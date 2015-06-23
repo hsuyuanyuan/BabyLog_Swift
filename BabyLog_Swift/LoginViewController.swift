@@ -65,6 +65,32 @@ class LoginViewController: UIViewController {
       imageView.frame = CGRectMake(0, 20, self.view.bounds.width, self.view.bounds.height);
       self.view.addSubview(imageView)
 */
+    
+    
+    
+    
+    var dictionaryExample : [String:AnyObject] = ["Username":"Test1", "Password":"1111"]
+    
+    //let dataExample : NSData = NSKeyedArchiver.archivedDataWithRootObject(dictionaryExample)
+    let data = NSJSONSerialization.dataWithJSONObject(dictionaryExample, options: NSJSONWritingOptions.PrettyPrinted, error: nil)
+    
+    Alamofire.request(.POST, "http://www.babysaga.cn/app/service?method=user.login", parameters: [:], encoding: .Custom({
+        (convertible, params) in
+        var mutableRequest = convertible.URLRequest.copy() as! NSMutableURLRequest
+        mutableRequest.HTTPBody = data
+        return (mutableRequest, nil)
+    })).responseJSON() {
+        (request, response, JSON, error) in
+        println("we did get the response")
+        println(JSON) //yxu: output the unicode
+        println((JSON as! NSDictionary)["Error"]!) //yxu: output Chinese: http://stackoverflow.com/questions/26963029/how-can-i-get-the-swift-xcode-console-to-show-chinese-characters-instead-of-unic
+        println(request)
+        println(response)
+        println(error)
+    }
+    
+    
+    
    }
 
    override func didReceiveMemoryWarning() {
