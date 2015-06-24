@@ -77,6 +77,7 @@ class LoginViewController: UIViewController {
                     println("Succeeded in login")
                     
                     //todo: jump to the new view
+                    self.presentViewController(mainVC, animated: true, completion: nil)
                     
                     
                 } else {

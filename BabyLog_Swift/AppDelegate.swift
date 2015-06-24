@@ -8,6 +8,14 @@
 
 import UIKit
 
+
+    var mainVC = MainTabBarController() //global main view controller
+
+    var logVC = MoreTableViewController()
+    var videoVC = MoreTableViewController()
+    var msgVC = MoreTableViewController()
+    var moreVC = MoreTableViewController() // one tab in the main vc
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -16,6 +24,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
       // Override point for customization after application launch.
+    
+    
+    
+    
+    
+
+    mainVC.viewControllers = [logVC, videoVC, msgVC, moreVC]
+    mainVC.view.frame = CGRectMake(0, 0, UIScreen.mainScreen().bounds.width, UIScreen.mainScreen().bounds.height) //yxu: todo: double check a better way to get screen width and height
+    mainVC.view.backgroundColor = UIColor.grayColor()
+    
+
+    //set up tab bar item in each tab
+    logVC.tabBarItem = UITabBarItem(title:"log", image: UIImage(named: "tabicon_log_off"), selectedImage: UIImage(named: "tabicon_log_on"))
+    
+    videoVC.tabBarItem = UITabBarItem(title:"video", image: UIImage(named: "tabicon_video_off"), selectedImage: UIImage(named: "tabicon_video_on"))
+
+    msgVC.tabBarItem = UITabBarItem(title:"message", image: UIImage(named: "tabicon_message_off"), selectedImage: UIImage(named: "tabicon_message_on"))
+    
+    moreVC.tabBarItem = UITabBarItem(title:"more", image: UIImage(named: "tabicon_class_off"), selectedImage: UIImage(named: "tabicon_class_on"))
+    
+    
+    
       return true
    }
 
