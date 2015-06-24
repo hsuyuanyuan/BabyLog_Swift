@@ -68,7 +68,7 @@ class LoginViewController: UIViewController {
     
     
     
-    
+    /*
     var dictionaryExample : [String:AnyObject] = ["Username":"Test1", "Password":"1111"]
     
     //let dataExample : NSData = NSKeyedArchiver.archivedDataWithRootObject(dictionaryExample)
@@ -88,7 +88,7 @@ class LoginViewController: UIViewController {
         println(response)
         println(error)
     }
-    
+    */
     
     
    }
