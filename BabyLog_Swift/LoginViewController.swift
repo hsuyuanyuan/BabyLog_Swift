@@ -72,13 +72,21 @@ class LoginViewController: UIViewController {
                 println(error)
                 println((JSON as! NSDictionary)["Error"]!) //yxu: output Chinese: http://stackoverflow.com/questions/26963029/how-can-i-get-the-swift-xcode-console-to-show-chinese-characters-instead-of-unic
 
-                let returnStr = (JSON as! NSDictionary)["Error"] as! String
-                if returnStr == "" {
+                let statusCode = (JSON as! NSDictionary)["StatusCode"] as! Int
+                if statusCode  == 200 {
                     println("Succeeded in login")
+                    
+                    //todo: jump to the new view
+                    
+                    
                 } else {
                     println("Failed to login")
+                    let errStr = (JSON as! NSDictionary)["Error"] as! String
+                    self.displayAlert("Login failed", message: "Status Code = \(statusCode), Error = \(errStr)")
                 }
                 
+                
+                //todo: persiste to UserDefault
                 
                 
             } else {
