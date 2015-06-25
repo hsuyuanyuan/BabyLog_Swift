@@ -14,7 +14,9 @@ import UIKit
 
     //todo: move the sub vc to mainVC class:  add them in viewDidAppear
     // http://stackoverflow.com/questions/26850411/how-add-tabs-programmatically-in-uitabbarcontroller-with-swift
-    var logVC = MoreTableViewController()
+
+    var logTableView = UITableViewController()
+    var logVC = LogViewController(rootViewController: logTableView)
     var videoVC = MoreTableViewController()
     var msgVC = MoreTableViewController()
     var moreVC = MoreTableViewController() // one tab in the main vc
@@ -39,9 +41,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
 
     //set up tab bar item in each tab
+    
+    
     logVC.tabBarItem = UITabBarItem(title:"log", image: UIImage(named: "tabicon_log_off"), selectedImage: UIImage(named: "tabicon_log_on"))
     logVC.tabBarItem.tag = 1
-    logVC.view.backgroundColor = UIColor.redColor()
+    logVC.view.backgroundColor = UIColor.whiteColor()
+    
+    
+
     
     videoVC.tabBarItem = UITabBarItem(title:"video", image: UIImage(named: "tabicon_video_off"), selectedImage: UIImage(named: "tabicon_video_on"))
     videoVC.tabBarItem.tag = 2

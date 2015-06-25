@@ -26,6 +26,7 @@
 		45FBD6B71B3B139A00A33663 /* tabicon_message_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45FBD6B01B3B139A00A33663 /* tabicon_message_on@2x.png */; };
 		45FBD6B81B3B139A00A33663 /* tabicon_video_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45FBD6B11B3B139A00A33663 /* tabicon_video_off@2x.png */; };
 		45FBD6BA1B3B13D600A33663 /* tabicon_video_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45FBD6B91B3B13D600A33663 /* tabicon_video_on@2x.png */; };
+		45FBD6BC1B3BD3D900A33663 /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FBD6BB1B3BD3D900A33663 /* LogViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,6 +102,7 @@
 		45FBD6B01B3B139A00A33663 /* tabicon_message_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabicon_message_on@2x.png"; sourceTree = "<group>"; };
 		45FBD6B11B3B139A00A33663 /* tabicon_video_off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabicon_video_off@2x.png"; sourceTree = "<group>"; };
 		45FBD6B91B3B13D600A33663 /* tabicon_video_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabicon_video_on@2x.png"; sourceTree = "<group>"; };
+		45FBD6BB1B3BD3D900A33663 /* LogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +141,7 @@
 				453E2B1E1B35492800500E31 /* AppDelegate.swift */,
 				45FBD6A71B3B0CB100A33663 /* MainTabBarController.swift */,
 				45FBD6A91B3B0D3900A33663 /* MoreTableViewController.swift */,
+				45FBD6BB1B3BD3D900A33663 /* LogViewController.swift */,
 				453E2B201B35492800500E31 /* LoginViewController.swift */,
 				453E2B221B35492800500E31 /* Main.storyboard */,
 				453E2B251B35492800500E31 /* Assets.xcassets */,
@@ -296,6 +299,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				453E2B211B35492800500E31 /* LoginViewController.swift in Sources */,
+				45FBD6BC1B3BD3D900A33663 /* LogViewController.swift in Sources */,
 				453E2B1F1B35492800500E31 /* AppDelegate.swift in Sources */,
 				45FBD6AA1B3B0D3900A33663 /* MoreTableViewController.swift in Sources */,
 				45FBD6A81B3B0CB100A33663 /* MainTabBarController.swift in Sources */,

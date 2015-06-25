@@ -76,7 +76,7 @@ class LoginViewController: UIViewController {
                 if statusCode  == 200 {
                     println("Succeeded in login")
                     
-                    //todo: jump to the new view
+                    // jump to the main tabbar view
                     self.presentViewController(mainVC, animated: true, completion: nil)
                     
                     
@@ -87,7 +87,7 @@ class LoginViewController: UIViewController {
                 }
                 
                 
-                //todo: persiste to UserDefault
+                //todo: persiste to UserDefault, especially the token in JSON
                 
                 
             } else {
@@ -109,6 +109,7 @@ class LoginViewController: UIViewController {
    override func viewDidLoad() {
       super.viewDidLoad()
       // Do any additional setup after loading the view, typically from a nib.
+    
       //Try1: image does not fit into screen
       // self.view.backgroundColor = UIColor(patternImage: UIImage(named: "login_bg")!)
       
@@ -117,7 +118,7 @@ class LoginViewController: UIViewController {
       let imageView = UIImageView(image: UIImage(named: "login_bg")!)
       imageView.frame = CGRectMake(0, 20, self.view.bounds.width, self.view.bounds.height);
       self.view.addSubview(imageView)
-*/
+      */
     
     
    }
@@ -127,7 +128,10 @@ class LoginViewController: UIViewController {
       // Dispose of any resources that can be recreated.
    }
 
-
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        self.view.endEditing(true)
+    }
+    
 }
 
 
