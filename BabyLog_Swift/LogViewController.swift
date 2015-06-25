@@ -25,10 +25,65 @@ class LogViewController: UINavigationController {
         var refreshButton = UIBarButtonItem(barButtonSystemItem: .Refresh, target: self, action: "buttonMethod") //Use a selector
         logVC.navigationItem.leftBarButtonItem = refreshButton
         
+
+        
+        
+        // teacher's retrieveLog module
+ 
+        var requestParams : [String:AnyObject] = [
+            "Id":307,
+            //"Day":"2015-06-25",
+        ]
+        
+        
+        let manager = Manager.sharedInstance
+        manager.session.configuration.HTTPAdditionalHeaders = [
+        "Token": "VhuZ18JOWjuLxyxJ" ] //todo: retrive the token and put it in the header
+        
+        
+        let data = NSJSONSerialization.dataWithJSONObject(requestParams, options: NSJSONWritingOptions.PrettyPrinted, error: nil)
+        
+        // get by date: "http://www.babysaga.cn/app/service?method=ClassSchedule.GetListSchedule"
+        // get by Id of date: "http://www.babysaga.cn/app/service?method=ClassSchedule.GetScheduleById"
+        let requestSchedule =  Alamofire.request(.POST, "http://www.babysaga.cn/app/service?method=ClassSchedule.GetScheduleById", parameters: [:], encoding: .Custom({
+            (convertible, params) in
+            var mutableRequest = convertible.URLRequest.copy() as! NSMutableURLRequest
+            mutableRequest.HTTPBody = data
+            return (mutableRequest, nil)
+        })).responseJSON() {
+            (request, response, JSON, error) in
+        
+            if error == nil {
+                println("we did get the response")
+                println(JSON) //yxu: output the unicode
+                println(request)
+                println(response)
+                println(error)
+                println((JSON as! NSDictionary)["Error"]!)
+                
+                let statusCode = (JSON as! NSDictionary)["StatusCode"] as! Int
+                if statusCode  == 200 {
+                println("Succeeded in getting the log")
+            
+            
+                } else {
+                    println("Failed to get response")
+                    let errStr = (JSON as! NSDictionary)["Error"] as! String
+                
+                }
+            } else {
+            //self.displayAlert("Login failed", message: error!.description)
+            }
+        }
+        
+
         
         
         
-        // teacher's log module
+        
+        
+        // teacher's uploadLog module
+        /*
         var requestParams : [String:AnyObject] = [
             "TimeBegin":"08:00",
             "TimeEnd":"09:30",
@@ -82,7 +137,7 @@ class LogViewController: UINavigationController {
             
         }
         
-        
+        */
         
     }
     
