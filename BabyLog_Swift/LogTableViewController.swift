@@ -18,15 +18,105 @@ Then go to the Editor menu, and click on the Embed In submenu, and choose Naviga
 
 */
 
+//yxu: add this for calendar view: CalendarViewDelegate
+class LogTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    var logView = UITableView()
+    
+    var arrLog = ["MorningPlay", "Nap", "AfternoonPlay", "AfternoonSnack"]
+   
+    let cellReuseId = "logCell"
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        //yxu: customize the table view
+        logView.separatorStyle = UITableViewCellSeparatorStyle.SingleLineEtched //?? yxu: does not work?? separator
+        logView.frame = CGRectMake(0, 50, 320, 200)
+        logView.delegate = self
+        logView.dataSource = self
+        logView.registerClass(UITableViewCell.self, forCellReuseIdentifier: cellReuseId)
+        
+        // add a 
+        var headerView = UIView(frame: CGRectMake(0, 0, logView.frame.size.width, 30))
+        var headerLabel = UILabel(frame: CGRectMake(0, 0, logView.frame.size.width, 30))
+        headerLabel.text = "Header Text"
+        headerLabel.textColor = UIColor.redColor()
+        headerLabel.textAlignment  = NSTextAlignment.Center
+        headerView.addSubview(headerLabel)
+        
+        // add a button to the header
+        var btnCalendar = UIButton(frame: CGRectMake(logView.frame.size.width / 2, 0, 100, 30))
+        btnCalendar.setTitle("ShowCalendar", forState: UIControlState.Highlighted) //yxu: note: state Selected will not be reset automatically
+        btnCalendar.setTitle("ClickCalendar", forState: UIControlState.Normal)
+        btnCalendar.backgroundColor = UIColor.greenColor()
+        headerView.addSubview(btnCalendar)
+        
+        logView.tableHeaderView = headerView //yxu: this is the key, do not use addSubView
+        
+        
+        
+        
+        self.view.addSubview(logView)
+        
+        
+        /*
+        //yxu: added calender https://github.com/lancy98/Calendar
+        var placeholderView = UIView(frame: CGRectMake(0, 0, self.view.bounds.width, self.view.bounds.height))
+        // todays date.
+        let date = NSDate()
+        
+        // create an instance of calendar view with
+        // base date (Calendar shows 12 months range from current base date)
+        // selected date (marked dated in the calendar)
+        let calendarView = CalendarView.instance(date, selectedDate: date)
+        calendarView.delegate = self
+        calendarView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        placeholderView.addSubview(calendarView)
+        
+        
+        // Constraints for calendar view - Fill the parent view.
+        placeholderView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[calendarView]|", options: NSLayoutFormatOptions(0), metrics: nil, views: ["calendarView": calendarView]))
+        placeholderView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[calendarView]|", options: NSLayoutFormatOptions(0), metrics: nil, views: ["calendarView": calendarView]))
 
-class LogViewController: UINavigationController {
-
+        self.view.addSubview(placeholderView)
+        */
+    }
+    
+    /* // related to v
+    func didSelectDate(date: NSDate) {
+        println("\(date.year)-\(date.month)-\(date.day)")
+    }
+    */
+    
+    
+    
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1;
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return arrLog.count
+    }
+    
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell  = tableView.dequeueReusableCellWithIdentifier(cellReuseId) as! UITableViewCell
+        cell.textLabel?.text = arrLog[indexPath.row]
+        return cell
+    }
+    
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        println("selected cell #\(indexPath.row)")
+    }
+    
+    
     override func viewDidAppear(animated: Bool) {
         var refreshButton = UIBarButtonItem(barButtonSystemItem: .Refresh, target: self, action: "buttonMethod") //Use a selector
         logVC.navigationItem.leftBarButtonItem = refreshButton
-        
 
-        
         
         // teacher's retrieveLog module
  

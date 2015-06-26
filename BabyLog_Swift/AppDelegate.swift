@@ -15,8 +15,8 @@ import UIKit
     //todo: move the sub vc to mainVC class:  add them in viewDidAppear
     // http://stackoverflow.com/questions/26850411/how-add-tabs-programmatically-in-uitabbarcontroller-with-swift
 
-    var logTableView = UITableViewController()
-    var logVC = LogViewController(rootViewController: logTableView)
+
+    var logVC = LogTableViewController()
     var videoVC = MoreTableViewController()
     var msgVC = MoreTableViewController()
     var moreVC = MoreTableViewController() // one tab in the main vc
