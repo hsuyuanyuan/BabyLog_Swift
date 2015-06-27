@@ -42,7 +42,7 @@ class KeleCalCellView: UIView
         addSubview(_dayLabel!)
         
         
-        _marker = KeleDraw(frame:self.bounds, color: UIColor.grayColor(), _alpha: 1)
+        _marker = KeleDraw(frame:self.bounds, color: UIColor.grayColor(), _alpha: 1) // = 1 originally
 //        _marker.center = CGPointMake(x, y)
         
         self.insertSubview(_marker, atIndex: 0)

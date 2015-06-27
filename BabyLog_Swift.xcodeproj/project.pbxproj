@@ -20,6 +20,8 @@
 		45A7E8C51B3E6E5B00748A6F /* KeleCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A7E8C41B3E6E5B00748A6F /* KeleCalendarViewController.swift */; };
 		45A7E8C81B3E8FB400748A6F /* DailyLogItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A7E8C71B3E8FB400748A6F /* DailyLogItem.swift */; };
 		45A7E8CA1B3E933400748A6F /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A7E8C91B3E933400748A6F /* SwiftyJSON.swift */; };
+		45A7E8CC1B3F128500748A6F /* AddDailyLogViewController_toremove.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A7E8CB1B3F128500748A6F /* AddDailyLogViewController_toremove.swift */; };
+		45A7E8CE1B3F193900748A6F /* AddLogItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A7E8CD1B3F193900748A6F /* AddLogItemViewController.swift */; };
 		45FBD6761B39BE3100A33663 /* login_bg-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45FBD6411B39BE3100A33663 /* login_bg-568h@2x.png */; };
 		45FBD6771B39BE3100A33663 /* login_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 45FBD6421B39BE3100A33663 /* login_bg.png */; };
 		45FBD6781B39BE3100A33663 /* login_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45FBD6431B39BE3100A33663 /* login_bg@2x.png */; };
@@ -118,6 +120,8 @@
 		45A7E8C41B3E6E5B00748A6F /* KeleCalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeleCalendarViewController.swift; sourceTree = "<group>"; };
 		45A7E8C71B3E8FB400748A6F /* DailyLogItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyLogItem.swift; sourceTree = "<group>"; };
 		45A7E8C91B3E933400748A6F /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
+		45A7E8CB1B3F128500748A6F /* AddDailyLogViewController_toremove.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddDailyLogViewController_toremove.swift; sourceTree = "<group>"; };
+		45A7E8CD1B3F193900748A6F /* AddLogItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddLogItemViewController.swift; sourceTree = "<group>"; };
 		45FBD6411B39BE3100A33663 /* login_bg-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_bg-568h@2x.png"; sourceTree = "<group>"; };
 		45FBD6421B39BE3100A33663 /* login_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_bg.png; sourceTree = "<group>"; };
 		45FBD6431B39BE3100A33663 /* login_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_bg@2x.png"; sourceTree = "<group>"; };
@@ -184,6 +188,8 @@
 				45FBD6921B3A8A1800A33663 /* Alamofire.xcodeproj */,
 				453E2B4C1B354B6200500E31 /* Resources */,
 				453E2B1E1B35492800500E31 /* AppDelegate.swift */,
+				45A7E8CB1B3F128500748A6F /* AddDailyLogViewController_toremove.swift */,
+				45A7E8CD1B3F193900748A6F /* AddLogItemViewController.swift */,
 				45FBD6A71B3B0CB100A33663 /* MainTabBarController.swift */,
 				45FBD6A91B3B0D3900A33663 /* MoreTableViewController.swift */,
 				45FBD6BB1B3BD3D900A33663 /* LogTableViewController.swift */,
@@ -391,6 +397,7 @@
 				45A7E8C11B3E6E0B00748A6F /* keleCalMainView.swift in Sources */,
 				45A7E8C81B3E8FB400748A6F /* DailyLogItem.swift in Sources */,
 				45FBD6CC1B3CFD5000A33663 /* Date.swift in Sources */,
+				45A7E8CE1B3F193900748A6F /* AddLogItemViewController.swift in Sources */,
 				45FBD6CD1B3CFD5000A33663 /* DayCollectionCell.swift in Sources */,
 				453E2B1F1B35492800500E31 /* AppDelegate.swift in Sources */,
 				45A7E8BF1B3E6E0B00748A6F /* KeleCalData.swift in Sources */,
@@ -398,6 +405,7 @@
 				45FBD6AA1B3B0D3900A33663 /* MoreTableViewController.swift in Sources */,
 				45FBD6C91B3CFD5000A33663 /* CalendarLogic.swift in Sources */,
 				45A7E8C01B3E6E0B00748A6F /* KeleCalDelegate.swift in Sources */,
+				45A7E8CC1B3F128500748A6F /* AddDailyLogViewController_toremove.swift in Sources */,
 				45FBD6D51B3DAD3900A33663 /* CalendarPickerViewController_toremove.swift in Sources */,
 				45A7E8C31B3E6E0B00748A6F /* keleDraw.swift in Sources */,
 				45FBD6A81B3B0CB100A33663 /* MainTabBarController.swift in Sources */,

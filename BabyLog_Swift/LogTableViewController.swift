@@ -19,7 +19,7 @@ Then go to the Editor menu, and click on the Embed In submenu, and choose Naviga
 */
 
 
-class LogTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, PickDateDelegate {
+class LogTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, PickDateDelegate, UploadLogDelegate {
     
     // MARK: member varaibles
     var logView = UITableView()
@@ -30,16 +30,23 @@ class LogTableViewController: UIViewController, UITableViewDelegate, UITableView
     
     var logItemsForDisplay = [DailyLogItem]()
     
+    var curDate = ""
+    
+    var navigationBar: UINavigationBar? // move this out of viewDidLoad, so that other funcs can update title. http://stackoverflow.com/questions/25167458/changing-navigation-title-programmatically
     
     // MARK: view lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // set current date
+        let date = NSDate()
+        curDate = "\(date.year)-\(date.month)-\(date.day)"
+        
         // customize the navigation bar
-        var navigationBar = UINavigationBar(frame: CGRectMake(0, 20, view.frame.size.width, 44))
-        navigationBar.pushNavigationItem(onMakeNavitem(), animated: true)
-        self.view.addSubview(navigationBar)
+        navigationBar = UINavigationBar(frame: CGRectMake(0, 20, view.frame.size.width, 44))
+        navigationBar!.pushNavigationItem(onMakeNavitem(), animated: true)
+        self.view.addSubview(navigationBar!)
         
         
         // customize a self-defined table view. will be added as a subview
@@ -56,7 +63,7 @@ class LogTableViewController: UIViewController, UITableViewDelegate, UITableView
         var navigationItem = UINavigationItem()
         //创建左边按钮
         var leftBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add,
-            target: self, action: "onAdd")
+            target: self, action: "addDailyLog:")
         //创建右边按钮
         var rightBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Search,
             target: self, action: "showCalendar:")
@@ -64,7 +71,7 @@ class LogTableViewController: UIViewController, UITableViewDelegate, UITableView
 
         
         //设置导航栏标题
-        navigationItem.title = " Daily Log "
+        navigationItem.title = curDate + " Log "
         //设置导航项左边的按钮
         navigationItem.setLeftBarButtonItem(leftBtn, animated: true)
         //设置导航项右边的按钮
@@ -72,50 +79,76 @@ class LogTableViewController: UIViewController, UITableViewDelegate, UITableView
         return navigationItem
     }
     
-    /*
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // customize a self-defined table view. will be added as a subview
-        logView.separatorStyle = UITableViewCellSeparatorStyle.SingleLineEtched //?? yxu: does not work?? separator
-        logView.frame = CGRectMake(0, 50, 320, 200)
-        logView.delegate = self
-        logView.dataSource = self
-        logView.registerClass(UITableViewCell.self, forCellReuseIdentifier: cellReuseId)
-        
-        // add a label to the header
-        var headerView = UIView(frame: CGRectMake(0, 0, logView.frame.size.width, 30)) //yxu: relative to parent's view's upper left corner
-        var headerLabel = UILabel(frame: CGRectMake(0, 0, logView.frame.size.width, 30))
-        headerLabel.text = "Header Text"
-        headerLabel.textColor = UIColor.redColor()
-        headerLabel.textAlignment  = NSTextAlignment.Center
-        
-        headerView.addSubview(headerLabel)
-        
-        // add a button to the header
-        var btnCalendar = UIButton(frame: CGRectMake(logView.frame.size.width / 2, 0, 100, 30))
-        btnCalendar.setTitle("ShowCalendar", forState: UIControlState.Highlighted) //yxu: note: state Selected will not be reset automatically
-        btnCalendar.setTitle("ClickCalendar", forState: UIControlState.Normal)
-        btnCalendar.backgroundColor = UIColor.greenColor()
-        
-        btnCalendar.addTarget(self, action: "showCalendar:", forControlEvents: .TouchUpInside) // set up the control target func
-        
-        headerView.addSubview(btnCalendar)
-        
-        
-        // set the table view header
-        logView.tableHeaderView = headerView //yxu: this is the key, do not use addSubView
-        
-        
-        // add tableview as a subview to the generic UIViewController
-        self.view.addSubview(logView)
+
     
-
+    func uploadLogItem(activityId: Int) {
+        
+        
+        
+        var requestParams : [String:AnyObject] = [
+            "TimeBegin":"08:00",
+            "TimeEnd":"09:30",
+            "InDay": curDate,
+            "DiaryType": activityId,
+            "ScheduleRemark": "This is a test",
+            "isPublish": 0
+        ]
+        
+        
+        let manager = Manager.sharedInstance
+        manager.session.configuration.HTTPAdditionalHeaders = [
+            "Token": "VhuZ18JOWjuLxyxJ" ] //todo: retrive the token and put it in the header
+        
+        
+        let data = NSJSONSerialization.dataWithJSONObject(requestParams, options: NSJSONWritingOptions.PrettyPrinted, error: nil)
+        
+        let requestSchedule =  Alamofire.request(.POST, "http://www.babysaga.cn/app/service?method=ClassSchedule.InputScheduleJson", parameters: [:], encoding: .Custom({
+            (convertible, params) in
+            var mutableRequest = convertible.URLRequest.copy() as! NSMutableURLRequest
+            mutableRequest.HTTPBody = data
+            return (mutableRequest, nil)
+        })).responseJSON() {
+            (request, response, JSON, error) in
+            
+            if error == nil {  //??yxu: error means http error. The web api error is inside JSON
+                println("we did get the response")
+                println(JSON) //yxu: output the unicode
+                println(request)
+                println(response)
+                println(error)
+                println((JSON as! NSDictionary)["Error"]!) //yxu: output Chinese: http://stackoverflow.com/questions/26963029/how-can-i-get-the-swift-xcode-console-to-show-chinese-characters-instead-of-unic
+                
+                let statusCode = (JSON as! NSDictionary)["StatusCode"] as! Int
+                if statusCode  == 200 {
+                    println("Succeeded in sending the log")
+                    
+                    
+                    // refresh the view after uploading
+                    self.retrieveDailyLog(self.curDate)
+                    
+                    
+                } else {
+                    println("Failed to get response")
+                    let errStr = (JSON as! NSDictionary)["Error"] as! String
+                    
+                }
+                
+                
+            } else {
+                //self.displayAlert("Login failed", message: error!.description)
+            }
+            
+            
+        }
+        
     }
-    */
-
+    
+    
     
     func retrieveDailyLog(date: String) {
+        
+        curDate = date
+        navigationBar!.topItem?.title = curDate + " Log "
         
         
         // block the UI before async action
@@ -266,7 +299,7 @@ class LogTableViewController: UIViewController, UITableViewDelegate, UITableView
     
     // MARK: control target
     func showCalendar(sender: UIButton) {
-        println("button pressed")
+        println("showing the calendar")
 
         let calendarPickerVC = KeleCalendarViewController()
         calendarPickerVC.delegate = self
@@ -274,6 +307,18 @@ class LogTableViewController: UIViewController, UITableViewDelegate, UITableView
         calendarPickerVC.modalPresentationStyle = .Custom
         presentViewController(calendarPickerVC, animated: true, completion: nil)
         
+    }
+    
+    
+    
+    
+    
+    func addDailyLog(sender: UIButton) {
+        println("adding daily log")
+        let addLogVC = AddLogItemViewController()
+        addLogVC.delegate = self
+        addLogVC.modalPresentationStyle = .Custom
+        presentViewController(addLogVC, animated: true, completion: nil)
     }
     
     
