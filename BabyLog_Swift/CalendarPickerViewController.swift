@@ -8,10 +8,20 @@
 
 import UIKit
 
+//yxu: delegate to pass the date picked from calendar, back to table view
+protocol PickDateDelegate {
+    func pickDataFromCalendar(date: String)
+}
+
+
 
 class CalendarPickerViewController: UIViewController, CalendarViewDelegate {
 
+    var delegate: PickDateDelegate!
+    
+    
     var bDatePickedFirstTime = true
+
     
     override func viewDidLoad() {
         
@@ -45,8 +55,10 @@ class CalendarPickerViewController: UIViewController, CalendarViewDelegate {
     
     // conform to calendarViewDelegate
     func didSelectDate(date: NSDate) {
-        println("\(date.year)-\(date.month)-\(date.day)")
+        let date = "\(date.year)-\(date.month)-\(date.day)"
+        println(date)
         
+        delegate?.pickDataFromCalendar(date)
         
         if bDatePickedFirstTime {
             bDatePickedFirstTime = false

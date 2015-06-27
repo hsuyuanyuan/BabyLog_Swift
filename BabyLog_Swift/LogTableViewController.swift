@@ -19,7 +19,7 @@ Then go to the Editor menu, and click on the Embed In submenu, and choose Naviga
 */
 
 
-class LogTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class LogTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, PickDateDelegate {
     
     // MARK: member varaibles
     var logView = UITableView()
@@ -32,6 +32,38 @@ class LogTableViewController: UIViewController, UITableViewDelegate, UITableView
     
     
     // MARK: view lifecycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        var navigationBar = UINavigationBar(frame: CGRectMake(0, 20, view.frame.size.width, 44))
+
+        navigationBar.pushNavigationItem(onMakeNavitem(), animated: true)
+
+        self.view.addSubview(navigationBar)
+    }
+    
+    func onMakeNavitem()->UINavigationItem{
+        var navigationItem = UINavigationItem()
+        //创建左边按钮
+        var leftBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add,
+            target: self, action: "onAdd")
+        //创建右边按钮
+        var rightBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Search,
+            target: self, action: "showCalendar:")
+        
+
+        
+        //设置导航栏标题
+        navigationItem.title = " Daily Log "
+        //设置导航项左边的按钮
+        navigationItem.setLeftBarButtonItem(leftBtn, animated: true)
+        //设置导航项右边的按钮
+        navigationItem.setRightBarButtonItem(rightBtn, animated: true)
+        return navigationItem
+    }
+    
+    /*
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -68,36 +100,31 @@ class LogTableViewController: UIViewController, UITableViewDelegate, UITableView
         
         // add tableview as a subview to the generic UIViewController
         self.view.addSubview(logView)
-        
-        
+    
 
     }
-    
+    */
 
     
-    override func viewDidAppear(animated: Bool) {
-        var refreshButton = UIBarButtonItem(barButtonSystemItem: .Refresh, target: self, action: "buttonMethod") //Use a selector
-        logVC.navigationItem.leftBarButtonItem = refreshButton
+    func retrieveDailyLog(date: String) {
         
-        
-        // teacher's retrieveLog module
+        //todo: add checking for the date string
         
         var requestParams : [String:AnyObject] = [
-            "Id":307,
-            //"Day":"2015-06-25",
+            //"Id":307,
+            "Day": date,
         ]
-        
         
         let manager = Manager.sharedInstance
         manager.session.configuration.HTTPAdditionalHeaders = [
-            "Token": "VhuZ18JOWjuLxyxJ" ] //todo: retrive the token and put it in the header
+            "Token": "VhuZ18JOWjuLxyxJ" ] //todo: retrive the token from UserDefault and put it in the header
         
         
         let data = NSJSONSerialization.dataWithJSONObject(requestParams, options: NSJSONWritingOptions.PrettyPrinted, error: nil)
         
         // get by date: "http://www.babysaga.cn/app/service?method=ClassSchedule.GetListSchedule"
         // get by Id of date: "http://www.babysaga.cn/app/service?method=ClassSchedule.GetScheduleById"
-        let requestSchedule =  Alamofire.request(.POST, "http://www.babysaga.cn/app/service?method=ClassSchedule.GetScheduleById", parameters: [:], encoding: .Custom({
+        let requestSchedule =  Alamofire.request(.POST, "http://www.babysaga.cn/app/service?method=ClassSchedule.GetListSchedule", parameters: [:], encoding: .Custom({
             (convertible, params) in
             var mutableRequest = convertible.URLRequest.copy() as! NSMutableURLRequest
             mutableRequest.HTTPBody = data
@@ -195,7 +222,7 @@ class LogTableViewController: UIViewController, UITableViewDelegate, UITableView
     
     
     
-    // MARK: table view delegate and datasource
+    // MARK: delegate: table view delegate and datasource
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1;
     }
@@ -217,7 +244,17 @@ class LogTableViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     
-
+    // MARK: delegate for calendar VC
+    func pickDataFromCalendar(date: String) {
+        
+        retrieveDailyLog(date);
+        
+        //todo: save the date to local strcture, array of logs
+        
+        
+        logView.reloadData()
+    }
+    
     
     // MARK: control target
     func showCalendar(sender: UIButton) {
@@ -225,12 +262,15 @@ class LogTableViewController: UIViewController, UITableViewDelegate, UITableView
         println("button pressed")
         
         let calendarPickerVC = CalendarPickerViewController()
-
+        calendarPickerVC.delegate = self
+        
         calendarPickerVC.modalPresentationStyle = .Custom
         presentViewController(calendarPickerVC, animated: true, completion: nil)
         
         
     }
     
+    
+
 
 }
