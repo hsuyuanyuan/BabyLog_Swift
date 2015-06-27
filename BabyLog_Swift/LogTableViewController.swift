@@ -117,7 +117,21 @@ class LogTableViewController: UIViewController, UITableViewDelegate, UITableView
     
     func retrieveDailyLog(date: String) {
         
-        //todo: add checking for the date string
+        
+        // block the UI before async action
+        let activityIndicator = UIActivityIndicatorView(frame: CGRectMake(0, 0, 50, 50))
+        
+        activityIndicator.center = self.view.center
+        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+        activityIndicator.hidesWhenStopped = true
+        self.view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+        
+        UIApplication.sharedApplication().beginIgnoringInteractionEvents() // prevent the user messing up the ui
+        
+        
+        
+        //todo: add sanity check for the date string
         
         var requestParams : [String:AnyObject] = [
             //"Id":307, 306, 305
@@ -158,18 +172,35 @@ class LogTableViewController: UIViewController, UITableViewDelegate, UITableView
                         let jsonResult = JSON(data)
                         
                         self.parseJsonForLogItemArray(jsonResult)
+                        
                     }
-                    
-                    
+
                     
                 } else {
                     println("Failed to get response")
                     let errStr = (data as! NSDictionary)["Error"] as! String
                     
                 }
-            } else {
-                //self.displayAlert("Login failed", message: error!.description)
+                } else {
+                    //self.displayAlert("Login failed", message: error!.description)
             }
+                
+                
+     
+
+            // Make sure we are on the main thread, and update the UI.
+            dispatch_async(dispatch_get_main_queue()) { //sync or async
+                // update some UI
+                self.logView.reloadData() //yxu: reloadData must be called on main thread. otherwise it does not work!!!
+                println("updating the table view")
+                // resume the UI at the end of async action
+                activityIndicator.stopAnimating()
+                UIApplication.sharedApplication().endIgnoringInteractionEvents()
+            }
+ 
+                
+            //todo: save the date to local strcture, array of logs
+            
         }
         
     }
@@ -194,24 +225,9 @@ class LogTableViewController: UIViewController, UITableViewDelegate, UITableView
             
             logItemsForDisplay = logItems
             
-            // Make sure we are on the main thread, and update the UI.
-            dispatch_async(dispatch_get_main_queue()) { //sync or async
-                // update some UI
-                self.logView.reloadData()
-                println("updating the table view")
-            }
-            
         }
         
-        /*
-      
-        // Make sure we are on the main thread, and update the UI.
-        dispatch_sync(dispatch_get_main_queue(), {
-            self.refreshControl!.endRefreshing()
-            self.tableView.reloadData()
-        }
-        */
-        
+       
     }
     
     
@@ -243,10 +259,8 @@ class LogTableViewController: UIViewController, UITableViewDelegate, UITableView
         
         retrieveDailyLog(date);
         
-        //todo: save the date to local strcture, array of logs
-        
-        
-        logView.reloadData()
+
+
     }
     
     

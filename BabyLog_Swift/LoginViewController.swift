@@ -39,6 +39,9 @@ class LoginViewController: UIViewController {
 
       } else {
       
+        // yxu: pattern:  block UI => call async => resume UI
+        
+        // block the UI before async action
          let activityIndicator = UIActivityIndicatorView(frame: CGRectMake(0, 0, 50, 50))
          
          activityIndicator.center = self.view.center
@@ -50,10 +53,9 @@ class LoginViewController: UIViewController {
          UIApplication.sharedApplication().beginIgnoringInteractionEvents() // prevent the user messing up the ui
         
         
-        // login module
+        // call login web api with async method
         var dictionaryExample : [String:AnyObject] = ["Username":userNameTextField.text, "Password":passwordTextField.text] // TestAccount: ["Username":"Test222", "Password":"222222"]
         
-        //let dataExample : NSData = NSKeyedArchiver.archivedDataWithRootObject(dictionaryExample)
         let data = NSJSONSerialization.dataWithJSONObject(dictionaryExample, options: NSJSONWritingOptions.PrettyPrinted, error: nil)
         
         Alamofire.request(.POST, "http://www.babysaga.cn/app/service?method=user.login", parameters: [:], encoding: .Custom({
@@ -94,6 +96,7 @@ class LoginViewController: UIViewController {
                 self.displayAlert("Login failed", message: error!.description)
             }
             
+            // resume the UI at the end of async action
             activityIndicator.stopAnimating()
             UIApplication.sharedApplication().endIgnoringInteractionEvents()
             

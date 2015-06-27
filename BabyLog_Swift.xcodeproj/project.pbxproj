@@ -47,7 +47,7 @@
 		45FBD6D11B3CFD5000A33663 /* NSDateAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FBD6C61B3CFD5000A33663 /* NSDateAdditions.swift */; };
 		45FBD6D21B3CFD5000A33663 /* WeekHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FBD6C71B3CFD5000A33663 /* WeekHeaderView.swift */; };
 		45FBD6D31B3CFD5000A33663 /* WeekHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45FBD6C81B3CFD5000A33663 /* WeekHeaderView.xib */; };
-		45FBD6D51B3DAD3900A33663 /* CalendarPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FBD6D41B3DAD3900A33663 /* CalendarPickerViewController.swift */; };
+		45FBD6D51B3DAD3900A33663 /* CalendarPickerViewController_toremove.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FBD6D41B3DAD3900A33663 /* CalendarPickerViewController_toremove.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -144,7 +144,7 @@
 		45FBD6C61B3CFD5000A33663 /* NSDateAdditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDateAdditions.swift; sourceTree = "<group>"; };
 		45FBD6C71B3CFD5000A33663 /* WeekHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekHeaderView.swift; sourceTree = "<group>"; };
 		45FBD6C81B3CFD5000A33663 /* WeekHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeekHeaderView.xib; sourceTree = "<group>"; };
-		45FBD6D41B3DAD3900A33663 /* CalendarPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarPickerViewController.swift; sourceTree = "<group>"; };
+		45FBD6D41B3DAD3900A33663 /* CalendarPickerViewController_toremove.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarPickerViewController_toremove.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,7 +188,7 @@
 				45FBD6A91B3B0D3900A33663 /* MoreTableViewController.swift */,
 				45FBD6BB1B3BD3D900A33663 /* LogTableViewController.swift */,
 				45A7E8C71B3E8FB400748A6F /* DailyLogItem.swift */,
-				45FBD6D41B3DAD3900A33663 /* CalendarPickerViewController.swift */,
+				45FBD6D41B3DAD3900A33663 /* CalendarPickerViewController_toremove.swift */,
 				45A7E8C41B3E6E5B00748A6F /* KeleCalendarViewController.swift */,
 				453E2B201B35492800500E31 /* LoginViewController.swift */,
 				453E2B221B35492800500E31 /* Main.storyboard */,
@@ -398,7 +398,7 @@
 				45FBD6AA1B3B0D3900A33663 /* MoreTableViewController.swift in Sources */,
 				45FBD6C91B3CFD5000A33663 /* CalendarLogic.swift in Sources */,
 				45A7E8C01B3E6E0B00748A6F /* KeleCalDelegate.swift in Sources */,
-				45FBD6D51B3DAD3900A33663 /* CalendarPickerViewController.swift in Sources */,
+				45FBD6D51B3DAD3900A33663 /* CalendarPickerViewController_toremove.swift in Sources */,
 				45A7E8C31B3E6E0B00748A6F /* keleDraw.swift in Sources */,
 				45FBD6A81B3B0CB100A33663 /* MainTabBarController.swift in Sources */,
 				45A7E8C51B3E6E5B00748A6F /* KeleCalendarViewController.swift in Sources */,
