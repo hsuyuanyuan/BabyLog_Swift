@@ -8,10 +8,7 @@
 
 import UIKit
 
-//yxu: delegate to pass the date picked from calendar, back to table view
-protocol PickDateDelegate {
-    func pickDataFromCalendar(date: String)
-}
+
 
 
 

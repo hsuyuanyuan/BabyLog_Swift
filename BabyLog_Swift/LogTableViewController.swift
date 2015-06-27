@@ -112,7 +112,7 @@ class LogTableViewController: UIViewController, UITableViewDelegate, UITableView
         
         var requestParams : [String:AnyObject] = [
             //"Id":307,
-            "Day": date,
+            "Day": date, //"2015-6-25"
         ]
         
         let manager = Manager.sharedInstance
@@ -261,7 +261,7 @@ class LogTableViewController: UIViewController, UITableViewDelegate, UITableView
         
         println("button pressed")
         
-        let calendarPickerVC = CalendarPickerViewController()
+        let calendarPickerVC = KeleCalendarViewController()
         calendarPickerVC.delegate = self
         
         calendarPickerVC.modalPresentationStyle = .Custom
