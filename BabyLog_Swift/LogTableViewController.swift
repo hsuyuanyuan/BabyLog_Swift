@@ -43,12 +43,14 @@ class LogTableViewController: UIViewController, UITableViewDelegate, UITableView
         let date = NSDate()
         curDate = "\(date.year)-\(date.month)-\(date.day)"
         
+        
+        
         // customize the navigation bar
         navigationBar = UINavigationBar(frame: CGRectMake(0, 20, view.frame.size.width, 44))
         navigationBar!.pushNavigationItem(onMakeNavitem(), animated: true)
         self.view.addSubview(navigationBar!)
         
-        
+
         // customize a self-defined table view. will be added as a subview
         logView.separatorStyle = UITableViewCellSeparatorStyle.SingleLineEtched //?? yxu: does not work?? separator
         logView.frame = CGRectMake(0, 70, 320, 200)
@@ -57,6 +59,10 @@ class LogTableViewController: UIViewController, UITableViewDelegate, UITableView
         logView.registerClass(UITableViewCell.self, forCellReuseIdentifier: cellReuseId)
         
         self.view.addSubview(logView)
+        
+        
+        // retrieve the logs for current date
+        retrieveDailyLog(curDate)
     }
     
     func onMakeNavitem()->UINavigationItem{
