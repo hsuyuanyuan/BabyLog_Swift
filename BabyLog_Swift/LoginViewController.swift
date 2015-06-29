@@ -78,9 +78,11 @@ class LoginViewController: UIViewController {
                 if statusCode  == 200 {
                     println("Succeeded in login")
                     
-                    // jump to the main tabbar view
-                    self.presentViewController(mainVC, animated: true, completion: nil)
+                    //yxu: old way: jump to the main tabbar view, which is programmatically created
+                    //self.presentViewController(mainVC, animated: true, completion: nil)
                     
+                    
+                    self.performSegueWithIdentifier("segueToShowMainTabBarVC", sender: self) //yxu: Note: segue is from the loginVC to mainVC in storyboard, not from button to mainVC, which would jump without calling performSegueWithIdentifier
                     
                 } else {
                     println("Failed to login")
