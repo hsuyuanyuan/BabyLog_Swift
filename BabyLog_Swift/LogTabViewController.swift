@@ -295,4 +295,28 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     
+    // add following two to delete the cell:  http://stackoverflow.com/questions/24103069/swift-add-swipe-to-delete-tableviewcell
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if (editingStyle == UITableViewCellEditingStyle.Delete) {
+            println("deleting the cell ")
+            
+            // add spinner
+            
+            // call web api 
+            
+            // if success, delete it from local copy
+            
+            // in callback, reload view ( using local copy)
+            
+            
+        }
+    }
+ 
+    
+    
+    
 }

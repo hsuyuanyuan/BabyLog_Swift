@@ -10,10 +10,7 @@ import UIKit
 import Alamofire
 
 
-//yxu: delegate to pass the date picked from calendar, back to table view
-protocol UploadLogDelegate {
-    func uploadLogItem(activityId: Int)
-}
+
 
 class AddLogItemViewController: UIViewController {
     

@@ -8,6 +8,11 @@
 
 import UIKit
 
+//yxu: delegate to pass the date picked from calendar, back to table view
+protocol UploadLogDelegate {
+    func uploadLogItem(activityId: Int)
+}
+
 class AddDailyLogViewController: UIViewController {
 
     
@@ -60,6 +65,13 @@ class AddDailyLogViewController: UIViewController {
 
 
     }
+    
+    
+    
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        self.view.endEditing(true)
+    }
+    
     
     
 }
