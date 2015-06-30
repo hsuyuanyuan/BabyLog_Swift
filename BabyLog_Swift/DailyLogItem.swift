@@ -8,6 +8,28 @@
 
 import Foundation
 
+
+class ActivityType {
+    
+    let id: Int
+    let name: String
+    let imageName: String
+    
+    init(id:Int, name:String, imageName:String) {
+        self.id = id
+        self.name = name
+        self.imageName = imageName
+    }
+
+}
+
+
+
+
+
+
+ 
+
 class DailyLogItem: Printable {
     
     let id: Int
@@ -28,6 +50,13 @@ class DailyLogItem: Printable {
     }
     
 }
+
+
+
+
+
+
+
 
 /*
 输出：List<ScheduleDto>

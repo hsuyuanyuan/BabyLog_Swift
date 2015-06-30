@@ -16,22 +16,65 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     var logItemsForDisplay = [DailyLogItem]()
     
+    var activityIndicator:UIActivityIndicatorView!
+    
     var curDate = ""
+    
+    let activityTypeList = [
+    1:ActivityType(id: 1, name: "DaBian", imageName: "activity_1.png"),
+    2:ActivityType(id: 2, name: "XiaoBian", imageName: "activity_2.png"),
+    3:ActivityType(id: 3, name: "ShuiJiao", imageName: "activity_3.png"),
+    4:ActivityType(id: 4, name: "WuShui", imageName: "activity_4.png"),
+    5:ActivityType(id: 5, name: "ChiFan", imageName: "activity_5.png"),
+    6:ActivityType(id: 6, name: "LingShi", imageName: "activity_6.png"),
+    7:ActivityType(id: 7, name: "ShiNeiGeRenHuoDong", imageName: "activity_7.png"),
+    8:ActivityType(id: 8, name: "ShiNeiJiTiHuoDong", imageName: "activity_8.png"),
+    9:ActivityType(id: 9, name: "ShiWaiGeRenHuoDong", imageName: "activity_9.png"),
+    10:ActivityType(id: 10, name: "ShiWaiJiTiHuoDong", imageName: "activity_10.png"),
+    11:ActivityType(id: 11, name: "XiSu", imageName: "activity_11.png"),
+    12:ActivityType(id: 12, name: "QiTa", imageName: "activity_12.png"),
+    13:ActivityType(id: 13, name: "QiChuang", imageName: "activity_13.jpg"),
+    14:ActivityType(id: 14, name: "XiZao", imageName: "activity_14.jpg"),
+    15:ActivityType(id: 15, name: "ShengBing", imageName: "activity_15.jpg"),
+    20:ActivityType(id: 20, name: "DaoXiao", imageName: "activity_20.jpg"),
+    21:ActivityType(id: 21, name: "LiXiao", imageName: "activity_21.jpg"),
+    ]
+    
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        logView.delegate = self
-        logView.dataSource = self
-        logView.registerClass(UITableViewCell.self, forCellReuseIdentifier: cellReuseId)
+
         
         // set current date
         let date = NSDate()
         curDate = "\(date.year)-\(date.month)-\(date.day)"
         
+        // set up spinner
+        activityIndicator = UIActivityIndicatorView(frame: CGRectMake(0, 0, 50, 50))
+        activityIndicator.center = self.view.center
+        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+        activityIndicator.hidesWhenStopped = true
+        self.view.addSubview(activityIndicator)
+        
+        // set up table view
+        logView.delegate = self
+        logView.dataSource = self
+        
+        //yxu: the following line caused problem!  The labels and images are nil. Have to remove it!
+        //logView.registerClass(LogItemTableViewCell.self, forCellReuseIdentifier: cellReuseId)
+        
+        logView.tableFooterView = UIView() //yxu: trick to remove the empty cells in tableView
+        
+        
         // retrieve the logs for current date
         _retrieveDailyLog(curDate)
+        
+        
+
+        
+        
     }
     
     
@@ -41,6 +84,18 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
         navigationBar!.topItem?.title = curDate + " Log " //refer to: http://stackoverflow.com/questions/10895122/changing-nav-bar-title-programatically
     }
     
+    //todo: this is used in both login and main VCs => move to global?? refer to architecture
+    func displayAlert(title: String, message: String ) {
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
+            self.dismissViewControllerAnimated(true, completion: nil) //yxu?: is self the alert or the LoginViewController??
+        }))
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+        
+    }
     
     
     @IBOutlet weak var navigationBar: UINavigationBar!
@@ -130,6 +185,17 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     // refresh the view after uploading
                     self._retrieveDailyLog(self.curDate)
                     
+                    // todo: add to local array, then update tableView => save one web api call
+                    
+                    /* refer to: http://www.raywenderlich.com/81880/storyboards-tutorial-swift-part-2
+                    //add the new player to the players array
+                    players.append(playerDetailsViewController.player)
+                    
+                    //update the tableView
+                    let indexPath = NSIndexPath(forRow: players.count-1, inSection: 0)
+                    tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+                    */
+                    
                     
                 } else {
                     println("Failed to get response")
@@ -139,7 +205,7 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 
                 
             } else {
-                //self.displayAlert("Login failed", message: error!.description)
+                self.displayAlert("Login failed", message: error!.description)
             }
             
             
@@ -149,28 +215,31 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     
     
+    // MARK: help functions
+    
+    func _startSpinnerAndBlockUI() {
+        // block the UI before async action
+        activityIndicator.startAnimating()
+        
+        UIApplication.sharedApplication().beginIgnoringInteractionEvents() // prevent the user messing up the ui
+    }
+    
+    func _stopSpinnerAndResumeUI() {
+        activityIndicator.stopAnimating()
+        UIApplication.sharedApplication().endIgnoringInteractionEvents()
+        
+    }
+    
     
     func _retrieveDailyLog(date: String) {
         
         curDate = date
         navigationBar!.topItem?.title = curDate + " Log "
         
-        // block the UI before async action
-        let activityIndicator = UIActivityIndicatorView(frame: CGRectMake(0, 0, 50, 50))
+        _startSpinnerAndBlockUI()
+       
         
-        activityIndicator.center = self.view.center
-        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
-        activityIndicator.hidesWhenStopped = true
-        self.view.addSubview(activityIndicator)
-        activityIndicator.startAnimating()
-        
-        UIApplication.sharedApplication().beginIgnoringInteractionEvents() // prevent the user messing up the ui
-        
-        
-        
-        //todo: add sanity check for the date string
-        
-        var requestParams : [String:AnyObject] = [
+        var requestParams : [String:AnyObject] = [ //todo: add sanity check for the date string
             //"Id":307, 306, 305
             "Day": date, //"2015-6-25"
         ]
@@ -219,7 +288,7 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     
                 }
             } else {
-                //self.displayAlert("Login failed", message: error!.description)
+                self.displayAlert("Login failed", message: error!.description)
             }
             
             
@@ -234,12 +303,13 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 
                 println("updating the table view")
                 // resume the UI at the end of async action
-                activityIndicator.stopAnimating()
-                UIApplication.sharedApplication().endIgnoringInteractionEvents()
+                
+                self._stopSpinnerAndResumeUI()
+
             }
             
             
-            //todo: save the date to local strcture, array of logs
+            //todo: persist data with UserDefault
             
         }
         
@@ -254,7 +324,7 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
             var logItems = [DailyLogItem]()
             
             for logItem in logItemArray {
-                var logId: Int = logItem["Id"].int ?? 0
+                var logId: Int = logItem["DiaryType"].int ?? 0
                 var logContent: String? = logItem["Content"].string
                 var logStartTime: String? = logItem["StartTime"].string
                 var logEndTime: String? = logItem["EndTime"].string
@@ -284,9 +354,31 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell  = tableView.dequeueReusableCellWithIdentifier(cellReuseId) as! UITableViewCell
-        cell.textLabel?.text = logItemsForDisplay[indexPath.row].id.description
-        return cell
+        let reusableCell  = tableView.dequeueReusableCellWithIdentifier(cellReuseId) as! LogItemTableViewCell
+        
+        
+        reusableCell.startEndTimeLabel!.text = logItemsForDisplay[indexPath.row].startTime + "-" + logItemsForDisplay[indexPath.row].endTime
+        
+        reusableCell.activityDetailsLabel!.text = logItemsForDisplay[indexPath.row].content
+        
+        if let curActivity = activityTypeList[logItemsForDisplay[indexPath.row].id] {
+            
+            reusableCell.activityTypeLabel!.text = curActivity.name
+            reusableCell.activityIcon!.image = UIImage(named: curActivity.imageName)
+            
+            
+        }
+        
+
+ 
+ 
+        
+        
+        // set background of cell:  http://www.gfzj.us/tech/2014/12/09/iOS-dev-tips.html
+        //cell.layer.contents = (id)[UIImage imageNamed:@"space_bg.jpg"].CGImage;//fill模式
+        //cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"space_bg.jpg"]];//平铺模式
+        
+        return reusableCell
     }
     
     
@@ -305,8 +397,88 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
             println("deleting the cell ")
             
             // add spinner
+            _startSpinnerAndBlockUI()
             
-            // call web api 
+            // get id
+            let logId = logItemsForDisplay[indexPath.row].id
+            
+            // call web api: parameter: int Id  日程的Id; http://www.babysaga.cn/app/service?method=ClassSchedule.DeleteSchedule
+            
+            
+            // TODO: make a function for calling web api
+            
+            // func start
+            var requestParams : [String:AnyObject] = [ //todo: add sanity check for the date string
+                "Id":logId
+            ]
+            
+            let manager = Manager.sharedInstance
+            manager.session.configuration.HTTPAdditionalHeaders = [
+                "Token": "VhuZ18JOWjuLxyxJ" ] //todo: retrive the token from UserDefault and put it in the header
+            
+            
+            let data = NSJSONSerialization.dataWithJSONObject(requestParams, options: NSJSONWritingOptions.PrettyPrinted, error: nil)
+            
+            let requestSchedule =  Alamofire.request(.POST, "http://www.babysaga.cn/app/service?method=ClassSchedule.DeleteSchedule", parameters: [:], encoding: .Custom({
+                (convertible, params) in
+                var mutableRequest = convertible.URLRequest.copy() as! NSMutableURLRequest
+                mutableRequest.HTTPBody = data
+                return (mutableRequest, nil)
+            })).responseJSON() {
+                (request, response, data, error) in
+                
+                if error == nil {
+                    println("we did get the response")
+                    println(data) //yxu: output the unicode
+                    println(request)
+                    println(response)
+                    println(error)
+                    println((data as! NSDictionary)["Error"]!)
+                    
+                    let statusCode = (data as! NSDictionary)["StatusCode"] as! Int
+                    if statusCode  == 200 {
+                        println("Succeeded in deleting the log")
+                        
+                        // delete the member from logItemsForDisplay
+                        self.logItemsForDisplay = self.logItemsForDisplay.filter({ (logItem ) -> Bool in
+                            logItem.id != logId //yxu: filter / map: in nature is looping, O(N)
+                        })
+
+                        
+                        
+                    } else {
+                        println("Failed to get response")
+                        let errStr = (data as! NSDictionary)["Error"] as! String
+                        
+                    }
+                } else {
+                    self.displayAlert("Login failed", message: error!.description)
+                }
+                
+                
+                
+                
+                // Make sure we are on the main thread, and update the UI.
+                dispatch_async(dispatch_get_main_queue()) { //sync or async
+                    // update some UI
+                    
+                    self.logView.reloadData() //yxu: reloadData must be called on main thread. otherwise it does not work!!!
+                    
+                    
+                    println("updating the table view")
+                    // resume the UI at the end of async action
+                    
+                    self._stopSpinnerAndResumeUI()
+                    
+                }
+                
+                
+                //todo: persist data with UserDefault
+                
+            }
+            //func end
+            
+            
             
             // if success, delete it from local copy
             
