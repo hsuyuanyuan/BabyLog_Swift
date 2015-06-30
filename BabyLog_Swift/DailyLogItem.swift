@@ -32,18 +32,20 @@ class ActivityType {
 
 class DailyLogItem: Printable {
     
-    let id: Int
+    let activityType: Int
     let content: String
     let startTime: String
     let endTime: String
+    let uniqueId: Int // 307-308 etc
     //todo: datetime for InDay and CreatedDateTime ??
     
     var description: String {
-        return "id: \(id), startTime: \(startTime), endTime: \(endTime), content: \(content)\n"
+        return "uniqueId:\(uniqueId), id: \(activityType), startTime: \(startTime), endTime: \(endTime), content: \(content)\n"
     }
     
-    init(id: Int, content: String?, startTime: String?, endTime: String? ) {
-        self.id = id ?? 0
+    init(uniqueId: Int, activityType: Int, content: String?, startTime: String?, endTime: String? ) {
+        self.uniqueId = uniqueId
+        self.activityType = activityType ?? 0
         self.content = content ?? ""
         self.startTime = startTime ?? ""
         self.endTime = endTime ?? ""

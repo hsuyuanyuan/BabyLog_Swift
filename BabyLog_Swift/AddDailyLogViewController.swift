@@ -10,7 +10,7 @@ import UIKit
 
 //yxu: delegate to pass the date picked from calendar, back to table view
 protocol UploadLogDelegate {
-    func uploadLogItem(activityId: Int)
+    func uploadLogItem(activityType: Int)
 }
 
 class AddDailyLogViewController: UIViewController {
@@ -33,9 +33,9 @@ class AddDailyLogViewController: UIViewController {
         
         println("activity = \(activityType.text) \n\n")
         
-        let activityId = activityType.text.toInt()
+        let activityTypeId = activityType.text.toInt()
         
-        delegate?.uploadLogItem(activityId ?? 0)
+        delegate?.uploadLogItem(activityTypeId ?? 0)
         
         dismissViewControllerAnimated(true, completion: nil)
         

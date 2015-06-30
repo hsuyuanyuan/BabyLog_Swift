@@ -37,7 +37,7 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
     14:ActivityType(id: 14, name: "XiZao", imageName: "activity_14.jpg"),
     15:ActivityType(id: 15, name: "ShengBing", imageName: "activity_15.jpg"),
     20:ActivityType(id: 20, name: "DaoXiao", imageName: "activity_20.jpg"),
-    21:ActivityType(id: 21, name: "LiXiao", imageName: "activity_21.jpg"),
+    30:ActivityType(id: 30, name: "LiXiao", imageName: "activity_30.jpg"),
     ]
     
     
@@ -140,7 +140,7 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
     }
     
-    func uploadLogItem(activityId: Int) {
+    func uploadLogItem(activityType: Int) {
         
         
         
@@ -148,7 +148,7 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
             "TimeBegin":"08:00",
             "TimeEnd":"09:30",
             "InDay": curDate,
-            "DiaryType": activityId,
+            "DiaryType": activityType,
             "ScheduleRemark": "This is a test",
             "isPublish": 0
         ]
@@ -324,12 +324,13 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
             var logItems = [DailyLogItem]()
             
             for logItem in logItemArray {
-                var logId: Int = logItem["DiaryType"].int ?? 0
+                var logUniqueId: Int = logItem["Id"].int ?? 0
+                var logActivityType: Int = logItem["DiaryType"].int ?? 0
                 var logContent: String? = logItem["Content"].string
                 var logStartTime: String? = logItem["StartTime"].string
                 var logEndTime: String? = logItem["EndTime"].string
                 
-                var dailyLogItem = DailyLogItem(id: logId, content: logContent, startTime: logStartTime, endTime: logEndTime)
+                var dailyLogItem = DailyLogItem(uniqueId: logUniqueId, activityType: logActivityType, content: logContent, startTime: logStartTime, endTime: logEndTime)
                 logItems.append(dailyLogItem)
             }
             
@@ -361,7 +362,7 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         reusableCell.activityDetailsLabel!.text = logItemsForDisplay[indexPath.row].content
         
-        if let curActivity = activityTypeList[logItemsForDisplay[indexPath.row].id] {
+        if let curActivity = activityTypeList[logItemsForDisplay[indexPath.row].activityType] {
             
             reusableCell.activityTypeLabel!.text = curActivity.name
             reusableCell.activityIcon!.image = UIImage(named: curActivity.imageName)
@@ -400,7 +401,7 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
             _startSpinnerAndBlockUI()
             
             // get id
-            let logId = logItemsForDisplay[indexPath.row].id
+            let logId = logItemsForDisplay[indexPath.row].uniqueId
             
             // call web api: parameter: int Id  日程的Id; http://www.babysaga.cn/app/service?method=ClassSchedule.DeleteSchedule
             
@@ -441,7 +442,7 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         
                         // delete the member from logItemsForDisplay
                         self.logItemsForDisplay = self.logItemsForDisplay.filter({ (logItem ) -> Bool in
-                            logItem.id != logId //yxu: filter / map: in nature is looping, O(N)
+                            logItem.uniqueId != logId //yxu: filter / map: in nature is looping, O(N)
                         })
 
                         

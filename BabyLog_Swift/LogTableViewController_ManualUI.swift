@@ -253,7 +253,8 @@ class LogTableViewController: UIViewController, UITableViewDelegate, UITableView
             var logItems = [DailyLogItem]()
             
             for logItem in logItemArray {
-                var logId: Int = logItem["Id"].int ?? 0
+                var uniqueId: Int = logItem["Id"].int ?? 0
+                var logId: Int = logItem["DiaryType"].int ?? 0
                 var logContent: String? = logItem["Content"].string
                 var logStartTime: String? = logItem["StartTime"].string
                 var logEndTime: String? = logItem["EndTime"].string

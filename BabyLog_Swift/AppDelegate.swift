@@ -15,11 +15,12 @@ import UIKit
     //todo: move the sub vc to mainVC class:  add them in viewDidAppear
     // http://stackoverflow.com/questions/26850411/how-add-tabs-programmatically-in-uitabbarcontroller-with-swift
 
-
+    /*
     var logVC = LogTableViewController()
     var videoVC = MoreTableViewController()
     var msgVC = MoreTableViewController()
     var moreVC = MoreTableViewController() // one tab in the main vc
+    */
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -34,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     
-
+    /*
     mainVC.viewControllers = [logVC, videoVC, msgVC, moreVC]
     mainVC.view.frame = CGRectMake(0, 0, UIScreen.mainScreen().bounds.width, UIScreen.mainScreen().bounds.height) //yxu: todo: double check a better way to get screen width and height
     mainVC.view.backgroundColor = UIColor.grayColor()
@@ -63,7 +64,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     moreVC.tabBarItem.tag = 4
     moreVC.view.backgroundColor = UIColor.yellowColor()
  
-    
+    */
     
     
       return true
