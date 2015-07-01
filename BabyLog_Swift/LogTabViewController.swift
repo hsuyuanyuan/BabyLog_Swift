@@ -127,16 +127,16 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
     }
     
-    func uploadLogItem(activityType: Int) {
+    func uploadLogItem(activityItem: DailyLogItem) {
         
         
         
         var requestParams : [String:AnyObject] = [
-            "TimeBegin":"08:00",
-            "TimeEnd":"09:30",
+            "TimeBegin":activityItem.startTime, //"08:00",
+            "TimeEnd":activityItem.endTime, //"09:30",
             "InDay": curDate,
-            "DiaryType": activityType,
-            "ScheduleRemark": "This is a test",
+            "DiaryType": activityItem.activityType,
+            "ScheduleRemark": activityItem.content, //"This is a test",
             "isPublish": 0
         ]
         

@@ -223,7 +223,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Kxt-O9-hQW">
-                                <rect key="frame" x="200" y="182" width="97" height="30"/>
+                                <rect key="frame" x="200" y="183" width="97" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -248,10 +248,9 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xWu-GA-4ND">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Add comments for this activity" translatesAutoresizingMaskIntoConstraints="NO" id="xWu-GA-4ND">
                                 <rect key="frame" x="45" y="298" width="252" height="173"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -261,8 +260,9 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="activityTypeTextField" destination="Xae-Zs-4eH" id="V6y-0l-JHU"/>
-                        <outlet property="endTime" destination="Kxt-O9-hQW" id="TQL-xo-NbQ"/>
-                        <outlet property="startTime" destination="Tv4-eC-1Ok" id="UCp-Mc-9hy"/>
+                        <outlet property="contentTextView" destination="xWu-GA-4ND" id="Nhn-D7-Wha"/>
+                        <outlet property="endTimeTextField" destination="Kxt-O9-hQW" id="puu-SE-43A"/>
+                        <outlet property="startTimeTextField" destination="Tv4-eC-1Ok" id="TLR-mU-F7A"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8dA-Ki-c8R" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -10,31 +10,48 @@ import UIKit
 
 //yxu: delegate to pass the date picked from calendar, back to table view
 protocol UploadLogDelegate {
-    func uploadLogItem(activityType: Int)
+    func uploadLogItem(activityItem: DailyLogItem)
+    
 }
+
+
+extension NSDate {
+    var formatted: String {
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "HH:mm"
+        return  formatter.stringFromDate(self)
+    }
+}
+
+
+
 
 class AddDailyLogViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
 
+    @IBOutlet weak var startTimeTextField: UITextField!
     
-    //@IBOutlet weak var activityType: UITextField!
+    @IBOutlet weak var endTimeTextField: UITextField!
+ 
     @IBOutlet weak var activityTypeTextField: UITextField!
     
-    @IBOutlet weak var startTime: UITextField!
-    
-    @IBOutlet weak var endTime: UITextField!
+    @IBOutlet weak var contentTextView: UITextView!
+ 
     
     // picker views
     var activityPicker = UIPickerView()
-    var timePicker = UIDatePicker()
+    var startTimePicker = UIDatePicker()
+    var endTimePicker = UIDatePicker()
     
     var delegate: UploadLogDelegate!
     
     
     var activityId = activityIdMin // default to minimum
+    var startTime = ""
+    var endTime = ""
+
     
     @IBAction func uploadLog(sender: UIButton) {
         println("uploading log ")
-        
         
         println("activity = \(activityTypeTextField.text), id = \(activityId) \n\n")
         
@@ -56,8 +73,9 @@ class AddDailyLogViewController: UIViewController, UIPickerViewDataSource, UIPic
         let uniqueId: Int // 307-308 etc
         
         */
+        let activityItem = DailyLogItem(uniqueId: 0, activityType: activityId, content: contentTextView.text, startTime: startTime, endTime: endTime)
         
-        delegate?.uploadLogItem(activityId)
+        delegate?.uploadLogItem(activityItem)
         
         dismissViewControllerAnimated(true, completion: nil)
         
@@ -68,24 +86,47 @@ class AddDailyLogViewController: UIViewController, UIPickerViewDataSource, UIPic
         self.view.endEditing(true)
     }
 
+    func startTimeChangedAction() {
+        startTimeTextField.text = startTimePicker.date.formatted
+        
+    }
     
+    func endTimeChangedAction() {
+        endTimeTextField.text = endTimePicker.date.formatted
+    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        var curTime = NSDate()
+        startTime = curTime.formatted
+        endTime = startTime  //todo: add logic to add 30 minutes to starttime as endtime; And check agains midnight
+        
+        startTimeTextField.text = startTime
+        endTimeTextField.text = endTime
+        
         activityPicker.dataSource = self
         activityPicker.delegate = self
         
-        timePicker.datePickerMode = UIDatePickerMode.Time;
-        timePicker.locale = NSLocale(localeIdentifier: "zh_Hans_CN")
+        startTimePicker.datePickerMode = UIDatePickerMode.Time;
+        startTimePicker.locale = NSLocale(localeIdentifier: "NL") //NL for Netherland, 24H; zh_Hans_CN for China
+        startTimePicker.addTarget(self, action: "startTimeChangedAction", forControlEvents: UIControlEvents.ValueChanged)
+  
+        
+        endTimePicker.datePickerMode = UIDatePickerMode.Time;
+        endTimePicker.locale = NSLocale(localeIdentifier: "NL") //NL for Netherland, 24H; zh_Hans_CN for China
+        endTimePicker.addTarget(self, action: "endTimeChangedAction", forControlEvents: UIControlEvents.ValueChanged)
+        
         
         activityTypeTextField.text = activityTypeDictionary[activityIdMin]?.name
         
         // set up input view
         activityTypeTextField.inputView = activityPicker //show from the bottom. refer to: http://stackoverflow.com/questions/20740874/uipickerview-as-inputview-of-uitextfield
 
-        startTime.inputView = timePicker
-        endTime.inputView = timePicker
+        startTimeTextField.inputView = startTimePicker
+        endTimeTextField.inputView = endTimePicker
     }
     
     
