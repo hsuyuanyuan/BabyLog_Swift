@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 
+
 class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,PickDateDelegate, UploadLogDelegate
 {
 
@@ -49,7 +50,13 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         // set current date
         let date = NSDate()
-        curDate = "\(date.year)-\(date.month)-\(date.day)"
+        
+        // refer to: http://stackoverflow.com/questions/24070450/how-to-get-the-current-timeand-hour-as-datetime-swift
+        let calendar = NSCalendar.currentCalendar()
+        let components = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay, fromDate: date)
+        
+        curDate = "\(components.year)-\(components.month)-\(components.day)"
+        
         
         // set up spinner
         activityIndicator = UIActivityIndicatorView(frame: CGRectMake(0, 0, 50, 50))
