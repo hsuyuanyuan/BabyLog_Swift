@@ -20,27 +20,7 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var activityIndicator:UIActivityIndicatorView!
     
     var curDate = ""
-    
-    let activityTypeList = [
-    1:ActivityType(id: 1, name: "DaBian", imageName: "activity_1.png"),
-    2:ActivityType(id: 2, name: "XiaoBian", imageName: "activity_2.png"),
-    3:ActivityType(id: 3, name: "ShuiJiao", imageName: "activity_3.png"),
-    4:ActivityType(id: 4, name: "WuShui", imageName: "activity_4.png"),
-    5:ActivityType(id: 5, name: "ChiFan", imageName: "activity_5.png"),
-    6:ActivityType(id: 6, name: "LingShi", imageName: "activity_6.png"),
-    7:ActivityType(id: 7, name: "ShiNeiGeRenHuoDong", imageName: "activity_7.png"),
-    8:ActivityType(id: 8, name: "ShiNeiJiTiHuoDong", imageName: "activity_8.png"),
-    9:ActivityType(id: 9, name: "ShiWaiGeRenHuoDong", imageName: "activity_9.png"),
-    10:ActivityType(id: 10, name: "ShiWaiJiTiHuoDong", imageName: "activity_10.png"),
-    11:ActivityType(id: 11, name: "XiSu", imageName: "activity_11.png"),
-    12:ActivityType(id: 12, name: "QiTa", imageName: "activity_12.png"),
-    13:ActivityType(id: 13, name: "QiChuang", imageName: "activity_13.jpg"),
-    14:ActivityType(id: 14, name: "XiZao", imageName: "activity_14.jpg"),
-    15:ActivityType(id: 15, name: "ShengBing", imageName: "activity_15.jpg"),
-    20:ActivityType(id: 20, name: "DaoXiao", imageName: "activity_20.jpg"),
-    30:ActivityType(id: 30, name: "LiXiao", imageName: "activity_30.jpg"),
-    ]
-    
+ 
     
     
     override func viewDidLoad() {
@@ -369,7 +349,7 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         reusableCell.activityDetailsLabel!.text = logItemsForDisplay[indexPath.row].content
         
-        if let curActivity = activityTypeList[logItemsForDisplay[indexPath.row].activityType] {
+        if let curActivity = activityTypeDictionary[logItemsForDisplay[indexPath.row].activityType] {
             
             reusableCell.activityTypeLabel!.text = curActivity.name
             reusableCell.activityIcon!.image = UIImage(named: curActivity.imageName)

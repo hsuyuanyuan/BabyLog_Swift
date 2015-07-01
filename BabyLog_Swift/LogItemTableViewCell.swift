@@ -22,4 +22,8 @@ class LogItemTableViewCell: UITableViewCell {
  
     @IBOutlet weak var activityIcon: UIImageView!
     
+    
+    
+    
+    
 }
