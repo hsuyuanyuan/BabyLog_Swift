@@ -59,20 +59,6 @@ class AddDailyLogViewController: UIViewController, UIPickerViewDataSource, UIPic
         // todo: add sanity check:  end time > start time etc
         //   show an alert view if error detected
         
-        
-        
-        
-        /*
-
-        class DailyLogItem: Printable {
-        
-        let activityType: Int
-        let content: String
-        let startTime: String
-        let endTime: String
-        let uniqueId: Int // 307-308 etc
-        
-        */
         let activityItem = DailyLogItem(uniqueId: 0, activityType: activityId, content: contentTextView.text, startTime: startTime, endTime: endTime)
         
         delegate?.uploadLogItem(activityItem)

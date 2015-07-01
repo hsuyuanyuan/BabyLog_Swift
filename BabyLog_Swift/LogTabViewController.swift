@@ -98,7 +98,8 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let calendarPickerVC = KeleCalendarViewController()
         calendarPickerVC.delegate = self
         
-        calendarPickerVC.modalPresentationStyle = .Custom
+        calendarPickerVC.view.backgroundColor = UIColor.whiteColor()
+        calendarPickerVC.modalPresentationStyle = .Custom //tried .CurrentContext. totally blocked the underlying view
         presentViewController(calendarPickerVC, animated: true, completion: nil)
         
         
