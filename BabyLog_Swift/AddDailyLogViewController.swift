@@ -50,6 +50,12 @@ class AddDailyLogViewController: UIViewController, UIPickerViewDataSource, UIPic
     var endTime = ""
 
     
+    @IBAction func cancelAction(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+ 
+    
+    
     @IBAction func uploadLog(sender: UIButton) {
         println("uploading log ")
         
@@ -85,6 +91,10 @@ class AddDailyLogViewController: UIViewController, UIPickerViewDataSource, UIPic
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        contentTextView.layer.borderWidth = 1.0
+        contentTextView.layer.borderColor = UIColor.blueColor().CGColor
+        contentTextView.layer.cornerRadius = 5
         
         var curTime = NSDate()
         startTime = curTime.formatted
