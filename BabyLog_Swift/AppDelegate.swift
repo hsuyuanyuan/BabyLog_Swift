@@ -8,6 +8,7 @@
 
 import UIKit
 
+let version = 0.5
 
 
 //---- global struct // todo: moving to a separate file
