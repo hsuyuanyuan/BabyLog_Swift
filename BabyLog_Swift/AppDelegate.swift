@@ -14,6 +14,11 @@ let version = 0.5
 //---- global struct // todo: moving to a separate file
 let defaultImg = "login_bg.png"
 
+let userTokenStringInHttpHeader = "Token" as NSObject
+
+let userTokenKeyInUserDefault = "keyForUserToken"
+
+
 let activityIdMin = 1 // first activity id, not zero
 
 let activityTypeDictionary = [

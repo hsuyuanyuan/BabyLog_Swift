@@ -10,10 +10,43 @@ import UIKit
 import Alamofire
 
 
+// share functions across the views:  http://stackoverflow.com/questions/27050580/how-are-global-functions-defined-in-swift
+extension UIViewController {
+    
+    func _saveUserToken(userToken:String) {
+        let userDefault = NSUserDefaults.standardUserDefaults()
+        userDefault.setObject(userToken, forKey: userTokenKeyInUserDefault)
+    }
+    
+    func _getUserToken() -> String {
+        let userDefault = NSUserDefaults.standardUserDefaults()
+        let userToken = userDefault.stringForKey(userTokenKeyInUserDefault) ?? ""
+        println("\(userToken)")
+        return userToken
+    }
+
+    func displayAlert(title: String, message: String ) {
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
+            self.dismissViewControllerAnimated(true, completion: nil) //yxu?: is self the alert or the LoginViewController??
+        }))
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+        
+    }
+    
+    
+}
+
+
+
 class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,PickDateDelegate, UploadLogDelegate
 {
 
     let cellReuseId = "logCell"
+
     
     var logItemsForDisplay = [DailyLogItem]()
     
@@ -21,7 +54,29 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     var curDate = ""
  
+    @IBOutlet weak var navigationBar: UINavigationBar!
     
+    
+    @IBOutlet weak var logView: UITableView!
+    
+    
+    @IBAction func pickDateFromCalendar(sender: UIBarButtonItem) {
+        
+        println("showing the calendar")
+        
+        let calendarPickerVC = KeleCalendarViewController()
+        calendarPickerVC.delegate = self
+        
+        calendarPickerVC.view.backgroundColor = UIColor.whiteColor()
+        calendarPickerVC.modalPresentationStyle = .Custom //tried .CurrentContext. totally blocked the underlying view
+        presentViewController(calendarPickerVC, animated: true, completion: nil)
+        
+        
+        
+    }
+    
+
+    // MARK: view management
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,41 +126,7 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
         navigationBar!.topItem?.title = curDate + " Log " //refer to: http://stackoverflow.com/questions/10895122/changing-nav-bar-title-programatically
     }
     
-    //todo: this is used in both login and main VCs => move to global?? refer to architecture
-    func displayAlert(title: String, message: String ) {
-        
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-        
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
-            self.dismissViewControllerAnimated(true, completion: nil) //yxu?: is self the alert or the LoginViewController??
-        }))
-        
-        self.presentViewController(alert, animated: true, completion: nil)
-        
-    }
-    
-    
-    @IBOutlet weak var navigationBar: UINavigationBar!
-    
-    
-    @IBOutlet weak var logView: UITableView!
-    
-    
-    @IBAction func pickDateFromCalendar(sender: UIBarButtonItem) {
-        
-        println("showing the calendar")
-        
-        let calendarPickerVC = KeleCalendarViewController()
-        calendarPickerVC.delegate = self
-        
-        calendarPickerVC.view.backgroundColor = UIColor.whiteColor()
-        calendarPickerVC.modalPresentationStyle = .Custom //tried .CurrentContext. totally blocked the underlying view
-        presentViewController(calendarPickerVC, animated: true, completion: nil)
-        
-        
-        
-    }
-    
+
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "SegueToShowAddLogVC" //yxu: defined in segue property in Storyboard
@@ -123,15 +144,133 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func pickDataFromCalendar(date: String) {
         
         _retrieveDailyLog(date);
-        
-        
-        
+
     }
     
     func uploadLogItem(activityItem: DailyLogItem) {
         
+        _uploadDailyLog(activityItem)
+        
+    }
+    
+    
+
+    
+    
+    
+    // MARK: help functions
+    
+
+    
+
+    
+    func _startSpinnerAndBlockUI() {
+        // block the UI before async action
+        activityIndicator.startAnimating()
+        
+        UIApplication.sharedApplication().beginIgnoringInteractionEvents() // prevent the user messing up the ui
+    }
+    
+    func _stopSpinnerAndResumeUI() {
+        activityIndicator.stopAnimating()
+        UIApplication.sharedApplication().endIgnoringInteractionEvents()
+        
+    }
+    
+    
+    // MARK: call web api
+    
+    func _deleteDailyLog(logId: Int) {
+        
+        // add spinner
+        _startSpinnerAndBlockUI()
+        
+        // call web api: parameter: int Id  日程的Id; http://www.babysaga.cn/app/service?method=ClassSchedule.DeleteSchedule
         
         
+        // TODO: make a function for calling web api
+        
+        // func start
+        var requestParams : [String:AnyObject] = [ //todo: add sanity check for the date string
+            "Id":logId
+        ]
+        
+        let manager = Manager.sharedInstance
+        manager.session.configuration.HTTPAdditionalHeaders = [
+            "Token": _getUserToken() ]
+        
+        let data = NSJSONSerialization.dataWithJSONObject(requestParams, options: NSJSONWritingOptions.PrettyPrinted, error: nil)
+        
+        let requestSchedule =  Alamofire.request(.POST, "http://www.babysaga.cn/app/service?method=ClassSchedule.DeleteSchedule", parameters: [:], encoding: .Custom({
+            (convertible, params) in
+            var mutableRequest = convertible.URLRequest.copy() as! NSMutableURLRequest
+            mutableRequest.HTTPBody = data
+            return (mutableRequest, nil)
+        })).responseJSON() {
+            (request, response, data, error) in
+            
+            if error == nil {
+                println("we did get the response")
+                println(data) //yxu: output the unicode
+                println(request)
+                println(response)
+                println(error)
+                println((data as! NSDictionary)["Error"]!)
+                
+                let statusCode = (data as! NSDictionary)["StatusCode"] as! Int
+                if statusCode  == 200 {
+                    println("Succeeded in deleting the log")
+                    
+                    // delete the member from logItemsForDisplay
+                    self.logItemsForDisplay = self.logItemsForDisplay.filter({ (logItem ) -> Bool in
+                        logItem.uniqueId != logId //yxu: filter / map: in nature is looping, O(N)
+                    })
+                    
+                    
+                    
+                } else {
+                    println("Failed to get response")
+                    let errStr = (data as! NSDictionary)["Error"] as! String
+                    
+                }
+            } else {
+                self.displayAlert("Login failed", message: error!.description)
+            }
+            
+            
+            
+            
+            // Make sure we are on the main thread, and update the UI.
+            dispatch_async(dispatch_get_main_queue()) { //sync or async
+                // update some UI
+                
+                self.logView.reloadData() //yxu: reloadData must be called on main thread. otherwise it does not work!!!
+                
+                
+                println("updating the table view")
+                // resume the UI at the end of async action
+                
+                self._stopSpinnerAndResumeUI()
+                
+            }
+            
+            
+            //todo: persist data with UserDefault
+            
+        }
+        //func end
+        
+        
+        
+        // if success, delete it from local copy
+        
+        // in callback, reload view ( using local copy)
+        
+        
+    }
+    
+    
+    func _uploadDailyLog(activityItem: DailyLogItem) {
         var requestParams : [String:AnyObject] = [
             "TimeBegin":activityItem.startTime, //"08:00",
             "TimeEnd":activityItem.endTime, //"09:30",
@@ -144,7 +283,7 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         let manager = Manager.sharedInstance
         manager.session.configuration.HTTPAdditionalHeaders = [
-            "Token": "VhuZ18JOWjuLxyxJ" ] //todo: retrive the token and put it in the header
+            "Token": _getUserToken()] //todo: retrive the token and put it in the header
         
         
         let data = NSJSONSerialization.dataWithJSONObject(requestParams, options: NSJSONWritingOptions.PrettyPrinted, error: nil)
@@ -202,23 +341,6 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     
-    
-    // MARK: help functions
-    
-    func _startSpinnerAndBlockUI() {
-        // block the UI before async action
-        activityIndicator.startAnimating()
-        
-        UIApplication.sharedApplication().beginIgnoringInteractionEvents() // prevent the user messing up the ui
-    }
-    
-    func _stopSpinnerAndResumeUI() {
-        activityIndicator.stopAnimating()
-        UIApplication.sharedApplication().endIgnoringInteractionEvents()
-        
-    }
-    
-    
     func _retrieveDailyLog(date: String) {
         
         curDate = date
@@ -232,9 +354,10 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
             "Day": date, //"2015-6-25"
         ]
         
+        
         let manager = Manager.sharedInstance
         manager.session.configuration.HTTPAdditionalHeaders = [
-            "Token": "VhuZ18JOWjuLxyxJ" ] //todo: retrive the token from UserDefault and put it in the header
+            userTokenStringInHttpHeader: _getUserToken()]
         
         
         let data = NSJSONSerialization.dataWithJSONObject(requestParams, options: NSJSONWritingOptions.PrettyPrinted, error: nil)
@@ -302,6 +425,7 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         
     }
+    
     
     // refer to: http://stackoverflow.com/questions/26672547/swift-handling-json-with-alamofire-swiftyjson
     // refer to: http://www.raywenderlich.com/82706/working-with-json-in-swift-tutorial
@@ -376,103 +500,23 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     
+    
     // add following two to delete the cell:  http://stackoverflow.com/questions/24103069/swift-add-swipe-to-delete-tableviewcell
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
     }
     
+    
+    
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if (editingStyle == UITableViewCellEditingStyle.Delete) {
             println("deleting the cell ")
             
-            // add spinner
-            _startSpinnerAndBlockUI()
-            
             // get id
             let logId = logItemsForDisplay[indexPath.row].uniqueId
             
-            // call web api: parameter: int Id  日程的Id; http://www.babysaga.cn/app/service?method=ClassSchedule.DeleteSchedule
-            
-            
-            // TODO: make a function for calling web api
-            
-            // func start
-            var requestParams : [String:AnyObject] = [ //todo: add sanity check for the date string
-                "Id":logId
-            ]
-            
-            let manager = Manager.sharedInstance
-            manager.session.configuration.HTTPAdditionalHeaders = [
-                "Token": "VhuZ18JOWjuLxyxJ" ] //todo: retrive the token from UserDefault and put it in the header
-            
-            
-            let data = NSJSONSerialization.dataWithJSONObject(requestParams, options: NSJSONWritingOptions.PrettyPrinted, error: nil)
-            
-            let requestSchedule =  Alamofire.request(.POST, "http://www.babysaga.cn/app/service?method=ClassSchedule.DeleteSchedule", parameters: [:], encoding: .Custom({
-                (convertible, params) in
-                var mutableRequest = convertible.URLRequest.copy() as! NSMutableURLRequest
-                mutableRequest.HTTPBody = data
-                return (mutableRequest, nil)
-            })).responseJSON() {
-                (request, response, data, error) in
-                
-                if error == nil {
-                    println("we did get the response")
-                    println(data) //yxu: output the unicode
-                    println(request)
-                    println(response)
-                    println(error)
-                    println((data as! NSDictionary)["Error"]!)
-                    
-                    let statusCode = (data as! NSDictionary)["StatusCode"] as! Int
-                    if statusCode  == 200 {
-                        println("Succeeded in deleting the log")
-                        
-                        // delete the member from logItemsForDisplay
-                        self.logItemsForDisplay = self.logItemsForDisplay.filter({ (logItem ) -> Bool in
-                            logItem.uniqueId != logId //yxu: filter / map: in nature is looping, O(N)
-                        })
-
-                        
-                        
-                    } else {
-                        println("Failed to get response")
-                        let errStr = (data as! NSDictionary)["Error"] as! String
-                        
-                    }
-                } else {
-                    self.displayAlert("Login failed", message: error!.description)
-                }
-                
-                
-                
-                
-                // Make sure we are on the main thread, and update the UI.
-                dispatch_async(dispatch_get_main_queue()) { //sync or async
-                    // update some UI
-                    
-                    self.logView.reloadData() //yxu: reloadData must be called on main thread. otherwise it does not work!!!
-                    
-                    
-                    println("updating the table view")
-                    // resume the UI at the end of async action
-                    
-                    self._stopSpinnerAndResumeUI()
-                    
-                }
-                
-                
-                //todo: persist data with UserDefault
-                
-            }
-            //func end
-            
-            
-            
-            // if success, delete it from local copy
-            
-            // in callback, reload view ( using local copy)
-            
+            // call web api
+            _deleteDailyLog(logId)
             
         }
     }

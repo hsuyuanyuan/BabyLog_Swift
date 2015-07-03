@@ -18,17 +18,7 @@ class LoginViewController: UIViewController {
    
    @IBOutlet weak var passwordTextField: UITextField!
    
-   func displayAlert(title: String, message: String ) {
-      
-      let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-      
-      alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
-         self.dismissViewControllerAnimated(true, completion: nil) //yxu?: is self the alert or the LoginViewController??
-      }))
-      
-      self.presentViewController(alert, animated: true, completion: nil)
-      
-   }
+
    
    @IBAction func logInAccount(sender: UIButton) {
 
@@ -78,10 +68,12 @@ class LoginViewController: UIViewController {
                 if statusCode  == 200 {
                     println("Succeeded in login")
                     
+                    let userToken = (JSON as! NSDictionary)["Token"] as! String
+                    self._saveUserToken(userToken)
+                    
+                    
                     //yxu: old way: jump to the main tabbar view, which is programmatically created
                     //self.presentViewController(mainVC, animated: true, completion: nil)
-                    
-                    
                     self.performSegueWithIdentifier("segueToShowMainTabBarVC", sender: self) //yxu: Note: segue is from the loginVC to mainVC in storyboard, not from button to mainVC, which would jump without calling performSegueWithIdentifier
                     
                 } else {
@@ -104,9 +96,6 @@ class LoginViewController: UIViewController {
             
         }
         
-        
-        
-         
       }
    }
    
