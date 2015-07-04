@@ -56,6 +56,52 @@ class DailyLogItem: Printable {
 
 
 
+class BabyInfo: Printable {
+    
+    // must have
+    let babyName: String
+    let nickName: String
+    let sex: Int //Note: in Json, it is String, not Int. need conversion
+    
+    // optional
+    let address: String = ""
+    let city: String = ""
+    let cityId: Int = 0
+    let province: String = ""
+    let proviceId: Int = 0
+    let country:String = ""
+
+    
+    let birthday: String = ""
+    let bloodType: String = ""
+    let telNumber: String = ""
+
+    // guid / daoxiaoTime / lixiaoTime
+    // usercode /userType
+    // open
+    
+    let diaryCount: Int = 0
+    let headImgName: String = ""
+    let headImgPath: String = ""
+    
+    let id: Int  // student id in class
+    let intro: String = ""
+
+    
+    
+    var description: String {
+        return "baby name:\(babyName), nick name: \(nickName), sex: \(sex)\n"
+    }
+    
+    init(babyName: String, nickName: String, sex: Int, id: Int ) {
+        self.babyName = babyName
+        self.nickName = nickName
+        self.sex = sex
+        self.id = id
+    }
+    
+}
+
 
 
 

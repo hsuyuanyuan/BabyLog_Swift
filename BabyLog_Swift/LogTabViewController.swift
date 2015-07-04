@@ -13,6 +13,8 @@ import Alamofire
 // share functions across the views:  http://stackoverflow.com/questions/27050580/how-are-global-functions-defined-in-swift
 extension UIViewController {
     
+
+    
     func _saveUserToken(userToken:String) {
         let userDefault = NSUserDefaults.standardUserDefaults()
         userDefault.setObject(userToken, forKey: userTokenKeyInUserDefault)
@@ -38,6 +40,11 @@ extension UIViewController {
     }
     
     
+    
+
+    
+
+    
 }
 
 
@@ -46,12 +53,8 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
 {
 
     let cellReuseId = "logCell"
-
-    
-    var logItemsForDisplay = [DailyLogItem]()
-    
     var activityIndicator:UIActivityIndicatorView!
-    
+    var logItemsForDisplay = [DailyLogItem]()
     var curDate = ""
  
     @IBOutlet weak var navigationBar: UINavigationBar!
@@ -72,6 +75,19 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
         presentViewController(calendarPickerVC, animated: true, completion: nil)
         
         
+        
+    }
+    
+    func _startSpinnerAndBlockUI() {
+        // block the UI before async action
+        activityIndicator.startAnimating()
+        
+        UIApplication.sharedApplication().beginIgnoringInteractionEvents() // prevent the user messing up the ui
+    }
+    
+    func _stopSpinnerAndResumeUI() {
+        activityIndicator.stopAnimating()
+        UIApplication.sharedApplication().endIgnoringInteractionEvents()
         
     }
     
@@ -164,18 +180,7 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
 
     
-    func _startSpinnerAndBlockUI() {
-        // block the UI before async action
-        activityIndicator.startAnimating()
-        
-        UIApplication.sharedApplication().beginIgnoringInteractionEvents() // prevent the user messing up the ui
-    }
-    
-    func _stopSpinnerAndResumeUI() {
-        activityIndicator.stopAnimating()
-        UIApplication.sharedApplication().endIgnoringInteractionEvents()
-        
-    }
+
     
     
     // MARK: call web api
