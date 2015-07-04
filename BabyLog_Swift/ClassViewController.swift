@@ -23,7 +23,7 @@ class ClassViewController: UIViewController, UICollectionViewDataSource,  UIColl
     let sectionInsets = UIEdgeInsets(top: 50, left: 20, bottom: 50, right: 20)
     
     var _babyInfoArray = [BabyInfo]()
-    
+    let pendingOperations = PendingOperations()
     
     func _startSpinnerAndBlockUI() {
         // block the UI before async action
@@ -159,8 +159,19 @@ class ClassViewController: UIViewController, UICollectionViewDataSource,  UIColl
                 var kidName: String = babyInformation["BabyName"].string!
                 var kidNickName: String = babyInformation["Nickname"].string!
                 var kidSex: Int = babyInformation["Sex"].string?.toInt() ?? 0
-
-                var newKid = BabyInfo(babyName: kidName, nickName: kidNickName, sex: kidSex, id: kidId)
+                var headImg = babyInformation["HeadImg"].string ?? ""
+                var headImgPath = babyInformation["HeadImgpath"].string ?? ""
+                
+                //let headImg = "302bf297-6646-4945-8867-d0ed17c7c111.jpg";
+                //var headImgPath = "~/Uploads/000014FilePath/";
+                // http://www.babysaga.cn/Uploads/000014FilePath/302bf297-6646-4945-8867-d0ed17c7c111.jpg
+                let range = headImgPath.startIndex ..< advance(headImgPath.startIndex, 2)
+                headImgPath.removeRange(range)
+                
+                let url = NSURL(string: headImgPath + headImg, relativeToURL: baseURL )
+                
+                
+                var newKid = BabyInfo(babyName: kidName, nickName: kidNickName, sex: kidSex, id: kidId, imageURL: url!)
                 kids.append(newKid)
             }
 
@@ -193,21 +204,53 @@ class ClassViewController: UIViewController, UICollectionViewDataSource,  UIColl
         cell.layer.borderWidth = 2.0
         
         // image downloading
-        // http://www.babysaga.cn/Uploads/000014FilePath/302bf297-6646-4945-8867-d0ed17c7c111.jpg
+        let babyInfo = _babyInfoArray[indexPath.row]
         
-        let headImg = "302bf297-6646-4945-8867-d0ed17c7c111.jpg";
-        var headImgPath = "~/Uploads/000014FilePath/";
+        cell.babyImageView.image = babyInfo.image
         
-        let range = headImgPath.startIndex ..< advance(headImgPath.startIndex, 2)
-        headImgPath.removeRange(range)
         
-        let url = NSURL(string: headImgPath + headImg, relativeToURL: baseURL )
-        let imageData = NSData(contentsOfURL: url!)
+        //let imageData = NSData(contentsOfURL: url!)
+        //cell.babyImageView.image = UIImage(data:imageData!)
+
+        switch (babyInfo.imageState) {
+        //case .Failed, .Downloaded:
+            //_stopSpinnerAndResumeUI()
+        case .New :
+            //_startSpinnerAndBlockUI()
+            _startDownloadForImage(babyInfo, indexPath: indexPath)
+        default:
+            break
+        }
         
-        cell.babyImageView.image = UIImage(data:imageData!)
         
         return cell
     }
+    
+    
+    func _startDownloadForImage(babyInfo: BabyInfo, indexPath: NSIndexPath){
+        //1
+        if let downloadOperation = pendingOperations.downloadsInProgress[indexPath] {
+            return
+        }
+        
+        //2
+        let downloader = ImageDownloader(babyInfo: babyInfo)
+        //3
+        downloader.completionBlock = {
+            if downloader.cancelled {
+                return
+            }
+            dispatch_async(dispatch_get_main_queue(), {
+                self.pendingOperations.downloadsInProgress.removeValueForKey(indexPath)
+                self.classCollectionView.reloadItemsAtIndexPaths([indexPath])
+            })
+        }
+        //4
+        pendingOperations.downloadsInProgress[indexPath] = downloader
+        //5
+        pendingOperations.downloadQueue.addOperation(downloader)
+    }
+    
     
     
     // MARK: delegate for layout
