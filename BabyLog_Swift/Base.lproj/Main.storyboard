@@ -351,7 +351,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BTj-8O-8Ym">
-                                                    <rect key="frame" x="16" y="97" width="69" height="30"/>
+                                                    <rect key="frame" x="16" y="98" width="69" height="30"/>
                                                     <state key="normal" title="到校时间">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
@@ -360,7 +360,7 @@
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wWG-lb-qXd">
-                                                    <rect key="frame" x="16" y="123" width="69" height="30"/>
+                                                    <rect key="frame" x="16" y="124" width="69" height="30"/>
                                                     <state key="normal" title="离校时间">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>

@@ -59,6 +59,10 @@ class ClassViewController: UIViewController, UICollectionViewDataSource,  UIColl
         // retrieve the students for current class
         _retrieveAllStudentsInClass()
         
+        // refer to: http://stackoverflow.com/questions/24126678/close-ios-keyboard-by-touching-anywhere-using-swift
+        //Looks for single or multiple taps.
+        var tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "DismissKeyboard")
+        view.addGestureRecognizer(tap)
         
     }
 
@@ -272,4 +276,10 @@ class ClassViewController: UIViewController, UICollectionViewDataSource,  UIColl
         return CGSize(width: 150, height: 150)
     }
 
+
+    
+    func DismissKeyboard(){
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
+    }
 }

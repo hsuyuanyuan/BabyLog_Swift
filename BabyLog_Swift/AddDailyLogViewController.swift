@@ -16,10 +16,16 @@ protocol UploadLogDelegate {
 
 
 extension NSDate {
-    var formatted: String {
+    var formattedHHMM: String {
         let formatter = NSDateFormatter()
         formatter.dateFormat = "HH:mm"
         return  formatter.stringFromDate(self)
+    }
+    
+    var formattedYYYYMMDD: String {
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "YYYY-MM-dd" //formatter.dateFormat = "EEEE, dd MMM yyyy HH:mm:ss Z"
+        return formatter.stringFromDate(self)
     }
 }
 
@@ -79,12 +85,12 @@ class AddDailyLogViewController: UIViewController, UIPickerViewDataSource, UIPic
     }
 
     func startTimeChangedAction() {
-        startTimeTextField.text = startTimePicker.date.formatted
+        startTimeTextField.text = startTimePicker.date.formattedHHMM
         
     }
     
     func endTimeChangedAction() {
-        endTimeTextField.text = endTimePicker.date.formatted
+        endTimeTextField.text = endTimePicker.date.formattedHHMM
     }
 
     
@@ -97,8 +103,8 @@ class AddDailyLogViewController: UIViewController, UIPickerViewDataSource, UIPic
         contentTextView.layer.cornerRadius = 5
         
         var curTime = NSDate()
-        startTime = curTime.formatted
-        endTime = startTime  //todo: add logic to add 30 minutes to starttime as endtime; And check agains midnight
+        startTime = curTime.formattedHHMM
+        endTime = startTime  // TODO add logic to add 30 minutes to starttime as endtime; And check agains midnight
         
         startTimeTextField.text = startTime
         endTimeTextField.text = endTime
@@ -125,6 +131,9 @@ class AddDailyLogViewController: UIViewController, UIPickerViewDataSource, UIPic
         endTimeTextField.inputView = endTimePicker
     }
     
+    
+    
+    // MARK: delegate for customized UIPicker for activity types
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
