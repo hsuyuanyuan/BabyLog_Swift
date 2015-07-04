@@ -9,13 +9,17 @@
 import UIKit
 import Alamofire
 
-class ClassViewController: UIViewController, UICollectionViewDelegate //, UICollectionViewDataSource
+
+//refer to collection view tutorial:
+// http://www.raywenderlich.com/78550/beginning-ios-collection-views-swift-part-1
+
+class ClassViewController: UIViewController, UICollectionViewDataSource // UICollectionViewDelegateFlowLayout UICollectionViewDelegate
 {
 
     @IBOutlet weak var classCollectionView: UICollectionView!
     var activityIndicator:UIActivityIndicatorView!
     
-    let resueIdentifier = "studentCell"
+    let reuseIdentifier = "babyInfoCell"
     let sectionInsets = UIEdgeInsets(top: 50, left: 20, bottom: 50, right: 20)
     
     var _babyInfoArray = [BabyInfo]()
@@ -49,8 +53,8 @@ class ClassViewController: UIViewController, UICollectionViewDelegate //, UIColl
         self.view.addSubview(activityIndicator)
         
         // set up table view
-        classCollectionView.delegate = self
-        //classCollectionView.dataSource = self
+        //classCollectionView.delegate = self
+        classCollectionView.dataSource = self
         
         // retrieve the students for current class
         _retrieveAllStudentsInClass()
@@ -169,6 +173,23 @@ class ClassViewController: UIViewController, UICollectionViewDelegate //, UIColl
     
     
     
+    
+    // MARK: delegate methods
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return 1 // only 1 section => 1 class per teacher account
+    }
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return _babyInfoArray.count
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! UICollectionViewCell
+        
+        cell.backgroundColor = UIColor.blueColor()
+
+        return cell
+    }
     
 
 }
