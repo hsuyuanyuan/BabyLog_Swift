@@ -20,7 +20,8 @@ let userTokenKeyInUserDefault = "keyForUserToken"
 
 let baseURL = NSURL(string: "http://www.babysaga.cn/") // another option, initWithPath is for local folder
 
-let imageDefaultHead = UIImage(named: "KidPhotoBig.png") // default photo for kids without their own photos
+let imageDefaultHead = UIImage(named: "TabBar-KId.png")
+//UIImage(named: "KidPhotoBig.png") // default photo for kids without their own photos
 
 
 let activityIdMin = 1 // first activity id, not zero
