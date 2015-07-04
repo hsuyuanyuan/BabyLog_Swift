@@ -13,7 +13,7 @@ import Alamofire
 //refer to collection view tutorial:
 // http://www.raywenderlich.com/78550/beginning-ios-collection-views-swift-part-1
 
-class ClassViewController: UIViewController, UICollectionViewDataSource // UICollectionViewDelegateFlowLayout UICollectionViewDelegate
+class ClassViewController: UIViewController, UICollectionViewDataSource,  UICollectionViewDelegateFlowLayout // UICollectionViewDelegate
 {
 
     @IBOutlet weak var classCollectionView: UICollectionView!
@@ -52,10 +52,10 @@ class ClassViewController: UIViewController, UICollectionViewDataSource // UICol
         activityIndicator.hidesWhenStopped = true
         self.view.addSubview(activityIndicator)
         
-        // set up table view
+        // set up collection view
         //classCollectionView.delegate = self
         classCollectionView.dataSource = self
-        
+        classCollectionView.backgroundColor = UIColor.whiteColor()
         // retrieve the students for current class
         _retrieveAllStudentsInClass()
         
@@ -174,7 +174,7 @@ class ClassViewController: UIViewController, UICollectionViewDataSource // UICol
     
     
     
-    // MARK: delegate methods
+    // MARK: delegate for data source
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1 // only 1 section => 1 class per teacher account
     }
@@ -184,12 +184,49 @@ class ClassViewController: UIViewController, UICollectionViewDataSource // UICol
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! UICollectionViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! ClassBabyInfoCollectionViewCell
         
-        cell.backgroundColor = UIColor.blueColor()
+        cell.backgroundColor = UIColor.whiteColor()
 
+        cell.layer.borderColor = UIColor.blackColor().CGColor
+        cell.layer.cornerRadius = 5.0
+        cell.layer.borderWidth = 2.0
+        
+        // image downloading
+        // http://www.babysaga.cn/Uploads/000014FilePath/302bf297-6646-4945-8867-d0ed17c7c111.jpg
+        
+        let headImg = "302bf297-6646-4945-8867-d0ed17c7c111.jpg";
+        var headImgPath = "~/Uploads/000014FilePath/";
+        
+        let range = headImgPath.startIndex ..< advance(headImgPath.startIndex, 2)
+        headImgPath.removeRange(range)
+        
+        let url = NSURL(string: headImgPath + headImg, relativeToURL: baseURL )
+        let imageData = NSData(contentsOfURL: url!)
+        
+        cell.babyImageView.image = UIImage(data:imageData!)
+        
         return cell
     }
     
+    
+    // MARK: delegate for layout
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+        return sectionInsets
+    }
+    
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        /*
+        let flickrPhoto =  photoForIndexPath(indexPath)
+        //2
+        if var size = flickrPhoto.thumbnail?.size {
+            size.width += 10
+            size.height += 10
+            return size
+        }
+        */
+        return CGSize(width: 150, height: 150)
+    }
 
 }

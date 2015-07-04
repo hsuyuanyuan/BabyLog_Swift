@@ -18,6 +18,8 @@ let userTokenStringInHttpHeader = "Token" as NSObject
 
 let userTokenKeyInUserDefault = "keyForUserToken"
 
+let baseURL = NSURL(string: "http://www.babysaga.cn/") // another option, initWithPath is for local folder
+
 
 let activityIdMin = 1 // first activity id, not zero
 
