@@ -59,6 +59,11 @@
 		45A7E9731B474F9F00748A6F /* TabBar-KId@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A7E9701B474F9F00748A6F /* TabBar-KId@3x.png */; };
 		45A7E9751B4776A600748A6F /* ClassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A7E9741B4776A600748A6F /* ClassViewController.swift */; };
 		45A7E9771B479B6400748A6F /* ClassBabyInfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A7E9761B479B6400748A6F /* ClassBabyInfoCollectionViewCell.swift */; };
+		45A7E97C1B49A97400748A6F /* StarEmpty@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A7E97A1B49A97400748A6F /* StarEmpty@2x.png */; };
+		45A7E97D1B49A97400748A6F /* StarFull@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A7E97B1B49A97400748A6F /* StarFull@2x.png */; };
+		45A7E9811B49AF4F00748A6F /* FloatRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A7E9801B49AF4F00748A6F /* FloatRatingView.swift */; };
+		45A7E9831B49C03C00748A6F /* BabyStarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A7E9821B49C03C00748A6F /* BabyStarViewController.swift */; };
+		45A7E9851B49C16200748A6F /* BabyStarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A7E9841B49C16200748A6F /* BabyStarTableViewCell.swift */; };
 		45FBD6761B39BE3100A33663 /* login_bg-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45FBD6411B39BE3100A33663 /* login_bg-568h@2x.png */; };
 		45FBD6771B39BE3100A33663 /* login_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 45FBD6421B39BE3100A33663 /* login_bg.png */; };
 		45FBD6781B39BE3100A33663 /* login_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45FBD6431B39BE3100A33663 /* login_bg@2x.png */; };
@@ -174,6 +179,11 @@
 		45A7E9701B474F9F00748A6F /* TabBar-KId@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabBar-KId@3x.png"; sourceTree = "<group>"; };
 		45A7E9741B4776A600748A6F /* ClassViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassViewController.swift; sourceTree = "<group>"; };
 		45A7E9761B479B6400748A6F /* ClassBabyInfoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassBabyInfoCollectionViewCell.swift; sourceTree = "<group>"; };
+		45A7E97A1B49A97400748A6F /* StarEmpty@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "StarEmpty@2x.png"; sourceTree = "<group>"; };
+		45A7E97B1B49A97400748A6F /* StarFull@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "StarFull@2x.png"; sourceTree = "<group>"; };
+		45A7E9801B49AF4F00748A6F /* FloatRatingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatRatingView.swift; sourceTree = "<group>"; };
+		45A7E9821B49C03C00748A6F /* BabyStarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BabyStarViewController.swift; sourceTree = "<group>"; };
+		45A7E9841B49C16200748A6F /* BabyStarTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BabyStarTableViewCell.swift; sourceTree = "<group>"; };
 		45FBD6411B39BE3100A33663 /* login_bg-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_bg-568h@2x.png"; sourceTree = "<group>"; };
 		45FBD6421B39BE3100A33663 /* login_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_bg.png; sourceTree = "<group>"; };
 		45FBD6431B39BE3100A33663 /* login_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_bg@2x.png"; sourceTree = "<group>"; };
@@ -212,7 +222,8 @@
 		453E2B1D1B35492800500E31 /* BabyLog_Swift */ = {
 			isa = PBXGroup;
 			children = (
-				45A7E8C91B3E933400748A6F /* SwiftyJSON.swift */,
+				45A7E97F1B49AF2C00748A6F /* FloatRatingView */,
+				45A7E97E1B49A99500748A6F /* SwiftyJson */,
 				45A7E8B41B3E6DF100748A6F /* KeleCalendar */,
 				45FBD6921B3A8A1800A33663 /* Alamofire.xcodeproj */,
 				453E2B4C1B354B6200500E31 /* Resources */,
@@ -227,6 +238,8 @@
 				45A7E9761B479B6400748A6F /* ClassBabyInfoCollectionViewCell.swift */,
 				453E2B251B35492800500E31 /* Assets.xcassets */,
 				453E2B221B35492800500E31 /* Main.storyboard */,
+				45A7E9841B49C16200748A6F /* BabyStarTableViewCell.swift */,
+				45A7E9821B49C03C00748A6F /* BabyStarViewController.swift */,
 				45FBD6A91B3B0D3900A33663 /* MoreTableViewController.swift */,
 				453E2B2A1B35492800500E31 /* Info.plist */,
 			);
@@ -236,6 +249,8 @@
 		453E2B4C1B354B6200500E31 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				45A7E97A1B49A97400748A6F /* StarEmpty@2x.png */,
+				45A7E97B1B49A97400748A6F /* StarFull@2x.png */,
 				45A7E9511B47298800748A6F /* tab_icons_old */,
 				45A7E9081B4725B800748A6F /* tab_icons */,
 				45A7E9041B4725A800748A6F /* activity_icons */,
@@ -312,6 +327,22 @@
 				45A7E9591B4729AC00748A6F /* tabicon_video_on@2x.png */,
 			);
 			name = tab_icons_old;
+			sourceTree = "<group>";
+		};
+		45A7E97E1B49A99500748A6F /* SwiftyJson */ = {
+			isa = PBXGroup;
+			children = (
+				45A7E8C91B3E933400748A6F /* SwiftyJSON.swift */,
+			);
+			name = SwiftyJson;
+			sourceTree = "<group>";
+		};
+		45A7E97F1B49AF2C00748A6F /* FloatRatingView */ = {
+			isa = PBXGroup;
+			children = (
+				45A7E9801B49AF4F00748A6F /* FloatRatingView.swift */,
+			);
+			name = FloatRatingView;
 			sourceTree = "<group>";
 		};
 		45FBD6931B3A8A1800A33663 /* Products */ = {
@@ -443,6 +474,7 @@
 				45A7E8F61B43577D00748A6F /* activity_8.jpg in Resources */,
 				45A7E9611B4729AC00748A6F /* tabicon_video_on@2x.png in Resources */,
 				45A7E8F21B43577D00748A6F /* activity_4.jpg in Resources */,
+				45A7E97C1B49A97400748A6F /* StarEmpty@2x.png in Resources */,
 				45A7E9691B474F5F00748A6F /* TabBar-Zuoxi-Blue@2x.png in Resources */,
 				45A7E95D1B4729AC00748A6F /* tabicon_log_on@2x.png in Resources */,
 				45A7E95C1B4729AC00748A6F /* tabicon_log_off@2x.png in Resources */,
@@ -450,6 +482,7 @@
 				453E2B261B35492800500E31 /* Assets.xcassets in Resources */,
 				45A7E9711B474F9F00748A6F /* TabBar-KId.png in Resources */,
 				45A7E96D1B474F5F00748A6F /* TabBar-Zuoxi-Grey@3x.png in Resources */,
+				45A7E97D1B49A97400748A6F /* StarFull@2x.png in Resources */,
 				45A7E8F01B43577D00748A6F /* activity_2.jpg in Resources */,
 				45A7E95B1B4729AC00748A6F /* tabicon_class_on@2x.png in Resources */,
 				45A7E96C1B474F5F00748A6F /* TabBar-Zuoxi-Grey@2x.png in Resources */,
@@ -476,8 +509,11 @@
 				45A7E8CA1B3E933400748A6F /* SwiftyJSON.swift in Sources */,
 				45A7E8C11B3E6E0B00748A6F /* keleCalMainView.swift in Sources */,
 				45A7E8C81B3E8FB400748A6F /* DailyLogItem.swift in Sources */,
+				45A7E9811B49AF4F00748A6F /* FloatRatingView.swift in Sources */,
 				45A7E8DD1B43431800748A6F /* LogItemTableViewCell.swift in Sources */,
 				453E2B1F1B35492800500E31 /* AppDelegate.swift in Sources */,
+				45A7E9851B49C16200748A6F /* BabyStarTableViewCell.swift in Sources */,
+				45A7E9831B49C03C00748A6F /* BabyStarViewController.swift in Sources */,
 				45A7E8BF1B3E6E0B00748A6F /* KeleCalData.swift in Sources */,
 				45A7E9751B4776A600748A6F /* ClassViewController.swift in Sources */,
 				45FBD6AA1B3B0D3900A33663 /* MoreTableViewController.swift in Sources */,

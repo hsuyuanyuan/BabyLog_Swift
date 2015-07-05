@@ -32,7 +32,7 @@ extension NSDate {
 
 
 
-class AddDailyLogViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+class AddDailyLogViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var startTimeTextField: UITextField!
     
@@ -55,6 +55,21 @@ class AddDailyLogViewController: UIViewController, UIPickerViewDataSource, UIPic
     var startTime = ""
     var endTime = ""
 
+  
+    
+    @IBAction func chooseImageButtonTapped(sender: AnyObject) {
+        var imagePickerView = UIImagePickerController()
+        imagePickerView.allowsEditing = false
+        imagePickerView.delegate = self //yxu: Note: this needs two delegate, UIImagePickerControllerDelegate & UINavigationControllerDelegate
+        //imagePickerView.sourceType
+        
+        presentViewController(imagePickerView, animated: true, completion: nil)
+        
+        
+    }
+    
+    
+    
     
     @IBAction func cancelAction(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
@@ -173,8 +188,35 @@ class AddDailyLogViewController: UIViewController, UIPickerViewDataSource, UIPic
         
         return myView
     }
- 
     
+    
+    
+    // MARK: delegate for image picker view
+    
+
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+        dismissViewControllerAnimated(true, completion: nil)
+        
+    
+        
+        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+           // imageView.contentMode = .ScaleAspectFit
+           // imageView.image = pickedImage
+        }
+
+        //?? todo: get file name for the image?? 
+        let imageURL = info[UIImagePickerControllerReferenceURL] as? NSURL
+        
+
+        
+    }
+ 
 }
 
 
