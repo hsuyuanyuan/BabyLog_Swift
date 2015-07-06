@@ -147,7 +147,7 @@
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
-                                                        <segue destination="JMc-zA-rTD" kind="show" id="ALW-Y9-Avp"/>
+                                                        <segue destination="JMc-zA-rTD" kind="show" identifier="showDailyLogPerBaby" id="ALW-Y9-Avp"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -156,6 +156,7 @@
                                             <outlet property="activityDetailsLabel" destination="Prl-xh-CKh" id="Hvx-5s-o5r"/>
                                             <outlet property="activityIcon" destination="6Y7-K7-i2g" id="hcR-EE-rG2"/>
                                             <outlet property="activityTypeLabel" destination="pcz-r9-UNU" id="501-V2-SMS"/>
+                                            <outlet property="dailyLogPerBabyButton" destination="29D-fG-hdV" id="PV6-sZ-o6M"/>
                                             <outlet property="startEndTimeLabel" destination="DdD-lQ-M2A" id="LZZ-fO-LT5"/>
                                         </connections>
                                     </tableViewCell>
@@ -437,7 +438,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GSr-zH-CxK">
-                                <rect key="frame" x="200" y="183" width="97" height="30"/>
+                                <rect key="frame" x="200" y="181" width="97" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -511,6 +512,12 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="activityTypeTextField" destination="Q4e-ja-h7o" id="3qr-lb-Lbq"/>
+                        <outlet property="contentTextView" destination="0S7-iB-Y8b" id="Ebi-Rv-VUK"/>
+                        <outlet property="endTimeTextField" destination="GSr-zH-CxK" id="s6Q-N4-3er"/>
+                        <outlet property="startTimeTextField" destination="rZk-dX-vHG" id="QFu-wp-gbD"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0hp-hJ-YPe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

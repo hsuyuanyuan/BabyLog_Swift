@@ -10,7 +10,8 @@ import UIKit
 
 class AddDailyLogPerBabyViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, SaveStartsForKidsDelegate  {
 
- 
+    // MARK: data arrays for baby info
+    
     var _idsForKids:[Int]?
     var _starsForKids:[Float]?
     var _namesForKids:[String]?
@@ -32,6 +33,40 @@ class AddDailyLogPerBabyViewController: UIViewController, UIImagePickerControlle
 
     }
     
+    
+    
+    // MARK: controls
+    
+    
+    @IBOutlet weak var activityTypeTextField: UITextField!
+    
+    @IBOutlet weak var startTimeTextField: UITextField!
+    
+    @IBOutlet weak var endTimeTextField: UITextField!
+    
+    @IBOutlet weak var contentTextView: UITextView!
+    
+    //Note, in prepareForSegue, cannot access those IBoutlet weak var, which leads to crash
+    // therefore, use the following internal variables to be set from prepareForSegue
+    var _activityStr: String?
+    var _startTime: String?
+    var _endTime: String?
+    var _contentStr: String?
+    
+    func initActivityInternalInfo(activityStr: String?, startTime: String, endTime: String, contentStr: String?) {
+        _activityStr = activityStr
+        _startTime = startTime
+        _endTime = endTime
+        _contentStr = contentStr
+    }
+    
+    
+    func initActivityDisplayInfo() {
+        activityTypeTextField.text = _activityStr
+        startTimeTextField.text = _startTime
+        endTimeTextField.text = _endTime
+        contentTextView.text = _contentStr
+    }
     
     
     @IBAction func confirmButtonTapped(sender: AnyObject) {
@@ -64,6 +99,7 @@ class AddDailyLogPerBabyViewController: UIViewController, UIImagePickerControlle
 
         // Do any additional setup after loading the view.
         initArraysForKids(_babyInfoArray.count)
+        initActivityDisplayInfo()
     }
 
     override func didReceiveMemoryWarning() {

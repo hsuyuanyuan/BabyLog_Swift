@@ -152,6 +152,18 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
         {
             let addLogVC = segue.destinationViewController as! AddDailyLogViewController
             addLogVC.delegate = self
+        } else if segue.identifier == "showDailyLogPerBaby" {
+            
+            let dailyLogPerBabyVC = segue.destinationViewController as! AddDailyLogPerBabyViewController
+            
+            let senderButton = sender as! UIButton
+            println("button tag: \(senderButton.tag)")
+            
+            let curDailyLog = logItemsForDisplay[senderButton.tag]
+            
+            let curActivityTypeName = activityTypeDictionary[curDailyLog.activityType]?.name
+            
+            dailyLogPerBabyVC.initActivityInternalInfo(curActivityTypeName, startTime: curDailyLog.startTime, endTime: curDailyLog.endTime, contentStr: curDailyLog.content)
         }
         
     }
@@ -477,6 +489,7 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let reusableCell  = tableView.dequeueReusableCellWithIdentifier(cellReuseId) as! LogItemTableViewCell
         
+        reusableCell.dailyLogPerBabyButton.tag = indexPath.row // used to identify which cell triggers the segue to per-baby view
         
         reusableCell.startEndTimeLabel!.text = logItemsForDisplay[indexPath.row].startTime + "-" + logItemsForDisplay[indexPath.row].endTime
         

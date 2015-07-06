@@ -23,6 +23,8 @@ class LogItemTableViewCell: UITableViewCell {
     @IBOutlet weak var activityIcon: UIImageView!
     
     
+
+    @IBOutlet weak var dailyLogPerBabyButton: UIButton!
     
     
     

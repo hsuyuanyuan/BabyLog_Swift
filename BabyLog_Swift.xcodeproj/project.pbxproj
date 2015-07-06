@@ -239,10 +239,10 @@
 				45A7E8C41B3E6E5B00748A6F /* KeleCalendarViewController.swift */,
 				45A7E9741B4776A600748A6F /* ClassViewController.swift */,
 				45A7E9761B479B6400748A6F /* ClassBabyInfoCollectionViewCell.swift */,
-				453E2B251B35492800500E31 /* Assets.xcassets */,
-				453E2B221B35492800500E31 /* Main.storyboard */,
 				45A7E9841B49C16200748A6F /* BabyStarTableViewCell.swift */,
 				45A7E9821B49C03C00748A6F /* BabyStarViewController.swift */,
+				453E2B251B35492800500E31 /* Assets.xcassets */,
+				453E2B221B35492800500E31 /* Main.storyboard */,
 				45FBD6A91B3B0D3900A33663 /* MoreTableViewController.swift */,
 				453E2B2A1B35492800500E31 /* Info.plist */,
 			);
