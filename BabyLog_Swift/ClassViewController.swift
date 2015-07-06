@@ -22,7 +22,6 @@ class ClassViewController: UIViewController, UICollectionViewDataSource,  UIColl
     let reuseIdentifier = "babyInfoCell"
     let sectionInsets = UIEdgeInsets(top: 50, left: 20, bottom: 50, right: 20)
     
-    var _babyInfoArray = [BabyInfo]()
     let pendingOperations = PendingOperations()
     
     func _startSpinnerAndBlockUI() {
@@ -116,7 +115,7 @@ class ClassViewController: UIViewController, UICollectionViewDataSource,  UIColl
                     if let data: AnyObject = data { //yxu: check if data is nil
                         let jsonResult = JSON(data)
                         
-                        self._parseJsonForBabyInfoArray(jsonResult)
+                        ClassViewController._parseJsonForBabyInfoArray(jsonResult)
                         
                     }
                     
@@ -151,7 +150,7 @@ class ClassViewController: UIViewController, UICollectionViewDataSource,  UIColl
     
     // refer to: http://stackoverflow.com/questions/26672547/swift-handling-json-with-alamofire-swiftyjson
     // refer to: http://www.raywenderlich.com/82706/working-with-json-in-swift-tutorial
-    func _parseJsonForBabyInfoArray(result: JSON) {
+    class func _parseJsonForBabyInfoArray(result: JSON) {
         
         if let babyInformationArray = result["BabyList"].array {
             

@@ -32,7 +32,7 @@ extension NSDate {
 
 
 
-class AddDailyLogViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class AddDailyLogViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
 
     @IBOutlet weak var startTimeTextField: UITextField!
     
@@ -42,6 +42,10 @@ class AddDailyLogViewController: UIViewController, UIPickerViewDataSource, UIPic
     
     @IBOutlet weak var contentTextView: UITextView!
  
+    
+    
+
+    
     
     // picker views
     var activityPicker = UIPickerView()
@@ -57,16 +61,7 @@ class AddDailyLogViewController: UIViewController, UIPickerViewDataSource, UIPic
 
   
     
-    @IBAction func chooseImageButtonTapped(sender: AnyObject) {
-        var imagePickerView = UIImagePickerController()
-        imagePickerView.allowsEditing = false
-        imagePickerView.delegate = self //yxu: Note: this needs two delegate, UIImagePickerControllerDelegate & UINavigationControllerDelegate
-        //imagePickerView.sourceType
-        
-        presentViewController(imagePickerView, animated: true, completion: nil)
-        
-        
-    }
+
     
     
     
@@ -191,31 +186,7 @@ class AddDailyLogViewController: UIViewController, UIPickerViewDataSource, UIPic
     
     
     
-    // MARK: delegate for image picker view
-    
 
-    
-    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-    
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
-        dismissViewControllerAnimated(true, completion: nil)
-        
-    
-        
-        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-           // imageView.contentMode = .ScaleAspectFit
-           // imageView.image = pickedImage
-        }
-
-        //?? todo: get file name for the image?? 
-        let imageURL = info[UIImagePickerControllerReferenceURL] as? NSURL
-        
-
-        
-    }
  
 }
 

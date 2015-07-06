@@ -11,7 +11,20 @@ import UIKit
 let version = 0.5
 
 
+
+
+
+
 //---- global struct // todo: moving to a separate file
+
+var _babyInfoArray = [BabyInfo]()
+
+
+
+
+//---- constants
+let defaultNumStars:Float = 3.0
+
 let defaultImg = "login_bg.png"
 
 let userTokenStringInHttpHeader = "Token" as NSObject

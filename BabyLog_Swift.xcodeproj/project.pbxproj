@@ -64,6 +64,7 @@
 		45A7E9811B49AF4F00748A6F /* FloatRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A7E9801B49AF4F00748A6F /* FloatRatingView.swift */; };
 		45A7E9831B49C03C00748A6F /* BabyStarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A7E9821B49C03C00748A6F /* BabyStarViewController.swift */; };
 		45A7E9851B49C16200748A6F /* BabyStarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A7E9841B49C16200748A6F /* BabyStarTableViewCell.swift */; };
+		45A7E9871B49D89200748A6F /* AddDailyLogPerBabyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A7E9861B49D89200748A6F /* AddDailyLogPerBabyViewController.swift */; };
 		45FBD6761B39BE3100A33663 /* login_bg-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45FBD6411B39BE3100A33663 /* login_bg-568h@2x.png */; };
 		45FBD6771B39BE3100A33663 /* login_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 45FBD6421B39BE3100A33663 /* login_bg.png */; };
 		45FBD6781B39BE3100A33663 /* login_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45FBD6431B39BE3100A33663 /* login_bg@2x.png */; };
@@ -184,6 +185,7 @@
 		45A7E9801B49AF4F00748A6F /* FloatRatingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatRatingView.swift; sourceTree = "<group>"; };
 		45A7E9821B49C03C00748A6F /* BabyStarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BabyStarViewController.swift; sourceTree = "<group>"; };
 		45A7E9841B49C16200748A6F /* BabyStarTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BabyStarTableViewCell.swift; sourceTree = "<group>"; };
+		45A7E9861B49D89200748A6F /* AddDailyLogPerBabyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddDailyLogPerBabyViewController.swift; sourceTree = "<group>"; };
 		45FBD6411B39BE3100A33663 /* login_bg-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_bg-568h@2x.png"; sourceTree = "<group>"; };
 		45FBD6421B39BE3100A33663 /* login_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_bg.png; sourceTree = "<group>"; };
 		45FBD6431B39BE3100A33663 /* login_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_bg@2x.png"; sourceTree = "<group>"; };
@@ -229,6 +231,7 @@
 				453E2B4C1B354B6200500E31 /* Resources */,
 				453E2B1E1B35492800500E31 /* AppDelegate.swift */,
 				45A7E8CB1B3F128500748A6F /* AddDailyLogViewController.swift */,
+				45A7E9861B49D89200748A6F /* AddDailyLogPerBabyViewController.swift */,
 				45A7E8DA1B4103D700748A6F /* LogTabViewController.swift */,
 				45A7E8DC1B43431800748A6F /* LogItemTableViewCell.swift */,
 				453E2B201B35492800500E31 /* LoginViewController.swift */,
@@ -503,6 +506,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45A7E9871B49D89200748A6F /* AddDailyLogPerBabyViewController.swift in Sources */,
 				45A7E8BE1B3E6E0B00748A6F /* KeleCalCellView.swift in Sources */,
 				45A7E8C21B3E6E0B00748A6F /* KeleCalMonthView.swift in Sources */,
 				453E2B211B35492800500E31 /* LoginViewController.swift in Sources */,

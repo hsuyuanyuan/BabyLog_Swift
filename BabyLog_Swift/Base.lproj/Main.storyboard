@@ -147,7 +147,7 @@
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
-                                                        <segue destination="JMc-zA-rTD" kind="show" id="VRU-FV-fpU"/>
+                                                        <segue destination="JMc-zA-rTD" kind="show" id="ALW-Y9-Avp"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -405,7 +405,7 @@
         <!--Daily Log for each kid-->
         <scene sceneID="fD2-qp-Zvr">
             <objects>
-                <viewController title="Daily Log for each kid" id="JMc-zA-rTD" customClass="AddDailyLogViewController" customModule="BabyLog_Swift" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Daily Log for each kid" id="JMc-zA-rTD" customClass="AddDailyLogPerBabyViewController" customModule="BabyLog_Swift" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="pPw-Ac-rGN"/>
                         <viewControllerLayoutGuide type="bottom" id="p5t-c2-oHx"/>
@@ -477,7 +477,7 @@
                                 <size key="titleShadowOffset" width="1" height="1"/>
                                 <state key="normal" title="+"/>
                                 <connections>
-                                    <action selector="chooseImageButtonTapped:" destination="JMc-zA-rTD" eventType="touchUpInside" id="dfB-mu-fac"/>
+                                    <action selector="chooseImageButtonTapped:" destination="JMc-zA-rTD" eventType="touchUpInside" id="3Wi-zg-r8V"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sL6-pQ-vOI">
@@ -486,7 +486,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="cancelAction:" destination="JMc-zA-rTD" eventType="touchUpInside" id="B7S-Jp-Z3J"/>
+                                    <action selector="cancelButtonTapped:" destination="JMc-zA-rTD" eventType="touchUpInside" id="e3M-CR-YQm"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hEg-8N-F59">
@@ -495,7 +495,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="uploadLog:" destination="JMc-zA-rTD" eventType="touchUpInside" id="hAt-Da-vFG"/>
+                                    <action selector="confirmButtonTapped:" destination="JMc-zA-rTD" eventType="touchUpInside" id="EKc-t3-RTl"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FQ2-jy-Gr7">
@@ -504,19 +504,13 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="Er6-4t-29q" kind="show" id="wlZ-qw-49K"/>
+                                    <segue destination="Er6-4t-29q" kind="show" identifier="showStarRatintgView" id="wlZ-qw-49K"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-                    <connections>
-                        <outlet property="activityTypeTextField" destination="Q4e-ja-h7o" id="NwZ-IM-SvV"/>
-                        <outlet property="contentTextView" destination="0S7-iB-Y8b" id="kaT-Op-plx"/>
-                        <outlet property="endTimeTextField" destination="GSr-zH-CxK" id="BcV-QW-h7M"/>
-                        <outlet property="startTimeTextField" destination="rZk-dX-vHG" id="CG1-vW-6r4"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0hp-hJ-YPe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -534,6 +528,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uas-L0-4Lk">
+                                <rect key="frame" x="228" y="607" width="43" height="30"/>
+                                <state key="normal" title="取   消">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancelAction:" destination="JMc-zA-rTD" eventType="touchUpInside" id="KM4-G3-vIq"/>
+                                    <action selector="cancelButtonTapped:" destination="Er6-4t-29q" eventType="touchUpInside" id="r5E-Zb-Re3"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IFC-pr-FvK">
+                                <rect key="frame" x="103" y="607" width="43" height="30"/>
+                                <state key="normal" title="确   定">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="confirmButtonTapped:" destination="Er6-4t-29q" eventType="touchUpInside" id="S0n-8O-YvV"/>
+                                    <action selector="uploadLog:" destination="JMc-zA-rTD" eventType="touchUpInside" id="vL6-bQ-4rB"/>
+                                </connections>
+                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="ywa-BW-W7O">
                                 <rect key="frame" x="0.0" y="35" width="375" height="575"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -575,29 +589,13 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="babyNameLabel" destination="8B1-U1-TKg" id="Lh0-hx-j5j"/>
+                                            <outlet property="babyStarRatingView" destination="zsk-Zo-zO8" id="b63-Pe-hDM"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uas-L0-4Lk">
-                                <rect key="frame" x="228" y="607" width="43" height="30"/>
-                                <state key="normal" title="取   消">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="cancelAction:" destination="JMc-zA-rTD" eventType="touchUpInside" id="KM4-G3-vIq"/>
-                                    <action selector="cancelButtonTapped:" destination="Er6-4t-29q" eventType="touchUpInside" id="r5E-Zb-Re3"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IFC-pr-FvK">
-                                <rect key="frame" x="103" y="607" width="43" height="30"/>
-                                <state key="normal" title="确   定">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="confirmButtonTapped:" destination="Er6-4t-29q" eventType="touchUpInside" id="S0n-8O-YvV"/>
-                                    <action selector="uploadLog:" destination="JMc-zA-rTD" eventType="touchUpInside" id="vL6-bQ-4rB"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>

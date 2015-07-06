@@ -68,6 +68,7 @@ class BabyInfo: Printable {
     let imageURL: NSURL
     var imageState = ImageState.New
     var image = imageDefaultHead // image is owned by the babyInfo object, not by the view cell
+    
 
     // optional
     let address: String = ""
