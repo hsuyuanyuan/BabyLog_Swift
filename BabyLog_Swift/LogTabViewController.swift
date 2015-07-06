@@ -161,9 +161,7 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
             
             let curDailyLog = logItemsForDisplay[senderButton.tag]
             
-            let curActivityTypeName = activityTypeDictionary[curDailyLog.activityType]?.name
-            
-            dailyLogPerBabyVC.initActivityInternalInfo(curActivityTypeName, startTime: curDailyLog.startTime, endTime: curDailyLog.endTime, contentStr: curDailyLog.content)
+            dailyLogPerBabyVC.initActivityInternalInfo(curDailyLog)
         }
         
     }

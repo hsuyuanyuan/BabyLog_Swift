@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class AddDailyLogPerBabyViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, SaveStartsForKidsDelegate  {
 
@@ -48,24 +49,20 @@ class AddDailyLogPerBabyViewController: UIViewController, UIImagePickerControlle
     
     //Note, in prepareForSegue, cannot access those IBoutlet weak var, which leads to crash
     // therefore, use the following internal variables to be set from prepareForSegue
-    var _activityStr: String?
-    var _startTime: String?
-    var _endTime: String?
-    var _contentStr: String?
     
-    func initActivityInternalInfo(activityStr: String?, startTime: String, endTime: String, contentStr: String?) {
-        _activityStr = activityStr
-        _startTime = startTime
-        _endTime = endTime
-        _contentStr = contentStr
+    var _curDailyLog = DailyLogItem(uniqueId: 0, activityType: activityIdMin, content: "", startTime: "", endTime: "")
+    
+    func initActivityInternalInfo(curDailyLog: DailyLogItem) {
+
+        _curDailyLog = curDailyLog
     }
     
     
     func initActivityDisplayInfo() {
-        activityTypeTextField.text = _activityStr
-        startTimeTextField.text = _startTime
-        endTimeTextField.text = _endTime
-        contentTextView.text = _contentStr
+        activityTypeTextField.text = activityTypeDictionary[_curDailyLog.activityType]?.name
+        startTimeTextField.text = _curDailyLog.startTime
+        endTimeTextField.text = _curDailyLog.endTime
+        contentTextView.text = _curDailyLog.content
     }
     
     
@@ -156,5 +153,72 @@ class AddDailyLogPerBabyViewController: UIViewController, UIImagePickerControlle
     func saveStartsForKids(starsForKids: [Float]?) {
         _starsForKids = starsForKids
     }
+    
+    
+    
+    // MARK: call web api
+    
+ 
+    func _uploadCompletedDailyLog() {
+        var requestParams : [String:AnyObject] = [
+            "Id": _curDailyLog.activityType,
+            "StartTime":_curDailyLog.startTime, //"08:00",
+            "EndTime":_curDailyLog.endTime, //"09:30",
+            "Rand": "",
+            "BabyId": "", // baby ids separated by ,
+            "PicList": "",
+            "Content": _curDailyLog.content,
+            "UploadPic": "",//?? how to use? is it pic name
+            "Stars": "" // stars separated by ,
+        ]
+        
+        
+        let manager = Manager.sharedInstance
+        manager.session.configuration.HTTPAdditionalHeaders = [
+            "Token": _getUserToken()] //todo: retrive the token and put it in the header
+        
+        
+        let data = NSJSONSerialization.dataWithJSONObject(requestParams, options: NSJSONWritingOptions.PrettyPrinted, error: nil)
+        
+        let requestSchedule =  Alamofire.request(.POST, "http://www.babysaga.cn/app/service?method=ClassSchedule.CompleteSchedule", parameters: [:], encoding: .Custom({
+            (convertible, params) in
+            var mutableRequest = convertible.URLRequest.copy() as! NSMutableURLRequest
+            mutableRequest.HTTPBody = data
+            return (mutableRequest, nil)
+        })).responseJSON() {
+            (request, response, JSON, error) in
+            
+            if error == nil {  //??yxu: error means http error. The web api error is inside JSON
+                println("we did get the response")
+                println(JSON) //yxu: output the unicode
+                println(request)
+                println(response)
+                println(error)
+                println((JSON as! NSDictionary)["Error"]!) //yxu: output Chinese: http://stackoverflow.com/questions/26963029/how-can-i-get-the-swift-xcode-console-to-show-chinese-characters-instead-of-unic
+                
+                let statusCode = (JSON as! NSDictionary)["StatusCode"] as! Int
+                if statusCode  == 200 {
+                    println("Succeeded in sending the log")
+                    
+                
+                    
+                    
+                } else {
+                    println("Failed to get response")
+                    let errStr = (JSON as! NSDictionary)["Error"] as! String
+                    
+                }
+                
+                
+            } else {
+                self.displayAlert("Login failed", message: error!.description)
+            }
+            
+            
+        }
+        
+    }
+ 
+    
     
 }
