@@ -191,7 +191,7 @@ class AddDailyLogPerBabyViewController: UIViewController, UIImagePickerControlle
         
         
         var requestParams : [String:AnyObject] = [
-            "Id": _curDailyLog.activityType,
+            "Id": _curDailyLog.uniqueId,
             "StartTime":_curDailyLog.startTime, //"08:00",
             "EndTime":_curDailyLog.endTime, //"09:30",
             "Rand": "",
@@ -230,7 +230,7 @@ class AddDailyLogPerBabyViewController: UIViewController, UIImagePickerControlle
                 if statusCode  == 200 {
                     println("Succeeded in sending the log")
                     
-                
+                 
                     
                     
                 } else {
