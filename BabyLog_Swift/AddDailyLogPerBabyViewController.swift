@@ -67,7 +67,9 @@ class AddDailyLogPerBabyViewController: UIViewController, UIImagePickerControlle
     
     
     @IBAction func confirmButtonTapped(sender: AnyObject) {
-            dismissViewControllerAnimated(true, completion: nil)
+        _uploadCompletedDailyLog()
+        
+        dismissViewControllerAnimated(true, completion: nil)
         
     }
     
@@ -160,16 +162,44 @@ class AddDailyLogPerBabyViewController: UIViewController, UIImagePickerControlle
     
  
     func _uploadCompletedDailyLog() {
+        
+        if _idsForKids == nil || _starsForKids == nil
+        {
+            return
+        }
+        
+        if _idsForKids!.count != _starsForKids!.count ||
+        _idsForKids!.count == 0 ||
+        _starsForKids!.count == 0
+        {
+            return
+        }
+        
+        
+        var idString = String(_idsForKids![0])
+        var starString = String(Int(_starsForKids![0]))
+        
+        for index in 1 ..< _idsForKids!.count {
+            idString += ","
+            idString += String( _idsForKids![index] )
+            
+            starString += ","
+            starString += String(Int(_starsForKids![index]))
+        }
+        
+        
+        
+        
         var requestParams : [String:AnyObject] = [
             "Id": _curDailyLog.activityType,
             "StartTime":_curDailyLog.startTime, //"08:00",
             "EndTime":_curDailyLog.endTime, //"09:30",
             "Rand": "",
-            "BabyId": "", // baby ids separated by ,
+            "BabyId": idString, // baby ids separated by ,
             "PicList": "",
             "Content": _curDailyLog.content,
             "UploadPic": "",//?? how to use? is it pic name
-            "Stars": "" // stars separated by ,
+            "Stars": starString // stars separated by ,
         ]
         
         
