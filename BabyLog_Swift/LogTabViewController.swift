@@ -551,15 +551,21 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
  
     
     
-    func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
-        let cell = tableView.cellForRowAtIndexPath(indexPath) as! LogItemTableViewCell
-        
-        println("activity: \(cell.activityTypeLabel)")
-    }
+ 
     
     
     
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -589,6 +595,10 @@ class LogTabForBabyViewController: LogTabViewController
         
     }
     
+    
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return false
+    }
     
     
     // MARK: call web api
