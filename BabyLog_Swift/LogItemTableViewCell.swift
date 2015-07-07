@@ -28,3 +28,16 @@ class LogItemTableViewCell: UITableViewCell {
     
     
 }
+
+
+
+class LogItemForBabyTableViewCell:
+LogItemTableViewCell {
+    
+    
+    @IBOutlet weak var numStarsLabel: UILabel!
+    
+    @IBOutlet weak var numImagesButton: UIButton!
+    
+    
+}

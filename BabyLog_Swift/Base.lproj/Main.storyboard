@@ -634,24 +634,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e2j-Qb-sqM">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <items>
-                                    <navigationItem title="Baby Daily Log" id="oBK-Ta-JcA">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="add" id="0uQ-g2-bmg"/>
-                                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="7wj-0x-v70">
-                                            <connections>
-                                                <action selector="pickDateFromCalendar:" destination="qsc-Hd-ZPq" id="MCa-25-54q"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="88" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="W0k-2d-eUw">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="logCell" rowHeight="88" id="BbP-XM-Q1v" customClass="LogItemTableViewCell" customModule="BabyLog_Swift" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="logCell" rowHeight="88" id="BbP-XM-Q1v" customClass="LogItemForBabyTableViewCell" customModule="BabyLog_Swift" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BbP-XM-Q1v" id="jdB-67-N3I">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -677,9 +664,15 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="login_bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="jAu-Jz-FWu">
                                                     <rect key="frame" x="16" y="28" width="54" height="44"/>
                                                 </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="efB-3U-kI5">
-                                                    <rect key="frame" x="301" y="20" width="66" height="30"/>
-                                                    <state key="normal" title="完成情况">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Stars" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zc5-gN-1Ic">
+                                                    <rect key="frame" x="290" y="8" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ebY-8F-ew5">
+                                                    <rect key="frame" x="285" y="42" width="35" height="30"/>
+                                                    <state key="normal" title="numImages">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                 </button>
@@ -689,12 +682,30 @@
                                             <outlet property="activityDetailsLabel" destination="nbr-kY-glV" id="oS1-4X-S8b"/>
                                             <outlet property="activityIcon" destination="jAu-Jz-FWu" id="vSS-1C-PQc"/>
                                             <outlet property="activityTypeLabel" destination="RgF-e2-jYN" id="86W-J1-OvN"/>
-                                            <outlet property="dailyLogPerBabyButton" destination="efB-3U-kI5" id="GCr-Ic-bLs"/>
+                                            <outlet property="numImagesButton" destination="ebY-8F-ew5" id="lCM-cz-iU6"/>
+                                            <outlet property="numStarsLabel" destination="Zc5-gN-1Ic" id="iDJ-U0-7RV"/>
                                             <outlet property="startEndTimeLabel" destination="mf2-4c-SWT" id="VFT-TC-TxF"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e2j-Qb-sqM">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <items>
+                                    <navigationItem title="Baby Daily Log" id="oBK-Ta-JcA">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="reply" id="ahe-Ah-5tI">
+                                            <connections>
+                                                <action selector="finishButtonTapped:" destination="qsc-Hd-ZPq" id="Rnb-Em-ziK"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="7wj-0x-v70">
+                                            <connections>
+                                                <action selector="pickDateFromCalendar:" destination="qsc-Hd-ZPq" id="MCa-25-54q"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>

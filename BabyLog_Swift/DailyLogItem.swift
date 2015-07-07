@@ -50,6 +50,32 @@ class DailyLogItem: Printable {
 }
 
 
+class DailyLogItem_ExtraInfoForBaby {
+    
+    var _stars = 0
+    var _babyId = 0
+    var _classId = 0
+    var _creatorId = 0
+    var _picCount = 0
+    var _picPaths: [String]?
+    
+    init(stars: Int, babyId: Int, classId: Int, creatorId: Int, picCount: Int, picPaths: [String]?  )
+    {
+        self._stars = stars
+        self._babyId = babyId
+        self._classId = classId
+        self._creatorId = creatorId
+        self._picCount = picCount
+        self._picPaths = picPaths
+    }
+    
+}
+
+
+
+
+
+
 enum ImageState {
     case New, Downloaded, Failed // TODO: add cached later
     

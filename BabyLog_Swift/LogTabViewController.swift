@@ -60,7 +60,7 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     let cellReuseId = "logCell"
     var activityIndicator:UIActivityIndicatorView!
-    var logItemsForDisplay = [DailyLogItem]()
+    var _logItemsForDisplay = [DailyLogItem]()
     var curDate = ""
  
     @IBOutlet weak var navigationBar: UINavigationBar!
@@ -168,7 +168,7 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let senderButton = sender as! UIButton
             println("button tag: \(senderButton.tag)")
             
-            let curDailyLog = logItemsForDisplay[senderButton.tag]
+            let curDailyLog = _logItemsForDisplay[senderButton.tag]
             
             dailyLogPerBabyVC.initActivityInternalInfo(curDailyLog)
         }
@@ -249,7 +249,7 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     println("Succeeded in deleting the log")
                     
                     // delete the member from logItemsForDisplay
-                    self.logItemsForDisplay = self.logItemsForDisplay.filter({ (logItem ) -> Bool in
+                    self._logItemsForDisplay = self._logItemsForDisplay.filter({ (logItem ) -> Bool in
                         logItem.uniqueId != logId //yxu: filter / map: in nature is looping, O(N)
                     })
                     
@@ -473,7 +473,7 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 logItems.append(dailyLogItem)
             }
             
-            logItemsForDisplay = logItems
+            _logItemsForDisplay = logItems
             
         }
         
@@ -489,7 +489,7 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return logItemsForDisplay.count
+        return _logItemsForDisplay.count
     }
     
     
@@ -498,11 +498,11 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         reusableCell.dailyLogPerBabyButton.tag = indexPath.row // used to identify which cell triggers the segue to per-baby view
         
-        reusableCell.startEndTimeLabel!.text = logItemsForDisplay[indexPath.row].startTime + "-" + logItemsForDisplay[indexPath.row].endTime
+        reusableCell.startEndTimeLabel!.text = _logItemsForDisplay[indexPath.row].startTime + "-" + _logItemsForDisplay[indexPath.row].endTime
         
-        reusableCell.activityDetailsLabel!.text = logItemsForDisplay[indexPath.row].content
+        reusableCell.activityDetailsLabel!.text = _logItemsForDisplay[indexPath.row].content
         
-        if let curActivity = activityTypeDictionary[logItemsForDisplay[indexPath.row].activityType] {
+        if let curActivity = activityTypeDictionary[_logItemsForDisplay[indexPath.row].activityType] {
             
             reusableCell.activityTypeLabel!.text = curActivity.name
             reusableCell.activityIcon!.image = UIImage(named: curActivity.imageName)
@@ -541,7 +541,7 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
             println("deleting the cell ")
             
             // get id
-            let logId = logItemsForDisplay[indexPath.row].uniqueId
+            let logId = _logItemsForDisplay[indexPath.row].uniqueId
             
             // call web api
             _deleteDailyLog(logId)
@@ -567,14 +567,127 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
 class LogTabForBabyViewController: LogTabViewController
 {
     
+    var _babyId = 0 // init to invalid one, set by the segue
  
-    override func _retrieveDataForDisplayInTableView() {
+    var _extraInfo = [DailyLogItem_ExtraInfoForBaby]()
+    
+ 
+
+    
+    
+    
+    @IBAction func finishButtonTapped(sender: UIBarButtonItem) {
         
-        //_retrieveDailyLogForBaby
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
-    // TODO:
-    /*
+    
+    // MARK: delegate for calendar VC
+    override func pickDataFromCalendar(date: String) {
+        
+        _retrieveDailyLogForBaby(date);
+        
+    }
+    
+    
+    
+    // MARK: call web api
+    override func _retrieveDataForDisplayInTableView() {
+        println("baby id = \(_babyId),  current date = \(curDate)")
+        
+        _retrieveDailyLogForBaby(curDate)
+    }
+    
+    
+    override func _parseJsonForLogItemArray(result: JSON) {
+        
+        if let logItemArray = result["Diary"].array {
+            
+            var logItems = [DailyLogItem]()
+            var extraInfoItems = [DailyLogItem_ExtraInfoForBaby]()
+            
+            for logItem in logItemArray {
+                var logUniqueId: Int = logItem["Id"].int ?? 0
+                var logActivityType: Int = logItem["DiaryTypeId"].int ?? 0
+                var logContent: String? = logItem["Content"].string
+                var logStartTime: String? = logItem["StartTime"].string
+                var logEndTime: String? = logItem["EndTime"].string
+
+                var dailyLogItem = DailyLogItem(uniqueId: logUniqueId, activityType: logActivityType, content: logContent, startTime: logStartTime, endTime: logEndTime)
+                logItems.append(dailyLogItem)
+                
+
+                var logStars: Int = logItem["Rank"].int ?? 0
+                var logBabyId: Int = logItem["ToUseId"].int ?? 0
+                var logClassId: Int = logItem["ByClassId"].int ?? 0
+                var logCreatorId: Int = logItem["ByUserId"].int ?? 0
+                var logPicCount: Int = logItem["PicCount"].int ?? 0
+                
+                var logPicPaths = [String]()
+                
+                if let picListArray = logItem["PicList"].array {
+                    
+                    for pic in picListArray {
+                        logPicPaths.append(pic.string ?? "")
+                        println("\(pic.string)")
+                        
+                    }
+                }
+                
+                var extraInfo = DailyLogItem_ExtraInfoForBaby(stars: logStars, babyId: logBabyId, classId: logClassId, creatorId: logCreatorId, picCount: logPicCount, picPaths: logPicPaths)
+                
+                extraInfoItems.append( extraInfo)
+                
+            }
+            
+            _logItemsForDisplay = logItems
+            _extraInfo = extraInfoItems
+            
+        }
+        
+        
+    }
+    
+    
+    
+    
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let reusableCell  = tableView.dequeueReusableCellWithIdentifier(cellReuseId) as! LogItemForBabyTableViewCell
+        
+        // reusableCell.dailyLogPerBabyButton.tag = indexPath.row // used to identify which cell triggers the segue to per-baby view
+        
+        reusableCell.startEndTimeLabel!.text = _logItemsForDisplay[indexPath.row].startTime + "-" + _logItemsForDisplay[indexPath.row].endTime
+        
+        reusableCell.activityDetailsLabel!.text = _logItemsForDisplay[indexPath.row].content
+        
+        if let curActivity = activityTypeDictionary[_logItemsForDisplay[indexPath.row].activityType] {
+            
+            reusableCell.activityTypeLabel!.text = curActivity.name
+            reusableCell.activityIcon!.image = UIImage(named: curActivity.imageName)
+            
+
+        }
+        
+
+        reusableCell.numStarsLabel.text = String( _extraInfo[indexPath.row]._stars )
+        
+        reusableCell.numImagesButton.setTitle( String( _extraInfo[indexPath.row]._picCount), forState: UIControlState.Normal)
+        
+        
+        // set background of cell:  http://www.gfzj.us/tech/2014/12/09/iOS-dev-tips.html
+        //cell.layer.contents = (id)[UIImage imageNamed:@"space_bg.jpg"].CGImage;//fill模式
+        //cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"space_bg.jpg"]];//平铺模式
+        
+        return reusableCell
+    }
+    
+    
+    
+ 
+    // 1. segeu pass in the student id?? 
+    // 2. call this api to populate the table view
+
     func _retrieveDailyLogForBaby(date: String) {
         
         curDate = date
@@ -584,7 +697,7 @@ class LogTabForBabyViewController: LogTabViewController
         
         
         var requestParams : [String:AnyObject] = [ //todo: add sanity check for the date string
-            //"Id":307, 306, 305
+            "ToUser": _babyId,
             "Day": date, //"2015-6-25"
         ]
         
@@ -598,7 +711,7 @@ class LogTabForBabyViewController: LogTabViewController
         
         // get by date: "http://www.babysaga.cn/app/service?method=ClassSchedule.GetListSchedule"
         // get by Id of date: "http://www.babysaga.cn/app/service?method=ClassSchedule.GetScheduleById"
-        let requestSchedule =  Alamofire.request(.POST, "http://www.babysaga.cn/app/service?method=ClassSchedule.GetListSchedule", parameters: [:], encoding: .Custom({
+        let requestSchedule =  Alamofire.request(.POST, "http://www.babysaga.cn/app/service?method=diary.tdaydiary", parameters: [:], encoding: .Custom({
             (convertible, params) in
             var mutableRequest = convertible.URLRequest.copy() as! NSMutableURLRequest
             mutableRequest.HTTPBody = data
@@ -659,6 +772,6 @@ class LogTabForBabyViewController: LogTabViewController
         }
         
     }
-    */
+
 }
 

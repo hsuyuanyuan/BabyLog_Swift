@@ -211,6 +211,7 @@ class ClassViewController: UIViewController, UICollectionViewDataSource,  UIColl
         
         //cell.babyImageView.image = babyInfo.image
         cell.babyImageButton.setBackgroundImage( babyInfo.image, forState: UIControlState.Normal) //yxu: tried setImage first. not working, show blue block
+        cell.babyImageButton.tag = babyInfo.id
         
         //let imageData = NSData(contentsOfURL: url!)
         //cell.babyImageView.image = UIImage(data:imageData!)
@@ -281,4 +282,15 @@ class ClassViewController: UIViewController, UICollectionViewDataSource,  UIColl
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
     }
+    
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showDailyLogForBaby" //yxu: defined in segue property in Storyboard
+        {
+            let logForBabyVC = segue.destinationViewController as! LogTabForBabyViewController
+            let babyButton = sender as! UIButton
+            logForBabyVC._babyId = babyButton.tag
+        }
+    }
+    
 }
