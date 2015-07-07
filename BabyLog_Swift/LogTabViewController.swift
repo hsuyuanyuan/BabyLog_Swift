@@ -49,6 +49,12 @@ extension UIViewController {
 
 
 
+
+
+
+
+
+
 class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,PickDateDelegate, UploadLogDelegate
 {
 
@@ -128,15 +134,18 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         logView.tableFooterView = UIView() //yxu: trick to remove the empty cells in tableView
         
-        
-        // retrieve the logs for current date
-        _retrieveDailyLog(curDate)
-        
-        
+        _retrieveDataForDisplayInTableView()
 
         
-        
+   
     }
+    
+    //yxu: override this in children view
+    func _retrieveDataForDisplayInTableView() {
+        // retrieve the logs for current date
+        _retrieveDailyLog(curDate)
+    }
+    
     
     
     override func viewWillAppear(animated: Bool) {
@@ -551,3 +560,105 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     
 }
+
+
+
+// inherit and override for LogTabViewController
+class LogTabForBabyViewController: LogTabViewController
+{
+    
+ 
+    override func _retrieveDataForDisplayInTableView() {
+        
+        //_retrieveDailyLogForBaby
+    }
+    
+    // TODO:
+    /*
+    func _retrieveDailyLogForBaby(date: String) {
+        
+        curDate = date
+        navigationBar!.topItem?.title = curDate + " Log "
+        
+        _startSpinnerAndBlockUI()
+        
+        
+        var requestParams : [String:AnyObject] = [ //todo: add sanity check for the date string
+            //"Id":307, 306, 305
+            "Day": date, //"2015-6-25"
+        ]
+        
+        
+        let manager = Manager.sharedInstance
+        manager.session.configuration.HTTPAdditionalHeaders = [
+            userTokenStringInHttpHeader: _getUserToken()]
+        
+        
+        let data = NSJSONSerialization.dataWithJSONObject(requestParams, options: NSJSONWritingOptions.PrettyPrinted, error: nil)
+        
+        // get by date: "http://www.babysaga.cn/app/service?method=ClassSchedule.GetListSchedule"
+        // get by Id of date: "http://www.babysaga.cn/app/service?method=ClassSchedule.GetScheduleById"
+        let requestSchedule =  Alamofire.request(.POST, "http://www.babysaga.cn/app/service?method=ClassSchedule.GetListSchedule", parameters: [:], encoding: .Custom({
+            (convertible, params) in
+            var mutableRequest = convertible.URLRequest.copy() as! NSMutableURLRequest
+            mutableRequest.HTTPBody = data
+            return (mutableRequest, nil)
+        })).responseJSON() {
+            (request, response, data, error) in
+            
+            if error == nil {
+                println("we did get the response")
+                println(data) //yxu: output the unicode
+                println(request)
+                println(response)
+                println(error)
+                println((data as! NSDictionary)["Error"]!)
+                
+                let statusCode = (data as! NSDictionary)["StatusCode"] as! Int
+                if statusCode  == 200 {
+                    println("Succeeded in getting the log")
+                    
+                    // refer to: https://grokswift.com/rest-with-alamofire-swiftyjson/
+                    if let data: AnyObject = data { //yxu: check if data is nil
+                        let jsonResult = JSON(data)
+                        
+                        self._parseJsonForLogItemArray(jsonResult)
+                        
+                    }
+                    
+                    
+                } else {
+                    println("Failed to get response")
+                    let errStr = (data as! NSDictionary)["Error"] as! String
+                    
+                }
+            } else {
+                self.displayAlert("Login failed", message: error!.description)
+            }
+            
+            
+            
+            
+            // Make sure we are on the main thread, and update the UI.
+            dispatch_async(dispatch_get_main_queue()) { //sync or async
+                // update some UI
+                
+                self.logView.reloadData() //yxu: reloadData must be called on main thread. otherwise it does not work!!!
+                
+                
+                println("updating the table view")
+                // resume the UI at the end of async action
+                
+                self._stopSpinnerAndResumeUI()
+                
+            }
+            
+            
+            //todo: persist data with UserDefault
+            
+        }
+        
+    }
+    */
+}
+

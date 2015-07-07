@@ -209,8 +209,8 @@ class ClassViewController: UIViewController, UICollectionViewDataSource,  UIColl
         // image downloading
         let babyInfo = _babyInfoArray[indexPath.row]
         
-        cell.babyImageView.image = babyInfo.image
-        
+        //cell.babyImageView.image = babyInfo.image
+        cell.babyImageButton.setBackgroundImage( babyInfo.image, forState: UIControlState.Normal) //yxu: tried setImage first. not working, show blue block
         
         //let imageData = NSData(contentsOfURL: url!)
         //cell.babyImageView.image = UIImage(data:imageData!)

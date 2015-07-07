@@ -13,7 +13,17 @@ class ClassBabyInfoCollectionViewCell: UICollectionViewCell, UITextFieldDelegate
     var timePicker = UIDatePicker()
     var textFieldSelected: UITextField!
     
-    @IBOutlet weak var babyImageView: UIImageView!
+    //@IBOutlet weak var babyImageView: UIImageView!
+    
+    
+    @IBOutlet weak var babyImageButton: UIButton!
+    
+    @IBAction func babyImageButtonTapped(sender: AnyObject) {
+        
+        
+        
+    }
+    
     
     
     @IBAction func arriveTimeButtonTapped(sender: AnyObject) {
