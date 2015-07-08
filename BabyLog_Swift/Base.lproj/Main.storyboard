@@ -664,18 +664,15 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="login_bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="jAu-Jz-FWu">
                                                     <rect key="frame" x="16" y="28" width="54" height="44"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Stars" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zc5-gN-1Ic">
-                                                    <rect key="frame" x="290" y="8" width="42" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ebY-8F-ew5">
                                                     <rect key="frame" x="285" y="42" width="35" height="30"/>
                                                     <state key="normal" title="numImages">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                 </button>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LLa-4g-KgA">
+                                                    <rect key="frame" x="253" y="8" width="115" height="24"/>
+                                                </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
@@ -683,7 +680,7 @@
                                             <outlet property="activityIcon" destination="jAu-Jz-FWu" id="vSS-1C-PQc"/>
                                             <outlet property="activityTypeLabel" destination="RgF-e2-jYN" id="86W-J1-OvN"/>
                                             <outlet property="numImagesButton" destination="ebY-8F-ew5" id="lCM-cz-iU6"/>
-                                            <outlet property="numStarsLabel" destination="Zc5-gN-1Ic" id="iDJ-U0-7RV"/>
+                                            <outlet property="numStarsImageView" destination="LLa-4g-KgA" id="Oul-2y-3Ba"/>
                                             <outlet property="startEndTimeLabel" destination="mf2-4c-SWT" id="VFT-TC-TxF"/>
                                         </connections>
                                     </tableViewCell>

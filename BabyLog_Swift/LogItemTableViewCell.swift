@@ -35,9 +35,10 @@ class LogItemForBabyTableViewCell:
 LogItemTableViewCell {
     
     
-    @IBOutlet weak var numStarsLabel: UILabel!
+    // @IBOutlet weak var numStarsLabel: UILabel!
     
     @IBOutlet weak var numImagesButton: UIButton!
     
+    @IBOutlet weak var numStarsImageView: UIImageView!
     
 }

@@ -596,9 +596,7 @@ class LogTabForBabyViewController: LogTabViewController
     }
     
     
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return false
-    }
+
     
     
     // MARK: call web api
@@ -680,7 +678,11 @@ class LogTabForBabyViewController: LogTabViewController
         }
         
 
-        reusableCell.numStarsLabel.text = String( _extraInfo[indexPath.row]._stars )
+        //reusableCell.numStarsLabel.text = String( _extraInfo[indexPath.row]._stars )
+        
+        let starImageName = "Stars-" + String( _extraInfo[indexPath.row]._stars ) + ".png"
+        
+        reusableCell.numStarsImageView.image = UIImage(named: starImageName)
         
         reusableCell.numImagesButton.setTitle( String( _extraInfo[indexPath.row]._picCount), forState: UIControlState.Normal)
         
