@@ -17,13 +17,15 @@ protocol UploadLogForOneBabyDelegate {
 
 
 
-class AddDailyLogForOneBabyViewController: AddDailyLogViewController, FloatRatingViewDelegate {
+class AddDailyLogForOneBabyViewController: AddDailyLogViewController, FloatRatingViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     var _babyId = 0
     
     var delegatePerBaby: UploadLogForOneBabyDelegate!
     
     var _numStars = 0
+    
+    var _imageList = [UIImage]()
     
     
     @IBOutlet weak var starRatingVIew: FloatRatingView!
@@ -100,6 +102,36 @@ class AddDailyLogForOneBabyViewController: AddDailyLogViewController, FloatRatin
     */
     
     
+    
+    // MARK: delegate for image picker view
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+        dismissViewControllerAnimated(true, completion: nil)
+
+        
+        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            _imageList.append( pickedImage )
+
+        }
+
+        
+    }
+    
+    
+    @IBAction func chooseImageButtonTapped(sender: AnyObject)  {
+        var imagePickerView = UIImagePickerController()
+        imagePickerView.allowsEditing = false
+        imagePickerView.delegate = self //yxu: Note: this needs two delegate, UIImagePickerControllerDelegate & UINavigationControllerDelegate
+        //imagePickerView.sourceType
+        
+        presentViewController(imagePickerView, animated: true, completion: nil)
+        
+    }
     
     func floatRatingView(ratingView: FloatRatingView, didUpdate rating: Float) {
         _numStars = Int(rating) // TODO: the ! may be dangerous

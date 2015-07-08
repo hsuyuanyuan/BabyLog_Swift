@@ -9,13 +9,24 @@
 import UIKit
 import Alamofire
 
-class AddDailyLogPerBabyViewController: AddDailyLogViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, SaveStartsForKidsDelegate  {
+
+
+
+
+
+class AddDailyLogPerBabyViewController: AddDailyLogViewController, SaveStartsForKidsDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate  {
 
     // MARK: data arrays for baby info
     
     var _idsForKids:[Int]?
     var _starsForKids:[Float]?
     var _namesForKids:[String]?
+    
+    //Note, in prepareForSegue, cannot access those IBoutlet weak var, which leads to crash
+    // therefore, use the following internal variables to be set from prepareForSegue
+    
+    var _curDailyLog = DailyLogItem(uniqueId: 0, activityType: activityIdMin, content: "", startTime: "", endTime: "")
+    
     
     
     func initArraysForKids(arraySize: Int) {
@@ -36,14 +47,34 @@ class AddDailyLogPerBabyViewController: AddDailyLogViewController, UIImagePicker
     
     
     
+    // MARK: delegate for image picker view
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+        dismissViewControllerAnimated(true, completion: nil)
+        
+        
+        
+        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            // imageView.contentMode = .ScaleAspectFit
+            // imageView.image = pickedImage
+        }
+        
+        //?? todo: get file name for the image??
+        //let imageURL = info[UIImagePickerControllerReferenceURL] as? NSURL
+        
+    }
+    
+    
+    
     // MARK: controls
 
     
-    //Note, in prepareForSegue, cannot access those IBoutlet weak var, which leads to crash
-    // therefore, use the following internal variables to be set from prepareForSegue
-    
-    var _curDailyLog = DailyLogItem(uniqueId: 0, activityType: activityIdMin, content: "", startTime: "", endTime: "")
-    
+ 
     func initActivityInternalInfo(curDailyLog: DailyLogItem) {
 
         _curDailyLog = curDailyLog
@@ -119,27 +150,7 @@ class AddDailyLogPerBabyViewController: AddDailyLogViewController, UIImagePicker
 
     
     
-    // MARK: delegate for image picker view
-    
-    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-    
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
-        dismissViewControllerAnimated(true, completion: nil)
-        
-        
-        
-        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            // imageView.contentMode = .ScaleAspectFit
-            // imageView.image = pickedImage
-        }
-        
-        //?? todo: get file name for the image??
-        let imageURL = info[UIImagePickerControllerReferenceURL] as? NSURL
-        
-    }
+
 
     
     // MARK: delegate for saving star ratings

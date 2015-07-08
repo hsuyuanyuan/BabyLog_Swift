@@ -646,7 +646,7 @@ class LogTabForOneBabyViewController: LogTabViewController, UploadLogForOneBabyD
             "TimeEnd":activityItem.endTime, //"09:30",
             "DiaryType": activityItem.activityType,
             "DiaryRemark": activityItem.content, //??
-            "UploadPic": [],
+            "UploadPic": "aaa", // repeat to send in a list
             "Important": 0,
             "Open": 0,
             "ByUser": 0,
@@ -654,7 +654,7 @@ class LogTabForOneBabyViewController: LogTabViewController, UploadLogForOneBabyD
             "RankStr": String(extraInfo._stars),
             "Title": "Test Title",
             "Content": activityItem.content,
-            "DiaryDate": curDate,
+            "DiaryDate": curDate
         ]
         
         
@@ -707,7 +707,7 @@ class LogTabForOneBabyViewController: LogTabViewController, UploadLogForOneBabyD
                 println(response)
 
           
-                self.displayAlert("upload for one baby failed", message: error!.description)
+                self.displayAlert("upload for one baby failed", message:  response!.description)
             }
             
             
