@@ -22,6 +22,7 @@
 		45210B481B4D8803004A2EFB /* Stars-5.png in Resources */ = {isa = PBXBuildFile; fileRef = 45210B391B4D8803004A2EFB /* Stars-5.png */; };
 		45210B491B4D8803004A2EFB /* Stars-5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45210B3A1B4D8803004A2EFB /* Stars-5@2x.png */; };
 		45210B4A1B4D8803004A2EFB /* Stars-5@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45210B3B1B4D8803004A2EFB /* Stars-5@3x.png */; };
+		45210B4C1B4DA240004A2EFB /* AddDailyLogForOneBabyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45210B4B1B4DA240004A2EFB /* AddDailyLogForOneBabyViewController.swift */; };
 		453E2B1F1B35492800500E31 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453E2B1E1B35492800500E31 /* AppDelegate.swift */; };
 		453E2B211B35492800500E31 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453E2B201B35492800500E31 /* LoginViewController.swift */; };
 		453E2B241B35492800500E31 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 453E2B221B35492800500E31 /* Main.storyboard */; };
@@ -156,6 +157,7 @@
 		45210B391B4D8803004A2EFB /* Stars-5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Stars-5.png"; sourceTree = "<group>"; };
 		45210B3A1B4D8803004A2EFB /* Stars-5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Stars-5@2x.png"; sourceTree = "<group>"; };
 		45210B3B1B4D8803004A2EFB /* Stars-5@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Stars-5@3x.png"; sourceTree = "<group>"; };
+		45210B4B1B4DA240004A2EFB /* AddDailyLogForOneBabyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddDailyLogForOneBabyViewController.swift; path = ../AddDailyLogForOneBabyViewController.swift; sourceTree = "<group>"; };
 		453E2B1B1B35492800500E31 /* BabyLog_Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BabyLog_Swift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		453E2B1E1B35492800500E31 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		453E2B201B35492800500E31 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -284,6 +286,7 @@
 				453E2B1E1B35492800500E31 /* AppDelegate.swift */,
 				45A7E8CB1B3F128500748A6F /* AddDailyLogViewController.swift */,
 				45A7E9861B49D89200748A6F /* AddDailyLogPerBabyViewController.swift */,
+				45210B4B1B4DA240004A2EFB /* AddDailyLogForOneBabyViewController.swift */,
 				45A7E8DA1B4103D700748A6F /* LogTabViewController.swift */,
 				45A7E8DC1B43431800748A6F /* LogItemTableViewCell.swift */,
 				453E2B201B35492800500E31 /* LoginViewController.swift */,
@@ -593,6 +596,7 @@
 				45A7E8C01B3E6E0B00748A6F /* KeleCalDelegate.swift in Sources */,
 				45A7E8CC1B3F128500748A6F /* AddDailyLogViewController.swift in Sources */,
 				45A7E8DB1B4103D700748A6F /* LogTabViewController.swift in Sources */,
+				45210B4C1B4DA240004A2EFB /* AddDailyLogForOneBabyViewController.swift in Sources */,
 				45A7E8C31B3E6E0B00748A6F /* keleDraw.swift in Sources */,
 				45A7E9771B479B6400748A6F /* ClassBabyInfoCollectionViewCell.swift in Sources */,
 				45A7E8C51B3E6E5B00748A6F /* KeleCalendarViewController.swift in Sources */,

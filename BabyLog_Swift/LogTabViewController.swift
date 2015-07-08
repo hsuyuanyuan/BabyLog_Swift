@@ -570,7 +570,7 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
 
 // inherit and override for LogTabViewController
-class LogTabForBabyViewController: LogTabViewController
+class LogTabForOneBabyViewController: LogTabViewController, UploadLogForOneBabyDelegate
 {
     
     var _babyId = 0 // init to invalid one, set by the segue
@@ -581,11 +581,10 @@ class LogTabForBabyViewController: LogTabViewController
 
     
     
-    
-    @IBAction func finishButtonTapped(sender: UIBarButtonItem) {
-        
-        dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func cancelButtonTapped(sender: AnyObject) {
+                dismissViewControllerAnimated(true, completion: nil)
     }
+
     
     
     // MARK: delegate for calendar VC
@@ -597,7 +596,128 @@ class LogTabForBabyViewController: LogTabViewController
     
     
 
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+       
+        if segue.identifier == "showAddDailyLogForOneBaby" //yxu: defined in segue property in Storyboard
+        {
+            let addLogForOneBabyVC = segue.destinationViewController as! AddDailyLogForOneBabyViewController
+            addLogForOneBabyVC.delegatePerBaby = self
+            addLogForOneBabyVC._babyId = _babyId // pass in the baby id
+        }
+        
+    }
     
+    
+    func uploadLogItemForOneBaby(activityItem: DailyLogItem, extraInfo: DailyLogItem_ExtraInfoForBaby)
+    {
+        println("conform to the delegate: calling api to upload log for one baby ")
+        
+        // TODO: call web api
+        _uploadDailyLogForOneBaby(activityItem, extraInfo: extraInfo)
+        
+    }
+    
+    
+    func _uploadDailyLogForOneBaby(activityItem: DailyLogItem, extraInfo: DailyLogItem_ExtraInfoForBaby) {
+        
+        /*
+        public int BabyId  学生的ID
+        public string TimeBegin  开始时间
+        public string TimeEnd  结束时间
+        public int DiaryType  作息类型Id
+        public string DiaryRemark
+        public List<String> UploadPic 上传图片的Base64 字符串
+        public int Important 默认0
+        public int Open 默认0
+        public int ByUser  默认0
+        public int ToUser 默认 0 (教师输入时=选择学生的Id)
+        public string RankStr 星星数 “1”，“2”
+        public string Title 标题
+        public string Content 内容
+        public string DiaryDate 日期
+
+        */
+        
+        
+        var requestParams : [String:AnyObject] = [
+            "BabyId": extraInfo._babyId,
+            "TimeBegin":activityItem.startTime, //"08:00",
+            "TimeEnd":activityItem.endTime, //"09:30",
+            "DiaryType": activityItem.activityType,
+            "DiaryRemark": activityItem.content, //??
+            "UploadPic": [],
+            "Important": 0,
+            "Open": 0,
+            "ByUser": 0,
+            "ToUser": extraInfo._babyId,
+            "RankStr": String(extraInfo._stars),
+            "Title": "Test Title",
+            "Content": activityItem.content,
+            "DiaryDate": curDate,
+        ]
+        
+        
+        let manager = Manager.sharedInstance
+        manager.session.configuration.HTTPAdditionalHeaders = [
+            "Token": _getUserToken()] //todo: retrive the token and put it in the header
+        
+        
+        let data = NSJSONSerialization.dataWithJSONObject(requestParams, options: NSJSONWritingOptions.PrettyPrinted, error: nil)
+        
+        let requestSchedule =  Alamofire.request(.POST, "http://www.babysaga.cn/app/service?method=Diary.IOSInputDiary", parameters: [:], encoding: .Custom({
+            (convertible, params) in
+            var mutableRequest = convertible.URLRequest.copy() as! NSMutableURLRequest
+            mutableRequest.HTTPBody = data
+            return (mutableRequest, nil)
+        })).responseJSON() {
+            (request, response, JSON, error) in
+            
+            if error == nil {  //??yxu: error means http error. The web api error is inside JSON
+                println("we did get the response")
+                println(JSON) //yxu: output the unicode
+                println(request)
+                println(response)
+                println(error)
+                println((JSON as! NSDictionary)["Error"]!) //yxu: output Chinese: http://stackoverflow.com/questions/26963029/how-can-i-get-the-swift-xcode-console-to-show-chinese-characters-instead-of-unic
+                
+                let statusCode = (JSON as! NSDictionary)["StatusCode"] as! Int
+                if statusCode  == 200 {
+                    println("Succeeded in sending the log")
+                    
+                    
+                    // refresh the view after uploading
+                    self._retrieveDailyLogForBaby(self.curDate)
+                    
+
+                    
+                    
+                } else {
+                    println("Failed to get response")
+                    let errStr = (JSON as! NSDictionary)["Error"] as! String
+                    
+                }
+                
+                
+            } else {
+                
+                println("we did get the response, but in error")
+                println(JSON) //yxu: output the unicode
+                println(request)
+                println(response)
+
+          
+                self.displayAlert("upload for one baby failed", message: error!.description)
+            }
+            
+            
+        }
+        
+    }
+    
+    
+    
+
     
     // MARK: call web api
     override func _retrieveDataForDisplayInTableView() {
@@ -605,6 +725,8 @@ class LogTabForBabyViewController: LogTabViewController
         
         _retrieveDailyLogForBaby(curDate)
     }
+    
+   
     
     
     override func _parseJsonForLogItemArray(result: JSON) {
@@ -721,8 +843,7 @@ class LogTabForBabyViewController: LogTabViewController
         
         let data = NSJSONSerialization.dataWithJSONObject(requestParams, options: NSJSONWritingOptions.PrettyPrinted, error: nil)
         
-        // get by date: "http://www.babysaga.cn/app/service?method=ClassSchedule.GetListSchedule"
-        // get by Id of date: "http://www.babysaga.cn/app/service?method=ClassSchedule.GetScheduleById"
+
         let requestSchedule =  Alamofire.request(.POST, "http://www.babysaga.cn/app/service?method=diary.tdaydiary", parameters: [:], encoding: .Custom({
             (convertible, params) in
             var mutableRequest = convertible.URLRequest.copy() as! NSMutableURLRequest

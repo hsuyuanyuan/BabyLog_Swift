@@ -385,7 +385,7 @@
                                                     </state>
                                                     <connections>
                                                         <action selector="babyImageButtonTapped:" destination="3Ad-6L-GT9" eventType="touchUpInside" id="YLx-Y7-jYd"/>
-                                                        <segue destination="qsc-Hd-ZPq" kind="show" identifier="showDailyLogForBaby" id="toC-AT-nuq"/>
+                                                        <segue destination="qsc-Hd-ZPq" kind="show" identifier="showDailyLogForOneBaby" id="toC-AT-nuq"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -528,7 +528,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0hp-hJ-YPe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1294.5" y="201.5"/>
+            <point key="canvasLocation" x="1294.5" y="196.5"/>
         </scene>
         <!--Baby Star View Controller-->
         <scene sceneID="k5c-QF-Ptv">
@@ -620,12 +620,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5XS-2K-jdQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1819.5" y="201.5"/>
+            <point key="canvasLocation" x="1818.5" y="196.5"/>
         </scene>
-        <!--日程-->
+        <!--Log Tab For One Baby View Controller-->
         <scene sceneID="1v6-ZZ-Ntc">
             <objects>
-                <viewController id="qsc-Hd-ZPq" customClass="LogTabForBabyViewController" customModule="BabyLog_Swift" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="qsc-Hd-ZPq" customClass="LogTabForOneBabyViewController" customModule="BabyLog_Swift" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="O8I-wk-4z8"/>
                         <viewControllerLayoutGuide type="bottom" id="QSz-av-sPn"/>
@@ -690,9 +690,9 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <items>
                                     <navigationItem title="Baby Daily Log" id="oBK-Ta-JcA">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="reply" id="ahe-Ah-5tI">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="add" id="ahe-Ah-5tI">
                                             <connections>
-                                                <action selector="finishButtonTapped:" destination="qsc-Hd-ZPq" id="Rnb-Em-ziK"/>
+                                                <segue destination="laC-0y-9BK" kind="show" identifier="showAddDailyLogForOneBaby" id="X7a-yl-Afn"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="7wj-0x-v70">
@@ -703,10 +703,18 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2RV-Qd-n7G">
+                                <rect key="frame" x="113" y="632" width="67" height="30"/>
+                                <state key="normal" title="cancel">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancelButtonTapped:" destination="qsc-Hd-ZPq" eventType="touchUpInside" id="tCv-3C-SNR"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="日程" image="TabBar-Zuoxi-Blue.png" id="Qoh-Rl-JP5"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="logView" destination="W0k-2d-eUw" id="sxT-Dc-Y6a"/>
@@ -716,6 +724,135 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ffi-rs-WEc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="780.5" y="1003.5"/>
+        </scene>
+        <!--Daily Log for One kid-->
+        <scene sceneID="9Fo-TS-xEU">
+            <objects>
+                <viewController title="Daily Log for One kid" id="laC-0y-9BK" customClass="AddDailyLogForOneBabyViewController" customModule="BabyLog_Swift" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="14v-P4-l59"/>
+                        <viewControllerLayoutGuide type="bottom" id="cxa-NY-K6w"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="1os-Ym-E8p">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="开始时间" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="frH-fF-fsg">
+                                <rect key="frame" x="39" y="129" width="68" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="结束时间" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q28-I3-wfl">
+                                <rect key="frame" x="39" y="183" width="68" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xi2-Bq-uM3">
+                                <rect key="frame" x="200" y="71" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="64l-bK-ZOJ">
+                                <rect key="frame" x="200" y="129" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AJL-MB-yCt">
+                                <rect key="frame" x="200" y="181" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="具体内容" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="58M-Tu-XPG">
+                                <rect key="frame" x="39" y="269" width="80" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="作息类型" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mrR-Af-UMr">
+                                <rect key="frame" x="39" y="74" width="68" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="加入具体内容" translatesAutoresizingMaskIntoConstraints="NO" id="MIl-e0-L3g">
+                                <rect key="frame" x="45" y="298" width="252" height="173"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" enablesReturnKeyAutomatically="YES"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="完成情况" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oqN-Cd-eeQ">
+                                <rect key="frame" x="39" y="228" width="68" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="上传图片" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="07O-zO-9eP">
+                                <rect key="frame" x="46" y="507" width="80" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Toh-Zz-wvz">
+                                <rect key="frame" x="177" y="503" width="46" height="30"/>
+                                <fontDescription key="fontDescription" name="STHeitiSC-Light" family="Heiti SC" pointSize="33"/>
+                                <size key="titleShadowOffset" width="1" height="1"/>
+                                <state key="normal" title="+"/>
+                                <connections>
+                                    <action selector="chooseImageButtonTapped:" destination="laC-0y-9BK" eventType="touchUpInside" id="mOA-N2-Y8n"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RqW-xO-9r1">
+                                <rect key="frame" x="212" y="555" width="43" height="30"/>
+                                <state key="normal" title="取   消">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancelButtonTapped:" destination="laC-0y-9BK" eventType="touchUpInside" id="GP9-wg-VGf"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nmF-4A-oCm">
+                                <rect key="frame" x="87" y="555" width="43" height="30"/>
+                                <state key="normal" title="确   定">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="confirmButtonTapped:" destination="laC-0y-9BK" eventType="touchUpInside" id="8ew-45-b8Y"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hRK-gX-73M" customClass="FloatRatingView" customModule="BabyLog_Swift" customModuleProvider="target">
+                                <rect key="frame" x="165" y="228" width="167" height="21"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="emptyImage" value="StarEmpty"/>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="fullImage" value="StarFull"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="minRating">
+                                        <integer key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="maxRating">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="rating">
+                                        <real key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="activityTypeTextField" destination="xi2-Bq-uM3" id="4do-16-1PY"/>
+                        <outlet property="contentTextView" destination="MIl-e0-L3g" id="ay3-2T-Wq2"/>
+                        <outlet property="endTimeTextField" destination="AJL-MB-yCt" id="FiU-RS-ZTI"/>
+                        <outlet property="starRatingVIew" destination="hRK-gX-73M" id="3xD-Hq-L72"/>
+                        <outlet property="startTimeTextField" destination="64l-bK-ZOJ" id="3LS-bZ-nLI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ILq-gq-572" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1294.5" y="1003.5"/>
         </scene>
     </scenes>
     <resources>

@@ -44,15 +44,15 @@ class AddDailyLogViewController: UIViewController, UIPickerViewDataSource, UIPic
  
     
     
-
+    // delegate
+    var delegate: UploadLogDelegate!
     
     
     // picker views
     var activityPicker = UIPickerView()
     var startTimePicker = UIDatePicker()
     var endTimePicker = UIDatePicker()
-    
-    var delegate: UploadLogDelegate!
+
     
     
     var activityId = activityIdMin // default to minimum

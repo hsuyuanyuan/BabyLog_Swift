@@ -285,9 +285,9 @@ class ClassViewController: UIViewController, UICollectionViewDataSource,  UIColl
     
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "showDailyLogForBaby" //yxu: defined in segue property in Storyboard
+        if segue.identifier == "showDailyLogForOneBaby" //yxu: defined in segue property in Storyboard
         {
-            let logForBabyVC = segue.destinationViewController as! LogTabForBabyViewController
+            let logForBabyVC = segue.destinationViewController as! LogTabForOneBabyViewController
             let babyButton = sender as! UIButton
             logForBabyVC._babyId = babyButton.tag
         }

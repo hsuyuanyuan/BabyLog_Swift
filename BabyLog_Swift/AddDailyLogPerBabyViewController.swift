@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 
-class AddDailyLogPerBabyViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, SaveStartsForKidsDelegate  {
+class AddDailyLogPerBabyViewController: AddDailyLogViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, SaveStartsForKidsDelegate  {
 
     // MARK: data arrays for baby info
     
@@ -37,15 +37,7 @@ class AddDailyLogPerBabyViewController: UIViewController, UIImagePickerControlle
     
     
     // MARK: controls
-    
-    
-    @IBOutlet weak var activityTypeTextField: UITextField!
-    
-    @IBOutlet weak var startTimeTextField: UITextField!
-    
-    @IBOutlet weak var endTimeTextField: UITextField!
-    
-    @IBOutlet weak var contentTextView: UITextView!
+
     
     //Note, in prepareForSegue, cannot access those IBoutlet weak var, which leads to crash
     // therefore, use the following internal variables to be set from prepareForSegue
@@ -64,8 +56,41 @@ class AddDailyLogPerBabyViewController: UIViewController, UIImagePickerControlle
         endTimeTextField.text = _curDailyLog.endTime
         contentTextView.text = _curDailyLog.content
     }
+   
     
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // Do any additional setup after loading the view.
+        initArraysForKids(_babyInfoArray.count)
+        initActivityDisplayInfo()
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    
+    
+    // MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "showStarRatintgView" //yxu: defined in segue property in Storyboard
+        {
+            let babyStarVC = segue.destinationViewController as! BabyStarViewController
+            babyStarVC.initStarsArray(_babyInfoArray.count, namesForKids: _namesForKids)
+            babyStarVC.delegate = self
+        }
+        
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+    }
+    
+ 
     @IBAction func confirmButtonTapped(sender: AnyObject) {
         _uploadCompletedDailyLog()
         
@@ -87,48 +112,14 @@ class AddDailyLogPerBabyViewController: UIViewController, UIImagePickerControlle
         
         presentViewController(imagePickerView, animated: true, completion: nil)
         
-        
     }
     
  
     
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-        initArraysForKids(_babyInfoArray.count)
-        initActivityDisplayInfo()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-    
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        if segue.identifier == "showStarRatintgView" //yxu: defined in segue property in Storyboard
-        {
-            let babyStarVC = segue.destinationViewController as! BabyStarViewController
-            babyStarVC.initStarsArray(_babyInfoArray.count, namesForKids: _namesForKids)
-            babyStarVC.delegate = self
-        }
-        
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-   
     
     
     // MARK: delegate for image picker view
-    
-    
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         dismissViewControllerAnimated(true, completion: nil)
