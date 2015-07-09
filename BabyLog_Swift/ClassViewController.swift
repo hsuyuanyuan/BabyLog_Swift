@@ -71,16 +71,6 @@ class ClassViewController: UIViewController, UICollectionViewDataSource,  UIColl
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
     
     // MARK: call web api
     
@@ -112,64 +102,7 @@ class ClassViewController: UIViewController, UICollectionViewDataSource,  UIColl
             }
         }
         
-        /*
-        let manager = Manager.sharedInstance
-        manager.session.configuration.HTTPAdditionalHeaders = [
-            userTokenStringInHttpHeader: _getUserToken()]
- 
-        let requestSchedule =  Alamofire.request(.POST, "http://www.babysaga.cn/app/service?method=user.ListClassBaby", parameters: [:], encoding: .Custom({
-            (convertible, params) in
-            var mutableRequest = convertible.URLRequest.copy() as! NSMutableURLRequest
-            return (mutableRequest, nil)
-        })).responseJSON() {
-            (request, response, data, error) in
-            
-            if error == nil {
-                println("we did get the response")
-                println(data) //yxu: output the unicode
-                println(request)
-                println(response)
-                println(error)
-                println((data as! NSDictionary)["Error"]!)
-                
-                let statusCode = (data as! NSDictionary)["StatusCode"] as! Int
-                if statusCode  == 200 {
-                    println("Succeeded in getting the log")
-                    
-                    // refer to: https://grokswift.com/rest-with-alamofire-swiftyjson/
-                    if let data: AnyObject = data { //yxu: check if data is nil
-                        let jsonResult = JSON(data)
-                        
-                        ClassViewController._parseJsonForBabyInfoArray(jsonResult)
-                        
-                    }
-                    
-                    
-                } else {
-                    println("Failed to get response")
-                    let errStr = (data as! NSDictionary)["Error"] as! String
-                    
-                }
-            } else {
-                self.displayAlert("Login failed", message: error!.description)
-            }
-            
-            // Make sure we are on the main thread, and update the UI.
-            dispatch_async(dispatch_get_main_queue()) { //sync or async
-                // update some UI
-                
-                self.classCollectionView.reloadData() //yxu: reloadData must be called on main thread. otherwise it does not work!!!
-                
-                println("updating the collection view")
-                // resume the UI at the end of async action
-                
-                self._stopSpinnerAndResumeUI()
-                
-            }
 
-            
-        }
-        */
         
     }
     
@@ -198,8 +131,7 @@ class ClassViewController: UIViewController, UICollectionViewDataSource,  UIColl
                 headImgPath.removeRange(range)
                 
                 let url = NSURL(string: headImgPath + headImg, relativeToURL: baseURL )
-                
-                
+    
                 var newKid = BabyInfo(babyName: kidName, nickName: kidNickName, sex: kidSex, id: kidId, imageURL: url!)
                 kids.append(newKid)
             }
@@ -258,14 +190,13 @@ class ClassViewController: UIViewController, UICollectionViewDataSource,  UIColl
     
     
     func _startDownloadForImage(babyInfo: BabyInfo, indexPath: NSIndexPath){
-        //1
+
         if let downloadOperation = pendingOperations.downloadsInProgress[indexPath] {
             return
         }
         
-        //2
         let downloader = ImageDownloader(babyInfo: babyInfo)
-        //3
+        
         downloader.completionBlock = {
             if downloader.cancelled {
                 return
@@ -275,9 +206,9 @@ class ClassViewController: UIViewController, UICollectionViewDataSource,  UIColl
                 self.classCollectionView.reloadItemsAtIndexPaths([indexPath])
             })
         }
-        //4
+        
         pendingOperations.downloadsInProgress[indexPath] = downloader
-        //5
+        
         pendingOperations.downloadQueue.addOperation(downloader)
     }
     
@@ -290,15 +221,6 @@ class ClassViewController: UIViewController, UICollectionViewDataSource,  UIColl
     
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        /*
-        let flickrPhoto =  photoForIndexPath(indexPath)
-        //2
-        if var size = flickrPhoto.thumbnail?.size {
-            size.width += 10
-            size.height += 10
-            return size
-        }
-        */
         return CGSize(width: 150, height: 150)
     }
 

@@ -8,7 +8,6 @@
 
 import UIKit
 
-//yxu: delegate to pass the date picked from calendar, back to table view
 protocol PickDateDelegate {
     func pickDataFromCalendar(date: String)
 }
@@ -44,8 +43,7 @@ class KeleCalendarViewController: UIViewController, KeleCalDelegate {
         println(date)
         delegate?.pickDataFromCalendar(date)
         
-        dismissViewControllerAnimated(true, completion: nil)
-        
+        dismissViewControllerAnimated(true, completion: nil)        
     }
     
 }

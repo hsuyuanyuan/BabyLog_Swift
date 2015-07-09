@@ -11,8 +11,7 @@ import Alamofire
 
 class LoginViewController: UIViewController {
 
-   
-   
+
    @IBOutlet weak var userNameTextField: UITextField!
    
    
@@ -93,9 +92,7 @@ class LoginViewController: UIViewController {
             } else {
                 self.displayAlert("Login failed", message: error!.description)
             }
-            
-            
-            
+ 
             
             // resume the UI at the end of async action
             activityIndicator.stopAnimating()
@@ -106,28 +103,6 @@ class LoginViewController: UIViewController {
       }
    }
    
-   
-   override func viewDidLoad() {
-      super.viewDidLoad()
-      // Do any additional setup after loading the view, typically from a nib.
-    
-      //Try1: image does not fit into screen
-      // self.view.backgroundColor = UIColor(patternImage: UIImage(named: "login_bg")!)
-      
-      //Try2: 
-      /*
-      let imageView = UIImageView(image: UIImage(named: "login_bg")!)
-      imageView.frame = CGRectMake(0, 20, self.view.bounds.width, self.view.bounds.height);
-      self.view.addSubview(imageView)
-      */
-    
-    
-   }
-
-   override func didReceiveMemoryWarning() {
-      super.didReceiveMemoryWarning()
-      // Dispose of any resources that can be recreated.
-   }
 
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         self.view.endEditing(true)

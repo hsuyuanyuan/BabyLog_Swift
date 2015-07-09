@@ -13,14 +13,9 @@ class ClassBabyInfoCollectionViewCell: UICollectionViewCell, UITextFieldDelegate
     var timePicker = UIDatePicker()
     var textFieldSelected: UITextField!
     
-    //@IBOutlet weak var babyImageView: UIImageView!
-    
-    
     @IBOutlet weak var babyImageButton: UIButton!
     
     @IBAction func babyImageButtonTapped(sender: AnyObject) {
-        
-        
         
     }
     
@@ -63,12 +58,9 @@ class ClassBabyInfoCollectionViewCell: UICollectionViewCell, UITextFieldDelegate
         leaveTextField.text = curTime.formattedHHMM
         textFieldSelected = leaveTextField
     
-        
-        
         leaveTextField.inputView = timePicker
         addSubview(leaveTextField)
-        
-        
+      
     }
 
     
@@ -81,8 +73,6 @@ class ClassBabyInfoCollectionViewCell: UICollectionViewCell, UITextFieldDelegate
         timePicker.datePickerMode = UIDatePickerMode.Time;
         timePicker.locale = NSLocale(localeIdentifier: "NL") //NL for Netherland, 24H; zh_Hans_CN for China
         timePicker.addTarget(self, action: "startTimeChangedAction:", forControlEvents: UIControlEvents.ValueChanged)
-        
-
 
     }
     
@@ -93,8 +83,6 @@ class ClassBabyInfoCollectionViewCell: UICollectionViewCell, UITextFieldDelegate
     }
     
     // MARK: delegate
-
-
     func textFieldDidBeginEditing(textField: UITextField) {
         textFieldSelected = textField
     }

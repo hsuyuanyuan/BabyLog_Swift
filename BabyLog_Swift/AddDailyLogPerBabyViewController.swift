@@ -11,9 +11,6 @@ import Alamofire
 
 
 
-
-
-
 class AddDailyLogPerBabyViewController: AddDailyLogViewController, SaveStartsForKidsDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate  {
 
     // MARK: data arrays for baby info
@@ -72,8 +69,6 @@ class AddDailyLogPerBabyViewController: AddDailyLogViewController, SaveStartsFor
     
     
     // MARK: controls
-
-    
  
     func initActivityInternalInfo(curDailyLog: DailyLogItem) {
 
@@ -144,12 +139,7 @@ class AddDailyLogPerBabyViewController: AddDailyLogViewController, SaveStartsFor
         presentViewController(imagePickerView, animated: true, completion: nil)
         
     }
-    
- 
-    
 
-    
-    
 
 
     
@@ -161,8 +151,6 @@ class AddDailyLogPerBabyViewController: AddDailyLogViewController, SaveStartsFor
     
     
     // MARK: call web api
-    
- 
     func _uploadCompletedDailyLog() {
         
         if _idsForKids == nil || _starsForKids == nil
@@ -207,51 +195,7 @@ class AddDailyLogPerBabyViewController: AddDailyLogViewController, SaveStartsFor
         
         callWebAPI(requestParams, curAPIType: APIType.UploadCompleteStatusWithStars, postActionAfterSuccessulReturn: nil, postActionAfterAllReturns: nil)
         
-        /*
-        let manager = Manager.sharedInstance
-        manager.session.configuration.HTTPAdditionalHeaders = [
-            "Token": _getUserToken()] //todo: retrive the token and put it in the header
-        
-        
-        let data = NSJSONSerialization.dataWithJSONObject(requestParams, options: NSJSONWritingOptions.PrettyPrinted, error: nil)
-        
-        let requestSchedule =  Alamofire.request(.POST, "http://www.babysaga.cn/app/service?method=ClassSchedule.CompleteSchedule", parameters: [:], encoding: .Custom({
-            (convertible, params) in
-            var mutableRequest = convertible.URLRequest.copy() as! NSMutableURLRequest
-            mutableRequest.HTTPBody = data
-            return (mutableRequest, nil)
-        })).responseJSON() {
-            (request, response, JSON, error) in
-            
-            if error == nil {  //??yxu: error means http error. The web api error is inside JSON
-                println("we did get the response")
-                println(JSON) //yxu: output the unicode
-                println(request)
-                println(response)
-                println(error)
-                println((JSON as! NSDictionary)["Error"]!) //yxu: output Chinese: http://stackoverflow.com/questions/26963029/how-can-i-get-the-swift-xcode-console-to-show-chinese-characters-instead-of-unic
-                
-                let statusCode = (JSON as! NSDictionary)["StatusCode"] as! Int
-                if statusCode  == 200 {
-                    println("Succeeded in sending the log")
-                    
-                 
-                    
-                    
-                } else {
-                    println("Failed to get response")
-                    let errStr = (JSON as! NSDictionary)["Error"] as! String
-                    
-                }
-                
-                
-            } else {
-                self.displayAlert("Login failed", message: error!.description)
-            }
-            
-            
-        }
-        */
+
         
     }
  

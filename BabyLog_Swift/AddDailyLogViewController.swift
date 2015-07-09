@@ -8,26 +8,13 @@
 
 import UIKit
 
-//yxu: delegate to pass the date picked from calendar, back to table view
+
 protocol UploadLogDelegate {
     func uploadLogItem(activityItem: DailyLogItem)
     
 }
 
 
-extension NSDate {
-    var formattedHHMM: String {
-        let formatter = NSDateFormatter()
-        formatter.dateFormat = "HH:mm"
-        return  formatter.stringFromDate(self)
-    }
-    
-    var formattedYYYYMMDD: String {
-        let formatter = NSDateFormatter()
-        formatter.dateFormat = "YYYY-MM-dd" //formatter.dateFormat = "EEEE, dd MMM yyyy HH:mm:ss Z"
-        return formatter.stringFromDate(self)
-    }
-}
 
 
 
@@ -47,29 +34,18 @@ class AddDailyLogViewController: UIViewController, UIPickerViewDataSource, UIPic
     // delegate
     var delegate: UploadLogDelegate!
     
-    
     // picker views
     var activityPicker = UIPickerView()
     var startTimePicker = UIDatePicker()
     var endTimePicker = UIDatePicker()
 
-    
-    
     var activityId = activityIdMin // default to minimum
     var startTime = ""
     var endTime = ""
 
-  
-    
-
-    
-    
-    
-    
     @IBAction func cancelAction(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
     }
- 
     
     
     @IBAction func uploadLog(sender: UIButton) {
@@ -77,8 +53,7 @@ class AddDailyLogViewController: UIViewController, UIPickerViewDataSource, UIPic
         
         println("activity = \(activityTypeTextField.text), id = \(activityId) \n\n")
         
-        
-        // todo: add sanity check:  end time > start time etc
+        // TODO: add sanity check:  end time > start time etc
         //   show an alert view if error detected
         
         let activityItem = DailyLogItem(uniqueId: 0, activityType: activityId, content: contentTextView.text, startTime: startTime, endTime: endTime)
@@ -86,7 +61,6 @@ class AddDailyLogViewController: UIViewController, UIPickerViewDataSource, UIPic
         delegate?.uploadLogItem(activityItem)
         
         dismissViewControllerAnimated(true, completion: nil)
-        
         
     }
     
@@ -114,7 +88,7 @@ class AddDailyLogViewController: UIViewController, UIPickerViewDataSource, UIPic
         
         var curTime = NSDate()
         startTime = curTime.formattedHHMM
-        endTime = startTime  // TODO add logic to add 30 minutes to starttime as endtime; And check agains midnight
+        endTime = startTime  // TODO add logic to add 30 minutes to starttime as endtime; And check agains midnight; make them aligned on 5 minutes resolution
         
         startTimeTextField.text = startTime
         endTimeTextField.text = endTime
@@ -184,20 +158,9 @@ class AddDailyLogViewController: UIViewController, UIPickerViewDataSource, UIPic
         return myView
     }
     
-    
-    
 
  
 }
 
 
-
-/* //sample code
-These methods might come in handy to update your view:
-
-[self.view setNeedsLayout];
-[self.view setNeedsUpdateConstraints];
-[self.view setNeedsDisplay];
-
-*/
         

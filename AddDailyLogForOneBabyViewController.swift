@@ -9,7 +9,7 @@
 import UIKit
 
 
-//yxu: delegate to pass the date picked from calendar, back to table view
+
 protocol UploadLogForOneBabyDelegate {
     func uploadLogItemForOneBaby(activityItem: DailyLogItem, extraInfo: DailyLogItem_ExtraInfoForBaby)
     
@@ -29,25 +29,7 @@ class AddDailyLogForOneBabyViewController: AddDailyLogViewController, FloatRatin
     
     
     @IBOutlet weak var starRatingVIew: FloatRatingView!
-    
-    
-    
-    
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        /*
-        if segue.identifier == "showStarRatintgView" //yxu: defined in segue property in Storyboard
-        {
-            let babyStarVC = segue.destinationViewController as! BabyStarViewController
-            babyStarVC.initStarsArray(_babyInfoArray.count, namesForKids: _namesForKids)
-            babyStarVC.delegate = self
-        }
-*/
-        
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
+
     
     
     @IBAction func confirmButtonTapped(sender: AnyObject) {
@@ -61,7 +43,6 @@ class AddDailyLogForOneBabyViewController: AddDailyLogViewController, FloatRatin
         
         let activityItem = DailyLogItem(uniqueId: 0, activityType: activityId, content: contentTextView.text, startTime: startTime, endTime: endTime)
         
-        //?? TODO: babyId??
         let extraInfo = DailyLogItem_ExtraInfoForBaby(stars: _numStars, babyId: _babyId, classId: 0, creatorId: 0, picCount: 0, picPaths: nil)
         
         delegatePerBaby?.uploadLogItemForOneBaby(activityItem, extraInfo: extraInfo)
@@ -77,7 +58,6 @@ class AddDailyLogForOneBabyViewController: AddDailyLogViewController, FloatRatin
     
     
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -89,18 +69,7 @@ class AddDailyLogForOneBabyViewController: AddDailyLogViewController, FloatRatin
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
     
     
     // MARK: delegate for image picker view

@@ -10,105 +10,6 @@ import UIKit
 import Alamofire
 
 
-// share functions across the views:  http://stackoverflow.com/questions/27050580/how-are-global-functions-defined-in-swift
-extension UIViewController {
-    
-
-    
-    
-    func _saveUserToken(userToken:String) {
-        let userDefault = NSUserDefaults.standardUserDefaults()
-        userDefault.setObject(userToken, forKey: userTokenKeyInUserDefault)
-    }
-    
-    func _getUserToken() -> String {
-        let userDefault = NSUserDefaults.standardUserDefaults()
-        let userToken = userDefault.stringForKey(userTokenKeyInUserDefault) ?? ""
-        println("\(userToken)")
-        return userToken
-    }
-
-    func displayAlert(title: String, message: String ) {
-        
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-        
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
-            self.dismissViewControllerAnimated(true, completion: nil) //yxu?: is self the alert or the LoginViewController??
-        }))
-        
-        self.presentViewController(alert, animated: true, completion: nil)
-        
-    }
-    
-    
-    func callWebAPI(requestParams: [String:AnyObject], curAPIType: APIType, postActionAfterSuccessulReturn: ((data: AnyObject?)->())?, postActionAfterAllReturns: (()->())?) {
-        
-        let curAPI = APICommonPrefix + curAPIType.description
-        
-        let manager = Manager.sharedInstance
-        manager.session.configuration.HTTPAdditionalHeaders = [
-            "Token": _getUserToken()] //todo: retrive the token and put it in the header
-        
-        
-        let data = NSJSONSerialization.dataWithJSONObject(requestParams, options: NSJSONWritingOptions.PrettyPrinted, error: nil)
-        
-        
-        let requestSchedule =  Alamofire.request(.POST, curAPI, parameters: [:], encoding: .Custom({
-            (convertible, params) in
-            var mutableRequest = convertible.URLRequest.copy() as! NSMutableURLRequest
-            mutableRequest.HTTPBody = data
-            return (mutableRequest, nil)
-        })).responseJSON() {
-            (request, response, JSON, error) in
-            
-            if error == nil {  //??yxu: error means http error. The web api error is inside JSON
-                println("we did get the response")
-                println(JSON) //yxu: output the unicode
-                println(request)
-                println(response)
-                println(error)
-                println((JSON as! NSDictionary)["Error"]!) //yxu: output Chinese: http://stackoverflow.com/questions/26963029/how-can-i-get-the-swift-xcode-console-to-show-chinese-characters-instead-of-unic
-                
-                let statusCode = (JSON as! NSDictionary)["StatusCode"] as! Int
-                if statusCode  == 200 {
-                    println("Succeeded in sending the log")
-                    
-                    postActionAfterSuccessulReturn?(data: JSON)
-                    
-                    
-                } else {
-                    println("Failed to get response")
-                    let errStr = (JSON as! NSDictionary)["Error"] as! String
-                    
-                }
-                
-                
-            } else {
-                self.displayAlert( curAPIType.description + " failed", message: error!.description)
-            }
-            
-            
-            
-            postActionAfterAllReturns?()
-
-            
-            
-        }
-        
-
-    }
-    
-
-    
-
-    
-}
-
-
-
-
-
-
 
 
 
@@ -160,19 +61,8 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
-        
         // set current date
         let date = NSDate()
-        
-        /*
-        // refer to: http://stackoverflow.com/questions/24070450/how-to-get-the-current-timeand-hour-as-datetime-swift
-        let calendar = NSCalendar.currentCalendar()
-        let components = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay, fromDate: date)
-        
-        curDate = "\(components.year)-\(components.month)-\(components.day)"
-        */
-        
         curDate = date.formattedYYYYMMDD
         
         // set up spinner
@@ -186,7 +76,7 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
         logView.delegate = self
         logView.dataSource = self
         
-        //yxu: the following line caused problem!  The labels and images are nil. Have to remove it!
+        //yxu: the following line caused problem!  The labels and images are nil. Have to remove it!  Correct way: 1. set the string in storyboard  2. use it in the code for deque
         //logView.registerClass(LogItemTableViewCell.self, forCellReuseIdentifier: cellReuseId)
         
         logView.tableFooterView = UIView() //yxu: trick to remove the empty cells in tableView
@@ -197,7 +87,7 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
    
     }
     
-    //yxu: override this in children view
+    
     func _retrieveDataForDisplayInTableView() {
         // retrieve the logs for current date
         _retrieveDailyLog(curDate)
@@ -211,8 +101,7 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
         navigationBar!.topItem?.title = curDate + " Log " //refer to: http://stackoverflow.com/questions/10895122/changing-nav-bar-title-programatically
     }
     
-
-    
+   
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "SegueToShowAddLogVC" //yxu: defined in segue property in Storyboard
         {
@@ -233,8 +122,6 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     
-    
-    
     // MARK: delegate for calendar VC
     func pickDataFromCalendar(date: String) {
         
@@ -249,36 +136,16 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     
-
-    
-    
-    
-    // MARK: help functions
-    
-
-    
-
-    
-
-    
     
     // MARK: call web api
     
     func _deleteDailyLog(logId: Int) {
         
-        // add spinner
         _startSpinnerAndBlockUI()
         
-        // call web api: parameter: int Id  日程的Id; http://www.babysaga.cn/app/service?method=ClassSchedule.DeleteSchedule
-        
-        
-        // TODO: make a function for calling web api
-        
-        // func start
         var requestParams : [String:AnyObject] = [ //todo: add sanity check for the date string
             "Id":logId
         ]
-        
         
         callWebAPI(requestParams, curAPIType: APIType.DeleteScheduleForClass, postActionAfterSuccessulReturn: { (data) -> () in
             // delete the member from logItemsForDisplay
@@ -301,79 +168,6 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
         }
         
-        /*
-        let manager = Manager.sharedInstance
-        manager.session.configuration.HTTPAdditionalHeaders = [
-            "Token": _getUserToken() ]
-        
-        let data = NSJSONSerialization.dataWithJSONObject(requestParams, options: NSJSONWritingOptions.PrettyPrinted, error: nil)
-        
-        let requestSchedule =  Alamofire.request(.POST, "http://www.babysaga.cn/app/service?method=ClassSchedule.DeleteSchedule", parameters: [:], encoding: .Custom({
-            (convertible, params) in
-            var mutableRequest = convertible.URLRequest.copy() as! NSMutableURLRequest
-            mutableRequest.HTTPBody = data
-            return (mutableRequest, nil)
-        })).responseJSON() {
-            (request, response, data, error) in
-            
-            if error == nil {
-                println("we did get the response")
-                println(data) //yxu: output the unicode
-                println(request)
-                println(response)
-                println(error)
-                println((data as! NSDictionary)["Error"]!)
-                
-                let statusCode = (data as! NSDictionary)["StatusCode"] as! Int
-                if statusCode  == 200 {
-                    println("Succeeded in deleting the log")
-                    
-                    // delete the member from logItemsForDisplay
-                    self._logItemsForDisplay = self._logItemsForDisplay.filter({ (logItem ) -> Bool in
-                        logItem.uniqueId != logId //yxu: filter / map: in nature is looping, O(N)
-                    })
-                    
-                    
-                    
-                } else {
-                    println("Failed to get response")
-                    let errStr = (data as! NSDictionary)["Error"] as! String
-                    
-                }
-            } else {
-                self.displayAlert("Login failed", message: error!.description)
-            }
-            
-            
-            
-            
-            // Make sure we are on the main thread, and update the UI.
-            dispatch_async(dispatch_get_main_queue()) { //sync or async
-                // update some UI
-                
-                self.logView.reloadData() //yxu: reloadData must be called on main thread. otherwise it does not work!!!
-                
-                
-                println("updating the table view")
-                // resume the UI at the end of async action
-                
-                self._stopSpinnerAndResumeUI()
-                
-            }
-            
-            
-            //todo: persist data with UserDefault
-            
-        }
-        */
-        
-        
-        
-        // if success, delete it from local copy
-        
-        // in callback, reload view ( using local copy)
-        
-        
     }
     
     
@@ -393,7 +187,7 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
             // refresh the view after uploading
             self._retrieveDailyLog(self.curDate)
             
-            // todo: add to local array, then update tableView => save one web api call
+            // TODO : add to local array, then update tableView => save one web api call
             
             /* refer to: http://www.raywenderlich.com/81880/storyboards-tutorial-swift-part-2
             //add the new player to the players array
@@ -404,66 +198,6 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
             tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
             */
         }, postActionAfterAllReturns: nil)
-        
-        /*
-        let manager = Manager.sharedInstance
-        manager.session.configuration.HTTPAdditionalHeaders = [
-            "Token": _getUserToken()] //todo: retrive the token and put it in the header
-        
-        
-        let data = NSJSONSerialization.dataWithJSONObject(requestParams, options: NSJSONWritingOptions.PrettyPrinted, error: nil)
-        
-        let requestSchedule =  Alamofire.request(.POST, "http://www.babysaga.cn/app/service?method=ClassSchedule.InputScheduleJson", parameters: [:], encoding: .Custom({
-            (convertible, params) in
-            var mutableRequest = convertible.URLRequest.copy() as! NSMutableURLRequest
-            mutableRequest.HTTPBody = data
-            return (mutableRequest, nil)
-        })).responseJSON() {
-            (request, response, JSON, error) in
-            
-            if error == nil {  //??yxu: error means http error. The web api error is inside JSON
-                println("we did get the response")
-                println(JSON) //yxu: output the unicode
-                println(request)
-                println(response)
-                println(error)
-                println((JSON as! NSDictionary)["Error"]!) //yxu: output Chinese: http://stackoverflow.com/questions/26963029/how-can-i-get-the-swift-xcode-console-to-show-chinese-characters-instead-of-unic
-                
-                let statusCode = (JSON as! NSDictionary)["StatusCode"] as! Int
-                if statusCode  == 200 {
-                    println("Succeeded in sending the log")
-                    
-                    
-                    // refresh the view after uploading
-                    self._retrieveDailyLog(self.curDate)
-                    
-                    // todo: add to local array, then update tableView => save one web api call
-                    
-                    /* refer to: http://www.raywenderlich.com/81880/storyboards-tutorial-swift-part-2
-                    //add the new player to the players array
-                    players.append(playerDetailsViewController.player)
-                    
-                    //update the tableView
-                    let indexPath = NSIndexPath(forRow: players.count-1, inSection: 0)
-                    tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
-                    */
-                    
-                    
-                } else {
-                    println("Failed to get response")
-                    let errStr = (JSON as! NSDictionary)["Error"] as! String
-                    
-                }
-                
-                
-            } else {
-                self.displayAlert("Login failed", message: error!.description)
-            }
-            
-            
-        }
-
-        */
         
     }
     
@@ -507,79 +241,6 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 
             }
         }
-        
-        /*
-        
-        let manager = Manager.sharedInstance
-        manager.session.configuration.HTTPAdditionalHeaders = [
-            userTokenStringInHttpHeader: _getUserToken()]
-        
-        
-        let data = NSJSONSerialization.dataWithJSONObject(requestParams, options: NSJSONWritingOptions.PrettyPrinted, error: nil)
-        
-        // get by date: "http://www.babysaga.cn/app/service?method=ClassSchedule.GetListSchedule"
-        // get by Id of date: "http://www.babysaga.cn/app/service?method=ClassSchedule.GetScheduleById"
-        let requestSchedule =  Alamofire.request(.POST, "http://www.babysaga.cn/app/service?method=ClassSchedule.GetListSchedule", parameters: [:], encoding: .Custom({
-            (convertible, params) in
-            var mutableRequest = convertible.URLRequest.copy() as! NSMutableURLRequest
-            mutableRequest.HTTPBody = data
-            return (mutableRequest, nil)
-        })).responseJSON() {
-            (request, response, data, error) in
-            
-            if error == nil {
-                println("we did get the response")
-                println(data) //yxu: output the unicode
-                println(request)
-                println(response)
-                println(error)
-                println((data as! NSDictionary)["Error"]!)
-                
-                let statusCode = (data as! NSDictionary)["StatusCode"] as! Int
-                if statusCode  == 200 {
-                    println("Succeeded in getting the log")
-                    
-                    // refer to: https://grokswift.com/rest-with-alamofire-swiftyjson/
-                    if let data: AnyObject = data { //yxu: check if data is nil
-                        let jsonResult = JSON(data)
-                        
-                        self._parseJsonForLogItemArray(jsonResult)
-                        
-                    }
-                    
-                    
-                } else {
-                    println("Failed to get response")
-                    let errStr = (data as! NSDictionary)["Error"] as! String
-                    
-                }
-            } else {
-                self.displayAlert("Login failed", message: error!.description)
-            }
-            
-            
-            
-            
-            // Make sure we are on the main thread, and update the UI.
-            dispatch_async(dispatch_get_main_queue()) { //sync or async
-                // update some UI
-                
-                self.logView.reloadData() //yxu: reloadData must be called on main thread. otherwise it does not work!!!
-                
-                
-                println("updating the table view")
-                // resume the UI at the end of async action
-                
-                self._stopSpinnerAndResumeUI()
-
-            }
-            
-            
-            //todo: persist data with UserDefault
-            
-        }
-
-        */
         
     }
     
@@ -640,11 +301,7 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
             
         }
         
-
- 
- 
-        
-        
+    
         // set background of cell:  http://www.gfzj.us/tech/2014/12/09/iOS-dev-tips.html
         //cell.layer.contents = (id)[UIImage imageNamed:@"space_bg.jpg"].CGImage;//fill模式
         //cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"space_bg.jpg"]];//平铺模式
@@ -678,21 +335,8 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
             
         }
     }
- 
-    
-    
- 
-    
-    
     
 }
-
-
-
-
-
-
-
 
 
 
@@ -795,65 +439,7 @@ class LogTabForOneBabyViewController: LogTabViewController, UploadLogForOneBabyD
             self._retrieveDailyLogForBaby(self.curDate)
             
         }, postActionAfterAllReturns: nil)
-        
-        /*
-        
-        let manager = Manager.sharedInstance
-        manager.session.configuration.HTTPAdditionalHeaders = [
-            "Token": _getUserToken()] //todo: retrive the token and put it in the header
-        
-        
-        let data = NSJSONSerialization.dataWithJSONObject(requestParams, options: NSJSONWritingOptions.PrettyPrinted, error: nil)
-        
-        let requestSchedule =  Alamofire.request(.POST, "http://www.babysaga.cn/app/service?method=Diary.IOSInputDiary", parameters: [:], encoding: .Custom({
-            (convertible, params) in
-            var mutableRequest = convertible.URLRequest.copy() as! NSMutableURLRequest
-            mutableRequest.HTTPBody = data
-            return (mutableRequest, nil)
-        })).responseJSON() {
-            (request, response, JSON, error) in
-            
-            if error == nil {  //??yxu: error means http error. The web api error is inside JSON
-                println("we did get the response")
-                println(JSON) //yxu: output the unicode
-                println(request)
-                println(response)
-                println(error)
-                println((JSON as! NSDictionary)["Error"]!) //yxu: output Chinese: http://stackoverflow.com/questions/26963029/how-can-i-get-the-swift-xcode-console-to-show-chinese-characters-instead-of-unic
-                
-                let statusCode = (JSON as! NSDictionary)["StatusCode"] as! Int
-                if statusCode  == 200 {
-                    println("Succeeded in sending the log")
-                    
-                    
-                    // refresh the view after uploading
-                    self._retrieveDailyLogForBaby(self.curDate)
-                    
 
-                    
-                    
-                } else {
-                    println("Failed to get response")
-                    let errStr = (JSON as! NSDictionary)["Error"] as! String
-                    
-                }
-                
-                
-            } else {
-                
-                println("we did get the response, but in error")
-                println(JSON) //yxu: output the unicode
-                println(request)
-                println(response)
-
-          
-                self.displayAlert("upload for one baby failed", message:  response!.description)
-            }
-            
-            
-        }
-
-        */
         
     }
     
@@ -920,14 +506,10 @@ class LogTabForOneBabyViewController: LogTabViewController, UploadLogForOneBabyD
         
     }
     
-    
-    
-    
+
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let reusableCell  = tableView.dequeueReusableCellWithIdentifier(cellReuseId) as! LogItemForBabyTableViewCell
-        
-        // reusableCell.dailyLogPerBabyButton.tag = indexPath.row // used to identify which cell triggers the segue to per-baby view
         
         reusableCell.startEndTimeLabel!.text = _logItemsForDisplay[indexPath.row].startTime + "-" + _logItemsForDisplay[indexPath.row].endTime
         
@@ -960,7 +542,7 @@ class LogTabForOneBabyViewController: LogTabViewController, UploadLogForOneBabyD
     
     
     
- 
+    // workflow:
     // 1. segeu pass in the student id?? 
     // 2. call this api to populate the table view
 
@@ -1001,77 +583,7 @@ class LogTabForOneBabyViewController: LogTabViewController, UploadLogForOneBabyD
             }
         }
         
-        
-        /*
-        let manager = Manager.sharedInstance
-        manager.session.configuration.HTTPAdditionalHeaders = [
-            userTokenStringInHttpHeader: _getUserToken()]
-        
-        
-        let data = NSJSONSerialization.dataWithJSONObject(requestParams, options: NSJSONWritingOptions.PrettyPrinted, error: nil)
-        
-
-        let requestSchedule =  Alamofire.request(.POST, "http://www.babysaga.cn/app/service?method=diary.tdaydiary", parameters: [:], encoding: .Custom({
-            (convertible, params) in
-            var mutableRequest = convertible.URLRequest.copy() as! NSMutableURLRequest
-            mutableRequest.HTTPBody = data
-            return (mutableRequest, nil)
-        })).responseJSON() {
-            (request, response, data, error) in
             
-            if error == nil {
-                println("we did get the response")
-                println(data) //yxu: output the unicode
-                println(request)
-                println(response)
-                println(error)
-                println((data as! NSDictionary)["Error"]!)
-                
-                let statusCode = (data as! NSDictionary)["StatusCode"] as! Int
-                if statusCode  == 200 {
-                    println("Succeeded in getting the log")
-                    
-                    // refer to: https://grokswift.com/rest-with-alamofire-swiftyjson/
-                    if let data: AnyObject = data { //yxu: check if data is nil
-                        let jsonResult = JSON(data)
-                        
-                        self._parseJsonForLogItemArray(jsonResult)
-                        
-                    }
-                    
-                    
-                } else {
-                    println("Failed to get response")
-                    let errStr = (data as! NSDictionary)["Error"] as! String
-                    
-                }
-            } else {
-                self.displayAlert("Login failed", message: error!.description)
-            }
-
-            
-            
-            
-            // Make sure we are on the main thread, and update the UI.
-            dispatch_async(dispatch_get_main_queue()) { //sync or async
-                // update some UI
-                
-                self.logView.reloadData() //yxu: reloadData must be called on main thread. otherwise it does not work!!!
-                
-                
-                println("updating the table view")
-                // resume the UI at the end of async action
-                
-                self._stopSpinnerAndResumeUI()
-                
-            }
-            
-
-            //todo: persist data with UserDefault
-            
-        }
-        */
-        
     }
 
 }

@@ -9,7 +9,6 @@
 import UIKit
 
 
-//yxu: delegate to pass the stars set in this view, back to the presenting view
 protocol SaveStartsForKidsDelegate {
     func saveStartsForKids(starsForKids: [Float]?)
 }
@@ -57,15 +56,6 @@ class BabyStarViewController: UIViewController, UITableViewDataSource, UITableVi
         delegate?.saveStartsForKids(_starsForKids)
         dismissViewControllerAnimated(true, completion: nil)
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -91,7 +81,7 @@ class BabyStarViewController: UIViewController, UITableViewDataSource, UITableVi
     
     // MARK: delegate for star rating view
     
-    /* update the number in real time, not used here
+    /* // update the number in real time, not used here
     func floatRatingView(ratingView: FloatRatingView, isUpdating rating:Float) {
     self.liveLabel.text = NSString(format: "%.2f", self.floatRatingView.rating) as String
     }

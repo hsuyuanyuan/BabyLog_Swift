@@ -10,17 +10,12 @@ import UIKit
 
 class BabyStarTableViewCell: UITableViewCell {
 
-    
-    
+ 
     @IBOutlet weak var babyStarRatingView: FloatRatingView!
-    
-    
-    
 
     @IBOutlet weak var babyNameLabel: UILabel!
     
 
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

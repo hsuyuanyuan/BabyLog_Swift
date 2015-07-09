@@ -11,6 +11,7 @@ import UIKit
 class MoreTableViewController: UITableViewController {
 
     @IBAction func addLogItem(sender: AnyObject) {
+        
     }
     
     
