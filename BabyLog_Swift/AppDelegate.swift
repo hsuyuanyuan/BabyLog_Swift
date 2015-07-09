@@ -24,13 +24,16 @@ var _babyInfoArray = [BabyInfo]()
 let APICommonPrefix = "http://www.babysaga.cn/app/service?method="
 
 enum APIType: String, Printable {
-    case UploadCompleteStatusWithStars = "ClassSchedule.CompleteSchedule"
+    
+    case AddDairyForOneBaby = "Diary.IOSInputDiary"
     case GetDairyForOneBaby = "diary.tdaydiary"
+    
     case ListAllBabiesInClass = "user.ListClassBaby"
+    
     case DeleteScheduleForClass = "ClassSchedule.DeleteSchedule"
     case AddScheduleForClass = "ClassSchedule.InputScheduleJson"
     case GetScheduleForClass = "ClassSchedule.GetListSchedule"
-    case AddDairyForOneBaby = "Diary.IOSInputDiary"
+    case UploadCompleteStatusWithStars = "ClassSchedule.CompleteSchedule"
     
     var description: String {
         return self.rawValue
@@ -51,8 +54,7 @@ let userTokenKeyInUserDefault = "keyForUserToken"
 
 let baseURL = NSURL(string: "http://www.babysaga.cn/") // another option, initWithPath is for local folder
 
-let imageDefaultHead = UIImage(named: "TabBar-KId.png")
-//UIImage(named: "KidPhotoBig.png") // default photo for kids without their own photos
+let imageDefaultHead = UIImage(named: "TabBar-KId.png")  // default photo for kids without their own photos
 
 
 
