@@ -15,6 +15,7 @@ extension UIViewController {
     
 
     
+    
     func _saveUserToken(userToken:String) {
         let userDefault = NSUserDefaults.standardUserDefaults()
         userDefault.setObject(userToken, forKey: userTokenKeyInUserDefault)
@@ -40,6 +41,62 @@ extension UIViewController {
     }
     
     
+    func callWebAPI(requestParams: [String:AnyObject], curAPIType: APIType, postActionAfterSuccessulReturn: ((data: AnyObject?)->())?, postActionAfterAllReturns: (()->())?) {
+        
+        let curAPI = APICommonPrefix + curAPIType.description
+        
+        let manager = Manager.sharedInstance
+        manager.session.configuration.HTTPAdditionalHeaders = [
+            "Token": _getUserToken()] //todo: retrive the token and put it in the header
+        
+        
+        let data = NSJSONSerialization.dataWithJSONObject(requestParams, options: NSJSONWritingOptions.PrettyPrinted, error: nil)
+        
+        
+        let requestSchedule =  Alamofire.request(.POST, curAPI, parameters: [:], encoding: .Custom({
+            (convertible, params) in
+            var mutableRequest = convertible.URLRequest.copy() as! NSMutableURLRequest
+            mutableRequest.HTTPBody = data
+            return (mutableRequest, nil)
+        })).responseJSON() {
+            (request, response, JSON, error) in
+            
+            if error == nil {  //??yxu: error means http error. The web api error is inside JSON
+                println("we did get the response")
+                println(JSON) //yxu: output the unicode
+                println(request)
+                println(response)
+                println(error)
+                println((JSON as! NSDictionary)["Error"]!) //yxu: output Chinese: http://stackoverflow.com/questions/26963029/how-can-i-get-the-swift-xcode-console-to-show-chinese-characters-instead-of-unic
+                
+                let statusCode = (JSON as! NSDictionary)["StatusCode"] as! Int
+                if statusCode  == 200 {
+                    println("Succeeded in sending the log")
+                    
+                    postActionAfterSuccessulReturn?(data: JSON)
+                    
+                    
+                } else {
+                    println("Failed to get response")
+                    let errStr = (JSON as! NSDictionary)["Error"] as! String
+                    
+                }
+                
+                
+            } else {
+                self.displayAlert( curAPIType.description + " failed", message: error!.description)
+            }
+            
+            
+            
+            postActionAfterAllReturns?()
+
+            
+            
+        }
+        
+
+    }
     
 
     
@@ -222,6 +279,29 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
             "Id":logId
         ]
         
+        
+        callWebAPI(requestParams, curAPIType: APIType.DeleteScheduleForClass, postActionAfterSuccessulReturn: { (data) -> () in
+            // delete the member from logItemsForDisplay
+            self._logItemsForDisplay = self._logItemsForDisplay.filter({ (logItem ) -> Bool in
+                logItem.uniqueId != logId //yxu: filter / map: in nature is looping, O(N)
+            })
+        }) { () -> () in
+            // Make sure we are on the main thread, and update the UI.
+            dispatch_async(dispatch_get_main_queue()) { //sync or async
+                // update some UI
+                
+                self.logView.reloadData() //yxu: reloadData must be called on main thread. otherwise it does not work!!!
+                
+                
+                println("updating the table view")
+                // resume the UI at the end of async action
+                
+                self._stopSpinnerAndResumeUI()
+                
+            }
+        }
+        
+        /*
         let manager = Manager.sharedInstance
         manager.session.configuration.HTTPAdditionalHeaders = [
             "Token": _getUserToken() ]
@@ -285,7 +365,7 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
             //todo: persist data with UserDefault
             
         }
-        //func end
+        */
         
         
         
@@ -308,6 +388,24 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
         ]
         
         
+        
+        callWebAPI(requestParams, curAPIType: APIType.AddScheduleForClass, postActionAfterSuccessulReturn: { (data) -> () in
+            // refresh the view after uploading
+            self._retrieveDailyLog(self.curDate)
+            
+            // todo: add to local array, then update tableView => save one web api call
+            
+            /* refer to: http://www.raywenderlich.com/81880/storyboards-tutorial-swift-part-2
+            //add the new player to the players array
+            players.append(playerDetailsViewController.player)
+            
+            //update the tableView
+            let indexPath = NSIndexPath(forRow: players.count-1, inSection: 0)
+            tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+            */
+        }, postActionAfterAllReturns: nil)
+        
+        /*
         let manager = Manager.sharedInstance
         manager.session.configuration.HTTPAdditionalHeaders = [
             "Token": _getUserToken()] //todo: retrive the token and put it in the header
@@ -364,6 +462,8 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
             
             
         }
+
+        */
         
     }
     
@@ -381,6 +481,34 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
             "Day": date, //"2015-6-25"
         ]
         
+        
+        
+        callWebAPI(requestParams, curAPIType: APIType.GetScheduleForClass, postActionAfterSuccessulReturn: { (data) -> () in
+            // refer to: https://grokswift.com/rest-with-alamofire-swiftyjson/
+            if let data: AnyObject = data { //yxu: check if data is nil
+                let jsonResult = JSON(data)
+                
+                self._parseJsonForLogItemArray(jsonResult)
+                
+            }
+        }) { () -> () in
+            
+            // Make sure we are on the main thread, and update the UI.
+            dispatch_async(dispatch_get_main_queue()) { //sync or async
+                // update some UI
+                
+                self.logView.reloadData() //yxu: reloadData must be called on main thread. otherwise it does not work!!!
+                
+                
+                println("updating the table view")
+                // resume the UI at the end of async action
+                
+                self._stopSpinnerAndResumeUI()
+                
+            }
+        }
+        
+        /*
         
         let manager = Manager.sharedInstance
         manager.session.configuration.HTTPAdditionalHeaders = [
@@ -450,6 +578,8 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
             //todo: persist data with UserDefault
             
         }
+
+        */
         
     }
     
@@ -658,6 +788,16 @@ class LogTabForOneBabyViewController: LogTabViewController, UploadLogForOneBabyD
         ]
         
         
+        
+        callWebAPI(requestParams, curAPIType: APIType.AddDairyForOneBaby, postActionAfterSuccessulReturn: { (data) -> () in
+            
+            // refresh the view after uploading
+            self._retrieveDailyLogForBaby(self.curDate)
+            
+        }, postActionAfterAllReturns: nil)
+        
+        /*
+        
         let manager = Manager.sharedInstance
         manager.session.configuration.HTTPAdditionalHeaders = [
             "Token": _getUserToken()] //todo: retrive the token and put it in the header
@@ -712,6 +852,8 @@ class LogTabForOneBabyViewController: LogTabViewController, UploadLogForOneBabyD
             
             
         }
+
+        */
         
     }
     
@@ -829,13 +971,38 @@ class LogTabForOneBabyViewController: LogTabViewController, UploadLogForOneBabyD
         
         _startSpinnerAndBlockUI()
         
-        
+
         var requestParams : [String:AnyObject] = [ //todo: add sanity check for the date string
             "ToUser": _babyId,
             "Day": date, //"2015-6-25"
         ]
         
         
+        callWebAPI(requestParams, curAPIType: APIType.GetDairyForOneBaby, postActionAfterSuccessulReturn: { (data) -> () in
+            if let data: AnyObject = data { //yxu: check if data is nil
+                let jsonResult = JSON(data)
+                
+                self._parseJsonForLogItemArray(jsonResult)
+                
+            }
+        }) { () -> () in
+            // Make sure we are on the main thread, and update the UI.
+            dispatch_async(dispatch_get_main_queue()) { //sync or async
+                // update some UI
+                
+                self.logView.reloadData() //yxu: reloadData must be called on main thread. otherwise it does not work!!!
+                
+                
+                println("updating the table view")
+                // resume the UI at the end of async action
+                
+                self._stopSpinnerAndResumeUI()
+                
+            }
+        }
+        
+        
+        /*
         let manager = Manager.sharedInstance
         manager.session.configuration.HTTPAdditionalHeaders = [
             userTokenStringInHttpHeader: _getUserToken()]
@@ -881,7 +1048,7 @@ class LogTabForOneBabyViewController: LogTabViewController, UploadLogForOneBabyD
             } else {
                 self.displayAlert("Login failed", message: error!.description)
             }
-            
+
             
             
             
@@ -899,10 +1066,11 @@ class LogTabForOneBabyViewController: LogTabViewController, UploadLogForOneBabyD
                 
             }
             
-            
+
             //todo: persist data with UserDefault
             
         }
+        */
         
     }
 

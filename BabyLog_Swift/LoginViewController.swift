@@ -45,6 +45,10 @@ class LoginViewController: UIViewController {
         
         // call login web api with async method
         var dictionaryExample : [String:AnyObject] = ["Username":userNameTextField.text, "Password":passwordTextField.text] // TestAccount: ["Username":"Test222", "Password":"222222"]
+              
+        
+        // Note: this one is different, no data in the body. 
+        // Keep it for now, instead of moving to callWebAPI
         
         let data = NSJSONSerialization.dataWithJSONObject(dictionaryExample, options: NSJSONWritingOptions.PrettyPrinted, error: nil)
         
@@ -90,6 +94,9 @@ class LoginViewController: UIViewController {
                 self.displayAlert("Login failed", message: error!.description)
             }
             
+            
+            
+            
             // resume the UI at the end of async action
             activityIndicator.stopAnimating()
             UIApplication.sharedApplication().endIgnoringInteractionEvents()
@@ -133,27 +140,6 @@ class LoginViewController: UIViewController {
 
 // ------- sample code 
 
-/*
-var dictionaryExample : [String:AnyObject] = ["Username":"Test1", "Password":"1111"]
-
-//let dataExample : NSData = NSKeyedArchiver.archivedDataWithRootObject(dictionaryExample)
-let data = NSJSONSerialization.dataWithJSONObject(dictionaryExample, options: NSJSONWritingOptions.PrettyPrinted, error: nil)
-
-Alamofire.request(.POST, "http://www.babysaga.cn/app/service?method=user.login", parameters: [:], encoding: .Custom({
-(convertible, params) in
-var mutableRequest = convertible.URLRequest.copy() as! NSMutableURLRequest
-mutableRequest.HTTPBody = data
-return (mutableRequest, nil)
-})).responseJSON() {
-(request, response, JSON, error) in
-println("we did get the response")
-println(JSON) //yxu: output the unicode
-println((JSON as! NSDictionary)["Error"]!) //yxu: output Chinese: http://stackoverflow.com/questions/26963029/how-can-i-get-the-swift-xcode-console-to-show-chinese-characters-instead-of-unic
-println(request)
-println(response)
-println(error)
-}
-*/
 
 
 /* signup module

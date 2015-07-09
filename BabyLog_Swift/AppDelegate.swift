@@ -21,6 +21,24 @@ var _babyInfoArray = [BabyInfo]()
 
 
 
+let APICommonPrefix = "http://www.babysaga.cn/app/service?method="
+
+enum APIType: String, Printable {
+    case UploadCompleteStatusWithStars = "ClassSchedule.CompleteSchedule"
+    case GetDairyForOneBaby = "diary.tdaydiary"
+    case ListAllBabiesInClass = "user.ListClassBaby"
+    case DeleteScheduleForClass = "ClassSchedule.DeleteSchedule"
+    case AddScheduleForClass = "ClassSchedule.InputScheduleJson"
+    case GetScheduleForClass = "ClassSchedule.GetListSchedule"
+    case AddDairyForOneBaby = "Diary.IOSInputDiary"
+    
+    var description: String {
+        return self.rawValue
+    }
+}
+
+
+
 
 //---- constants
 let defaultNumStars:Float = 3.0
@@ -35,6 +53,9 @@ let baseURL = NSURL(string: "http://www.babysaga.cn/") // another option, initWi
 
 let imageDefaultHead = UIImage(named: "TabBar-KId.png")
 //UIImage(named: "KidPhotoBig.png") // default photo for kids without their own photos
+
+
+
 
 
 let activityIdMin = 1 // first activity id, not zero

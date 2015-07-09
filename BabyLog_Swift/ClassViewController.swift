@@ -88,6 +88,31 @@ class ClassViewController: UIViewController, UICollectionViewDataSource,  UIColl
         
         _startSpinnerAndBlockUI()
        
+        
+        callWebAPI([:], curAPIType: APIType.ListAllBabiesInClass, postActionAfterSuccessulReturn: { (data) -> () in
+            // refer to: https://grokswift.com/rest-with-alamofire-swiftyjson/
+            if let data: AnyObject = data { //yxu: check if data is nil
+                let jsonResult = JSON(data)
+                
+                ClassViewController._parseJsonForBabyInfoArray(jsonResult)
+                
+            }
+        }) { () -> () in
+            // Make sure we are on the main thread, and update the UI.
+            dispatch_async(dispatch_get_main_queue()) { //sync or async
+                // update some UI
+                
+                self.classCollectionView.reloadData() //yxu: reloadData must be called on main thread. otherwise it does not work!!!
+                
+                println("updating the collection view")
+                // resume the UI at the end of async action
+                
+                self._stopSpinnerAndResumeUI()
+                
+            }
+        }
+        
+        /*
         let manager = Manager.sharedInstance
         manager.session.configuration.HTTPAdditionalHeaders = [
             userTokenStringInHttpHeader: _getUserToken()]
@@ -144,6 +169,7 @@ class ClassViewController: UIViewController, UICollectionViewDataSource,  UIColl
 
             
         }
+        */
         
     }
     

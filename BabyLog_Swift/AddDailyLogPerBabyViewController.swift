@@ -205,6 +205,9 @@ class AddDailyLogPerBabyViewController: AddDailyLogViewController, SaveStartsFor
         ]
         
         
+        callWebAPI(requestParams, curAPIType: APIType.UploadCompleteStatusWithStars, postActionAfterSuccessulReturn: nil, postActionAfterAllReturns: nil)
+        
+        /*
         let manager = Manager.sharedInstance
         manager.session.configuration.HTTPAdditionalHeaders = [
             "Token": _getUserToken()] //todo: retrive the token and put it in the header
@@ -248,6 +251,7 @@ class AddDailyLogPerBabyViewController: AddDailyLogViewController, SaveStartsFor
             
             
         }
+        */
         
     }
  
