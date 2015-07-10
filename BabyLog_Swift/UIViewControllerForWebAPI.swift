@@ -139,5 +139,76 @@ class UIViewControllerForWebAPI: UIViewController {
     }
     
     
+    func _retrieveAllStudentsInClass( UpdateUI: ()->() ) {
+        
+        _startSpinnerAndBlockUI()
+        
+        
+        callWebAPI([:], curAPIType: APIType.ListAllBabiesInClass, postActionAfterSuccessulReturn: { (data) -> () in
+            // refer to: https://grokswift.com/rest-with-alamofire-swiftyjson/
+            if let data: AnyObject = data { //yxu: check if data is nil
+                let jsonResult = JSON(data)
+                
+                self._parseJsonForBabyInfoArray(jsonResult)
+                
+            }
+            }, postActionAfterAllReturns: { () -> () in
+                // Make sure we are on the main thread, and update the UI.
+                dispatch_async(dispatch_get_main_queue()) {
+                    
+                    // update some UI
+                    UpdateUI()
+                    /*
+                    self.classCollectionView.reloadData() //yxu: reloadData must be called on main thread. otherwise it does not work!!!
+                    
+                    println("updating the collection view")
+                    // resume the UI at the end of async action
+                    
+                    self._stopSpinnerAndResumeUI()
+                    */
+                }
+        })
+        
+        
+    }
+    
+    
+    // refer to: http://stackoverflow.com/questions/26672547/swift-handling-json-with-alamofire-swiftyjson
+    // refer to: http://www.raywenderlich.com/82706/working-with-json-in-swift-tutorial
+    func _parseJsonForBabyInfoArray(result: JSON) {
+        
+        if let babyInformationArray = result["BabyList"].array {
+            
+            var kids = [BabyInfo]()
+            
+            for babyInformation in babyInformationArray {
+                
+                var kidId: Int = babyInformation["Id"].int!
+                var kidName: String = babyInformation["BabyName"].string!
+                var kidNickName: String = babyInformation["Nickname"].string!
+                var kidSex: Int = babyInformation["Sex"].string?.toInt() ?? 0
+                var headImg = babyInformation["HeadImg"].string ?? ""
+                var headImgPath = babyInformation["HeadImgpath"].string ?? ""
+                
+                //let headImg = "302bf297-6646-4945-8867-d0ed17c7c111.jpg";
+                //var headImgPath = "~/Uploads/000014FilePath/";
+                // http://www.babysaga.cn/Uploads/000014FilePath/302bf297-6646-4945-8867-d0ed17c7c111.jpg
+                let range = headImgPath.startIndex ..< advance(headImgPath.startIndex, 2)
+                headImgPath.removeRange(range)
+                
+                let url = NSURL(string: headImgPath + headImg, relativeToURL: baseURL )
+                
+                var newKid = BabyInfo(babyName: kidName, nickName: kidNickName, sex: kidSex, id: kidId, imageURL: url!)
+                kids.append(newKid)
+            }
+            
+            _babyInfoArray = kids
+        }
+        
+        // TODO: caching
+        
+    }
+    
+    
 }
 

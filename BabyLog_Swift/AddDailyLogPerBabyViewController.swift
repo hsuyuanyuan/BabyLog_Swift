@@ -88,9 +88,21 @@ class AddDailyLogPerBabyViewController: AddDailyLogViewController, SaveStartsFor
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
-        initArraysForKids(_babyInfoArray.count)
-        initActivityDisplayInfo()
+        
+        if _babyInfoArray.count == 0 {
+            
+            _retrieveAllStudentsInClass() {
+                
+                // Do any additional setup after loading the view.
+                self.initArraysForKids(_babyInfoArray.count)
+                self.initActivityDisplayInfo()
+                
+                self._stopSpinnerAndResumeUI()
+            }
+        }
+        
+        
+
     }
     
     override func didReceiveMemoryWarning() {
@@ -191,6 +203,8 @@ class AddDailyLogPerBabyViewController: AddDailyLogViewController, SaveStartsFor
             "UploadPic": "",//?? how to use? is it pic name
             "Stars": starString // stars separated by ,
         ]
+        
+        println("\(requestParams.description)")
         
         
         callWebAPI(requestParams, curAPIType: APIType.UploadCompleteStatusWithStars, postActionAfterSuccessulReturn: nil, postActionAfterAllReturns: nil)
