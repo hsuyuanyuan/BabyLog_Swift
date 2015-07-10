@@ -93,6 +93,7 @@ class BabyInfo: Printable {
     //let headImgName: String = ""
     //let headImgPath: String = ""
     let imageURL: NSURL
+    var validImageExtension: Bool = true
     var imageState = ImageState.New
     var image = imageDefaultHead // image is owned by the babyInfo object, not by the view cell
     
@@ -124,12 +125,13 @@ class BabyInfo: Printable {
         return "baby name:\(babyName), nick name: \(nickName), sex: \(sex)\n, id: \(id)"
     }
     
-    init(babyName: String, nickName: String, sex: Int, id: Int, imageURL: NSURL ) {
+    init(babyName: String, nickName: String, sex: Int, id: Int, imageURL: NSURL, validImageExtension: Bool ) {
         self.babyName = babyName
         self.nickName = nickName
         self.sex = sex
         self.id = id
         self.imageURL = imageURL
+        self.validImageExtension = validImageExtension
     }
     
 }
@@ -164,6 +166,12 @@ class ImageDownloader: NSOperation {
         if self.cancelled {
             return
         }
+        
+        if !self.babyInfo.validImageExtension {
+            self.babyInfo.imageState = .Failed // do not bother to make api call, if the extension is not even valid
+            return
+        }
+        
         
         let imageData = NSData(contentsOfURL: self.babyInfo.imageURL)
         

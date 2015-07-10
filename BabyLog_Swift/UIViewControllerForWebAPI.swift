@@ -196,9 +196,16 @@ class UIViewControllerForWebAPI: UIViewController {
                 let range = headImgPath.startIndex ..< advance(headImgPath.startIndex, 2)
                 headImgPath.removeRange(range)
                 
+                
+                println("\(headImg.pathExtension)")
+                var bValidImageExtension = true
+                if headImg.pathExtension == "" {
+                    bValidImageExtension = false
+                }
+                
                 let url = NSURL(string: headImgPath + headImg, relativeToURL: baseURL )
                 
-                var newKid = BabyInfo(babyName: kidName, nickName: kidNickName, sex: kidSex, id: kidId, imageURL: url!)
+                var newKid = BabyInfo(babyName: kidName, nickName: kidNickName, sex: kidSex, id: kidId, imageURL: url!, validImageExtension: bValidImageExtension)
                 kids.append(newKid)
             }
             

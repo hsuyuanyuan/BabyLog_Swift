@@ -60,9 +60,7 @@ class AddDailyLogPerBabyViewController: AddDailyLogViewController, SaveStartsFor
             // imageView.contentMode = .ScaleAspectFit
             // imageView.image = pickedImage
         }
-        
-        //?? todo: get file name for the image??
-        //let imageURL = info[UIImagePickerControllerReferenceURL] as? NSURL
+ 
         
     }
     
