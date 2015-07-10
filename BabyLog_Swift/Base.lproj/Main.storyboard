@@ -37,6 +37,14 @@
                                     <action selector="logInAccount:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7s9-4i-FD8"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N44-W5-XAP">
+                                <rect key="frame" x="30" y="471" width="325" height="41"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <state key="normal" title="注      册"/>
+                                <connections>
+                                    <action selector="registerAccount:" destination="BYZ-38-t0r" eventType="touchUpInside" id="72I-1b-nfG"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>

@@ -13,29 +13,18 @@ import Alamofire
 //refer to collection view tutorial:
 // http://www.raywenderlich.com/78550/beginning-ios-collection-views-swift-part-1
 
-class ClassViewController: UIViewController, UICollectionViewDataSource,  UICollectionViewDelegateFlowLayout // UICollectionViewDelegate
+class ClassViewController: UIViewControllerForWebAPI, UICollectionViewDataSource,  UICollectionViewDelegateFlowLayout // UICollectionViewDelegate
 {
 
     @IBOutlet weak var classCollectionView: UICollectionView!
-    var activityIndicator:UIActivityIndicatorView!
+ 
     
     let reuseIdentifier = "babyInfoCell"
     let sectionInsets = UIEdgeInsets(top: 50, left: 20, bottom: 50, right: 20)
     
     let pendingOperations = PendingOperations()
     
-    func _startSpinnerAndBlockUI() {
-        // block the UI before async action
-        activityIndicator.startAnimating()
-        
-        UIApplication.sharedApplication().beginIgnoringInteractionEvents() // prevent the user messing up the ui
-    }
-    
-    func _stopSpinnerAndResumeUI() {
-        activityIndicator.stopAnimating()
-        UIApplication.sharedApplication().endIgnoringInteractionEvents()
-        
-    }
+ 
     
     // MARK: view management
     
@@ -44,12 +33,6 @@ class ClassViewController: UIViewController, UICollectionViewDataSource,  UIColl
 
         // Do any additional setup after loading the view.
         
-        // set up spinner
-        activityIndicator = UIActivityIndicatorView(frame: CGRectMake(0, 0, 50, 50))
-        activityIndicator.center = self.view.center
-        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
-        activityIndicator.hidesWhenStopped = true
-        self.view.addSubview(activityIndicator)
         
         // set up collection view
         //classCollectionView.delegate = self
@@ -87,7 +70,7 @@ class ClassViewController: UIViewController, UICollectionViewDataSource,  UIColl
                 ClassViewController._parseJsonForBabyInfoArray(jsonResult)
                 
             }
-        }) { () -> () in
+        }, postActionAfterAllReturns: { () -> () in
             // Make sure we are on the main thread, and update the UI.
             dispatch_async(dispatch_get_main_queue()) { //sync or async
                 // update some UI
@@ -100,7 +83,7 @@ class ClassViewController: UIViewController, UICollectionViewDataSource,  UIColl
                 self._stopSpinnerAndResumeUI()
                 
             }
-        }
+        })
         
 
         

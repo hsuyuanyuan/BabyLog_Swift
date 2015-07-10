@@ -16,10 +16,7 @@ protocol UploadLogDelegate {
 
 
 
-
-
-
-class AddDailyLogViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+class AddDailyLogViewController: UIViewControllerForWebAPI, UIPickerViewDataSource, UIPickerViewDelegate {
 
     @IBOutlet weak var startTimeTextField: UITextField!
     

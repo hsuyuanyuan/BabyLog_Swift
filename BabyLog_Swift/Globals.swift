@@ -34,6 +34,9 @@ enum APIType: String, Printable {
     case GetScheduleForClass = "ClassSchedule.GetListSchedule"
     case UploadCompleteStatusWithStars = "ClassSchedule.CompleteSchedule"
     
+    case UserLogIn = "user.login"
+    case UserRegistration = "user.register"
+    
     var description: String {
         return self.rawValue
     }
@@ -139,96 +142,5 @@ extension NSDate {
     }
 }
 
-
-
-
-// share functions across the views:  http://stackoverflow.com/questions/27050580/how-are-global-functions-defined-in-swift
-extension UIViewController {
-    
-    
-    func _saveUserToken(userToken:String) {
-        let userDefault = NSUserDefaults.standardUserDefaults()
-        userDefault.setObject(userToken, forKey: userTokenKeyInUserDefault)
-    }
-    
-    func _getUserToken() -> String {
-        let userDefault = NSUserDefaults.standardUserDefaults()
-        let userToken = userDefault.stringForKey(userTokenKeyInUserDefault) ?? ""
-        println("\(userToken)")
-        return userToken
-    }
-    
-    func displayAlert(title: String, message: String ) {
-        
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-        
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
-            self.dismissViewControllerAnimated(true, completion: nil) //yxu?: is self the alert or the LoginViewController??
-        }))
-        
-        self.presentViewController(alert, animated: true, completion: nil)
-        
-    }
-    
-    
-    func callWebAPI(requestParams: [String:AnyObject], curAPIType: APIType, postActionAfterSuccessulReturn: ((data: AnyObject?)->())?, postActionAfterAllReturns: (()->())?) {
-        
-        let curAPI = APICommonPrefix + curAPIType.description
-        
-        let manager = Manager.sharedInstance
-        manager.session.configuration.HTTPAdditionalHeaders = [
-            "Token": _getUserToken()] //todo: retrive the token and put it in the header
-        
-        
-        let data = NSJSONSerialization.dataWithJSONObject(requestParams, options: NSJSONWritingOptions.PrettyPrinted, error: nil)
-        
-        
-        let requestSchedule =  Alamofire.request(.POST, curAPI, parameters: [:], encoding: .Custom({
-            (convertible, params) in
-            var mutableRequest = convertible.URLRequest.copy() as! NSMutableURLRequest
-            mutableRequest.HTTPBody = data
-            return (mutableRequest, nil)
-        })).responseJSON() {
-            (request, response, JSON, error) in
-            
-            if error == nil {  //??yxu: error means http error. The web api error is inside JSON
-                println("we did get the response")
-                println(JSON) //yxu: output the unicode
-                println(request)
-                println(response)
-                println(error)
-                println((JSON as! NSDictionary)["Error"]!) //yxu: output Chinese: http://stackoverflow.com/questions/26963029/how-can-i-get-the-swift-xcode-console-to-show-chinese-characters-instead-of-unic
-                
-                let statusCode = (JSON as! NSDictionary)["StatusCode"] as! Int
-                if statusCode  == 200 {
-                    println("Succeeded in sending the log")
-                    
-                    postActionAfterSuccessulReturn?(data: JSON)
-                    
-                    
-                } else {
-                    println("Failed to get response")
-                    let errStr = (JSON as! NSDictionary)["Error"] as! String
-                    
-                }
-                
-                
-            } else {
-                self.displayAlert( curAPIType.description + " failed", message: error!.description)
-            }
-            
-            
-            
-            postActionAfterAllReturns?()
-            
-            
-            
-        }
-        
-        
-    }
-    
-    
-}
 
 

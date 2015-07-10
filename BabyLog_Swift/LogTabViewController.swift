@@ -13,11 +13,11 @@ import Alamofire
 
 
 
-class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,PickDateDelegate, UploadLogDelegate
+class LogTabViewController: UIViewControllerForWebAPI, UITableViewDelegate, UITableViewDataSource,PickDateDelegate, UploadLogDelegate
 {
 
     let cellReuseId = "logCell"
-    var activityIndicator:UIActivityIndicatorView!
+
     var _logItemsForDisplay = [DailyLogItem]()
     var curDate = ""
  
@@ -41,20 +41,9 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         
     }
-    
-    func _startSpinnerAndBlockUI() {
-        // block the UI before async action
-        activityIndicator.startAnimating()
-        
-        UIApplication.sharedApplication().beginIgnoringInteractionEvents() // prevent the user messing up the ui
-    }
-    
-    func _stopSpinnerAndResumeUI() {
-        activityIndicator.stopAnimating()
-        UIApplication.sharedApplication().endIgnoringInteractionEvents()
-        
-    }
-    
+ 
+ 
+ 
 
     // MARK: view management
     
@@ -65,12 +54,7 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let date = NSDate()
         curDate = date.formattedYYYYMMDD
         
-        // set up spinner
-        activityIndicator = UIActivityIndicatorView(frame: CGRectMake(0, 0, 50, 50))
-        activityIndicator.center = self.view.center
-        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
-        activityIndicator.hidesWhenStopped = true
-        self.view.addSubview(activityIndicator)
+
         
         // set up table view
         logView.delegate = self
@@ -152,13 +136,13 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
             self._logItemsForDisplay = self._logItemsForDisplay.filter({ (logItem ) -> Bool in
                 logItem.uniqueId != logId //yxu: filter / map: in nature is looping, O(N)
             })
-        }) { () -> () in
+
+        }, postActionAfterAllReturns: { () -> () in
             // Make sure we are on the main thread, and update the UI.
             dispatch_async(dispatch_get_main_queue()) { //sync or async
                 // update some UI
                 
                 self.logView.reloadData() //yxu: reloadData must be called on main thread. otherwise it does not work!!!
-                
                 
                 println("updating the table view")
                 // resume the UI at the end of async action
@@ -166,9 +150,11 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 self._stopSpinnerAndResumeUI()
                 
             }
-        }
+        } )
         
     }
+    
+    
     
     
     func _uploadDailyLog(activityItem: DailyLogItem) {
@@ -225,7 +211,7 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 self._parseJsonForLogItemArray(jsonResult)
                 
             }
-        }) { () -> () in
+        }, postActionAfterAllReturns: { () -> () in
             
             // Make sure we are on the main thread, and update the UI.
             dispatch_async(dispatch_get_main_queue()) { //sync or async
@@ -240,7 +226,7 @@ class LogTabViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 self._stopSpinnerAndResumeUI()
                 
             }
-        }
+        })
         
     }
     
@@ -567,7 +553,7 @@ class LogTabForOneBabyViewController: LogTabViewController, UploadLogForOneBabyD
                 self._parseJsonForLogItemArray(jsonResult)
                 
             }
-        }) { () -> () in
+        }, postActionAfterAllReturns: { () -> () in
             // Make sure we are on the main thread, and update the UI.
             dispatch_async(dispatch_get_main_queue()) { //sync or async
                 // update some UI
@@ -581,7 +567,7 @@ class LogTabForOneBabyViewController: LogTabViewController, UploadLogForOneBabyD
                 self._stopSpinnerAndResumeUI()
                 
             }
-        }
+        })
         
             
     }
