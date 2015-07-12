@@ -52,7 +52,7 @@ class DailyLogItem: Printable {
 
 class DailyLogItem_ExtraInfoForBaby {
     
-    var _stars = 0
+    var _stars = Int(defaultNumStars)
     var _babyId = 0
     var _classId = 0
     var _creatorId = 0

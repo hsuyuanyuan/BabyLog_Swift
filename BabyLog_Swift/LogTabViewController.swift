@@ -123,7 +123,7 @@ class LogTabViewController: UIViewControllerForWebAPI, UITableViewDelegate, UITa
     
     // MARK: call web api
     
-    func _deleteDailyLog(logId: Int) {
+    func _deleteDailyLog(logId: Int, atRow: Int) {
         
         _startSpinnerAndBlockUI()
         
@@ -132,11 +132,17 @@ class LogTabViewController: UIViewControllerForWebAPI, UITableViewDelegate, UITa
         ]
         
         callWebAPI(requestParams, curAPIType: APIType.DeleteScheduleForClass, postActionAfterSuccessulReturn: { (data) -> () in
+            
+            /*
             // delete the member from logItemsForDisplay
             self._logItemsForDisplay = self._logItemsForDisplay.filter({ (logItem ) -> Bool in
                 logItem.uniqueId != logId //yxu: filter / map: in nature is looping, O(N)
             })
-
+            */
+            
+            self._logItemsForDisplay.removeAtIndex(atRow)
+            
+            
         }, postActionAfterAllReturns: { () -> () in
             // Make sure we are on the main thread, and update the UI.
             dispatch_async(dispatch_get_main_queue()) { //sync or async
@@ -317,7 +323,7 @@ class LogTabViewController: UIViewControllerForWebAPI, UITableViewDelegate, UITa
             let logId = _logItemsForDisplay[indexPath.row].uniqueId
             
             // call web api
-            _deleteDailyLog(logId)
+            _deleteDailyLog(logId, atRow: indexPath.row)
             
         }
     }
@@ -346,19 +352,9 @@ class LogTabForOneBabyViewController: LogTabViewController, UploadLogForOneBabyD
     }
 
     
-    
-    // MARK: delegate for calendar VC
-    override func pickDataFromCalendar(date: String) {
-        
-        _retrieveDailyLogForBaby(date);
-        
-    }
-    
-    
-
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-       
+        
         if segue.identifier == "showAddDailyLogForOneBaby" //yxu: defined in segue property in Storyboard
         {
             let addLogForOneBabyVC = segue.destinationViewController as! AddDailyLogForOneBabyViewController
@@ -369,6 +365,18 @@ class LogTabForOneBabyViewController: LogTabViewController, UploadLogForOneBabyD
     }
     
     
+    
+    // MARK: delegate for calendar VC
+    override func pickDataFromCalendar(date: String) {
+        
+        _retrieveDailyLogForOneBaby(date);
+        
+    }
+
+    
+    
+    // MARK: delegate for VC
+    
     func uploadLogItemForOneBaby(activityItem: DailyLogItem, extraInfo: DailyLogItem_ExtraInfoForBaby)
     {
         println("conform to the delegate: calling api to upload log for one baby ")
@@ -378,37 +386,31 @@ class LogTabForOneBabyViewController: LogTabViewController, UploadLogForOneBabyD
         
     }
     
+    override func _retrieveDataForDisplayInTableView() {
+        println("baby id = \(_babyId),  current date = \(curDate)")
+        
+        _retrieveDailyLogForOneBaby(curDate)
+    }
+    
+
+    
+    
+
+    
+    // MARK: call web api
     
     func _uploadDailyLogForOneBaby(activityItem: DailyLogItem, extraInfo: DailyLogItem_ExtraInfoForBaby) {
         
-        /*
-        public int BabyId  学生的ID
-        public string TimeBegin  开始时间
-        public string TimeEnd  结束时间
-        public int DiaryType  作息类型Id
-        public string DiaryRemark
-        public List<String> UploadPic 上传图片的Base64 字符串
-        public int Important 默认0
-        public int Open 默认0
-        public int ByUser  默认0
-        public int ToUser 默认 0 (教师输入时=选择学生的Id)
-        public string RankStr 星星数 “1”，“2”
-        public string Title 标题
-        public string Content 内容
-        public string DiaryDate 日期
-
-        */
-        
         
         var requestParams : [String:AnyObject] = [
-            "BabyId": extraInfo._babyId,
+            //"BabyId": extraInfo._babyId,
             "TimeBegin":activityItem.startTime, //"08:00",
             "TimeEnd":activityItem.endTime, //"09:30",
             "DiaryType": activityItem.activityType,
-            "DiaryRemark": activityItem.content, //??
-            "UploadPic": "aaa", // repeat to send in a list
-            "Important": 0,
-            "Open": 0,
+            //"DiaryRemark": activityItem.content, //??
+            //"UploadPic": "aaa", // repeat to send in a list
+            //"Important": 0,
+            //"Open": 0,
             "ByUser": 0,
             "ToUser": extraInfo._babyId,
             "RankStr": String(extraInfo._stars),
@@ -422,24 +424,16 @@ class LogTabForOneBabyViewController: LogTabViewController, UploadLogForOneBabyD
         callWebAPI(requestParams, curAPIType: APIType.AddDairyForOneBaby, postActionAfterSuccessulReturn: { (data) -> () in
             
             // refresh the view after uploading
-            self._retrieveDailyLogForBaby(self.curDate)
+            self._retrieveDailyLogForOneBaby(self.curDate)
             
-        }, postActionAfterAllReturns: nil)
-
+            }, postActionAfterAllReturns: nil)
+        
         
     }
     
     
     
 
-    
-    // MARK: call web api
-    override func _retrieveDataForDisplayInTableView() {
-        println("baby id = \(_babyId),  current date = \(curDate)")
-        
-        _retrieveDailyLogForBaby(curDate)
-    }
-    
    
     
     
@@ -494,45 +488,14 @@ class LogTabForOneBabyViewController: LogTabViewController, UploadLogForOneBabyD
     
 
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let reusableCell  = tableView.dequeueReusableCellWithIdentifier(cellReuseId) as! LogItemForBabyTableViewCell
-        
-        reusableCell.startEndTimeLabel!.text = _logItemsForDisplay[indexPath.row].startTime + "-" + _logItemsForDisplay[indexPath.row].endTime
-        
-        reusableCell.activityDetailsLabel!.text = _logItemsForDisplay[indexPath.row].content
-        
-        if let curActivity = activityTypeDictionary[_logItemsForDisplay[indexPath.row].activityType] {
-            
-            reusableCell.activityTypeLabel!.text = curActivity.name
-            reusableCell.activityIcon!.image = UIImage(named: curActivity.imageName)
-            
 
-        }
-        
-
-        //reusableCell.numStarsLabel.text = String( _extraInfo[indexPath.row]._stars )
-        
-        let starImageName = "Stars-" + String( _extraInfo[indexPath.row]._stars ) + ".png"
-        
-        reusableCell.numStarsImageView.image = UIImage(named: starImageName)
-        
-        reusableCell.numImagesButton.setTitle( String( _extraInfo[indexPath.row]._picCount), forState: UIControlState.Normal)
-        
-        
-        // set background of cell:  http://www.gfzj.us/tech/2014/12/09/iOS-dev-tips.html
-        //cell.layer.contents = (id)[UIImage imageNamed:@"space_bg.jpg"].CGImage;//fill模式
-        //cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"space_bg.jpg"]];//平铺模式
-        
-        return reusableCell
-    }
-    
     
     
     // workflow:
     // 1. segeu pass in the student id?? 
     // 2. call this api to populate the table view
 
-    func _retrieveDailyLogForBaby(date: String) {
+    func _retrieveDailyLogForOneBaby(date: String) {
         
         curDate = date
         navigationBar!.topItem?.title = curDate + " Log "
@@ -571,6 +534,93 @@ class LogTabForOneBabyViewController: LogTabViewController, UploadLogForOneBabyD
         
             
     }
+    
+    
+    
+    
+    func _deleteDailyLogForOneBaby(logId: Int, atRow: Int) {
+        
+        _startSpinnerAndBlockUI()
+        
+        var requestParams : [String:AnyObject] = [ //todo: add sanity check for the date string
+            "Id":logId
+        ]
+        
+        callWebAPI(requestParams, curAPIType: APIType.DelDairyForOneBaby, postActionAfterSuccessulReturn: { (data) -> () in
+            
+                // delete the member from logItemsForDisplay
+                self._logItemsForDisplay.removeAtIndex(atRow)
+                self._extraInfo.removeAtIndex(atRow)
+            
+            }, postActionAfterAllReturns: { () -> () in
+                // Make sure we are on the main thread, and update the UI.
+                dispatch_async(dispatch_get_main_queue()) { //sync or async
+                    // update some UI
+                    
+                    self.logView.reloadData() //yxu: reloadData must be called on main thread. otherwise it does not work!!!
+                    
+                    println("updating the table view")
+                    // resume the UI at the end of async action
+                    
+                    self._stopSpinnerAndResumeUI()
+                    
+                }
+        } )
+        
+    }
+    
+    
+    // MARK: delegate for table view
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let reusableCell  = tableView.dequeueReusableCellWithIdentifier(cellReuseId) as! LogItemForBabyTableViewCell
+        
+        reusableCell.startEndTimeLabel!.text = _logItemsForDisplay[indexPath.row].startTime + "-" + _logItemsForDisplay[indexPath.row].endTime
+        
+        reusableCell.activityDetailsLabel!.text = _logItemsForDisplay[indexPath.row].content
+        
+        if let curActivity = activityTypeDictionary[_logItemsForDisplay[indexPath.row].activityType] {
+            
+            reusableCell.activityTypeLabel!.text = curActivity.name
+            reusableCell.activityIcon!.image = UIImage(named: curActivity.imageName)
+            
+            
+        }
+        
+        
+        //reusableCell.numStarsLabel.text = String( _extraInfo[indexPath.row]._stars )
+        
+        let starImageName = "Stars-" + String( _extraInfo[indexPath.row]._stars ) + ".png"
+        
+        reusableCell.numStarsImageView.image = UIImage(named: starImageName)
+        
+        reusableCell.numImagesButton.setTitle( String( _extraInfo[indexPath.row]._picCount), forState: UIControlState.Normal)
+        
+        
+        // set background of cell:  http://www.gfzj.us/tech/2014/12/09/iOS-dev-tips.html
+        //cell.layer.contents = (id)[UIImage imageNamed:@"space_bg.jpg"].CGImage;//fill模式
+        //cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"space_bg.jpg"]];//平铺模式
+        
+        return reusableCell
+    }
+    
+    
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if (editingStyle == UITableViewCellEditingStyle.Delete) {
+            println("deleting the cell ")
+            
+            // get id
+            let logId = _logItemsForDisplay[indexPath.row].uniqueId
+            
+            // call web api
+            _deleteDailyLogForOneBaby(logId, atRow: indexPath.row)
+            
+        }
+    }
+    
+    
+    
 
 }
 

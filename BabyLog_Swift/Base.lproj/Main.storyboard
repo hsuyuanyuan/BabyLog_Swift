@@ -325,7 +325,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9hE-VL-Q1k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-209.5" y="840.5"/>
+            <point key="canvasLocation" x="-235.5" y="840.5"/>
         </scene>
         <!--班级主页-->
         <scene sceneID="ERh-FH-HZU">
@@ -713,7 +713,7 @@
                             </navigationBar>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2RV-Qd-n7G">
                                 <rect key="frame" x="113" y="632" width="67" height="30"/>
-                                <state key="normal" title="cancel">
+                                <state key="normal" title="OK">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>

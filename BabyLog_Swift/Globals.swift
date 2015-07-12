@@ -26,6 +26,7 @@ enum APIType: String, Printable {
     
     case AddDairyForOneBaby = "Diary.IOSInputDiary"
     case GetDairyForOneBaby = "diary.tdaydiary"
+    case DelDairyForOneBaby = "Diary.DelDiary"
     
     case ListAllBabiesInClass = "user.ListClassBaby"
     
@@ -46,7 +47,7 @@ enum APIType: String, Printable {
 
 
 // constants
-let defaultNumStars:Float = 3.0
+let defaultNumStars:Float = 3.0 // this is from the float rating view. default 3 stars
 
 let defaultImg = "login_bg.png"
 

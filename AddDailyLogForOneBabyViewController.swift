@@ -23,7 +23,7 @@ class AddDailyLogForOneBabyViewController: AddDailyLogViewController, FloatRatin
     
     var delegatePerBaby: UploadLogForOneBabyDelegate!
     
-    var _numStars = 0
+    var _numStars = Int(defaultNumStars)
     
     var _imageList = [UIImage]()
     
