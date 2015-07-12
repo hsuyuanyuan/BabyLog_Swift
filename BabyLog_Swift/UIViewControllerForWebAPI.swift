@@ -92,6 +92,7 @@ class UIViewControllerForWebAPI: UIViewController {
         
         let data = NSJSONSerialization.dataWithJSONObject(requestParams, options: NSJSONWritingOptions.PrettyPrinted, error: nil)
         
+ 
         
         let requestSchedule =  Alamofire.request(.POST, curAPI, parameters: [:], encoding: .Custom({
             (convertible, params) in
@@ -101,23 +102,26 @@ class UIViewControllerForWebAPI: UIViewController {
         })).responseJSON() {
             (request, response, JSON, error) in
             
-            if error == nil {  //??yxu: error means http error. The web api error is inside JSON
-                println("we did get the response")
-                println(JSON) //yxu: output the unicode
-                println(request)
-                println(response)
-                println(error)
+            
+            println("we did get the response")
+            println(JSON) //yxu: output the unicode
+            println(request)
+            println(response)
+            println(error)
+            
+            
+            if error == nil {  //: error means http error. The api specific logic error is contained inside JSON
+
                 println((JSON as! NSDictionary)["Error"]!) //yxu: output Chinese: http://stackoverflow.com/questions/26963029/how-can-i-get-the-swift-xcode-console-to-show-chinese-characters-instead-of-unic
                 
                 let statusCode = (JSON as! NSDictionary)["StatusCode"] as! Int
                 if statusCode  == 200 {
-                    println("Succeeded in sending the log")
+                    println("Succeeded in making the api call: " + curAPIType.description )
                     
                     postActionAfterSuccessulReturn?(data: JSON)
                     
                     
                 } else {
-                    println("Failed to get response")
                     let errStr = (JSON as! NSDictionary)["Error"] as! String
                     self.displayAlert(curAPIType.description + " failed", message: "Status Code = \(statusCode), Error = \(errStr)")
                 }

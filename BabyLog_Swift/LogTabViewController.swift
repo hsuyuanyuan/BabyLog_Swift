@@ -381,7 +381,6 @@ class LogTabForOneBabyViewController: LogTabViewController, UploadLogForOneBabyD
     {
         println("conform to the delegate: calling api to upload log for one baby ")
         
-        // TODO: call web api
         _uploadDailyLogForOneBaby(activityItem, extraInfo: extraInfo)
         
     }
@@ -402,17 +401,28 @@ class LogTabForOneBabyViewController: LogTabViewController, UploadLogForOneBabyD
     func _uploadDailyLogForOneBaby(activityItem: DailyLogItem, extraInfo: DailyLogItem_ExtraInfoForBaby) {
         
         
+        // convert images to base64 string
+        var imageBase64StrList = [String]()
+        
+        if (extraInfo._images != nil) {
+            for image in extraInfo._images! {
+                var imageData = UIImagePNGRepresentation(image)
+                let base64Str = imageData.base64EncodedStringWithOptions( NSDataBase64EncodingOptions.allZeros )
+                
+                imageBase64StrList.append(base64Str)
+            }
+        }
+    
+        
         var requestParams : [String:AnyObject] = [
-            //"BabyId": extraInfo._babyId,
             "TimeBegin":activityItem.startTime, //"08:00",
             "TimeEnd":activityItem.endTime, //"09:30",
             "DiaryType": activityItem.activityType,
-            //"DiaryRemark": activityItem.content, //??
-            //"UploadPic": "aaa", // repeat to send in a list
+            "UploadPic": imageBase64StrList, // array of image data in base64 format
             //"Important": 0,
             //"Open": 0,
             "ByUser": 0,
-            "ToUser": extraInfo._babyId,
+            "ToUser": extraInfo._babyId, // baby id
             "RankStr": String(extraInfo._stars),
             "Title": "Test Title",
             "Content": activityItem.content,

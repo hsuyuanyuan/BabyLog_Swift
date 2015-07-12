@@ -56,10 +56,13 @@ class DailyLogItem_ExtraInfoForBaby {
     var _babyId = 0
     var _classId = 0
     var _creatorId = 0
-    var _picCount = 0
+    var _picCount = 0  // TODO: clean up picCount / picPaths / images
     var _picPaths: [String]?
+    var _images: [UIImage]?
     
-    init(stars: Int, babyId: Int, classId: Int, creatorId: Int, picCount: Int, picPaths: [String]?  )
+    
+    init(stars: Int, babyId: Int, classId: Int, creatorId: Int, picCount: Int, picPaths: [String]?,
+        images:[UIImage]? = nil  ) // last parameter images is optional
     {
         self._stars = stars
         self._babyId = babyId
@@ -67,6 +70,7 @@ class DailyLogItem_ExtraInfoForBaby {
         self._creatorId = creatorId
         self._picCount = picCount
         self._picPaths = picPaths
+        self._images = images
     }
     
 }

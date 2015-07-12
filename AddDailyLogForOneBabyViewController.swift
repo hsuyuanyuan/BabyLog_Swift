@@ -43,7 +43,7 @@ class AddDailyLogForOneBabyViewController: AddDailyLogViewController, FloatRatin
         
         let activityItem = DailyLogItem(uniqueId: 0, activityType: activityId, content: contentTextView.text, startTime: startTime, endTime: endTime)
         
-        let extraInfo = DailyLogItem_ExtraInfoForBaby(stars: _numStars, babyId: _babyId, classId: 0, creatorId: 0, picCount: 0, picPaths: nil)
+        let extraInfo = DailyLogItem_ExtraInfoForBaby(stars: _numStars, babyId: _babyId, classId: 0, creatorId: 0, picCount: 0, picPaths: nil, images: _imageList)
         
         delegatePerBaby?.uploadLogItemForOneBaby(activityItem, extraInfo: extraInfo)
         
