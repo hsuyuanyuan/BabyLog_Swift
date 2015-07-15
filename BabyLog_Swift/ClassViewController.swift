@@ -13,7 +13,7 @@ import Alamofire
 //refer to collection view tutorial:
 // http://www.raywenderlich.com/78550/beginning-ios-collection-views-swift-part-1
 
-class ClassViewController: UIViewControllerForWebAPI, UICollectionViewDataSource,  UICollectionViewDelegateFlowLayout // UICollectionViewDelegate
+class ClassViewController: UIViewControllerForWebAPI, UICollectionViewDataSource,  UICollectionViewDelegateFlowLayout, SetInAndOutTimeDelegate // UICollectionViewDelegate
 {
 
     @IBOutlet weak var classCollectionView: UICollectionView!
@@ -86,7 +86,10 @@ class ClassViewController: UIViewControllerForWebAPI, UICollectionViewDataSource
                     let jsonResult = JSON(data)
                     
                      self._parseJsonForExistingInAndOutTime(jsonResult)
-                     self.classCollectionView.reloadData()
+                    
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.classCollectionView.reloadData() //yxu: Note: not working property. Must use main queue
+                    }
                 }
             
                 // update the list
@@ -123,8 +126,8 @@ class ClassViewController: UIViewControllerForWebAPI, UICollectionViewDataSource
                 var kidId: Int = InAndOutTime["Babyid"].int!
                 var kidName: String = InAndOutTime["Babyname"].string ?? ""
                 var kidImgPath: String = InAndOutTime["Img"].string ?? ""
-                var kidInTime: String =  "08:25"//InAndOutTime["Intime"].string ?? ""
-                var kidOutTime: String = "17:55"// InAndOutTime["Outtime"].string ?? ""
+                var kidInTime: String =  InAndOutTime["Intime"].string ?? ""
+                var kidOutTime: String = InAndOutTime["Outtime"].string ?? ""
 
                 
                 var newInAndOutTime = BabyInAndOutTime(id: kidId, babyName: kidName, imgPath: kidImgPath, inTime: kidInTime, outTime: kidOutTime)
@@ -155,8 +158,11 @@ class ClassViewController: UIViewControllerForWebAPI, UICollectionViewDataSource
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! ClassBabyInfoCollectionViewCell
         
+        // delegate
+        cell.delegate = self
+        
+        // visuals
         cell.backgroundColor = UIColor.whiteColor()
-
         cell.layer.borderColor = UIColor.blackColor().CGColor
         cell.layer.cornerRadius = 5.0
         cell.layer.borderWidth = 2.0
@@ -169,15 +175,22 @@ class ClassViewController: UIViewControllerForWebAPI, UICollectionViewDataSource
         cell.babyImageButton.tag = babyInfo.id
         
         if _BabyInAndOutTimeList.count > indexPath.row {
-        
+            
             let inAndOutTime =  _BabyInAndOutTimeList[indexPath.row]
         
+            //TODO: verify inAndOutTime.id == babyInfo.id
+            
+            
+            
+            
             //TODO: add check to validate the time
+            
             //if inAndOutTime.inTime != "\U{5230}\U{6821}\U{65f6}\U{95f4}"
             cell.leaveTime = inAndOutTime.outTime
             cell.arriveTime = inAndOutTime.inTime
             cell.arriveTimeButton?.sendActionsForControlEvents(UIControlEvents.TouchUpInside) // refer to: http://stackoverflow.com/questions/27413059/how-can-i-simulate-a-button-press-in-swift-ios8-using-code
             cell.leaveTimeButton?.sendActionsForControlEvents(UIControlEvents.TouchUpInside)
+            
         }
     
         
@@ -251,6 +264,30 @@ class ClassViewController: UIViewControllerForWebAPI, UICollectionViewDataSource
             let babyButton = sender as! UIButton
             logForBabyVC._babyId = babyButton.tag
         }
+    }
+    
+    
+    func SetInAndOutTime(babyId: Int, time: String, inOutType: InOutType) {
+        
+        
+        
+        var requestParams : [String:AnyObject] = [ //todo: add sanity check for the date string
+            "BabyId": babyId,
+            "Time": time,
+            "InputType": inOutType.rawValue // convert enum to Int
+        ]
+        
+        callWebAPI(requestParams, curAPIType: APIType.SetInAndOutTimeForOneBaby, postActionAfterSuccessulReturn: { (data) -> () in
+           
+            
+            }, postActionAfterAllReturns: { () -> () in
+                
+                
+        } )
+        
+        
+        
+        
     }
     
 }

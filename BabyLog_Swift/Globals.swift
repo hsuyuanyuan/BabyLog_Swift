@@ -17,7 +17,14 @@ let version = 0.5
 // TODO: add locking to pretect it, as it is used by multiple VCs
 var _babyInfoArray = [BabyInfo]()
 
+var _bitMaskForLeaveTime: Int = 0x1000
 
+
+enum InOutType: Int {
+    case Arrival = 1
+    case Leaving = 2
+    
+}
 
 // constants for web api
 let APICommonPrefix = "http://www.babysaga.cn/app/service?method="
@@ -31,6 +38,7 @@ enum APIType: String, Printable {
     case ListAllBabiesInClass = "user.ListClassBaby"
     
     case ListAllBabiesInAndOutTime = "TeacherManage.ListBanjiBabyInAndOut"
+    case SetInAndOutTimeForOneBaby = "TeacherManage.InOutSchoolTime"
     
     case DeleteScheduleForClass = "ClassSchedule.DeleteSchedule"
     case AddScheduleForClass = "ClassSchedule.InputScheduleJson"
