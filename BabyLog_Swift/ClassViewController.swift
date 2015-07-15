@@ -185,12 +185,16 @@ class ClassViewController: UIViewControllerForWebAPI, UICollectionViewDataSource
             
             //TODO: add check to validate the time
             
-            //if inAndOutTime.inTime != "\U{5230}\U{6821}\U{65f6}\U{95f4}"
-            cell.leaveTime = inAndOutTime.outTime
-            cell.arriveTime = inAndOutTime.inTime
-            cell.arriveTimeButton?.sendActionsForControlEvents(UIControlEvents.TouchUpInside) // refer to: http://stackoverflow.com/questions/27413059/how-can-i-simulate-a-button-press-in-swift-ios8-using-code
-            cell.leaveTimeButton?.sendActionsForControlEvents(UIControlEvents.TouchUpInside)
+            if (inAndOutTime.inTime != "到校时间")  {
+                cell.arriveTime = inAndOutTime.inTime
+                cell.arriveTimeButton?.sendActionsForControlEvents(UIControlEvents.TouchUpInside) // refer to: http://stackoverflow.com/questions/27413059/how-can-i-simulate-a-button-press-in-swift-ios8-using-code
+            }
             
+            if (inAndOutTime.outTime != "离校时间")
+            {
+                cell.leaveTime = inAndOutTime.outTime
+                cell.leaveTimeButton?.sendActionsForControlEvents(UIControlEvents.TouchUpInside)
+            }
         }
     
         
