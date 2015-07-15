@@ -86,6 +86,23 @@ enum ImageState {
 }
 
 
+class BabyInAndOutTime {
+    let id: Int  // baby id in class
+    let babyName: String // = "\U5c0f\U5929";
+    let imgPath: String
+    let inTime: String
+    let outTime: String
+    
+    init(id: Int, babyName: String, imgPath: String, inTime: String, outTime: String) {
+        self.id = id
+        self.babyName = babyName
+        self.imgPath = imgPath
+        self.inTime = inTime
+        self.outTime =  outTime
+    }
+    
+}
+
 
 class BabyInfo: Printable {
     
@@ -114,7 +131,7 @@ class BabyInfo: Printable {
     let bloodType: String = ""
     let telNumber: String = ""
     
-    let id: Int  // student id in class
+    let id: Int  // baby id in class
     let intro: String = ""
     
     let diaryCount: Int = 0

@@ -13,12 +13,19 @@ class ClassBabyInfoCollectionViewCell: UICollectionViewCell, UITextFieldDelegate
     var timePicker = UIDatePicker()
     var textFieldSelected: UITextField!
     
+    var arriveTime: String?
+    var leaveTime: String?
+    
     @IBOutlet weak var babyImageButton: UIButton!
     
     @IBAction func babyImageButtonTapped(sender: AnyObject) {
         
     }
     
+    @IBOutlet weak var arriveTimeButton: UIButton? // default is !, but it is deleted to show the text field
+    
+    
+    @IBOutlet weak var leaveTimeButton: UIButton?
     
     
     @IBAction func arriveTimeButtonTapped(sender: AnyObject) {
@@ -32,8 +39,13 @@ class ClassBabyInfoCollectionViewCell: UICollectionViewCell, UITextFieldDelegate
         var arriveTextField = UITextField(frame: arriveButton.frame)
         arriveTextField.borderStyle  = UITextBorderStyle.RoundedRect
         
-        var curTime = NSDate()
-        arriveTextField.text = curTime.formattedHHMM
+        if arriveTime == nil {
+            var curTime = NSDate()
+            arriveTextField.text = curTime.formattedHHMM
+        } else {
+            arriveTextField.text = arriveTime
+        }
+        
         arriveTextField.delegate = self
         textFieldSelected = arriveTextField
         
@@ -54,10 +66,16 @@ class ClassBabyInfoCollectionViewCell: UICollectionViewCell, UITextFieldDelegate
         var leaveTextField = UITextField(frame: leaveButton.frame)
         leaveTextField.borderStyle  = UITextBorderStyle.RoundedRect
         
-        var curTime = NSDate()
-        leaveTextField.text = curTime.formattedHHMM
+        if leaveTime == nil {
+            var curTime = NSDate()
+            leaveTextField.text = curTime.formattedHHMM
+        } else {
+            leaveTextField.text = leaveTime
+        }
+        
+        leaveTextField.delegate = self
         textFieldSelected = leaveTextField
-    
+        
         leaveTextField.inputView = timePicker
         addSubview(leaveTextField)
       

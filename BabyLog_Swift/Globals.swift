@@ -30,6 +30,8 @@ enum APIType: String, Printable {
     
     case ListAllBabiesInClass = "user.ListClassBaby"
     
+    case ListAllBabiesInAndOutTime = "TeacherManage.ListBanjiBabyInAndOut"
+    
     case DeleteScheduleForClass = "ClassSchedule.DeleteSchedule"
     case AddScheduleForClass = "ClassSchedule.InputScheduleJson"
     case GetScheduleForClass = "ClassSchedule.GetListSchedule"

@@ -24,6 +24,8 @@ class ClassViewController: UIViewControllerForWebAPI, UICollectionViewDataSource
     
     let pendingOperations = PendingOperations()
     
+    var _BabyInAndOutTimeList = [BabyInAndOutTime]()
+    
  
     
     // MARK: view management
@@ -41,6 +43,9 @@ class ClassViewController: UIViewControllerForWebAPI, UICollectionViewDataSource
         // retrieve the students for current class
         
         _retrieveAllStudentsInClass() {
+            
+            self._retrieveExistingInAndOutTime() // ?? should I block UI or not
+            
             self.classCollectionView.reloadData() //yxu: reloadData must be called on main thread. otherwise it does not work!!!
             
             println("updating the collection view")
@@ -66,7 +71,73 @@ class ClassViewController: UIViewControllerForWebAPI, UICollectionViewDataSource
     
     // MARK: call web api
     
+    func _retrieveExistingInAndOutTime() {
+        
+        let curDate = NSDate()
+        let strCurDate = curDate.formattedYYYYMMDD
+        
+ 
+        var requestParams : [String:AnyObject] = [ //todo: add sanity check for the date string
+            "day": strCurDate
+        ]
+        
+        callWebAPI(requestParams, curAPIType: APIType.ListAllBabiesInAndOutTime, postActionAfterSuccessulReturn: { (data) -> () in
+                if let data: AnyObject = data { //yxu: check if data is nil
+                    let jsonResult = JSON(data)
+                    
+                     self._parseJsonForExistingInAndOutTime(jsonResult)
+                     self.classCollectionView.reloadData()
+                }
+            
+                // update the list
+            
+            
+            }, postActionAfterAllReturns: { () -> () in
 
+                
+                
+                
+        } )
+        
+    }
+    
+    /*
+    Babyid = 14;
+    Babyname = "\U59dc\U660e\U5e0c";
+    Day = "2015-07-15";
+    Img = "http://www.babysaga.cn/Uploads/000014FilePath/9d3e5491-bf2a-4545-9ee8-7544357102c6.jpg";
+    Intime = "\U5230\U6821\U65f6\U95f4";
+    Outtime = "\U79bb\U6821\U65f6\U95f4";
+
+    */
+    
+    
+    func _parseJsonForExistingInAndOutTime(result: JSON) {
+        
+        if let InAndOutTimeArray = result["list"].array {
+            
+            var BabyInAndOutTimeList = [BabyInAndOutTime]()
+            
+            for InAndOutTime in InAndOutTimeArray {
+                
+                var kidId: Int = InAndOutTime["Babyid"].int!
+                var kidName: String = InAndOutTime["Babyname"].string ?? ""
+                var kidImgPath: String = InAndOutTime["Img"].string ?? ""
+                var kidInTime: String =  "08:25"//InAndOutTime["Intime"].string ?? ""
+                var kidOutTime: String = "17:55"// InAndOutTime["Outtime"].string ?? ""
+
+                
+                var newInAndOutTime = BabyInAndOutTime(id: kidId, babyName: kidName, imgPath: kidImgPath, inTime: kidInTime, outTime: kidOutTime)
+                
+                BabyInAndOutTimeList.append(newInAndOutTime)
+            }
+            
+            _BabyInAndOutTimeList = BabyInAndOutTimeList
+        }
+        
+        
+        
+    }
     
     
     
@@ -81,6 +152,7 @@ class ClassViewController: UIViewControllerForWebAPI, UICollectionViewDataSource
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! ClassBabyInfoCollectionViewCell
         
         cell.backgroundColor = UIColor.whiteColor()
@@ -95,6 +167,21 @@ class ClassViewController: UIViewControllerForWebAPI, UICollectionViewDataSource
         //cell.babyImageView.image = babyInfo.image
         cell.babyImageButton.setBackgroundImage( babyInfo.image, forState: UIControlState.Normal) //yxu: tried setImage first. not working, show blue block
         cell.babyImageButton.tag = babyInfo.id
+        
+        if _BabyInAndOutTimeList.count > indexPath.row {
+        
+            let inAndOutTime =  _BabyInAndOutTimeList[indexPath.row]
+        
+            //TODO: add check to validate the time
+            //if inAndOutTime.inTime != "\U{5230}\U{6821}\U{65f6}\U{95f4}"
+            cell.leaveTime = inAndOutTime.outTime
+            cell.arriveTime = inAndOutTime.inTime
+            cell.arriveTimeButton?.sendActionsForControlEvents(UIControlEvents.TouchUpInside) // refer to: http://stackoverflow.com/questions/27413059/how-can-i-simulate-a-button-press-in-swift-ios8-using-code
+            cell.leaveTimeButton?.sendActionsForControlEvents(UIControlEvents.TouchUpInside)
+        }
+    
+        
+        
         
         //let imageData = NSData(contentsOfURL: url!)
         //cell.babyImageView.image = UIImage(data:imageData!)

@@ -162,14 +162,7 @@ class UIViewControllerForWebAPI: UIViewController {
                     
                     // update some UI
                     UpdateUI()
-                    /*
-                    self.classCollectionView.reloadData() //yxu: reloadData must be called on main thread. otherwise it does not work!!!
-                    
-                    println("updating the collection view")
-                    // resume the UI at the end of async action
-                    
-                    self._stopSpinnerAndResumeUI()
-                    */
+
                 }
         })
         
@@ -219,6 +212,11 @@ class UIViewControllerForWebAPI: UIViewController {
         // TODO: caching
         
     }
+    
+    
+    
+    
+    
     
     
 }
