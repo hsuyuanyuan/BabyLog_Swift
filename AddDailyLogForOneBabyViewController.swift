@@ -17,7 +17,7 @@ protocol UploadLogForOneBabyDelegate {
 
 
 
-class AddDailyLogForOneBabyViewController: AddDailyLogViewController, FloatRatingViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class AddDailyLogForOneBabyViewController: AddDailyLogViewController, FloatRatingViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, DKImagePickerControllerDelegate {
 
     var _babyId = 0
     
@@ -25,7 +25,7 @@ class AddDailyLogForOneBabyViewController: AddDailyLogViewController, FloatRatin
     
     var _numStars = Int(defaultNumStars)
     
-    var _imageList = [UIImage]()
+
     
     
     @IBOutlet weak var starRatingVIew: FloatRatingView!
@@ -93,14 +93,40 @@ class AddDailyLogForOneBabyViewController: AddDailyLogViewController, FloatRatin
     
     
     @IBAction func chooseImageButtonTapped(sender: AnyObject)  {
+        /*
         var imagePickerView = UIImagePickerController()
         imagePickerView.allowsEditing = false
         imagePickerView.delegate = self //yxu: Note: this needs two delegate, UIImagePickerControllerDelegate & UINavigationControllerDelegate
         //imagePickerView.sourceType
         
         presentViewController(imagePickerView, animated: true, completion: nil)
+        */
+        
+        // multiple image picker
+        let imagePicker = DKImagePickerController()
+        
+        imagePicker.pickerDelegate = self
+        presentViewController(imagePicker, animated: true, completion: nil)
         
     }
+    
+    func imagePickerControllerCancelled() {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func imagePickerControllerDidSelectedAssets(assets: [DKAsset]!) {
+        for (index, asset) in enumerate(assets) {
+
+            if let fullImage = asset.fullResolutionImage {
+                _imageList.append( fullImage )
+            }
+ 
+        }
+        
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    
     
     func floatRatingView(ratingView: FloatRatingView, didUpdate rating: Float) {
         _numStars = Int(rating) // TODO: the ! may be dangerous

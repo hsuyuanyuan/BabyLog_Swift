@@ -26,7 +26,7 @@ class AddDailyLogViewController: UIViewControllerForWebAPI, UIPickerViewDataSour
     
     @IBOutlet weak var contentTextView: UITextView!
  
-    
+    var _imageList = [UIImage]()
     
     // delegate
     var delegate: UploadLogDelegate!
