@@ -9,18 +9,33 @@
 import UIKit
 
 protocol SetInAndOutTimeDelegate {
-    func SetInAndOutTime(babyId: Int, time: String, inOutType: InOutType)
+    func SetInAndOutTime(babyId: Int, time: String, inOutType: InOutType, row: Int)
     
 }
 
 
 class ClassBabyInfoCollectionViewCell: UICollectionViewCell, UITextFieldDelegate {
     
+    var _row = 0
+    var _babyId = 0
+    
     var timePicker = UIDatePicker()
     var textFieldSelected: UITextField!
     
-    var arriveTime: String?
-    var leaveTime: String?
+    var arriveTime: String? { // use observer!!
+    
+        didSet {
+            arriveTextField.text = arriveTime
+        }
+    }
+    var leaveTime: String? {
+        didSet {
+            leaveTextField.text = leaveTime
+        }
+    }
+    
+    var arriveTextField = UITextField() // dummy for now, created when button is clicked
+    var leaveTextField = UITextField() // dummy for now, created when button is clicked
     
     var delegate: SetInAndOutTimeDelegate?
     
@@ -44,9 +59,9 @@ class ClassBabyInfoCollectionViewCell: UICollectionViewCell, UITextFieldDelegate
         //arriveButton.hidden = true
         arriveButton.removeFromSuperview()
         
-        var arriveTextField = UITextField(frame: arriveButton.frame)
+        arriveTextField = UITextField(frame: arriveButton.frame)
         arriveTextField.borderStyle  = UITextBorderStyle.RoundedRect
-        arriveTextField.tag = babyImageButton.tag // tag is the baby id, passed in when rendering the cell in the datasource method
+        arriveTextField.tag = 0
         
         if arriveTime == nil {
             var curTime = NSDate()
@@ -72,9 +87,9 @@ class ClassBabyInfoCollectionViewCell: UICollectionViewCell, UITextFieldDelegate
         //leaveButton.hidden = true
         leaveButton.removeFromSuperview()
         
-        var leaveTextField = UITextField(frame: leaveButton.frame)
+        leaveTextField = UITextField(frame: leaveButton.frame)
         leaveTextField.borderStyle  = UITextBorderStyle.RoundedRect
-        leaveTextField.tag = _bitMaskForLeaveTime | babyImageButton.tag // tag is the baby id, passed in when rendering the cell in the datasource method
+        leaveTextField.tag = _bitMaskForLeaveTime
         
         if leaveTime == nil {
             var curTime = NSDate()
@@ -122,14 +137,13 @@ class ClassBabyInfoCollectionViewCell: UICollectionViewCell, UITextFieldDelegate
         
         // call web api to upload the In/Out time, pass time and type(1 for arrival, 2 for leaving)
         var inOutType = InOutType.Arrival
-        var babyId = textField.tag
-        if textField.tag & _bitMaskForLeaveTime > 0 {
+        if textField.tag == _bitMaskForLeaveTime  {
             println("This is a leave time text field ")
             inOutType = InOutType.Leaving
-            babyId -= _bitMaskForLeaveTime
+
         }
         
-        delegate?.SetInAndOutTime( babyId, time: textField.text, inOutType: inOutType )
+        delegate?.SetInAndOutTime( _babyId, time: textField.text, inOutType: inOutType, row: _row )
         
     }
     

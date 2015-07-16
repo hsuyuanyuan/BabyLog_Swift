@@ -57,6 +57,9 @@ enum APIType: String, Printable {
 
 
 // constants
+let defaultStringForOutTime = "离校时间"
+let defaultStringForInTime = "到校时间"
+
 let defaultNumStars:Float = 3.0 // this is from the float rating view. default 3 stars
 
 let defaultImg = "login_bg.png"

@@ -172,7 +172,8 @@ class ClassViewController: UIViewControllerForWebAPI, UICollectionViewDataSource
         
         //cell.babyImageView.image = babyInfo.image
         cell.babyImageButton.setBackgroundImage( babyInfo.image, forState: UIControlState.Normal) //yxu: tried setImage first. not working, show blue block
-        cell.babyImageButton.tag = babyInfo.id
+        cell._babyId = babyInfo.id
+        cell._row = indexPath.row
         
         if _BabyInAndOutTimeList.count > indexPath.row {
             
@@ -180,21 +181,23 @@ class ClassViewController: UIViewControllerForWebAPI, UICollectionViewDataSource
         
             //TODO: verify inAndOutTime.id == babyInfo.id
             
-            
-            
-            
-            //TODO: add check to validate the time
-            
-            if (inAndOutTime.inTime != "到校时间")  {
-                cell.arriveTime = inAndOutTime.inTime
+
+                if inAndOutTime.inTime == "" {
+                    cell.arriveTime = defaultStringForInTime
+                } else {
+                    cell.arriveTime = inAndOutTime.inTime
+                }
                 cell.arriveTimeButton?.sendActionsForControlEvents(UIControlEvents.TouchUpInside) // refer to: http://stackoverflow.com/questions/27413059/how-can-i-simulate-a-button-press-in-swift-ios8-using-code
-            }
+ 
             
-            if (inAndOutTime.outTime != "离校时间")
-            {
-                cell.leaveTime = inAndOutTime.outTime
+ 
+                if inAndOutTime.outTime == "" {
+                    cell.leaveTime = defaultStringForOutTime
+                } else {
+                    cell.leaveTime = inAndOutTime.outTime
+                }
                 cell.leaveTimeButton?.sendActionsForControlEvents(UIControlEvents.TouchUpInside)
-            }
+ 
         }
     
         
@@ -271,9 +274,8 @@ class ClassViewController: UIViewControllerForWebAPI, UICollectionViewDataSource
     }
     
     
-    func SetInAndOutTime(babyId: Int, time: String, inOutType: InOutType) {
-        
-        
+    func SetInAndOutTime(babyId: Int, time: String, inOutType: InOutType, row: Int) {
+   
         
         var requestParams : [String:AnyObject] = [ //todo: add sanity check for the date string
             "BabyId": babyId,
@@ -282,7 +284,21 @@ class ClassViewController: UIViewControllerForWebAPI, UICollectionViewDataSource
         ]
         
         callWebAPI(requestParams, curAPIType: APIType.SetInAndOutTimeForOneBaby, postActionAfterSuccessulReturn: { (data) -> () in
-           
+                var indexPath = NSIndexPath(forItem: row, inSection: 0)
+            
+                // update local data
+                let prevInOutTime = self._BabyInAndOutTimeList[row]
+                if inOutType == InOutType.Arrival {
+                    let newInOutTime = BabyInAndOutTime(id: prevInOutTime.id, babyName: prevInOutTime.babyName, imgPath: prevInOutTime.imgPath, inTime: time, outTime: prevInOutTime.outTime)
+                    
+                    self._BabyInAndOutTimeList[row] = newInOutTime
+                } else  {
+                    let newInOutTime = BabyInAndOutTime(id: prevInOutTime.id, babyName: prevInOutTime.babyName, imgPath: prevInOutTime.imgPath, inTime: prevInOutTime.inTime, outTime: time)
+                    
+                    self._BabyInAndOutTimeList[row] = newInOutTime
+                }
+            
+                self.classCollectionView.reloadItemsAtIndexPaths( [indexPath] ) //reloadItemsAtIndexPaths  indexPathsForVisibleItems
             
             }, postActionAfterAllReturns: { () -> () in
                 
