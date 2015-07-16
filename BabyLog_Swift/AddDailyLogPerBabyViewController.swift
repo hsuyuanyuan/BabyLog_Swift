@@ -231,6 +231,26 @@ class AddDailyLogPerBabyViewController: AddDailyLogViewController, SaveStartsFor
         }
         
         
+        // convert images to base64 string
+        var imageBase64StrList = [String]()
+        
+ 
+        for image in _imageList {
+            var imageData = image.mediumQualityJPEGNSData
+            if imageData.length > OneMB {
+                imageData = image.lowQualityJPEGNSData
+            }
+            
+            println("image size: \(imageData.length)") // ~100k
+            
+            let base64Str = imageData.base64EncodedStringWithOptions( NSDataBase64EncodingOptions.allZeros )
+            //refer here for size on disk and size in mem:
+            // http://stackoverflow.com/questions/15656403/inaccurate-nsdata-size-given-in-bytes
+            
+            imageBase64StrList.append(base64Str)
+        }
+ 
+        
         
         
         var requestParams : [String:AnyObject] = [
@@ -241,7 +261,7 @@ class AddDailyLogPerBabyViewController: AddDailyLogViewController, SaveStartsFor
             "BabyId": idString, // baby ids separated by ,
             "PicList": "",
             "Content": _curDailyLog.content,
-            "UploadPic": "",//?? how to use? is it pic name
+            "UploadPic": imageBase64StrList,
             "Stars": starString // stars separated by ,
         ]
         

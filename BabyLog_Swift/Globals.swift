@@ -57,6 +57,11 @@ enum APIType: String, Printable {
 
 
 // constants
+let OneKB = 1024
+let OneMB = 1048576 //1024 * 1024
+
+
+
 let defaultStringForOutTime = "离校时间"
 let defaultStringForInTime = "到校时间"
 
@@ -173,3 +178,47 @@ extension String {
     }
 }
 
+
+// refer to: http://stackoverflow.com/questions/29726643/how-to-compress-of-reduce-the-size-of-an-image-before-uploading-to-parse-as-pffi
+extension UIImage {
+    var highestQualityJPEGNSData:NSData { return UIImageJPEGRepresentation(self, 1.0) }
+    var highQualityJPEGNSData:NSData    { return UIImageJPEGRepresentation(self, 0.75)}
+    var mediumQualityJPEGNSData:NSData  { return UIImageJPEGRepresentation(self, 0.5) }
+    var lowQualityJPEGNSData:NSData     { return UIImageJPEGRepresentation(self, 0.25)}
+    var lowestQualityJPEGNSData:NSData  { return UIImageJPEGRepresentation(self, 0.0) }
+}
+
+
+
+// refer to: http://rajiev.com/resize-uiimage-in-swift/
+extension UIImage {
+    public func resize(size:CGSize, completionHandler:(resizedImage:UIImage, data:NSData)->()) {
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), { () -> Void in
+            var newSize:CGSize = size
+            let rect = CGRectMake(0, 0, newSize.width, newSize.height)
+            UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
+            self.drawInRect(rect)
+            let newImage = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            let imageData = UIImageJPEGRepresentation(newImage, 0.5)
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                completionHandler(resizedImage: newImage, data:imageData)
+            })
+        })
+    }
+}
+
+/*
+// how to use?
+
+image.resize(CGSizeMake(150, 150), completionHandler: { [weak self](resizedImage, data) -> () in
+
+    let image = resizedImage
+
+    self?.imageView.image = image
+
+    self?.viewModel.imageData = data
+
+})
+
+*/

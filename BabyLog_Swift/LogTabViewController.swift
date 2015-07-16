@@ -406,8 +406,16 @@ class LogTabForOneBabyViewController: LogTabViewController, UploadLogForOneBabyD
         
         if (extraInfo._images != nil) {
             for image in extraInfo._images! {
-                var imageData = UIImagePNGRepresentation(image)
+                var imageData = image.mediumQualityJPEGNSData
+                if imageData.length > OneMB {
+                    imageData = image.lowQualityJPEGNSData
+                }
+                
+                println("image size: \(imageData.length)") // ~100k
+                
                 let base64Str = imageData.base64EncodedStringWithOptions( NSDataBase64EncodingOptions.allZeros )
+                //refer here for size on disk and size in mem: 
+                // http://stackoverflow.com/questions/15656403/inaccurate-nsdata-size-given-in-bytes
                 
                 imageBase64StrList.append(base64Str)
             }
