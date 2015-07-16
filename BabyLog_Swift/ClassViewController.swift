@@ -40,20 +40,11 @@ class ClassViewController: UIViewControllerForWebAPI, UICollectionViewDataSource
         //classCollectionView.delegate = self
         classCollectionView.dataSource = self
         classCollectionView.backgroundColor = UIColor.whiteColor()
-        // retrieve the students for current class
         
-        _retrieveAllStudentsInClass() {
-            
-            self._retrieveExistingInAndOutTime() // ?? should I block UI or not
-            
-            self.classCollectionView.reloadData() //yxu: reloadData must be called on main thread. otherwise it does not work!!!
-            
-            println("updating the collection view")
-            // resume the UI at the end of async action
-            
-            self._stopSpinnerAndResumeUI()
-            
-        }
+        
+        
+        // retrieve the students for current class
+        _retrieveAllStudentsAndRetrieveInAndOutTime()
         
         // refer to: http://stackoverflow.com/questions/24126678/close-ios-keyboard-by-touching-anywhere-using-swift
         //Looks for single or multiple taps.
@@ -70,6 +61,32 @@ class ClassViewController: UIViewControllerForWebAPI, UICollectionViewDataSource
 
     
     // MARK: call web api
+    func _retrieveAllStudentsAndRetrieveInAndOutTime() {
+        
+        _startSpinnerAndBlockUI()
+        
+        
+        callWebAPI([:], curAPIType: APIType.ListAllBabiesInClass, postActionAfterSuccessulReturn: { (data) -> () in
+                // refer to: https://grokswift.com/rest-with-alamofire-swiftyjson/
+                if let data: AnyObject = data { //yxu: check if data is nil
+                    
+                    let jsonResult = JSON(data)
+                    
+                    self._parseJsonForBabyInfoArray(jsonResult)
+                    
+                    self._retrieveExistingInAndOutTime()
+                    
+                }
+            }, postActionAfterAllReturns: { () -> () in
+ 
+                    
+                    self._stopSpinnerAndResumeUI()
+ 
+        })
+    }
+    
+    
+    
     
     func _retrieveExistingInAndOutTime() {
         
@@ -81,6 +98,7 @@ class ClassViewController: UIViewControllerForWebAPI, UICollectionViewDataSource
             "day": strCurDate
         ]
         
+        _startSpinnerAndBlockUI()
         callWebAPI(requestParams, curAPIType: APIType.ListAllBabiesInAndOutTime, postActionAfterSuccessulReturn: { (data) -> () in
                 if let data: AnyObject = data { //yxu: check if data is nil
                     let jsonResult = JSON(data)
@@ -92,12 +110,12 @@ class ClassViewController: UIViewControllerForWebAPI, UICollectionViewDataSource
                     }
                 }
             
-                // update the list
+            
             
             
             }, postActionAfterAllReturns: { () -> () in
 
-                
+                self._stopSpinnerAndResumeUI()
                 
                 
         } )
@@ -187,7 +205,7 @@ class ClassViewController: UIViewControllerForWebAPI, UICollectionViewDataSource
                 } else {
                     cell.arriveTime = inAndOutTime.inTime
                 }
-                cell.arriveTimeButton?.sendActionsForControlEvents(UIControlEvents.TouchUpInside) // refer to: http://stackoverflow.com/questions/27413059/how-can-i-simulate-a-button-press-in-swift-ios8-using-code
+                // cell.arriveTimeButton?.sendActionsForControlEvents(UIControlEvents.TouchUpInside) // refer to: http://stackoverflow.com/questions/27413059/how-can-i-simulate-a-button-press-in-swift-ios8-using-code
  
             
  
@@ -196,7 +214,7 @@ class ClassViewController: UIViewControllerForWebAPI, UICollectionViewDataSource
                 } else {
                     cell.leaveTime = inAndOutTime.outTime
                 }
-                cell.leaveTimeButton?.sendActionsForControlEvents(UIControlEvents.TouchUpInside)
+                // cell.leaveTimeButton?.sendActionsForControlEvents(UIControlEvents.TouchUpInside)
  
         }
     

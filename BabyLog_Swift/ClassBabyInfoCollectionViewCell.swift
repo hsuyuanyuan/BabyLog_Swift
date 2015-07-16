@@ -19,23 +19,25 @@ class ClassBabyInfoCollectionViewCell: UICollectionViewCell, UITextFieldDelegate
     var _row = 0
     var _babyId = 0
     
-    var timePicker = UIDatePicker()
-    var textFieldSelected: UITextField!
+    var arriveTimePicker = UIDatePicker()
+    var leaveTimePicker = UIDatePicker()
     
     var arriveTime: String? { // use observer!!
     
         didSet {
-            arriveTextField.text = arriveTime
+            arriveTimeTextField.text = arriveTime
         }
     }
     var leaveTime: String? {
         didSet {
-            leaveTextField.text = leaveTime
+            leaveTimeTextField.text = leaveTime
         }
     }
     
-    var arriveTextField = UITextField() // dummy for now, created when button is clicked
-    var leaveTextField = UITextField() // dummy for now, created when button is clicked
+    @IBOutlet weak var arriveTimeTextField: UITextField!
+    
+    @IBOutlet weak var leaveTimeTextField: UITextField!
+    
     
     var delegate: SetInAndOutTimeDelegate?
     
@@ -45,95 +47,58 @@ class ClassBabyInfoCollectionViewCell: UICollectionViewCell, UITextFieldDelegate
         
     }
     
-    @IBOutlet weak var arriveTimeButton: UIButton? // default is !, but it is deleted to show the text field
-    
-    
-    @IBOutlet weak var leaveTimeButton: UIButton?
-    
-    
-    @IBAction func arriveTimeButtonTapped(sender: AnyObject) {
-        println(" arrive time button pressed")
-        
-        var arriveButton = sender as! UIButton
-        
-        //arriveButton.hidden = true
-        arriveButton.removeFromSuperview()
-        
-        arriveTextField = UITextField(frame: arriveButton.frame)
-        arriveTextField.borderStyle  = UITextBorderStyle.RoundedRect
-        arriveTextField.tag = 0
-        
-        if arriveTime == nil {
-            var curTime = NSDate()
-            arriveTextField.text = curTime.formattedHHMM
-        } else {
-            arriveTextField.text = arriveTime
-        }
-        
-        arriveTextField.delegate = self
-        textFieldSelected = arriveTextField
-        
-        
-        arriveTextField.inputView = timePicker
-        addSubview(arriveTextField)
-    }
-    
-    
-    @IBAction func leaveTimeButtonTapped(sender: AnyObject) {
-        println(" leave time button pressed")
- 
-        var leaveButton = sender as! UIButton
-        
-        //leaveButton.hidden = true
-        leaveButton.removeFromSuperview()
-        
-        leaveTextField = UITextField(frame: leaveButton.frame)
-        leaveTextField.borderStyle  = UITextBorderStyle.RoundedRect
-        leaveTextField.tag = _bitMaskForLeaveTime
-        
-        if leaveTime == nil {
-            var curTime = NSDate()
-            leaveTextField.text = curTime.formattedHHMM
-        } else {
-            leaveTextField.text = leaveTime
-        }
-        
-        leaveTextField.delegate = self
-        textFieldSelected = leaveTextField
-        
-        leaveTextField.inputView = timePicker
-        addSubview(leaveTextField)
-      
-    }
 
-    
-    
+
     // MARK: view management
-    
+   
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        timePicker.datePickerMode = UIDatePickerMode.Time;
-        timePicker.locale = NSLocale(localeIdentifier: "NL") //NL for Netherland, 24H; zh_Hans_CN for China
-        timePicker.addTarget(self, action: "finishedTimePick:", forControlEvents: UIControlEvents.ValueChanged)
+        arriveTimePicker.datePickerMode = UIDatePickerMode.Time
+        arriveTimePicker.locale = NSLocale(localeIdentifier: "NL") //NL for Netherland, 24H; zh_Hans_CN for China
+        arriveTimePicker.addTarget(self, action: "finishedArriveTimePick:", forControlEvents: UIControlEvents.ValueChanged)
+    
+        
+        leaveTimePicker.datePickerMode = UIDatePickerMode.Time
+        leaveTimePicker.locale = NSLocale(localeIdentifier: "NL")
+        leaveTimePicker.addTarget(self, action: "finishedLeaveTimePick:", forControlEvents: UIControlEvents.ValueChanged)
+ 
+        
+        // arrive time text field
+        arriveTimeTextField.borderStyle  = UITextBorderStyle.RoundedRect
+        arriveTimeTextField.tag = 0
+        
+        arriveTimeTextField.delegate = self
+        arriveTimeTextField.inputView = arriveTimePicker
+ 
+        
+        
+        // leave time text field
+        leaveTimeTextField.borderStyle  = UITextBorderStyle.RoundedRect
+        leaveTimeTextField.tag = _bitMaskForLeaveTime
+        
+        leaveTimeTextField.delegate = self
+        leaveTimeTextField.inputView = leaveTimePicker
 
     }
     
     
-    func finishedTimePick(sender:UIDatePicker) {
-        textFieldSelected.text = sender.date.formattedHHMM
+    func finishedArriveTimePick(sender:UIDatePicker) {
+        arriveTime = sender.date.formattedHHMM
         
     }
     
-    // MARK: delegate
-    func textFieldDidBeginEditing(textField: UITextField) {
-        textFieldSelected = textField
+    func finishedLeaveTimePick(sender:UIDatePicker) {
+        leaveTime = sender.date.formattedHHMM
+        
     }
+
+    
+    // TODO: add DidBeginEditing:  logic: if text == initValue, then set current time => make API call to update server
+    
     
     
     func textFieldDidEndEditing(textField: UITextField) {
-        println("text field tag: \(textFieldSelected.tag) " )
-        println("\(textFieldSelected)")
         
         // call web api to upload the In/Out time, pass time and type(1 for arrival, 2 for leaving)
         var inOutType = InOutType.Arrival

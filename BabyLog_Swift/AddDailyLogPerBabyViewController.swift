@@ -89,14 +89,7 @@ class AddDailyLogPerBabyViewController: AddDailyLogViewController, SaveStartsFor
         
         if _babyInfoArray.count == 0 {
             
-            _retrieveAllStudentsInClass() {
-                
-                // Do any additional setup after loading the view.
-                self.initArraysForKids(_babyInfoArray.count)
-                self.initActivityDisplayInfo()
-                
-                self._stopSpinnerAndResumeUI()
-            }
+            _retrieveAllStudentsInClass()
         }
         
         
@@ -106,6 +99,36 @@ class AddDailyLogPerBabyViewController: AddDailyLogViewController, SaveStartsFor
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    
+    
+    
+    func _retrieveAllStudentsInClass() {
+        
+        _startSpinnerAndBlockUI()
+        
+        
+        callWebAPI([:], curAPIType: APIType.ListAllBabiesInClass, postActionAfterSuccessulReturn: { (data) -> () in
+            // refer to: https://grokswift.com/rest-with-alamofire-swiftyjson/
+            if let data: AnyObject = data { //yxu: check if data is nil
+                let jsonResult = JSON(data)
+                
+                self._parseJsonForBabyInfoArray(jsonResult)
+                
+            }
+            }, postActionAfterAllReturns: { () -> () in
+ 
+                    
+                    // Do any additional setup after loading the view.
+                    self.initArraysForKids(_babyInfoArray.count)
+                    self.initActivityDisplayInfo()
+                    
+                    self._stopSpinnerAndResumeUI()
+ 
+        })
+        
+        
     }
     
     

@@ -142,32 +142,7 @@ class UIViewControllerForWebAPI: UIViewController {
         
     }
     
-    
-    func _retrieveAllStudentsInClass( UpdateUI: ()->() ) {
-        
-        _startSpinnerAndBlockUI()
-        
-        
-        callWebAPI([:], curAPIType: APIType.ListAllBabiesInClass, postActionAfterSuccessulReturn: { (data) -> () in
-            // refer to: https://grokswift.com/rest-with-alamofire-swiftyjson/
-            if let data: AnyObject = data { //yxu: check if data is nil
-                let jsonResult = JSON(data)
-                
-                self._parseJsonForBabyInfoArray(jsonResult)
-                
-            }
-            }, postActionAfterAllReturns: { () -> () in
-                // Make sure we are on the main thread, and update the UI.
-                dispatch_async(dispatch_get_main_queue()) {
-                    
-                    // update some UI
-                    UpdateUI()
 
-                }
-        })
-        
-        
-    }
     
     
     // refer to: http://stackoverflow.com/questions/26672547/swift-handling-json-with-alamofire-swiftyjson

@@ -368,16 +368,6 @@
                                             <rect key="frame" x="0.0" y="0.0" width="105" height="161"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wWG-lb-qXd">
-                                                    <rect key="frame" x="16" y="130" width="69" height="25"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <state key="normal" title="离校时间">
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="leaveTimeButtonTapped:" destination="3Ad-6L-GT9" eventType="touchUpInside" id="TZI-0J-nHQ"/>
-                                                    </connections>
-                                                </button>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zfj-8M-bQY">
                                                     <rect key="frame" x="8" y="8" width="84" height="82"/>
                                                     <state key="normal">
@@ -388,23 +378,23 @@
                                                         <segue destination="qsc-Hd-ZPq" kind="show" identifier="showDailyLogForOneBaby" id="toC-AT-nuq"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BTj-8O-8Ym">
-                                                    <rect key="frame" x="18" y="98" width="69" height="25"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <state key="normal" title="到校时间">
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="arriveTimeButtonTapped:" destination="3Ad-6L-GT9" eventType="touchUpInside" id="gfb-Mh-hHW"/>
-                                                    </connections>
-                                                </button>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="到校时间" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iNg-4A-Y79">
+                                                    <rect key="frame" x="18" y="98" width="70" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="离校时间" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DSx-i5-cwo">
+                                                    <rect key="frame" x="18" y="130" width="70" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <connections>
-                                            <outlet property="arriveTimeButton" destination="BTj-8O-8Ym" id="87t-UT-aOZ"/>
+                                            <outlet property="arriveTimeTextField" destination="iNg-4A-Y79" id="Ayk-8z-iop"/>
                                             <outlet property="babyImageButton" destination="Zfj-8M-bQY" id="7RU-eF-p4e"/>
-                                            <outlet property="leaveTimeButton" destination="wWG-lb-qXd" id="ff2-SA-gVg"/>
+                                            <outlet property="leaveTimeTextField" destination="DSx-i5-cwo" id="rgz-4v-g4R"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
