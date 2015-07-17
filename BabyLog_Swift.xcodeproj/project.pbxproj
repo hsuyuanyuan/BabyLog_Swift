@@ -85,6 +85,8 @@
 		45A7E9871B49D89200748A6F /* AddDailyLogPerBabyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A7E9861B49D89200748A6F /* AddDailyLogPerBabyViewController.swift */; };
 		45E3552C1B578B350085770B /* DKImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E3552B1B578B350085770B /* DKImagePickerController.swift */; };
 		45E3552E1B578B460085770B /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45E3552D1B578B460085770B /* AssetsLibrary.framework */; };
+		45E355361B5892350085770B /* MessageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E355351B5892350085770B /* MessageTableViewController.swift */; };
+		45E3553B1B58944B0085770B /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E3553A1B58944B0085770B /* MessageTableViewCell.swift */; };
 		45FBD6761B39BE3100A33663 /* login_bg-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45FBD6411B39BE3100A33663 /* login_bg-568h@2x.png */; };
 		45FBD6771B39BE3100A33663 /* login_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 45FBD6421B39BE3100A33663 /* login_bg.png */; };
 		45FBD6781B39BE3100A33663 /* login_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45FBD6431B39BE3100A33663 /* login_bg@2x.png */; };
@@ -226,6 +228,8 @@
 		45A7E9861B49D89200748A6F /* AddDailyLogPerBabyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddDailyLogPerBabyViewController.swift; sourceTree = "<group>"; };
 		45E3552B1B578B350085770B /* DKImagePickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DKImagePickerController.swift; sourceTree = "<group>"; };
 		45E3552D1B578B460085770B /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		45E355351B5892350085770B /* MessageTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTableViewController.swift; sourceTree = "<group>"; };
+		45E3553A1B58944B0085770B /* MessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		45FBD6411B39BE3100A33663 /* login_bg-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_bg-568h@2x.png"; sourceTree = "<group>"; };
 		45FBD6421B39BE3100A33663 /* login_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_bg.png; sourceTree = "<group>"; };
 		45FBD6431B39BE3100A33663 /* login_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_bg@2x.png"; sourceTree = "<group>"; };
@@ -309,6 +313,8 @@
 				45A7E9761B479B6400748A6F /* ClassBabyInfoCollectionViewCell.swift */,
 				45A7E9841B49C16200748A6F /* BabyStarTableViewCell.swift */,
 				45A7E9821B49C03C00748A6F /* BabyStarViewController.swift */,
+				45E355351B5892350085770B /* MessageTableViewController.swift */,
+				45E3553A1B58944B0085770B /* MessageTableViewCell.swift */,
 				453E2B251B35492800500E31 /* Assets.xcassets */,
 				453E2B221B35492800500E31 /* Main.storyboard */,
 				45FBD6A91B3B0D3900A33663 /* MoreTableViewController.swift */,
@@ -602,6 +608,7 @@
 				45A7E9811B49AF4F00748A6F /* FloatRatingView.swift in Sources */,
 				45A7E8DD1B43431800748A6F /* LogItemTableViewCell.swift in Sources */,
 				453E2B1F1B35492800500E31 /* AppDelegate.swift in Sources */,
+				45E3553B1B58944B0085770B /* MessageTableViewCell.swift in Sources */,
 				45A7E9851B49C16200748A6F /* BabyStarTableViewCell.swift in Sources */,
 				45A7E9831B49C03C00748A6F /* BabyStarViewController.swift in Sources */,
 				45A7E8BF1B3E6E0B00748A6F /* KeleCalData.swift in Sources */,
@@ -609,6 +616,7 @@
 				45210B551B4F4C7B004A2EFB /* UIViewControllerForWebAPI.swift in Sources */,
 				45FBD6AA1B3B0D3900A33663 /* MoreTableViewController.swift in Sources */,
 				45A7E8C01B3E6E0B00748A6F /* KeleCalDelegate.swift in Sources */,
+				45E355361B5892350085770B /* MessageTableViewController.swift in Sources */,
 				45A7E8CC1B3F128500748A6F /* AddDailyLogViewController.swift in Sources */,
 				45210B501B4F2B69004A2EFB /* Globals.swift in Sources */,
 				45A7E8DB1B4103D700748A6F /* LogTabViewController.swift in Sources */,

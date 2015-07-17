@@ -190,6 +190,32 @@ class UIViewControllerForWebAPI: UIViewController {
     
     
     
+    let pendingOperations = PendingOperations()
+    
+    func _startDownloadForImage(babyInfo: BabyInfo, indexPath: NSIndexPath, UpdataUI: ()->() ){
+        
+        if let downloadOperation = pendingOperations.downloadsInProgress[indexPath] {
+            return
+        }
+        
+        let downloader = ImageDownloader(babyInfo: babyInfo)
+        
+        downloader.completionBlock = {
+            if downloader.cancelled {
+                return
+            }
+            dispatch_async(dispatch_get_main_queue(), {
+                self.pendingOperations.downloadsInProgress.removeValueForKey(indexPath)
+                //self.classCollectionView.reloadItemsAtIndexPaths([indexPath])
+                UpdataUI()
+            })
+        }
+        
+        pendingOperations.downloadsInProgress[indexPath] = downloader
+        
+        pendingOperations.downloadQueue.addOperation(downloader)
+    }
+    
     
     
     

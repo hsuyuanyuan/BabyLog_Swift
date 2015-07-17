@@ -407,7 +407,7 @@ class LogTabForOneBabyViewController: LogTabViewController, UploadLogForOneBabyD
         if (extraInfo._images != nil) {
             for image in extraInfo._images! {
                 var imageData = image.mediumQualityJPEGNSData
-                if imageData.length > OneMB {
+                if imageData.length > defaultUploadImageSizeLimit {
                     imageData = image.lowQualityJPEGNSData
                 }
                 

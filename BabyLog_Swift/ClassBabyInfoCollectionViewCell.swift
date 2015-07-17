@@ -94,18 +94,26 @@ class ClassBabyInfoCollectionViewCell: UICollectionViewCell, UITextFieldDelegate
     }
 
     
-    // TODO: add DidBeginEditing:  logic: if text == initValue, then set current time => make API call to update server
+
     func textFieldDidBeginEditing(textField: UITextField) {
-        if textField.tag != _bitMaskForLeaveTime && arriveTime == defaultStringForInTime {
+        if textField.tag != _bitMaskForLeaveTime {
+            
             var curTime = NSDate()
             arriveTime = curTime.formattedHHMM
-            textField.endEditing(true) // disable inputView just once: http://stackoverflow.com/questions/5053465/ios-uitextfield-dismissing-custom-inputview
+            
+            if arriveTime == defaultStringForInTime {
+                textField.endEditing(true) // disable inputView just once: http://stackoverflow.com/questions/5053465/ios-uitextfield-dismissing-custom-inputview
+            }
         }
         
-        if textField.tag == _bitMaskForLeaveTime  && leaveTime == defaultStringForOutTime {
+        if textField.tag == _bitMaskForLeaveTime  {
+            
             var curTime = NSDate()
             leaveTime = curTime.formattedHHMM
-            textField.endEditing(true) // disable inputView just once
+            
+            if  leaveTime == defaultStringForOutTime {
+                textField.endEditing(true) // disable inputView just once
+            }
         }
         
         

@@ -13,9 +13,16 @@ import Alamofire
 
 let version = 0.5
 
-
+//  ***************************
 // TODO: add locking to pretect it, as it is used by multiple VCs
+
 var _babyInfoArray = [BabyInfo]()
+
+
+
+//  ***************************
+
+
 
 var _bitMaskForLeaveTime: Int = 0x1000
 
@@ -57,8 +64,8 @@ enum APIType: String, Printable {
 
 
 // constants
-let OneKB = 1024
-let OneMB = 1048576 //1024 * 1024
+ 
+let defaultUploadImageSizeLimit = 1048576 //1024 * 1024
 
 
 

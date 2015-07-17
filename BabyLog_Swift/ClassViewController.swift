@@ -22,7 +22,7 @@ class ClassViewController: UIViewControllerForWebAPI, UICollectionViewDataSource
     let reuseIdentifier = "babyInfoCell"
     let sectionInsets = UIEdgeInsets(top: 50, left: 20, bottom: 50, right: 20)
     
-    let pendingOperations = PendingOperations()
+
     
     var _BabyInAndOutTimeList = [BabyInAndOutTime]()
     
@@ -219,17 +219,18 @@ class ClassViewController: UIViewControllerForWebAPI, UICollectionViewDataSource
         }
     
         
-        
-        
-        //let imageData = NSData(contentsOfURL: url!)
-        //cell.babyImageView.image = UIImage(data:imageData!)
 
         switch (babyInfo.imageState) {
         //case .Failed, .Downloaded:
             //_stopSpinnerAndResumeUI()
         case .New :
             //_startSpinnerAndBlockUI()
-            _startDownloadForImage(babyInfo, indexPath: indexPath)
+            _startDownloadForImage(babyInfo, indexPath: indexPath) {
+                self.classCollectionView.reloadItemsAtIndexPaths([indexPath])
+            }
+            
+ 
+            
         default:
             break
         }
@@ -239,28 +240,7 @@ class ClassViewController: UIViewControllerForWebAPI, UICollectionViewDataSource
     }
     
     
-    func _startDownloadForImage(babyInfo: BabyInfo, indexPath: NSIndexPath){
 
-        if let downloadOperation = pendingOperations.downloadsInProgress[indexPath] {
-            return
-        }
-        
-        let downloader = ImageDownloader(babyInfo: babyInfo)
-        
-        downloader.completionBlock = {
-            if downloader.cancelled {
-                return
-            }
-            dispatch_async(dispatch_get_main_queue(), {
-                self.pendingOperations.downloadsInProgress.removeValueForKey(indexPath)
-                self.classCollectionView.reloadItemsAtIndexPaths([indexPath])
-            })
-        }
-        
-        pendingOperations.downloadsInProgress[indexPath] = downloader
-        
-        pendingOperations.downloadQueue.addOperation(downloader)
-    }
     
     
     

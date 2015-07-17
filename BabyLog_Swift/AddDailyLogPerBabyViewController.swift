@@ -237,7 +237,7 @@ class AddDailyLogPerBabyViewController: AddDailyLogViewController, SaveStartsFor
  
         for image in _imageList {
             var imageData = image.mediumQualityJPEGNSData
-            if imageData.length > OneMB {
+            if imageData.length > defaultUploadImageSizeLimit {
                 imageData = image.lowQualityJPEGNSData
             }
             
