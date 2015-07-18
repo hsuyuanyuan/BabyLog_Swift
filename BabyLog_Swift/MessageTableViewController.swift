@@ -96,6 +96,18 @@ class MessageTableViewController: UIViewControllerForWebAPI, UITableViewDataSour
     }
     
     
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // TODO:  if segue == "showChatView", set chat id
+        
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        // trigger segue
+        performSegueWithIdentifier("showChatView", sender: tableView)
+    }
+    
+    
 
     /*
     // MARK: - Navigation
