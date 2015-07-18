@@ -88,7 +88,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pmf-r9-wqA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="284.5" y="840.5"/>
+            <point key="canvasLocation" x="871.5" y="840.5"/>
         </scene>
         <!--日程-->
         <scene sceneID="qvt-FS-p64">
@@ -197,7 +197,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="rc2-VK-VL2" kind="relationship" relationship="viewControllers" id="djL-87-rzD"/>
-                        <segue destination="z3v-Lb-ZTu" kind="relationship" relationship="viewControllers" id="qyz-oq-4ho"/>
+                        <segue destination="TwH-dV-FZM" kind="relationship" relationship="viewControllers" id="qyz-oq-4ho"/>
                         <segue destination="PHP-mY-Vr5" kind="relationship" relationship="viewControllers" id="zcr-Ks-0WT"/>
                         <segue destination="TlM-CH-6go" kind="relationship" relationship="viewControllers" id="7Iw-m8-rzY"/>
                     </connections>
@@ -296,7 +296,7 @@
             </objects>
             <point key="canvasLocation" x="1294.5" y="-568.5"/>
         </scene>
-        <!--消息-->
+        <!--Message Table View Controller-->
         <scene sceneID="Hjz-zB-unR">
             <objects>
                 <viewController id="z3v-Lb-ZTu" customClass="MessageTableViewController" customModule="BabyLog_Swift" customModuleProvider="target" sceneMemberID="viewController">
@@ -361,7 +361,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" tag="2" title="消息" image="tabicon_message_off.png" id="5bT-ze-MQg"/>
+                    <navigationItem key="navigationItem" id="NzZ-it-0BS"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="messageTableView" destination="Ffs-IV-TQu" id="L8O-pC-Kj5"/>
@@ -370,7 +370,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9hE-VL-Q1k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-576.5" y="840.5"/>
+            <point key="canvasLocation" x="10.5" y="840.5"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="Vz8-qo-gMs">
@@ -389,7 +389,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4gA-w1-JqN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-129.5" y="840.5"/>
+            <point key="canvasLocation" x="457.5" y="840.5"/>
         </scene>
         <!--班级主页-->
         <scene sceneID="ERh-FH-HZU">
@@ -474,7 +474,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="weP-IO-7Qv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="780.5" y="201.5"/>
+            <point key="canvasLocation" x="1367.5" y="201.5"/>
         </scene>
         <!--Daily Log for each kid-->
         <scene sceneID="fD2-qp-Zvr">
@@ -594,7 +594,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0hp-hJ-YPe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1294.5" y="196.5"/>
+            <point key="canvasLocation" x="1881.5" y="196.5"/>
         </scene>
         <!--Baby Star View Controller-->
         <scene sceneID="k5c-QF-Ptv">
@@ -686,7 +686,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5XS-2K-jdQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1818.5" y="196.5"/>
+            <point key="canvasLocation" x="2405.5" y="196.5"/>
         </scene>
         <!--Log Tab For One Baby View Controller-->
         <scene sceneID="1v6-ZZ-Ntc">
@@ -789,7 +789,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ffi-rs-WEc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="780.5" y="1003.5"/>
+            <point key="canvasLocation" x="1367.5" y="1003.5"/>
         </scene>
         <!--Daily Log for One kid-->
         <scene sceneID="9Fo-TS-xEU">
@@ -918,7 +918,26 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ILq-gq-572" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1294.5" y="1003.5"/>
+            <point key="canvasLocation" x="1881.5" y="1003.5"/>
+        </scene>
+        <!--消息-->
+        <scene sceneID="pM9-64-XSF">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="TwH-dV-FZM" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" tag="2" title="消息" image="tabicon_message_off.png" id="5bT-ze-MQg"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="jNm-lr-ctA">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="z3v-Lb-ZTu" kind="relationship" relationship="rootViewController" id="jeJ-dW-njz"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3fc-T6-LzI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-576.5" y="840.5"/>
         </scene>
     </scenes>
     <resources>

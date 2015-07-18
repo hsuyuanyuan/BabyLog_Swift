@@ -315,9 +315,9 @@
 				45A7E9821B49C03C00748A6F /* BabyStarViewController.swift */,
 				45E355351B5892350085770B /* MessageTableViewController.swift */,
 				45E3553A1B58944B0085770B /* MessageTableViewCell.swift */,
+				45FBD6A91B3B0D3900A33663 /* MoreTableViewController.swift */,
 				453E2B251B35492800500E31 /* Assets.xcassets */,
 				453E2B221B35492800500E31 /* Main.storyboard */,
-				45FBD6A91B3B0D3900A33663 /* MoreTableViewController.swift */,
 				453E2B2A1B35492800500E31 /* Info.plist */,
 			);
 			path = BabyLog_Swift;
