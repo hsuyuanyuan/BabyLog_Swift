@@ -99,20 +99,27 @@ class ClassBabyInfoCollectionViewCell: UICollectionViewCell, UITextFieldDelegate
         if textField.tag != _bitMaskForLeaveTime {
             
             var curTime = NSDate()
-            arriveTime = curTime.formattedHHMM
-            
+
             if arriveTime == defaultStringForInTime {
+                arriveTime = curTime.formattedHHMM
                 textField.endEditing(true) // disable inputView just once: http://stackoverflow.com/questions/5053465/ios-uitextfield-dismissing-custom-inputview
+            }
+            else {
+                arriveTime = curTime.formattedHHMM
             }
         }
         
         if textField.tag == _bitMaskForLeaveTime  {
             
             var curTime = NSDate()
-            leaveTime = curTime.formattedHHMM
+
             
             if  leaveTime == defaultStringForOutTime {
+                leaveTime = curTime.formattedHHMM
                 textField.endEditing(true) // disable inputView just once
+            }
+            else {
+                leaveTime = curTime.formattedHHMM
             }
         }
         
