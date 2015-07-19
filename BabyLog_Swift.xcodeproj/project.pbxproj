@@ -418,6 +418,7 @@
 		453E2B131B35492800500E31 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = StreamSaga;
 				TargetAttributes = {
