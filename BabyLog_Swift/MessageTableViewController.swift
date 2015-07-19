@@ -100,6 +100,16 @@ class MessageTableViewController: UIViewControllerForWebAPI, UITableViewDataSour
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // TODO:  if segue == "showChatView", set chat id
         
+        if segue.identifier == "showChatView" //yxu: defined in segue property in Storyboard
+        {
+            let chatVC = segue.destinationViewController as! ChatViewController
+            chatVC.hidesBottomBarWhenPushed = true
+        }
+        
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+        
+        
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

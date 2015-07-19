@@ -365,17 +365,17 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="messageTableView" destination="Ffs-IV-TQu" id="L8O-pC-Kj5"/>
-                        <segue destination="9qR-Tc-dIw" kind="show" identifier="showChatView" id="o49-eW-7n8"/>
+                        <segue destination="9qR-Tc-dIw" kind="push" identifier="showChatView" id="o49-eW-7n8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9hE-VL-Q1k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="10.5" y="840.5"/>
         </scene>
-        <!--View Controller-->
+        <!--Chat View Controller-->
         <scene sceneID="Vz8-qo-gMs">
             <objects>
-                <viewController id="9qR-Tc-dIw" sceneMemberID="viewController">
+                <viewController id="9qR-Tc-dIw" customClass="ChatViewController" customModule="BabyLog_Swift" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="b7M-OB-a9V"/>
                         <viewControllerLayoutGuide type="bottom" id="n1A-0r-irz"/>
@@ -385,6 +385,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="fXI-ie-59P"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4gA-w1-JqN" userLabel="First Responder" sceneMemberID="firstResponder"/>

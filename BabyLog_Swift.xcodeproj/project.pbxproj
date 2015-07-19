@@ -58,14 +58,6 @@
 		45A7E8FD1B43577D00748A6F /* activity_15.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 45A7E8EC1B43577D00748A6F /* activity_15.jpg */; };
 		45A7E8FE1B43577D00748A6F /* activity_20.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 45A7E8ED1B43577D00748A6F /* activity_20.jpg */; };
 		45A7E8FF1B43577D00748A6F /* activity_30.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 45A7E8EE1B43577D00748A6F /* activity_30.jpg */; };
-		45A7E95A1B4729AC00748A6F /* tabicon_class_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A7E9521B4729AC00748A6F /* tabicon_class_off@2x.png */; };
-		45A7E95B1B4729AC00748A6F /* tabicon_class_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A7E9531B4729AC00748A6F /* tabicon_class_on@2x.png */; };
-		45A7E95C1B4729AC00748A6F /* tabicon_log_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A7E9541B4729AC00748A6F /* tabicon_log_off@2x.png */; };
-		45A7E95D1B4729AC00748A6F /* tabicon_log_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A7E9551B4729AC00748A6F /* tabicon_log_on@2x.png */; };
-		45A7E95E1B4729AC00748A6F /* tabicon_message_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A7E9561B4729AC00748A6F /* tabicon_message_off@2x.png */; };
-		45A7E95F1B4729AC00748A6F /* tabicon_message_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A7E9571B4729AC00748A6F /* tabicon_message_on@2x.png */; };
-		45A7E9601B4729AC00748A6F /* tabicon_video_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A7E9581B4729AC00748A6F /* tabicon_video_off@2x.png */; };
-		45A7E9611B4729AC00748A6F /* tabicon_video_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A7E9591B4729AC00748A6F /* tabicon_video_on@2x.png */; };
 		45A7E9681B474F5F00748A6F /* TabBar-Zuoxi-Blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A7E9621B474F5F00748A6F /* TabBar-Zuoxi-Blue.png */; };
 		45A7E9691B474F5F00748A6F /* TabBar-Zuoxi-Blue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A7E9631B474F5F00748A6F /* TabBar-Zuoxi-Blue@2x.png */; };
 		45A7E96A1B474F5F00748A6F /* TabBar-Zuoxi-Blue@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A7E9641B474F5F00748A6F /* TabBar-Zuoxi-Blue@3x.png */; };
@@ -83,6 +75,8 @@
 		45A7E9831B49C03C00748A6F /* BabyStarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A7E9821B49C03C00748A6F /* BabyStarViewController.swift */; };
 		45A7E9851B49C16200748A6F /* BabyStarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A7E9841B49C16200748A6F /* BabyStarTableViewCell.swift */; };
 		45A7E9871B49D89200748A6F /* AddDailyLogPerBabyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A7E9861B49D89200748A6F /* AddDailyLogPerBabyViewController.swift */; };
+		45DB02D21B5AADC400EA754D /* TestRongCloud.m in Sources */ = {isa = PBXBuildFile; fileRef = 45DB02D11B5AADC400EA754D /* TestRongCloud.m */; };
+		45DB02D71B5AAE3D00EA754D /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DB02D61B5AAE3D00EA754D /* ChatViewController.swift */; };
 		45E3552C1B578B350085770B /* DKImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E3552B1B578B350085770B /* DKImagePickerController.swift */; };
 		45E3552E1B578B460085770B /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45E3552D1B578B460085770B /* AssetsLibrary.framework */; };
 		45E355361B5892350085770B /* MessageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E355351B5892350085770B /* MessageTableViewController.swift */; };
@@ -203,14 +197,6 @@
 		45A7E8EC1B43577D00748A6F /* activity_15.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = activity_15.jpg; sourceTree = "<group>"; };
 		45A7E8ED1B43577D00748A6F /* activity_20.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = activity_20.jpg; sourceTree = "<group>"; };
 		45A7E8EE1B43577D00748A6F /* activity_30.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = activity_30.jpg; sourceTree = "<group>"; };
-		45A7E9521B4729AC00748A6F /* tabicon_class_off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabicon_class_off@2x.png"; sourceTree = "<group>"; };
-		45A7E9531B4729AC00748A6F /* tabicon_class_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabicon_class_on@2x.png"; sourceTree = "<group>"; };
-		45A7E9541B4729AC00748A6F /* tabicon_log_off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabicon_log_off@2x.png"; sourceTree = "<group>"; };
-		45A7E9551B4729AC00748A6F /* tabicon_log_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabicon_log_on@2x.png"; sourceTree = "<group>"; };
-		45A7E9561B4729AC00748A6F /* tabicon_message_off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabicon_message_off@2x.png"; sourceTree = "<group>"; };
-		45A7E9571B4729AC00748A6F /* tabicon_message_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabicon_message_on@2x.png"; sourceTree = "<group>"; };
-		45A7E9581B4729AC00748A6F /* tabicon_video_off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabicon_video_off@2x.png"; sourceTree = "<group>"; };
-		45A7E9591B4729AC00748A6F /* tabicon_video_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabicon_video_on@2x.png"; sourceTree = "<group>"; };
 		45A7E9621B474F5F00748A6F /* TabBar-Zuoxi-Blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabBar-Zuoxi-Blue.png"; sourceTree = "<group>"; };
 		45A7E9631B474F5F00748A6F /* TabBar-Zuoxi-Blue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabBar-Zuoxi-Blue@2x.png"; sourceTree = "<group>"; };
 		45A7E9641B474F5F00748A6F /* TabBar-Zuoxi-Blue@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabBar-Zuoxi-Blue@3x.png"; sourceTree = "<group>"; };
@@ -228,6 +214,9 @@
 		45A7E9821B49C03C00748A6F /* BabyStarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BabyStarViewController.swift; sourceTree = "<group>"; };
 		45A7E9841B49C16200748A6F /* BabyStarTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BabyStarTableViewCell.swift; sourceTree = "<group>"; };
 		45A7E9861B49D89200748A6F /* AddDailyLogPerBabyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddDailyLogPerBabyViewController.swift; sourceTree = "<group>"; };
+		45DB02D01B5AADC400EA754D /* BabyLog_Swift-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BabyLog_Swift-Bridging-Header.h"; sourceTree = "<group>"; };
+		45DB02D11B5AADC400EA754D /* TestRongCloud.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestRongCloud.m; sourceTree = "<group>"; };
+		45DB02D61B5AAE3D00EA754D /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		45E3552B1B578B350085770B /* DKImagePickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DKImagePickerController.swift; sourceTree = "<group>"; };
 		45E3552D1B578B460085770B /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		45E355351B5892350085770B /* MessageTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTableViewController.swift; sourceTree = "<group>"; };
@@ -306,8 +295,10 @@
 				45FBD6921B3A8A1800A33663 /* Alamofire.xcodeproj */,
 				453E2B4C1B354B6200500E31 /* Resources */,
 				45210B4F1B4F2B69004A2EFB /* Globals.swift */,
+				45DB02D61B5AAE3D00EA754D /* ChatViewController.swift */,
 				45210B541B4F4C7B004A2EFB /* UIViewControllerForWebAPI.swift */,
 				453E2B1E1B35492800500E31 /* AppDelegate.swift */,
+				45DB02D11B5AADC400EA754D /* TestRongCloud.m */,
 				45A7E8CB1B3F128500748A6F /* AddDailyLogViewController.swift */,
 				45A7E9861B49D89200748A6F /* AddDailyLogPerBabyViewController.swift */,
 				45210B4B1B4DA240004A2EFB /* AddDailyLogForOneBabyViewController.swift */,
@@ -326,6 +317,7 @@
 				453E2B251B35492800500E31 /* Assets.xcassets */,
 				453E2B221B35492800500E31 /* Main.storyboard */,
 				453E2B2A1B35492800500E31 /* Info.plist */,
+				45DB02D01B5AADC400EA754D /* BabyLog_Swift-Bridging-Header.h */,
 			);
 			path = BabyLog_Swift;
 			sourceTree = "<group>";
@@ -336,7 +328,6 @@
 				45210B291B4D87F8004A2EFB /* stars */,
 				45A7E97A1B49A97400748A6F /* StarEmpty@2x.png */,
 				45A7E97B1B49A97400748A6F /* StarFull@2x.png */,
-				45A7E9511B47298800748A6F /* tab_icons_old */,
 				45A7E9081B4725B800748A6F /* tab_icons */,
 				45A7E9041B4725A800748A6F /* activity_icons */,
 				45FBD6411B39BE3100A33663 /* login_bg-568h@2x.png */,
@@ -397,21 +388,6 @@
 				45A7E9701B474F9F00748A6F /* TabBar-KId@3x.png */,
 			);
 			name = tab_icons;
-			sourceTree = "<group>";
-		};
-		45A7E9511B47298800748A6F /* tab_icons_old */ = {
-			isa = PBXGroup;
-			children = (
-				45A7E9521B4729AC00748A6F /* tabicon_class_off@2x.png */,
-				45A7E9531B4729AC00748A6F /* tabicon_class_on@2x.png */,
-				45A7E9541B4729AC00748A6F /* tabicon_log_off@2x.png */,
-				45A7E9551B4729AC00748A6F /* tabicon_log_on@2x.png */,
-				45A7E9561B4729AC00748A6F /* tabicon_message_off@2x.png */,
-				45A7E9571B4729AC00748A6F /* tabicon_message_on@2x.png */,
-				45A7E9581B4729AC00748A6F /* tabicon_video_off@2x.png */,
-				45A7E9591B4729AC00748A6F /* tabicon_video_on@2x.png */,
-			);
-			name = tab_icons_old;
 			sourceTree = "<group>";
 		};
 		45A7E97E1B49A99500748A6F /* SwiftyJson */ = {
@@ -577,22 +553,17 @@
 				45210B401B4D8803004A2EFB /* Stars-2@2x.png in Resources */,
 				45210B3E1B4D8803004A2EFB /* Stars-1@3x.png in Resources */,
 				45210B3F1B4D8803004A2EFB /* Stars-2.png in Resources */,
-				45A7E95F1B4729AC00748A6F /* tabicon_message_on@2x.png in Resources */,
 				45A7E8EF1B43577D00748A6F /* activity_1.jpg in Resources */,
-				45A7E95E1B4729AC00748A6F /* tabicon_message_off@2x.png in Resources */,
 				45FBD6761B39BE3100A33663 /* login_bg-568h@2x.png in Resources */,
 				45A7E9721B474F9F00748A6F /* TabBar-KId@2x.png in Resources */,
 				45A7E8F61B43577D00748A6F /* activity_8.jpg in Resources */,
 				45210B481B4D8803004A2EFB /* Stars-5.png in Resources */,
-				45A7E9611B4729AC00748A6F /* tabicon_video_on@2x.png in Resources */,
 				45A7E8F21B43577D00748A6F /* activity_4.jpg in Resources */,
 				45A7E97C1B49A97400748A6F /* StarEmpty@2x.png in Resources */,
 				45210B451B4D8803004A2EFB /* Stars-4.png in Resources */,
 				45A7E9691B474F5F00748A6F /* TabBar-Zuoxi-Blue@2x.png in Resources */,
-				45A7E95D1B4729AC00748A6F /* tabicon_log_on@2x.png in Resources */,
 				45210B3C1B4D8803004A2EFB /* Stars-1.png in Resources */,
 				45210B411B4D8803004A2EFB /* Stars-2@3x.png in Resources */,
-				45A7E95C1B4729AC00748A6F /* tabicon_log_off@2x.png in Resources */,
 				45A7E9681B474F5F00748A6F /* TabBar-Zuoxi-Blue.png in Resources */,
 				453E2B261B35492800500E31 /* Assets.xcassets in Resources */,
 				45210B491B4D8803004A2EFB /* Stars-5@2x.png in Resources */,
@@ -603,13 +574,10 @@
 				45A7E8F01B43577D00748A6F /* activity_2.jpg in Resources */,
 				45210B441B4D8803004A2EFB /* Stars-3@3x.png in Resources */,
 				45210B461B4D8803004A2EFB /* Stars-4@2x.png in Resources */,
-				45A7E95B1B4729AC00748A6F /* tabicon_class_on@2x.png in Resources */,
 				45A7E96C1B474F5F00748A6F /* TabBar-Zuoxi-Grey@2x.png in Resources */,
-				45A7E95A1B4729AC00748A6F /* tabicon_class_off@2x.png in Resources */,
 				45A7E8FA1B43577D00748A6F /* activity_12.jpg in Resources */,
 				45A7E8F81B43577D00748A6F /* activity_10.jpg in Resources */,
 				45210B421B4D8803004A2EFB /* Stars-3.png in Resources */,
-				45A7E9601B4729AC00748A6F /* tabicon_video_off@2x.png in Resources */,
 				45A7E96A1B474F5F00748A6F /* TabBar-Zuoxi-Blue@3x.png in Resources */,
 				453E2B241B35492800500E31 /* Main.storyboard in Resources */,
 				45A7E8F41B43577D00748A6F /* activity_6.jpg in Resources */,
@@ -667,6 +635,7 @@
 				45A7E9811B49AF4F00748A6F /* FloatRatingView.swift in Sources */,
 				45A7E8DD1B43431800748A6F /* LogItemTableViewCell.swift in Sources */,
 				453E2B1F1B35492800500E31 /* AppDelegate.swift in Sources */,
+				45DB02D21B5AADC400EA754D /* TestRongCloud.m in Sources */,
 				45E3553B1B58944B0085770B /* MessageTableViewCell.swift in Sources */,
 				45A7E9851B49C16200748A6F /* BabyStarTableViewCell.swift in Sources */,
 				45A7E9831B49C03C00748A6F /* BabyStarViewController.swift in Sources */,
@@ -682,6 +651,7 @@
 				45210B4C1B4DA240004A2EFB /* AddDailyLogForOneBabyViewController.swift in Sources */,
 				45A7E8C31B3E6E0B00748A6F /* keleDraw.swift in Sources */,
 				45A7E9771B479B6400748A6F /* ClassBabyInfoCollectionViewCell.swift in Sources */,
+				45DB02D71B5AAE3D00EA754D /* ChatViewController.swift in Sources */,
 				45A7E8C51B3E6E5B00748A6F /* KeleCalendarViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -798,6 +768,7 @@
 			baseConfigurationReference = 2324B3A9BABA6D45BEA4F995 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -805,11 +776,13 @@
 					"$(PROJECT_DIR)/BabyLog_Swift",
 				);
 				INFOPLIST_FILE = BabyLog_Swift/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.streamsaga.BabyLog-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "BabyLog_Swift/BabyLog_Swift-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -819,6 +792,7 @@
 			baseConfigurationReference = 7E94F1EE055CD555632AE808 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -826,11 +800,12 @@
 					"$(PROJECT_DIR)/BabyLog_Swift",
 				);
 				INFOPLIST_FILE = BabyLog_Swift/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.streamsaga.BabyLog-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "BabyLog_Swift/BabyLog_Swift-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

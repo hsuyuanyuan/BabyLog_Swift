@@ -7,9 +7,6 @@
 //
 
 import UIKit
-
-
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -18,6 +15,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
       // Override point for customization after application launch.
+    
+    
+    RCIM.sharedRCIM().initWithAppKey("mgb7ka1nb5rjg")
+    
+    RCIM.sharedRCIM().connectWithToken(userTokens[curUser], success: { (userid: String!) -> Void in
+        println("userid = \(userid)")
+        }, error: { (error: RCConnectErrorCode) -> Void in
+            println("connection failed")
+        }) { () -> Void in
+            println("token wrong!")
+    }
     
     
       return true

@@ -215,17 +215,35 @@ extension UIImage {
     }
 }
 
-/*
-// how to use?
 
-image.resize(CGSizeMake(150, 150), completionHandler: { [weak self](resizedImage, data) -> () in
 
-    let image = resizedImage
 
-    self?.imageView.image = image
 
-    self?.viewModel.imageData = data
 
-})
+/* =============== RongCloud
+Note: how to get the token for a test user?
+1. go to https://developer.rongcloud.cn/apitool/cLJ6Ys7T2JiHAH0T0w==
+2. userid = 1, name = Test111, portraitUri = empty
+3. copy the return token
+
+获取用户 Token 并连接的流程如下： 1， 首先，您的 App 查询您的应用程序服务器， 2， 然后，您的应用程序服务器再访问融云服务器获取，最后返回给 App， 3， App 用返回的 Token 直接连接融云服务器登录。 详细描述请参考 Server 开发指南 中的身份认证服务小节。
+
+为了方便您进行测试开发，我们还提供了 API 调试工具，以便您不用部署服务器端程序，即可直接获得测试开发所需的 Token。请访问 融云开发者平台，打开您想测试的应用，在左侧菜单中选择“API 调试”即可。融云拥有业内最丰富功能的开发者后台服务，我们建议所有开发者先熟悉后台的功能。
 
 */
+let userTokens  = ["", "YosJ8u4R9BDqhiG3IZKQ+VIPIEx22OKrNk+hkytiK3ZE0cslnXRrmjK+u6BZOb3YUbhmXbiLhAET627UJzV7Og==", "jELDaCGEl2zDl2PxC+0pAg7Sb0qRD+ExST5W71Ob8Ref2OQLwZvwE0XkoygJS8+BJBQWVCcMMduw/WfGu1LNZg=="]
+let userIds  = [0, 1, 2 ]
+let userNames = ["", "Test111", "Test222" ]
+
+
+//Note: two versions: one for simulator, the other for the real phone, so they can talk to each other
+// this is for simulator
+let curUser = 1
+let nextUser = 2
+
+/*
+// for phone
+let curUser = 2
+let nextUser = 1
+
+=======================  */
