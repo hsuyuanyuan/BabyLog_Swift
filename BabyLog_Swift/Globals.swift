@@ -8,7 +8,7 @@
 
 
 import UIKit
-import Alamofire
+ 
 
 
 let version = 0.5

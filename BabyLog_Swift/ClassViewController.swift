@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Alamofire
+// import Alamofire // // To support iOS 7.0, followed Mattt's instruction: https://github.com/Alamofire/Alamofire/commit/8e2e5251144a7792e8358e8ff9326bb7aa71ab7a
 
 
 //refer to collection view tutorial:

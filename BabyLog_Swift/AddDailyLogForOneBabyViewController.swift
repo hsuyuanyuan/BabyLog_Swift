@@ -26,7 +26,7 @@ class AddDailyLogForOneBabyViewController: AddDailyLogViewController, FloatRatin
     var _numStars = Int(defaultNumStars)
     
 
-      
+    
     
     @IBOutlet weak var starRatingVIew: FloatRatingView!
 

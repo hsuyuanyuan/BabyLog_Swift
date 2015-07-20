@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Alamofire
+// import Alamofire // To support iOS 7.0, followed Mattt's instruction: https://github.com/Alamofire/Alamofire/commit/8e2e5251144a7792e8358e8ff9326bb7aa71ab7a
 
 
 
@@ -94,7 +94,8 @@ class UIViewControllerForWebAPI: UIViewController {
         
  
         
-        let requestSchedule =  Alamofire.request(.POST, curAPI, parameters: [:], encoding: .Custom({
+        let requestSchedule =  //Alamofire.
+            request(.POST, curAPI, parameters: [:], encoding: .Custom({
             (convertible, params) in
             var mutableRequest = convertible.URLRequest.copy() as! NSMutableURLRequest
             mutableRequest.HTTPBody = data
