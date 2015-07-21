@@ -5,3 +5,5 @@
 
 // dummy bridge file, to include RongCloud IM Kit
 #import <RongIMKit/RongIMKit.h>
+
+#import <PgySDK/PgyManager.h>

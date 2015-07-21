@@ -8,6 +8,7 @@
 
 import UIKit
 @UIApplicationMain
+
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
    var window: UIWindow?
@@ -27,6 +28,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             println("token wrong!")
     }
     
+    // For PuGongYing SDK:
+    // dSYM文件是一个iOS应用编译的时候产生的文件，其中包含了符号信息。在Xcode中，选择项目目录下Products -> XXX.app，然后Show in Finder，即可看到项目对应的dSYM文件
+    /*
+    使用Xcode的Archive导出
+    Right Click on your archive -> Show in Finder -> Right click on file and click on Show package contents. Here you will find your .dSYM file.
+    */
+    PgyManager.sharedPgyManager().startManagerWithAppId("bc7c2d593c16b96a6709f3aee07836d4")
+    PgyManager.sharedPgyManager().checkUpdate()
     
       return true
    }

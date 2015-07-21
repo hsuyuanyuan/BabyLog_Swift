@@ -91,6 +91,14 @@
 		45BEA6B61B5C88B90087EFB0 /* ResponseSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BEA6AD1B5C88B90087EFB0 /* ResponseSerialization.swift */; };
 		45BEA6B71B5C88B90087EFB0 /* Upload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BEA6AE1B5C88B90087EFB0 /* Upload.swift */; };
 		45BEA6B81B5C88B90087EFB0 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BEA6AF1B5C88B90087EFB0 /* Validation.swift */; };
+		45BEA6BA1B5EA29F0087EFB0 /* PgySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45BEA6B91B5EA29F0087EFB0 /* PgySDK.framework */; };
+		45BEA6BC1B5EA2BD0087EFB0 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45BEA6BB1B5EA2BD0087EFB0 /* CoreTelephony.framework */; };
+		45BEA6BE1B5EA2C50087EFB0 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45BEA6BD1B5EA2C50087EFB0 /* OpenGLES.framework */; };
+		45BEA6C01B5EA2D20087EFB0 /* SceneKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45BEA6BF1B5EA2D20087EFB0 /* SceneKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		45BEA6C21B5EA2DA0087EFB0 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45BEA6C11B5EA2DA0087EFB0 /* CoreMotion.framework */; };
+		45BEA6C41B5EA2E40087EFB0 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45BEA6C31B5EA2E40087EFB0 /* AudioToolbox.framework */; };
+		45BEA6C61B5EA2EC0087EFB0 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45BEA6C51B5EA2EC0087EFB0 /* AVFoundation.framework */; };
+		45BEA6C81B5EA2F30087EFB0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45BEA6C71B5EA2F30087EFB0 /* SystemConfiguration.framework */; };
 		45DB02D21B5AADC400EA754D /* TestRongCloud.m in Sources */ = {isa = PBXBuildFile; fileRef = 45DB02D11B5AADC400EA754D /* TestRongCloud.m */; };
 		45DB02D71B5AAE3D00EA754D /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DB02D61B5AAE3D00EA754D /* ChatViewController.swift */; };
 		45E3552C1B578B350085770B /* DKImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E3552B1B578B350085770B /* DKImagePickerController.swift */; };
@@ -201,6 +209,14 @@
 		45BEA6AD1B5C88B90087EFB0 /* ResponseSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseSerialization.swift; sourceTree = "<group>"; };
 		45BEA6AE1B5C88B90087EFB0 /* Upload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Upload.swift; sourceTree = "<group>"; };
 		45BEA6AF1B5C88B90087EFB0 /* Validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
+		45BEA6B91B5EA29F0087EFB0 /* PgySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PgySDK.framework; sourceTree = "<group>"; };
+		45BEA6BB1B5EA2BD0087EFB0 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		45BEA6BD1B5EA2C50087EFB0 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		45BEA6BF1B5EA2D20087EFB0 /* SceneKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SceneKit.framework; path = System/Library/Frameworks/SceneKit.framework; sourceTree = SDKROOT; };
+		45BEA6C11B5EA2DA0087EFB0 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		45BEA6C31B5EA2E40087EFB0 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		45BEA6C51B5EA2EC0087EFB0 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		45BEA6C71B5EA2F30087EFB0 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		45DB02D01B5AADC400EA754D /* BabyLog_Swift-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BabyLog_Swift-Bridging-Header.h"; sourceTree = "<group>"; };
 		45DB02D11B5AADC400EA754D /* TestRongCloud.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestRongCloud.m; sourceTree = "<group>"; };
 		45DB02D61B5AAE3D00EA754D /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
@@ -218,7 +234,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45BEA6BC1B5EA2BD0087EFB0 /* CoreTelephony.framework in Frameworks */,
+				45BEA6BE1B5EA2C50087EFB0 /* OpenGLES.framework in Frameworks */,
+				45BEA6C01B5EA2D20087EFB0 /* SceneKit.framework in Frameworks */,
+				45BEA6C21B5EA2DA0087EFB0 /* CoreMotion.framework in Frameworks */,
+				45BEA6C41B5EA2E40087EFB0 /* AudioToolbox.framework in Frameworks */,
+				45BEA6C61B5EA2EC0087EFB0 /* AVFoundation.framework in Frameworks */,
+				45BEA6C81B5EA2F30087EFB0 /* SystemConfiguration.framework in Frameworks */,
 				45E3552E1B578B460085770B /* AssetsLibrary.framework in Frameworks */,
+				45BEA6BA1B5EA29F0087EFB0 /* PgySDK.framework in Frameworks */,
 				02C509511B8E84F5F2830FD4 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -419,6 +443,14 @@
 		7F32535C4EFA45D819C29D2F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				45BEA6C71B5EA2F30087EFB0 /* SystemConfiguration.framework */,
+				45BEA6C51B5EA2EC0087EFB0 /* AVFoundation.framework */,
+				45BEA6C31B5EA2E40087EFB0 /* AudioToolbox.framework */,
+				45BEA6C11B5EA2DA0087EFB0 /* CoreMotion.framework */,
+				45BEA6BF1B5EA2D20087EFB0 /* SceneKit.framework */,
+				45BEA6BD1B5EA2C50087EFB0 /* OpenGLES.framework */,
+				45BEA6BB1B5EA2BD0087EFB0 /* CoreTelephony.framework */,
+				45BEA6B91B5EA29F0087EFB0 /* PgySDK.framework */,
 				B42E8F6C4AE3A36388389326 /* libPods.a */,
 			);
 			name = Frameworks;
@@ -733,6 +765,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2324B3A9BABA6D45BEA4F995 /* Pods.debug.xcconfig */;
 			buildSettings = {
+				"ARCHS[sdk=*]" = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -740,16 +773,19 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/BabyLog_Swift",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = BabyLog_Swift/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.streamsaga.BabyLog-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "BabyLog_Swift/BabyLog_Swift-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				"VALID_ARCHS[sdk=*]" = "arm64 armv7 armv7s";
 			};
 			name = Debug;
 		};
@@ -764,6 +800,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/BabyLog_Swift",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = BabyLog_Swift/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
