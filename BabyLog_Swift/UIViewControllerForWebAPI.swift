@@ -66,13 +66,23 @@ class UIViewControllerForWebAPI: UIViewController {
     
     func displayAlert(title: String, message: String ) {
         
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-        
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
-            self.dismissViewControllerAnimated(true, completion: nil) //yxu?: is self the alert or the LoginViewController??
-        }))
-        
-        self.presentViewController(alert, animated: true, completion: nil)
+        //BugFix: UIAlertController only exists on iOS 8.0, crash on iOS 7.0
+        // refer to: http://stackoverflow.com/questions/25921325/uialertview-is-crashing-app-on-ios-7
+        // refer to: http://stackoverflow.com/questions/25111011/uialertview-uialertcontroller-ios-7-and-ios-8-compatibility
+        if objc_getClass("UIAlertController") != nil {
+            let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+            
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
+                self.dismissViewControllerAnimated(true, completion: nil) //yxu?: is self the alert or the LoginViewController??
+            }))
+            
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+        else {
+            let alert = UIAlertView(title: title, message: message, delegate: nil, cancelButtonTitle: "cancel")
+            alert.show()
+        }
+ 
         
     }
     
