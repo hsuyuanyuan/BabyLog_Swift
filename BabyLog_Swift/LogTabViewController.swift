@@ -19,7 +19,14 @@ class LogTabViewController: UIViewControllerForWebAPI, UITableViewDelegate, UITa
     let cellReuseId = "logCell"
 
     var _logItemsForDisplay = [DailyLogItem]()
-    var curDate = ""
+    var curDate = "" {
+        didSet {
+            curDateLabel.text = curDate
+        }
+    }
+    
+    @IBOutlet weak var curDateLabel: UILabel!
+    
  
     @IBOutlet weak var navigationBar: UINavigationBar!
     
@@ -82,7 +89,7 @@ class LogTabViewController: UIViewControllerForWebAPI, UITableViewDelegate, UITa
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        navigationBar!.topItem?.title = curDate + " Log " //refer to: http://stackoverflow.com/questions/10895122/changing-nav-bar-title-programatically
+        //navigationBar!.topItem?.title = curDate + " Log " //refer to: http://stackoverflow.com/questions/10895122/changing-nav-bar-title-programatically
     }
     
    
@@ -197,7 +204,7 @@ class LogTabViewController: UIViewControllerForWebAPI, UITableViewDelegate, UITa
     func _retrieveDailyLog(date: String) {
         
         curDate = date
-        navigationBar!.topItem?.title = curDate + " Log "
+        // navigationBar!.topItem?.title = curDate + " Log "
         
         _startSpinnerAndBlockUI()
        
@@ -343,10 +350,7 @@ class LogTabForOneBabyViewController: LogTabViewController, UploadLogForOneBabyD
  
     var _extraInfo = [DailyLogItem_ExtraInfoForBaby]()
     
- 
 
-    
-    
     @IBAction func cancelButtonTapped(sender: AnyObject) {
                 dismissViewControllerAnimated(true, completion: nil)
     }
@@ -516,7 +520,7 @@ class LogTabForOneBabyViewController: LogTabViewController, UploadLogForOneBabyD
     func _retrieveDailyLogForOneBaby(date: String) {
         
         curDate = date
-        navigationBar!.topItem?.title = curDate + " Log "
+        // navigationBar!.topItem?.title = curDate + " Log "
         
         _startSpinnerAndBlockUI()
         

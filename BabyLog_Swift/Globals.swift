@@ -78,7 +78,7 @@ let defaultImg = "login_bg.png"
 
 let baseURL = NSURL(string: "http://www.babysaga.cn/") // another option, initWithPath is for local folder
 
-let imageDefaultHead = UIImage(named: "TabBar-KId.png")  // default photo for kids without their own photos
+let imageDefaultHead = UIImage(named: "Tab Bar-KId@3x.png")  // default photo for kids without their own photos
 
 
 let userTokenStringInHttpHeader = "Token" as NSObject
