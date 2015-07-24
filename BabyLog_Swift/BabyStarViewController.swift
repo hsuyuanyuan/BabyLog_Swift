@@ -37,6 +37,9 @@ class BabyStarViewController: UIViewController, UITableViewDataSource, UITableVi
         starTableView.delegate = self
         starTableView.dataSource = self
         
+        
+        starTableView.tableFooterView = UIView() //yxu: trick to remove the empty cells in tableView
+        
     }
 
     override func didReceiveMemoryWarning() {

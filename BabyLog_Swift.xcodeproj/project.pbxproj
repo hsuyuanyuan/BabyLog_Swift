@@ -159,6 +159,8 @@
 		45BEA80E1B61FEA30087EFB0 /* TeacherPhoto-TopBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 45BEA8081B61FEA30087EFB0 /* TeacherPhoto-TopBar.png */; };
 		45BEA80F1B61FEA30087EFB0 /* TeacherPhoto-TopBar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45BEA8091B61FEA30087EFB0 /* TeacherPhoto-TopBar@2x.png */; };
 		45BEA8101B61FEA30087EFB0 /* TeacherPhoto-TopBar@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45BEA80A1B61FEA30087EFB0 /* TeacherPhoto-TopBar@3x.png */; };
+		45BEA8131B62CE140087EFB0 /* StarFull@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45BEA8111B62CE140087EFB0 /* StarFull@2x.png */; };
+		45BEA8141B62CE140087EFB0 /* StarEmpty@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45BEA8121B62CE140087EFB0 /* StarEmpty@2x.png */; };
 		45DB02D21B5AADC400EA754D /* TestRongCloud.m in Sources */ = {isa = PBXBuildFile; fileRef = 45DB02D11B5AADC400EA754D /* TestRongCloud.m */; };
 		45DB02D71B5AAE3D00EA754D /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DB02D61B5AAE3D00EA754D /* ChatViewController.swift */; };
 		45E3552C1B578B350085770B /* DKImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E3552B1B578B350085770B /* DKImagePickerController.swift */; };
@@ -337,6 +339,8 @@
 		45BEA8081B61FEA30087EFB0 /* TeacherPhoto-TopBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TeacherPhoto-TopBar.png"; sourceTree = "<group>"; };
 		45BEA8091B61FEA30087EFB0 /* TeacherPhoto-TopBar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TeacherPhoto-TopBar@2x.png"; sourceTree = "<group>"; };
 		45BEA80A1B61FEA30087EFB0 /* TeacherPhoto-TopBar@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TeacherPhoto-TopBar@3x.png"; sourceTree = "<group>"; };
+		45BEA8111B62CE140087EFB0 /* StarFull@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "StarFull@2x.png"; sourceTree = "<group>"; };
+		45BEA8121B62CE140087EFB0 /* StarEmpty@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "StarEmpty@2x.png"; sourceTree = "<group>"; };
 		45DB02D01B5AADC400EA754D /* BabyLog_Swift-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BabyLog_Swift-Bridging-Header.h"; sourceTree = "<group>"; };
 		45DB02D11B5AADC400EA754D /* TestRongCloud.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestRongCloud.m; sourceTree = "<group>"; };
 		45DB02D61B5AAE3D00EA754D /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
@@ -393,6 +397,8 @@
 				45180A811B5B7AE3008B1FF9 /* stars_3.png */,
 				45180A821B5B7AE3008B1FF9 /* stars_4.png */,
 				45180A831B5B7AE3008B1FF9 /* stars_5.png */,
+				45BEA8111B62CE140087EFB0 /* StarFull@2x.png */,
+				45BEA8121B62CE140087EFB0 /* StarEmpty@2x.png */,
 			);
 			name = stars;
 			sourceTree = "<group>";
@@ -777,6 +783,7 @@
 				45BEA7ED1B61EAA60087EFB0 /* TabBar-Xiaoxi-Blue@3x.png in Resources */,
 				45BEA7141B6149050087EFB0 /* activity_6.png in Resources */,
 				45BEA72D1B6149050087EFB0 /* activity_30@2x.png in Resources */,
+				45BEA8141B62CE140087EFB0 /* StarEmpty@2x.png in Resources */,
 				45BEA7E21B61EAA60087EFB0 /* TabBar-Banji-Grey.png in Resources */,
 				45BEA7E71B61EAA60087EFB0 /* TabBar-Gengduo-Blue@3x.png in Resources */,
 				45BEA7171B6149050087EFB0 /* activity_7.png in Resources */,
@@ -816,6 +823,7 @@
 				45BEA7091B6149050087EFB0 /* activity_1.png in Resources */,
 				45BEA7EC1B61EAA60087EFB0 /* TabBar-Xiaoxi-Blue@2x.png in Resources */,
 				45BEA6FE1B6149050087EFB0 /* activity_2@3x.png in Resources */,
+				45BEA8131B62CE140087EFB0 /* StarFull@2x.png in Resources */,
 				45BEA72C1B6149050087EFB0 /* activity_30.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -139,13 +139,13 @@ class AddDailyLogViewController: UIViewControllerForWebAPI, UIPickerViewDataSour
  
     func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView!) -> UIView {
         
-        var myView = UIView(frame: CGRectMake(0, 0, pickerView.bounds.width - 30, 60))
+        var myView = UIView(frame: CGRectMake(0, 0, pickerView.bounds.width - 30, 40))
         
-        var myImageView = UIImageView(frame: CGRectMake(0, 0, 50, 50))
+        var myImageView = UIImageView(frame: CGRectMake(0, 4, 32, 32))
         
         myImageView.image = UIImage(named: activityTypeArray[row].imageName ?? defaultImg)
         
-        let myLabel = UILabel(frame: CGRectMake(60, 0, pickerView.bounds.width - 70, 60 ))
+        let myLabel = UILabel(frame: CGRectMake(60, 0, pickerView.bounds.width - 70, 40 ))
         myLabel.font = UIFont (name: myLabel.font.fontName, size: 24)
         myLabel.text = activityTypeArray[row].name
         
