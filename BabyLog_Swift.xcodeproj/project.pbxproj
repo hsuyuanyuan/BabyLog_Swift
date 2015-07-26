@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		272540005D9C82BC53745C35 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AD880DCF430E191560FC27CB /* libPods.a */; };
 		45180A841B5B7AE3008B1FF9 /* Stars-3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45180A701B5B7AE3008B1FF9 /* Stars-3@2x.png */; };
 		45180A851B5B7AE3008B1FF9 /* Stars-3@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45180A711B5B7AE3008B1FF9 /* Stars-3@3x.png */; };
 		45180A861B5B7AE3008B1FF9 /* Stars-4.png in Resources */ = {isa = PBXBuildFile; fileRef = 45180A721B5B7AE3008B1FF9 /* Stars-4.png */; };
@@ -168,7 +169,6 @@
 		45E355361B5892350085770B /* MessageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E355351B5892350085770B /* MessageTableViewController.swift */; };
 		45E3553B1B58944B0085770B /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E3553A1B58944B0085770B /* MessageTableViewCell.swift */; };
 		45FBD6AA1B3B0D3900A33663 /* MoreTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FBD6A91B3B0D3900A33663 /* MoreTableViewController.swift */; };
-		ADB7E42E718B32949D8C3C37 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B31BCC8A1BAC9A425BD3D9D4 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -352,7 +352,7 @@
 		45E3553A1B58944B0085770B /* MessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		45FBD6A91B3B0D3900A33663 /* MoreTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreTableViewController.swift; sourceTree = "<group>"; };
 		7E94F1EE055CD555632AE808 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		B31BCC8A1BAC9A425BD3D9D4 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD880DCF430E191560FC27CB /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -369,7 +369,7 @@
 				45BEA6C81B5EA2F30087EFB0 /* SystemConfiguration.framework in Frameworks */,
 				45E3552E1B578B460085770B /* AssetsLibrary.framework in Frameworks */,
 				45BEA6BA1B5EA29F0087EFB0 /* PgySDK.framework in Frameworks */,
-				ADB7E42E718B32949D8C3C37 /* libPods.a in Frameworks */,
+				272540005D9C82BC53745C35 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -640,7 +640,7 @@
 				45BEA6BD1B5EA2C50087EFB0 /* OpenGLES.framework */,
 				45BEA6BB1B5EA2BD0087EFB0 /* CoreTelephony.framework */,
 				45BEA6B91B5EA29F0087EFB0 /* PgySDK.framework */,
-				B31BCC8A1BAC9A425BD3D9D4 /* libPods.a */,
+				AD880DCF430E191560FC27CB /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

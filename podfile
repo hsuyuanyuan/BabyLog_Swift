@@ -1,3 +1,1 @@
 pod 'RongCloudIMKit'
-pod 'Alamofire'
-use_frameworks!
