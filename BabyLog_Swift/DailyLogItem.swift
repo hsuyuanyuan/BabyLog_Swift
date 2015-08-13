@@ -109,6 +109,7 @@ class BabyInfo: Printable {
     // must have
     let babyName: String
     let nickName: String
+    let id: Int  // baby id in class
     let sex: Int //Note: in Json, it is String, not Int. need conversion
     // replace the raw json field with a real URL
     //let headImgName: String = ""
@@ -131,9 +132,8 @@ class BabyInfo: Printable {
     let bloodType: String = ""
     let telNumber: String = ""
     
-    let id: Int  // baby id in class
+
     let intro: String = ""
-    
     let diaryCount: Int = 0
     
     
@@ -154,6 +154,50 @@ class BabyInfo: Printable {
         self.imageURL = imageURL
         self.validImageExtension = validImageExtension
     }
+    
+}
+
+
+
+
+class TeacherInfo: Printable  {
+    // must have
+    let name: String
+    let id: Int
+    let sex: Int
+    let BirthDay: String
+    let BloodType: String
+    
+    // optional
+    var addrCity: String = ""
+    var addrProv: String = ""
+    var addrCountry: String = ""
+    
+    var intro: String = ""
+    var nickName: String = ""
+    var imageURL: NSURL
+    var validImageExtension: Bool = true
+    
+    var description: String {
+        return "teacher name:\(name), nick name: \(nickName), sex: \(sex)\n, id: \(id)"
+    }
+    
+    
+    init(name: String, nickName: String, sex: Int, id: Int, imageURL: NSURL, validImageExtension: Bool, birthDay: String, bloodType: String,
+        city: String, province: String, country: String) {
+        self.name = name
+        self.nickName = nickName
+        self.sex = sex
+        self.id = id
+        self.imageURL = imageURL
+        self.validImageExtension = validImageExtension
+        self.BloodType = bloodType
+        self.BirthDay = birthDay
+        self.addrCity = city
+        self.addrProv = province
+        self.addrCountry = country
+    }
+
     
 }
 

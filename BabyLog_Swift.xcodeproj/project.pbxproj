@@ -50,6 +50,9 @@
 		453E2B211B35492800500E31 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453E2B201B35492800500E31 /* LoginViewController.swift */; };
 		453E2B241B35492800500E31 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 453E2B221B35492800500E31 /* Main.storyboard */; };
 		453E2B261B35492800500E31 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 453E2B251B35492800500E31 /* Assets.xcassets */; };
+		457E226F1B78368000CDA4CC /* MoreTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457E226E1B78368000CDA4CC /* MoreTableViewController.swift */; };
+		457E22711B79589300CDA4CC /* CreateClassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457E22701B79589300CDA4CC /* CreateClassViewController.swift */; };
+		457E22791B7D155D00CDA4CC /* TeacherInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457E22781B7D155D00CDA4CC /* TeacherInfoViewController.swift */; };
 		45A7E8BE1B3E6E0B00748A6F /* KeleCalCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A7E8B81B3E6E0B00748A6F /* KeleCalCellView.swift */; };
 		45A7E8BF1B3E6E0B00748A6F /* KeleCalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A7E8B91B3E6E0B00748A6F /* KeleCalData.swift */; };
 		45A7E8C01B3E6E0B00748A6F /* KeleCalDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A7E8BA1B3E6E0B00748A6F /* KeleCalDelegate.swift */; };
@@ -180,7 +183,6 @@
 		45E3552E1B578B460085770B /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45E3552D1B578B460085770B /* AssetsLibrary.framework */; };
 		45E355361B5892350085770B /* MessageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E355351B5892350085770B /* MessageTableViewController.swift */; };
 		45E3553B1B58944B0085770B /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E3553A1B58944B0085770B /* MessageTableViewCell.swift */; };
-		45FBD6AA1B3B0D3900A33663 /* MoreTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FBD6A91B3B0D3900A33663 /* MoreTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -242,6 +244,9 @@
 		453E2B231B35492800500E31 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		453E2B251B35492800500E31 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		453E2B2A1B35492800500E31 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		457E226E1B78368000CDA4CC /* MoreTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreTableViewController.swift; sourceTree = "<group>"; };
+		457E22701B79589300CDA4CC /* CreateClassViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateClassViewController.swift; sourceTree = "<group>"; };
+		457E22781B7D155D00CDA4CC /* TeacherInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherInfoViewController.swift; sourceTree = "<group>"; };
 		45A7E8B81B3E6E0B00748A6F /* KeleCalCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeleCalCellView.swift; sourceTree = "<group>"; };
 		45A7E8B91B3E6E0B00748A6F /* KeleCalData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeleCalData.swift; sourceTree = "<group>"; };
 		45A7E8BA1B3E6E0B00748A6F /* KeleCalDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeleCalDelegate.swift; sourceTree = "<group>"; };
@@ -374,7 +379,6 @@
 		45E3552D1B578B460085770B /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		45E355351B5892350085770B /* MessageTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTableViewController.swift; sourceTree = "<group>"; };
 		45E3553A1B58944B0085770B /* MessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
-		45FBD6A91B3B0D3900A33663 /* MoreTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreTableViewController.swift; sourceTree = "<group>"; };
 		7E94F1EE055CD555632AE808 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		AD880DCF430E191560FC27CB /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -500,10 +504,12 @@
 				45A7E9821B49C03C00748A6F /* BabyStarViewController.swift */,
 				45E355351B5892350085770B /* MessageTableViewController.swift */,
 				45E3553A1B58944B0085770B /* MessageTableViewCell.swift */,
-				45FBD6A91B3B0D3900A33663 /* MoreTableViewController.swift */,
 				45DB02D11B5AADC400EA754D /* TestRongCloud.m */,
 				453E2B251B35492800500E31 /* Assets.xcassets */,
 				453E2B221B35492800500E31 /* Main.storyboard */,
+				457E22781B7D155D00CDA4CC /* TeacherInfoViewController.swift */,
+				457E22701B79589300CDA4CC /* CreateClassViewController.swift */,
+				457E226E1B78368000CDA4CC /* MoreTableViewController.swift */,
 				453E2B2A1B35492800500E31 /* Info.plist */,
 				45DB02D01B5AADC400EA754D /* BabyLog_Swift-Bridging-Header.h */,
 			);
@@ -958,22 +964,24 @@
 				45A7E9751B4776A600748A6F /* ClassViewController.swift in Sources */,
 				45BEA7C01B61E7730087EFB0 /* MainTabBarController.swift in Sources */,
 				45210B551B4F4C7B004A2EFB /* UIViewControllerForWebAPI.swift in Sources */,
-				45FBD6AA1B3B0D3900A33663 /* MoreTableViewController.swift in Sources */,
 				45A7E8C01B3E6E0B00748A6F /* KeleCalDelegate.swift in Sources */,
 				45E355361B5892350085770B /* MessageTableViewController.swift in Sources */,
 				45BEA6B41B5C88B90087EFB0 /* ParameterEncoding.swift in Sources */,
 				45A7E8CC1B3F128500748A6F /* AddDailyLogViewController.swift in Sources */,
 				45210B501B4F2B69004A2EFB /* Globals.swift in Sources */,
+				457E22711B79589300CDA4CC /* CreateClassViewController.swift in Sources */,
 				45A7E8DB1B4103D700748A6F /* LogTabViewController.swift in Sources */,
 				45BEA6B71B5C88B90087EFB0 /* Upload.swift in Sources */,
 				45BEA6B31B5C88B90087EFB0 /* MultipartFormData.swift in Sources */,
 				45A7E8C31B3E6E0B00748A6F /* keleDraw.swift in Sources */,
 				45A7E9771B479B6400748A6F /* ClassBabyInfoCollectionViewCell.swift in Sources */,
 				45BEA6B81B5C88B90087EFB0 /* Validation.swift in Sources */,
+				457E22791B7D155D00CDA4CC /* TeacherInfoViewController.swift in Sources */,
 				45BEA6B61B5C88B90087EFB0 /* ResponseSerialization.swift in Sources */,
 				45DB02D71B5AAE3D00EA754D /* ChatViewController.swift in Sources */,
 				45BEA6B51B5C88B90087EFB0 /* Request.swift in Sources */,
 				45BEA6B11B5C88B90087EFB0 /* Download.swift in Sources */,
+				457E226F1B78368000CDA4CC /* MoreTableViewController.swift in Sources */,
 				45A7E8C51B3E6E5B00748A6F /* KeleCalendarViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

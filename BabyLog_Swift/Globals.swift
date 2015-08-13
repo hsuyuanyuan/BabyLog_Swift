@@ -18,10 +18,10 @@ let version = 0.5
 
 var _babyInfoArray = [BabyInfo]()
 
+var _teacherInfo: TeacherInfo?
 
 
 //  ***************************
-
 
 
 var _bitMaskForLeaveTime: Int = 0x1000
@@ -54,6 +54,9 @@ enum APIType: String, Printable {
     
     case UserLogIn = "user.login"
     case UserRegistration = "user.register"
+    case UserGetInfo = "user.GetUserInfo"
+    case UserUpdateInfo = "user.UpdateUserInfo"
+
     
     var description: String {
         return self.rawValue
