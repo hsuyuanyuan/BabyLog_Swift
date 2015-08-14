@@ -64,7 +64,13 @@ class MoreTableViewController: UITableViewController {
 
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        // trigger segue
+        //refer to below on how to fix the bug that same view was pushed twice onto navigation stack
+        // http://stackoverflow.com/questions/5687991/uitableview-didselectrowatindexpath-called-twice
+        
+        if (self.navigationController!.topViewController != self) {
+            return;
+        }
+        
         if (indexPath.row == 1 && indexPath.section == 0) {
             performSegueWithIdentifier("showClassSetUp", sender: tableView)
         }
@@ -74,6 +80,11 @@ class MoreTableViewController: UITableViewController {
             performSegueWithIdentifier("showTeacherInfo", sender: tableView)
         }
         
+        if (indexPath.row == 2 && indexPath.section == 0) {
+            
+            performSegueWithIdentifier("showDeselectBaby", sender: tableView)
+        }
+    
         
     }
     

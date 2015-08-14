@@ -53,6 +53,7 @@
 		457E226F1B78368000CDA4CC /* MoreTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457E226E1B78368000CDA4CC /* MoreTableViewController.swift */; };
 		457E22711B79589300CDA4CC /* CreateClassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457E22701B79589300CDA4CC /* CreateClassViewController.swift */; };
 		457E22791B7D155D00CDA4CC /* TeacherInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457E22781B7D155D00CDA4CC /* TeacherInfoViewController.swift */; };
+		457E227B1B7DBCF400CDA4CC /* DeselectBabyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457E227A1B7DBCF400CDA4CC /* DeselectBabyViewController.swift */; };
 		45A7E8BE1B3E6E0B00748A6F /* KeleCalCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A7E8B81B3E6E0B00748A6F /* KeleCalCellView.swift */; };
 		45A7E8BF1B3E6E0B00748A6F /* KeleCalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A7E8B91B3E6E0B00748A6F /* KeleCalData.swift */; };
 		45A7E8C01B3E6E0B00748A6F /* KeleCalDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A7E8BA1B3E6E0B00748A6F /* KeleCalDelegate.swift */; };
@@ -247,6 +248,7 @@
 		457E226E1B78368000CDA4CC /* MoreTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreTableViewController.swift; sourceTree = "<group>"; };
 		457E22701B79589300CDA4CC /* CreateClassViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateClassViewController.swift; sourceTree = "<group>"; };
 		457E22781B7D155D00CDA4CC /* TeacherInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherInfoViewController.swift; sourceTree = "<group>"; };
+		457E227A1B7DBCF400CDA4CC /* DeselectBabyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeselectBabyViewController.swift; sourceTree = "<group>"; };
 		45A7E8B81B3E6E0B00748A6F /* KeleCalCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeleCalCellView.swift; sourceTree = "<group>"; };
 		45A7E8B91B3E6E0B00748A6F /* KeleCalData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeleCalData.swift; sourceTree = "<group>"; };
 		45A7E8BA1B3E6E0B00748A6F /* KeleCalDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeleCalDelegate.swift; sourceTree = "<group>"; };
@@ -507,6 +509,7 @@
 				45DB02D11B5AADC400EA754D /* TestRongCloud.m */,
 				453E2B251B35492800500E31 /* Assets.xcassets */,
 				453E2B221B35492800500E31 /* Main.storyboard */,
+				457E227A1B7DBCF400CDA4CC /* DeselectBabyViewController.swift */,
 				457E22781B7D155D00CDA4CC /* TeacherInfoViewController.swift */,
 				457E22701B79589300CDA4CC /* CreateClassViewController.swift */,
 				457E226E1B78368000CDA4CC /* MoreTableViewController.swift */,
@@ -974,6 +977,7 @@
 				45BEA6B71B5C88B90087EFB0 /* Upload.swift in Sources */,
 				45BEA6B31B5C88B90087EFB0 /* MultipartFormData.swift in Sources */,
 				45A7E8C31B3E6E0B00748A6F /* keleDraw.swift in Sources */,
+				457E227B1B7DBCF400CDA4CC /* DeselectBabyViewController.swift in Sources */,
 				45A7E9771B479B6400748A6F /* ClassBabyInfoCollectionViewCell.swift in Sources */,
 				45BEA6B81B5C88B90087EFB0 /* Validation.swift in Sources */,
 				457E22791B7D155D00CDA4CC /* TeacherInfoViewController.swift in Sources */,

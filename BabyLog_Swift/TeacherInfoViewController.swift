@@ -44,12 +44,10 @@ class TeacherInfoViewController: UIViewControllerForWebAPI {
     @IBAction func confirmButtonPressed(sender: AnyObject) {
         
         // call web api to update teacher info
-        
         _updateTeacherInfo()
         
-        // dismissViewControllerAnimated(true, completion: nil)
-        
-        
+         navigationController?.popViewControllerAnimated(true)
+    
     }
     
     override func viewDidLoad() {

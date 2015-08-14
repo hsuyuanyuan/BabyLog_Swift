@@ -42,11 +42,45 @@ class CreateClassViewController: UIViewController {
     
     @IBOutlet weak var classAddressTextField: UITextField!
     
+    /*
+    ------ input
+    
+            public string Name { get; set; } 班级名称
+            public string Description { get; set; } 描述
+            public string Address { get; set; } 地址
+            public string School { get; set; } 学校
+            public int TeacherId { get; set; } 教师Id
+            public string BanjiId { get; set; } 班级Code （不用赋值）
+    
+            public string Province { get; set; } 省
+            public string City { get; set; } 市
+            public string Area { get; set; } 区
+            public string Pic { get; set; } logo iOS 中单独设置
+            public string Password { get; set; } 密码
+    
+    
+    ------ output
+    
+            public string Name { get; set; }
+            public string Description { get; set; }
+            public string Address { get; set; }
+            public string School { get; set; }
+            public int TeacherId { get; set; }
+            public string BanjiId { get; set; }
+    
+            public string Province { get; set; }
+            public string City { get; set; }
+            public string Area { get; set; }
+            public string Pic { get; set; }
+            public string Password { get; set; }
+
+    */
     
     
     
-    
-    
+    override func viewWillAppear(animated: Bool) {
+        println("view will appear: ")
+    }
     
 
     override func viewDidLoad() {
@@ -79,11 +113,7 @@ class CreateClassViewController: UIViewController {
     }
     
     
-    
-    @IBAction func cancelButtonTapped(sender: UIButton) {
-        //dismissViewControllerAnimate
-    }
-    
+
     
     
     
