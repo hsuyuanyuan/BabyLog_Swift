@@ -47,6 +47,7 @@ enum APIType: String, Printable {
     case ListAllBabiesInAndOutTime = "TeacherManage.ListBanjiBabyInAndOut"
     case SetInAndOutTimeForOneBaby = "TeacherManage.InOutSchoolTime"
     
+    
     case DeleteScheduleForClass = "ClassSchedule.DeleteSchedule"
     case AddScheduleForClass = "ClassSchedule.InputScheduleJson"
     case GetScheduleForClass = "ClassSchedule.GetListSchedule"
@@ -56,6 +57,7 @@ enum APIType: String, Printable {
     case UserRegistration = "user.register"
     case UserGetInfo = "user.GetUserInfo"
     case UserUpdateInfo = "user.UpdateUserInfo"
+    case UserOutClassBaby = "User.TeacherOutClassBaby"
 
     
     var description: String {
