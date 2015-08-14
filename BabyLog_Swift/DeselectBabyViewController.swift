@@ -73,7 +73,11 @@ class DeselectBabyViewController: UIViewControllerForWebAPI, UIPickerViewDataSou
                 
                 self._parseJsonForBabyInfoArray(jsonResult)
                 
-                self.chooseBabyTextField.text = _babyInfoArray[0].nickName
+
+              
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.chooseBabyTextField.text = _babyInfoArray[0].nickName
+                }
                 
             }
             }, postActionAfterAllReturns: { () -> () in
@@ -95,16 +99,21 @@ class DeselectBabyViewController: UIViewControllerForWebAPI, UIPickerViewDataSou
         super.viewDidLoad() // note: forgot to call this => crash, because activityIndicator not shown
         
         chooseBabyTextField.inputView = babyPicker
+        babyPicker.delegate = self
+        babyPicker.dataSource = self
         
         if (_babyInfoArray.count == 0 ) {
             
             _retrieveAllStudentsInClass()
         }
+        else {
+           chooseBabyTextField.text = _babyInfoArray[0].nickName 
+            
+        }
         
 
         
-        babyPicker.delegate = self
-        babyPicker.dataSource = self
+
     }
     
     

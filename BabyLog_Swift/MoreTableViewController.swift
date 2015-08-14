@@ -84,6 +84,11 @@ class MoreTableViewController: UITableViewController {
             
             performSegueWithIdentifier("showDeselectBaby", sender: tableView)
         }
+        
+        if (indexPath.row == 0 && indexPath.section == 1) {
+            
+            dismissViewControllerAnimated(true, completion: nil)
+        }
     
         
     }

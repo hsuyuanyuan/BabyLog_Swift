@@ -159,6 +159,49 @@ class BabyInfo: Printable {
 
 
 
+class BanjiInfo: Printable { // avoid the name classInfo, may conflict with reserved words
+    
+    var addr: String
+    var code: String
+    var desc: String
+    var id: Int
+    var name: String
+    
+    var password: String
+    var quarter: Int
+    var school: String
+    
+    var teacherId: Int
+    var teacherName: String
+    var year: String
+    
+    
+
+    var description: String {
+        return "class name:\(name), school: \(school), TeacherName: \(teacherName)\n, quarter: \(quarter), year: \(year)"
+    }
+
+    
+    init(name: String, addr: String, code: String, id: Int, desc: String,  password: String, quarter: Int,
+        school: String, teacherId: Int, teacherName: String, year: String) {
+            self.name = name
+            self.addr = addr
+            self.code = code
+            self.id = id
+            self.desc = desc
+            
+            self.password = password
+            self.quarter = quarter
+            self.school = school
+            self.teacherId = teacherId
+            self.teacherName = teacherName
+            self.year = year
+    }
+
+}
+
+
+
 
 class TeacherInfo: Printable  {
     // must have

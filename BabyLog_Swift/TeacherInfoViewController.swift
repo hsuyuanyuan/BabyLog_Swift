@@ -111,12 +111,9 @@ class TeacherInfoViewController: UIViewControllerForWebAPI {
     
     func _getTeacherInfo() {
         
-
         _startSpinnerAndBlockUI()
         
-        
         var requestParams : [String:AnyObject] = [:]
-
         
         callWebAPI(requestParams, curAPIType: APIType.UserGetInfo, postActionAfterSuccessulReturn: { (data) -> () in
             // refer to: https://grokswift.com/rest-with-alamofire-swiftyjson/
@@ -142,9 +139,7 @@ class TeacherInfoViewController: UIViewControllerForWebAPI {
                     
                 }
         })
-        
-        
-        
+  
     }
     
     

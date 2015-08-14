@@ -20,6 +20,7 @@ var _babyInfoArray = [BabyInfo]()
 
 var _teacherInfo: TeacherInfo?
 
+var _banjiInfo: BanjiInfo?
 
 //  ***************************
 
@@ -46,7 +47,7 @@ enum APIType: String, Printable {
     
     case ListAllBabiesInAndOutTime = "TeacherManage.ListBanjiBabyInAndOut"
     case SetInAndOutTimeForOneBaby = "TeacherManage.InOutSchoolTime"
-    
+    case GetBanjiInfo = "TeacherManage.GetBanjiInfo"
     
     case DeleteScheduleForClass = "ClassSchedule.DeleteSchedule"
     case AddScheduleForClass = "ClassSchedule.InputScheduleJson"
@@ -58,6 +59,8 @@ enum APIType: String, Printable {
     case UserGetInfo = "user.GetUserInfo"
     case UserUpdateInfo = "user.UpdateUserInfo"
     case UserOutClassBaby = "User.TeacherOutClassBaby"
+    
+
 
     
     var description: String {
