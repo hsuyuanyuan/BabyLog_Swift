@@ -171,11 +171,8 @@ class TeacherInfoViewController: UIViewControllerForWebAPI {
                 dispatch_async(dispatch_get_main_queue()) { //sync or async
                     // update some UI
 
-    
                     // resume the UI at the end of async action
-                    
                     self._stopSpinnerAndResumeUI()
-                    
                 }
         })
         
@@ -208,9 +205,7 @@ class TeacherInfoViewController: UIViewControllerForWebAPI {
         }
         
         let url = NSURL(string: headImg )
-        
-        
-        
+
         _teacherInfo = TeacherInfo(name: teacherName, nickName: teacherNickname, sex: teacherSex, id: teacherId, imageURL: url!, validImageExtension: bValidImageExtension, birthDay: teacherDoB, bloodType: teacherBloodType, city: teacherCity, province: teacherProvince, country: teacherCountry)
 
     }
