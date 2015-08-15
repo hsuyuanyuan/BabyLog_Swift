@@ -93,7 +93,7 @@
             </objects>
             <point key="canvasLocation" x="-645.5" y="-232.5"/>
         </scene>
-        <!--More Table View Controller-->
+        <!--更多内容-->
         <scene sceneID="Ij7-dh-vKt">
             <objects>
                 <tableViewController id="gey-gz-ksJ" customClass="MoreTableViewController" customModule="BabyLog_Swift" customModuleProvider="target" sceneMemberID="viewController">
@@ -102,7 +102,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <sections>
-                            <tableViewSection headerTitle="教师和班级" id="JAK-P4-70g">
+                            <tableViewSection headerTitle="班级管理" id="JAK-P4-70g">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="31u-Uc-N4i" style="IBUITableViewCellStyleDefault" id="h4L-or-CgQ">
                                         <autoresizingMask key="autoresizingMask"/>
@@ -157,7 +157,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="软件版本和退出" id="4IC-cr-Z3k">
+                            <tableViewSection headerTitle="软件管理" id="4IC-cr-Z3k">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="H6L-Qn-0mc" style="IBUITableViewCellStyleDefault" id="h8p-op-LSu">
                                         <autoresizingMask key="autoresizingMask"/>
@@ -181,7 +181,7 @@
                             <outlet property="delegate" destination="gey-gz-ksJ" id="5ep-4W-rjg"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="Hab-Ss-nsQ"/>
+                    <navigationItem key="navigationItem" title="更多内容" id="Hab-Ss-nsQ"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EkY-CE-DdX" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -336,7 +336,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lc4-K1-Ki9">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lc4-K1-Ki9">
                                 <rect key="frame" x="164" y="548" width="46" height="30"/>
                                 <state key="normal" title="确  认">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -347,25 +347,40 @@
                                     <action selector="confirmButtonTapped:" destination="dpI-eU-ohX" eventType="touchUpInside" id="lhK-UJ-q5q"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="离开班级" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dwv-wm-q7h">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="离开班级" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dwv-wm-q7h">
                                 <rect key="frame" x="152" y="76" width="71" height="23"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="23" id="Tel-fj-B0C"/>
+                                    <constraint firstAttribute="width" constant="71" id="uih-dC-byX"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="选择学生" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fmr-3C-fkz">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="选择学生" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fmr-3C-fkz">
                                 <rect key="frame" x="29" y="132" width="73" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tVJ-hh-UKC">
-                                <rect key="frame" x="139" y="128" width="156" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tVJ-hh-UKC">
+                                <rect key="frame" x="154" y="128" width="156" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="gaM-74-C3G" firstAttribute="top" secondItem="Lc4-K1-Ki9" secondAttribute="bottom" constant="40" id="4vY-xv-1pi"/>
+                            <constraint firstItem="Fmr-3C-fkz" firstAttribute="top" secondItem="oS7-dt-c9o" secondAttribute="bottom" constant="68" id="JUn-Ty-Mpl"/>
+                            <constraint firstItem="Dwv-wm-q7h" firstAttribute="top" secondItem="oS7-dt-c9o" secondAttribute="bottom" constant="12" id="NeY-xe-WJJ"/>
+                            <constraint firstItem="tVJ-hh-UKC" firstAttribute="leading" secondItem="Fmr-3C-fkz" secondAttribute="trailing" constant="52" id="Pjc-kr-gaA"/>
+                            <constraint firstItem="Fmr-3C-fkz" firstAttribute="leading" secondItem="I8e-fv-4Gi" secondAttribute="leading" constant="30" id="Q6d-BG-8Of"/>
+                            <constraint firstAttribute="trailing" secondItem="tVJ-hh-UKC" secondAttribute="trailing" constant="65" id="XK4-rz-Dkp"/>
+                            <constraint firstItem="Dwv-wm-q7h" firstAttribute="centerX" secondItem="Lc4-K1-Ki9" secondAttribute="centerX" id="ao7-Fm-dwf"/>
+                            <constraint firstAttribute="centerX" secondItem="Lc4-K1-Ki9" secondAttribute="centerX" id="gTu-Uq-v9g"/>
+                            <constraint firstItem="tVJ-hh-UKC" firstAttribute="top" secondItem="Dwv-wm-q7h" secondAttribute="bottom" constant="30" id="xcf-gf-aDZ"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="GYy-Qi-Kxb"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
@@ -500,8 +515,11 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AU1-bH-3pH">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AU1-bH-3pH">
                                 <rect key="frame" x="187" y="107" width="129" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="129" id="JKn-ze-GYL"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>

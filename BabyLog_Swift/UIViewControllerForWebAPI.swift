@@ -165,7 +165,7 @@ class UIViewControllerForWebAPI: UIViewController {
         var teacherCity: String = userInfo["City"].string ?? ""
         var teacherProvince: String = userInfo["Province"].string ?? ""
         var teacherCountry: String = userInfo["Country"].string ?? ""
-        var teacherId: Int = userInfo["Id"].int!
+        var teacherId: Int = userInfo["Id"].int ?? 0
         var teacherIntro: String = userInfo["Introduction"].string ?? ""
         var teacherNickname: String = userInfo["Nickname"].string ?? ""
         var teacherSex:Int = userInfo["Sex"].int ?? 0
