@@ -120,7 +120,7 @@ class TeacherInfoViewController: UIViewControllerForWebAPI {
             if let data: AnyObject = data { //yxu: check if data is nil
                 let jsonResult = JSON(data)
                 
-                self._parseJsonForTeacherInfo(jsonResult)
+                super._parseJsonForTeacherInfo(jsonResult)
                 
             }
             }, postActionAfterAllReturns: { () -> () in
@@ -181,33 +181,6 @@ class TeacherInfoViewController: UIViewControllerForWebAPI {
     
     
     
-    func _parseJsonForTeacherInfo(result: JSON) {
-            
-        let userInfo = result["UserInfo"]
- 
-        var teacherName: String = userInfo["BabyName"].string ?? ""
-        var teacherDoB: String = userInfo["Birthday"].string ?? ""
-        var teacherBloodType: String = userInfo["BloodType"].string ?? ""
-        var teacherCity: String = userInfo["City"].string ?? ""
-        var teacherProvince: String = userInfo["Province"].string ?? ""
-        var teacherCountry: String = userInfo["Country"].string ?? ""
-        var teacherId: Int = userInfo["Id"].int!
-        var teacherIntro: String = userInfo["Introduction"].string ?? ""
-        var teacherNickname: String = userInfo["Nickname"].string ?? ""
-        var teacherSex:Int = userInfo["Sex"].int ?? 0
-        var headImg: String = userInfo["HeadImg"].string ?? ""
 
-        
-        println("\(headImg.pathExtension)")
-        var bValidImageExtension = true
-        if headImg.pathExtension == "" {
-            bValidImageExtension = false
-        }
-        
-        let url = NSURL(string: headImg )
-
-        _teacherInfo = TeacherInfo(name: teacherName, nickName: teacherNickname, sex: teacherSex, id: teacherId, imageURL: url!, validImageExtension: bValidImageExtension, birthDay: teacherDoB, bloodType: teacherBloodType, city: teacherCity, province: teacherProvince, country: teacherCountry)
-
-    }
 
 }

@@ -38,7 +38,13 @@ class CreateClassViewController: UIViewControllerForWebAPI {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        _getBanjiInfo()
+        
+        if _teacherInfo == nil {
+            _getTeacherInfoAndBanjiInfo()
+            
+        } else {
+            _getBanjiInfo()
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -86,29 +92,6 @@ class CreateClassViewController: UIViewControllerForWebAPI {
     }
     
     
-
-    
-    /*
-    ------ input
-    
-
-    
-    ------ output
-    
-            public string Name { get; set; }
-            public string Description { get; set; }
-            public string Address { get; set; }
-            public string School { get; set; }
-            public int TeacherId { get; set; }
-            public string BanjiId { get; set; }
-    
-            public string Province { get; set; }
-            public string City { get; set; }
-            public string Area { get; set; }
-            public string Pic { get; set; }
-            public string Password { get; set; }
-    
-    */
     
     
     func _createBanjiInfo() { //CreateBanji
@@ -118,10 +101,7 @@ class CreateClassViewController: UIViewControllerForWebAPI {
         _startSpinnerAndBlockUI()
         
         let urlString:String = _teacherInfo!.imageURL.absoluteString!
-        
- 
-        
-        
+    
         
         var requestParams : [String:AnyObject] = [
             "Name":_banjiInfo!.name,
@@ -162,8 +142,7 @@ class CreateClassViewController: UIViewControllerForWebAPI {
         })
         
     }
-    
-    
+
     
     // similar to GetTeacherInfo
     func _getBanjiInfo() {
@@ -195,6 +174,39 @@ class CreateClassViewController: UIViewControllerForWebAPI {
     }
     
     
+    //Note: have to make sure that teacher info is valid, before calling getBanji
+    //      because teacher's id and name are used for create class api
+    func _getTeacherInfoAndBanjiInfo() {
+        
+        _startSpinnerAndBlockUI()
+        
+        var requestParams : [String:AnyObject] = [:]
+        
+        callWebAPI(requestParams, curAPIType: APIType.UserGetInfo, postActionAfterSuccessulReturn: { (data) -> () in
+            // refer to: https://grokswift.com/rest-with-alamofire-swiftyjson/
+            if let data: AnyObject = data { //yxu: check if data is nil
+                let jsonResult = JSON(data)
+                
+                super._parseJsonForTeacherInfo(jsonResult)
+                
+                self._getBanjiInfo()
+                
+            }
+            }, postActionAfterAllReturns: { () -> () in
+                
+                // Make sure we are on the main thread, and update the UI.
+                dispatch_async(dispatch_get_main_queue()) { //sync or async
+                    // update some UI
+
+                    println("updating the table view")
+                    // resume the UI at the end of async action
+                    
+                    self._stopSpinnerAndResumeUI()
+                    
+                }
+        })
+        
+    }
     
     
     func _parseJsonForBanjiInfo(result: JSON) {
