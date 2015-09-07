@@ -80,7 +80,7 @@ class AddDailyLogViewController: UIViewControllerForWebAPI, UIPickerViewDataSour
         
         
         contentTextView.layer.borderWidth = 1.0
-        contentTextView.layer.borderColor = UIColor.blueColor().CGColor
+        contentTextView.layer.borderColor = myGrayColor.CGColor
         contentTextView.layer.cornerRadius = 5
         
         var curTime = NSDate()

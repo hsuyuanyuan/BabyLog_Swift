@@ -50,7 +50,8 @@ class ClassBabyInfoCollectionViewCell: UICollectionViewCell, UITextFieldDelegate
 
 
     // MARK: view management
-   
+    
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         
@@ -66,6 +67,7 @@ class ClassBabyInfoCollectionViewCell: UICollectionViewCell, UITextFieldDelegate
         
         // arrive time text field
         arriveTimeTextField.borderStyle  = UITextBorderStyle.RoundedRect
+        arriveTimeTextField.layer.borderColor = myBlueColor.CGColor
         arriveTimeTextField.tag = 0
         
         arriveTimeTextField.delegate = self
@@ -75,6 +77,7 @@ class ClassBabyInfoCollectionViewCell: UICollectionViewCell, UITextFieldDelegate
         
         // leave time text field
         leaveTimeTextField.borderStyle  = UITextBorderStyle.RoundedRect
+        leaveTimeTextField.layer.borderColor = myBlueColor.CGColor
         leaveTimeTextField.tag = _bitMaskForLeaveTime
         
         leaveTimeTextField.delegate = self

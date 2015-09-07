@@ -13,6 +13,66 @@ import UIKit
 
 let version = 0.5
 
+
+//  ***************************
+//  customized colors
+
+let myBlueColor = UIColor(
+    red: 115 / 255.0,
+    green: 163 / 255.0,
+    blue: 232 / 255.0,
+    alpha: CGFloat(1.0)
+) // refer to: http://stackoverflow.com/questions/24074257/how-to-use-uicolorfromrgb-value-in-swift
+
+
+let myBlackColor = UIColor(
+    red: 0 / 255.0,
+    green: 0 / 255.0,
+    blue: 0 / 255.0,
+    alpha: CGFloat(1.0)
+) // refer to: http://stackoverflow.com/questions/24074257/how-to-use-uicolorfromrgb-value-in-swift
+
+
+
+let myGrayColor = UIColor(
+    red: 153 / 255.0,
+    green: 153 / 255.0,
+    blue: 153 / 255.0,
+    alpha: CGFloat(1.0)
+) // refer to: http://stackoverflow.com/questions/24074257/how-to-use-uicolorfromrgb-value-in-swift
+
+
+
+
+let myWhiteColor = UIColor(
+    red: 229 / 255.0,
+    green: 229 / 255.0,
+    blue: 229 / 255.0,
+    alpha: CGFloat(1.0)
+) // refer to: http://stackoverflow.com/questions/24074257/how-to-use-uicolorfromrgb-value-in-swift
+
+
+
+let myRedColor = UIColor(
+    red: 255 / 255.0,
+    green: 0 / 255.0,
+    blue: 0 / 255.0,
+    alpha: CGFloat(0.85)
+) // refer to: http://stackoverflow.com/questions/24074257/how-to-use-uicolorfromrgb-value-in-swift
+
+
+
+let myOrangeColor = UIColor(
+    red: 255 / 255.0,
+    green: 136 / 255.0,
+    blue: 0 / 255.0,
+    alpha: CGFloat(0.94)
+) // refer to: http://stackoverflow.com/questions/24074257/how-to-use-uicolorfromrgb-value-in-swift
+
+
+
+
+
 //  ***************************
 // TODO: add locking to pretect it, as it is used by multiple VCs
 

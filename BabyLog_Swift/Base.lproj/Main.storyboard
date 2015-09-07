@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -143,7 +142,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZVp-kf-LOW" id="qGr-OG-dWg">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="离开班级" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Khr-uI-VyY">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="学生管理" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Khr-uI-VyY">
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -347,7 +346,7 @@
                                     <action selector="confirmButtonTapped:" destination="dpI-eU-ohX" eventType="touchUpInside" id="lhK-UJ-q5q"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="离开班级" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dwv-wm-q7h">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="学生管理" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dwv-wm-q7h">
                                 <rect key="frame" x="152" y="76" width="71" height="23"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="23" id="Tel-fj-B0C"/>
@@ -581,8 +580,8 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="88" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="6Bi-G5-R0W">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="88" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="6Bi-G5-R0W">
+                                <rect key="frame" x="0.0" y="64" width="375" height="535"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="logCell" rowHeight="88" id="vPc-cR-yvL" customClass="LogItemTableViewCell" customModule="BabyLog_Swift" customModuleProvider="target">
@@ -591,7 +590,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="StartEndTime" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DdD-lQ-M2A">
-                                                    <rect key="frame" x="130" y="8" width="130" height="20"/>
+                                                    <rect key="frame" x="130" y="8" width="130" height="20.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="130" id="ECV-n4-qqX"/>
                                                     </constraints>
@@ -606,7 +605,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Activity Details" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Prl-xh-CKh">
-                                                    <rect key="frame" x="130" y="49" width="130" height="35"/>
+                                                    <rect key="frame" x="130" y="49.5" width="130" height="34.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -619,7 +618,7 @@
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="29D-fG-hdV">
                                                     <rect key="frame" x="301" y="24" width="66" height="30"/>
-                                                    <state key="normal" title="完成情况">
+                                                    <state key="normal" title="学生表现">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
@@ -638,7 +637,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="29D-fG-hdV" secondAttribute="trailing" constant="8" id="m2b-VN-ax6"/>
                                                 <constraint firstItem="6Y7-K7-i2g" firstAttribute="top" secondItem="pw3-vw-BJX" secondAttribute="topMargin" constant="2" id="pim-I0-op6"/>
                                                 <constraint firstItem="Prl-xh-CKh" firstAttribute="top" secondItem="DdD-lQ-M2A" secondAttribute="bottom" constant="21" id="pum-Vg-Arq"/>
-                                                <constraint firstAttribute="centerY" secondItem="29D-fG-hdV" secondAttribute="centerY" constant="4.5" id="qNw-Em-nUf"/>
+                                                <constraint firstAttribute="centerY" secondItem="29D-fG-hdV" secondAttribute="centerY" constant="4" id="qNw-Em-nUf"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="6Y7-K7-i2g" secondAttribute="bottom" constant="-3" id="wfm-wM-WM4"/>
                                                 <constraint firstItem="DdD-lQ-M2A" firstAttribute="leading" secondItem="pw3-vw-BJX" secondAttribute="leading" constant="130" id="yPb-oI-J0J"/>
                                                 <constraint firstAttribute="centerY" secondItem="pcz-r9-UNU" secondAttribute="centerY" id="zLl-wd-L3d"/>
@@ -910,10 +909,7 @@
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="556-Ph-Axr">
                                 <rect key="frame" x="0.0" y="20" width="376" height="44"/>
                                 <items>
-                                    <navigationItem title="班级主页" id="ojd-tl-dfC">
-                                        <barButtonItem key="leftBarButtonItem" image="TabBar-Zuoxi-Blue.png" id="AOP-ki-d03"/>
-                                        <barButtonItem key="rightBarButtonItem" title="Item" id="xMT-12-HPN"/>
-                                    </navigationItem>
+                                    <navigationItem title="班级主页" id="ojd-tl-dfC"/>
                                 </items>
                             </navigationBar>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="lhW-81-nbg">
@@ -956,6 +952,7 @@
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="arriveTimeTextField" destination="iNg-4A-Y79" id="Ayk-8z-iop"/>
                                             <outlet property="babyImageButton" destination="Zfj-8M-bQY" id="7RU-eF-p4e"/>
@@ -1044,8 +1041,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" enablesReturnKeyAutomatically="YES"/>
                             </textView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="学生" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nzi-HV-oek">
-                                <rect key="frame" x="39" y="228" width="34" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="学生表现" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nzi-HV-oek">
+                                <rect key="frame" x="39" y="228" width="68" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>

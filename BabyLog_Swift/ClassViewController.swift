@@ -181,7 +181,7 @@ class ClassViewController: UIViewControllerForWebAPI, UICollectionViewDataSource
         
         // visuals
         cell.backgroundColor = UIColor.whiteColor()
-        cell.layer.borderColor = UIColor.blackColor().CGColor
+        cell.layer.borderColor = UIColor.whiteColor().CGColor
         cell.layer.cornerRadius = 5.0
         cell.layer.borderWidth = 2.0
         
