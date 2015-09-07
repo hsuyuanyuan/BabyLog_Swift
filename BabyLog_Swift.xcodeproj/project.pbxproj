@@ -42,8 +42,6 @@
 		4519B4031B66176800E200A5 /* Icon-152.png in Resources */ = {isa = PBXBuildFile; fileRef = 4519B3F91B66176800E200A5 /* Icon-152.png */; };
 		4519B4041B66176800E200A5 /* Icon-180.png in Resources */ = {isa = PBXBuildFile; fileRef = 4519B3FA1B66176800E200A5 /* Icon-180.png */; };
 		4519B4051B66176800E200A5 /* Icon-1024.png in Resources */ = {isa = PBXBuildFile; fileRef = 4519B3FB1B66176800E200A5 /* Icon-1024.png */; };
-		4519B4091B66194D00E200A5 /* default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4519B4071B66194D00E200A5 /* default-568h@2x.png */; };
-		4519B40A1B66194D00E200A5 /* default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4519B4081B66194D00E200A5 /* default@2x.png */; };
 		45210B501B4F2B69004A2EFB /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45210B4F1B4F2B69004A2EFB /* Globals.swift */; };
 		45210B551B4F4C7B004A2EFB /* UIViewControllerForWebAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45210B541B4F4C7B004A2EFB /* UIViewControllerForWebAPI.swift */; };
 		453E2B1F1B35492800500E31 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453E2B1E1B35492800500E31 /* AppDelegate.swift */; };
@@ -235,8 +233,6 @@
 		4519B3F91B66176800E200A5 /* Icon-152.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-152.png"; sourceTree = "<group>"; };
 		4519B3FA1B66176800E200A5 /* Icon-180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-180.png"; sourceTree = "<group>"; };
 		4519B3FB1B66176800E200A5 /* Icon-1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-1024.png"; sourceTree = "<group>"; };
-		4519B4071B66194D00E200A5 /* default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "default-568h@2x.png"; sourceTree = "<group>"; };
-		4519B4081B66194D00E200A5 /* default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "default@2x.png"; sourceTree = "<group>"; };
 		45210B4F1B4F2B69004A2EFB /* Globals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
 		45210B541B4F4C7B004A2EFB /* UIViewControllerForWebAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerForWebAPI.swift; sourceTree = "<group>"; };
 		453E2B1B1B35492800500E31 /* BabyLog_Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BabyLog_Swift.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -426,8 +422,6 @@
 		4519B4061B66192E00E200A5 /* LaunchImages */ = {
 			isa = PBXGroup;
 			children = (
-				4519B4071B66194D00E200A5 /* default-568h@2x.png */,
-				4519B4081B66194D00E200A5 /* default@2x.png */,
 			);
 			name = LaunchImages;
 			sourceTree = "<group>";
@@ -870,7 +864,6 @@
 				4519B4021B66176800E200A5 /* Icon-120.png in Resources */,
 				4519B3FC1B66176800E200A5 /* Icon-29.png in Resources */,
 				45BEA7191B6149050087EFB0 /* activity_7@3x.png in Resources */,
-				4519B4091B66194D00E200A5 /* default-568h@2x.png in Resources */,
 				45BEA7EF1B61EAA60087EFB0 /* TabBar-Xiaoxi-Grey@2x.png in Resources */,
 				45BEA7E61B61EAA60087EFB0 /* TabBar-Gengduo-Blue@2x.png in Resources */,
 				45BEA7EA1B61EAA60087EFB0 /* TabBar-Gengduo-Grey@3x.png in Resources */,
@@ -889,7 +882,6 @@
 				45180A911B5B7AE3008B1FF9 /* Stars-2@3x.png in Resources */,
 				45180A941B5B7AE3008B1FF9 /* stars_2.png in Resources */,
 				45BEA7061B6149050087EFB0 /* activity_15.png in Resources */,
-				4519B40A1B66194D00E200A5 /* default@2x.png in Resources */,
 				45180AD01B5B7B4D008B1FF9 /* login_bg.png in Resources */,
 				45BEA7081B6149050087EFB0 /* activity_15@3x.png in Resources */,
 				45BEA80B1B61FEA30087EFB0 /* BabyPhoto-TopBar.png in Resources */,
@@ -1021,7 +1013,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iOS Developer";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iOS Distribution";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1040,7 +1032,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = Automatic;
@@ -1067,7 +1059,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iOS Developer";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iOS Distribution";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1080,7 +1072,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PROVISIONING_PROFILE = Automatic;
 				SDKROOT = iphoneos;
@@ -1104,7 +1096,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = BabyLog_Swift/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.streamsaga.BabyLog-Swift";
@@ -1131,7 +1123,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = BabyLog_Swift/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.streamsaga.BabyLog-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
