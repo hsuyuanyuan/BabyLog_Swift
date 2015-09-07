@@ -17,6 +17,14 @@ let version = 0.5
 //  ***************************
 //  customized colors
 
+/*
+classDescTextView.layer.borderColor = UIColor.grayColor().colorWithAlphaComponent(0.5).CGColor
+classDescTextView.layer.borderWidth = 1.0
+classDescTextView.layer.cornerRadius = 5
+classDescTextView.clipsToBounds = true
+*/
+
+
 let myBlueColor = UIColor(
     red: 115 / 255.0,
     green: 163 / 255.0,

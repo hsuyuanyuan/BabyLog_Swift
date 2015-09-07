@@ -72,7 +72,7 @@ class ClassBabyInfoCollectionViewCell: UICollectionViewCell, UITextFieldDelegate
         
         arriveTimeTextField.delegate = self
         arriveTimeTextField.inputView = arriveTimePicker
- 
+
         
         
         // leave time text field

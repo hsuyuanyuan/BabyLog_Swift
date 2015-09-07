@@ -18,6 +18,19 @@ class LoginViewController: UIViewControllerForWebAPI {
    @IBOutlet weak var passwordTextField: UITextField!
    
  
+    @IBOutlet weak var logInButton: UIButton!
+    
+    
+    @IBOutlet weak var registerButton: UIButton!
+   
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        logInButton.layer.backgroundColor = myBlueColor.CGColor
+        registerButton.layer.backgroundColor = myOrangeColor.CGColor
+    }
+    
     
     @IBAction func registerAccount(sender: UIButton) {
         

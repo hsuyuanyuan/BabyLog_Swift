@@ -56,6 +56,11 @@ class TeacherInfoViewController: UIViewControllerForWebAPI {
         
         _getTeacherInfo()
         
+        teacherIntroTextView.layer.borderColor = UIColor.grayColor().colorWithAlphaComponent(0.5).CGColor
+        teacherIntroTextView.layer.borderWidth = 1.0
+        teacherIntroTextView.layer.cornerRadius = 5
+        teacherIntroTextView.clipsToBounds = true
+        
     }
     
     

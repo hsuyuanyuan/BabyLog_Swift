@@ -110,6 +110,14 @@ class AddDailyLogViewController: UIViewControllerForWebAPI, UIPickerViewDataSour
 
         startTimeTextField.inputView = startTimePicker
         endTimeTextField.inputView = endTimePicker
+        
+        
+        //contentTextView      
+        contentTextView.layer.borderColor = UIColor.grayColor().colorWithAlphaComponent(0.5).CGColor
+        contentTextView.layer.borderWidth = 1.0
+        contentTextView.layer.cornerRadius = 5
+        contentTextView.clipsToBounds = true
+        
     }
     
     

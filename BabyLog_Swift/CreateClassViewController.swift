@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CreateClassViewController: UIViewControllerForWebAPI {
+class CreateClassViewController: UIViewControllerForWebAPI, UITextFieldDelegate,  UIPickerViewDataSource, UIPickerViewDelegate {
     
     
     @IBOutlet weak var classAddressTextField: UITextField!
@@ -27,7 +27,12 @@ class CreateClassViewController: UIViewControllerForWebAPI {
     
     @IBOutlet weak var classDescTextView: UITextView!
     
-
+    var classYearPIcker = UIPickerView()
+    var classQuarterPicker = UIPickerView()
+    
+    var curYearNum = NSDate().formattedYYYY.toInt() ?? 2015
+    let numYearSelection = 10
+    
     
     override func viewWillAppear(animated: Bool) {
         println("view will appear: ")
@@ -38,6 +43,23 @@ class CreateClassViewController: UIViewControllerForWebAPI {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        classCodeTextField.delegate = self //Note: make it not editable
+        
+        //refer to: http://stackoverflow.com/questions/1824463/how-to-style-uitextview-to-like-rounded-rect-text-field
+        classDescTextView.layer.borderColor = UIColor.grayColor().colorWithAlphaComponent(0.5).CGColor
+        classDescTextView.layer.borderWidth = 1.0
+        classDescTextView.layer.cornerRadius = 5
+        classDescTextView.clipsToBounds = true
+        
+        classYearTextField.inputView = classYearPIcker
+        classYearPIcker.dataSource = self
+        classYearPIcker.delegate = self
+        
+        classQuerterTextField.inputView = classQuarterPicker
+        classQuarterPicker.dataSource = self
+        classQuarterPicker.delegate = self
+        
         
         if _teacherInfo == nil {
             _getTeacherInfoAndBanjiInfo()
@@ -52,6 +74,53 @@ class CreateClassViewController: UIViewControllerForWebAPI {
         // Dispose of any resources that can be recreated.
     }
     
+    
+    // pickers (one for year, the other for quarter
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1;
+    }
+    
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if (pickerView == classYearPIcker) {
+            return numYearSelection
+        }
+        else if (pickerView == classQuarterPicker) {
+            return 4
+        }
+        return 0
+    }
+    
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
+        if (pickerView == classYearPIcker) {
+            return String(curYearNum + numYearSelection/2 - row)
+        }
+        else if (pickerView == classQuarterPicker) {
+            return String(row+1)
+        }
+        return ""
+    }
+    
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if (pickerView == classYearPIcker) {
+            classYearTextField.text = String(curYearNum + numYearSelection/2 - row)
+        }
+        else if (pickerView == classQuarterPicker) {
+            classQuerterTextField.text = String(row+1)
+            
+        }
+        pickerView.resignFirstResponder()
+    }
+    
+    // use to disable picker when clicking on window
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        self.view.endEditing(true)
+    }
+    
+    
+    // disable the editing in the delegate
+    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+        return false
+    }
     
 
     func _showBanjiInfoUI() {

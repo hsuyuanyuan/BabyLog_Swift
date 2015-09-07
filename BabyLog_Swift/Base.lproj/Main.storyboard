@@ -37,23 +37,27 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5np-QO-tzG">
-                                <rect key="frame" x="30" y="427" width="325" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N44-W5-XAP">
+                                <rect key="frame" x="30" y="476" width="325" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <state key="normal" title="注 册 新 用 户">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="registerAccount:" destination="BYZ-38-t0r" eventType="touchUpInside" id="72I-1b-nfG"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5np-QO-tzG">
+                                <rect key="frame" x="30" y="421" width="325" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="zcB-fY-aOu"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <state key="normal" title="登      录"/>
+                                <state key="normal" title="登      录">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="logInAccount:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7s9-4i-FD8"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N44-W5-XAP">
-                                <rect key="frame" x="30" y="471" width="325" height="41"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <state key="normal" title="注      册"/>
-                                <connections>
-                                    <action selector="registerAccount:" destination="BYZ-38-t0r" eventType="touchUpInside" id="72I-1b-nfG"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -83,7 +87,9 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="logInButton" destination="5np-QO-tzG" id="xba-zZ-2zN"/>
                         <outlet property="passwordTextField" destination="G6A-at-G1o" id="URw-pA-HvU"/>
+                        <outlet property="registerButton" destination="N44-W5-XAP" id="hNr-1L-62K"/>
                         <outlet property="userNameTextField" destination="0WV-2U-mfN" id="nce-Sa-fBV"/>
                         <segue destination="mr3-Nf-5xd" kind="show" identifier="segueToShowMainTabBarVC" id="fMY-is-I0m"/>
                     </connections>
@@ -236,7 +242,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="sample text" translatesAutoresizingMaskIntoConstraints="NO" id="85X-5W-ZdT">
-                                <rect key="frame" x="67" y="441" width="240" height="128"/>
+                                <rect key="frame" x="67" y="441" width="240" height="116"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -248,6 +254,7 @@
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lEc-s1-U1g">
                                 <rect key="frame" x="171" y="168" width="148" height="30"/>
+                                <color key="backgroundColor" red="0.88512731481481477" green="0.88512731481481477" blue="0.88512731481481477" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -267,8 +274,9 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uXM-Ih-blh">
-                                <rect key="frame" x="164" y="575" width="46" height="30"/>
-                                <state key="normal" title="确  认">
+                                <rect key="frame" x="34" y="575" width="285" height="30"/>
+                                <state key="normal" title="保    存" backgroundImage="Button-Big-Orange.png">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -335,17 +343,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lc4-K1-Ki9">
-                                <rect key="frame" x="164" y="548" width="46" height="30"/>
-                                <state key="normal" title="确  认">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="confirmButtonPressed:" destination="GAm-lq-lem" eventType="touchUpInside" id="0xj-2u-ko6"/>
-                                    <action selector="confirmButtonTapped:" destination="pcg-2f-taq" eventType="touchUpInside" id="LmP-oW-LW4"/>
-                                    <action selector="confirmButtonTapped:" destination="dpI-eU-ohX" eventType="touchUpInside" id="lhK-UJ-q5q"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="学生管理" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dwv-wm-q7h">
                                 <rect key="frame" x="152" y="76" width="71" height="23"/>
                                 <constraints>
@@ -367,6 +364,18 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lc4-K1-Ki9">
+                                <rect key="frame" x="29" y="199" width="281" height="30"/>
+                                <state key="normal" title="离开班级" backgroundImage="Button-Big-Orange.png">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="confirmButtonPressed:" destination="GAm-lq-lem" eventType="touchUpInside" id="0xj-2u-ko6"/>
+                                    <action selector="confirmButtonTapped:" destination="pcg-2f-taq" eventType="touchUpInside" id="LmP-oW-LW4"/>
+                                    <action selector="confirmButtonTapped:" destination="dpI-eU-ohX" eventType="touchUpInside" id="lhK-UJ-q5q"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -404,8 +413,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MXx-Qx-bTw">
-                                <rect key="frame" x="164" y="583" width="46" height="30"/>
-                                <state key="normal" title="确  认">
+                                <rect key="frame" x="59" y="579" width="257" height="26"/>
+                                <state key="normal" title="保    存" backgroundImage="Button-Big-Orange.png">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -474,7 +484,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="add some intro" translatesAutoresizingMaskIntoConstraints="NO" id="KaP-VD-HAE">
-                                <rect key="frame" x="76" y="441" width="240" height="128"/>
+                                <rect key="frame" x="76" y="438" width="240" height="122"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -758,8 +768,9 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" enablesReturnKeyAutomatically="YES"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fub-op-7j6">
-                                <rect key="frame" x="181" y="543" width="43" height="30"/>
-                                <state key="normal" title="取   消">
+                                <rect key="frame" x="181" y="543" width="53" height="30"/>
+                                <state key="normal" title="取   消" backgroundImage="Button-Big-Orange.png">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -767,8 +778,9 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VFR-Ok-r8f">
-                                <rect key="frame" x="86" y="543" width="43" height="30"/>
-                                <state key="normal" title="确   定">
+                                <rect key="frame" x="78" y="543" width="53" height="30"/>
+                                <state key="normal" title="确   定" backgroundImage="Button-Big-Orange.png">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -916,7 +928,7 @@
                                 <rect key="frame" x="16" y="64" width="343" height="554"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="CQR-fx-ud2">
-                                    <size key="itemSize" width="105" height="161"/>
+                                    <size key="itemSize" width="100" height="166"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -926,7 +938,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="105" height="161"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="100" height="166"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zfj-8M-bQY">
@@ -939,13 +951,13 @@
                                                         <segue destination="qsc-Hd-ZPq" kind="show" identifier="showDailyLogForOneBaby" id="toC-AT-nuq"/>
                                                     </connections>
                                                 </button>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="到校时间" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iNg-4A-Y79">
-                                                    <rect key="frame" x="18" y="98" width="70" height="30"/>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="到校时间" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iNg-4A-Y79">
+                                                    <rect key="frame" x="15" y="98" width="70" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="离校时间" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DSx-i5-cwo">
-                                                    <rect key="frame" x="18" y="130" width="70" height="30"/>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="离校时间" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DSx-i5-cwo">
+                                                    <rect key="frame" x="15" y="130" width="70" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
@@ -1063,8 +1075,9 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sL6-pQ-vOI">
-                                <rect key="frame" x="212" y="555" width="43" height="30"/>
-                                <state key="normal" title="取   消">
+                                <rect key="frame" x="205" y="555" width="53" height="30"/>
+                                <state key="normal" title="取   消" backgroundImage="Button-Big-Orange.png">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -1072,8 +1085,9 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hEg-8N-F59">
-                                <rect key="frame" x="87" y="555" width="43" height="30"/>
-                                <state key="normal" title="确   定">
+                                <rect key="frame" x="87" y="555" width="53" height="30"/>
+                                <state key="normal" title="确   定" backgroundImage="Button-Big-Orange.png">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -1393,21 +1407,13 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RqW-xO-9r1">
-                                <rect key="frame" x="212" y="555" width="43" height="30"/>
-                                <state key="normal" title="取   消">
+                                <rect key="frame" x="206" y="555" width="53" height="30"/>
+                                <state key="normal" title="取   消" backgroundImage="Button-Big-Orange.png">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="cancelButtonTapped:" destination="laC-0y-9BK" eventType="touchUpInside" id="GP9-wg-VGf"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nmF-4A-oCm">
-                                <rect key="frame" x="87" y="555" width="43" height="30"/>
-                                <state key="normal" title="确   定">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="confirmButtonTapped:" destination="laC-0y-9BK" eventType="touchUpInside" id="8ew-45-b8Y"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hRK-gX-73M" customClass="FloatRatingView" customModule="BabyLog_Swift" customModuleProvider="target">
@@ -1433,6 +1439,16 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" enablesReturnKeyAutomatically="YES"/>
                             </textView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nmF-4A-oCm">
+                                <rect key="frame" x="87" y="555" width="53" height="30"/>
+                                <state key="normal" title="确   定" backgroundImage="Button-Big-Orange.png">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="confirmButtonTapped:" destination="laC-0y-9BK" eventType="touchUpInside" id="8ew-45-b8Y"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -1489,6 +1505,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Button-Big-Orange.png" width="290" height="40"/>
         <image name="StarEmpty" width="22" height="22"/>
         <image name="StarFull" width="22" height="22"/>
         <image name="TabBar-Banji-Blue.png" width="25" height="23"/>

@@ -185,6 +185,22 @@ class ClassViewController: UIViewControllerForWebAPI, UICollectionViewDataSource
         cell.layer.cornerRadius = 5.0
         cell.layer.borderWidth = 2.0
         
+        
+        
+        cell.arriveTimeTextField.layer.borderColor = myBlueColor.CGColor
+        cell.arriveTimeTextField.layer.borderWidth = 1.0
+        cell.arriveTimeTextField.textColor = myBlueColor
+        cell.arriveTimeTextField.layer.cornerRadius = 3
+        cell.arriveTimeTextField.clipsToBounds = true
+
+        
+        
+        cell.leaveTimeTextField.layer.borderColor = myBlueColor.CGColor
+        cell.leaveTimeTextField.layer.borderWidth = 1.0
+        cell.leaveTimeTextField.textColor = myBlueColor
+        cell.leaveTimeTextField.layer.cornerRadius = 3
+        cell.leaveTimeTextField.clipsToBounds = true
+        
         // image downloading
         let babyInfo = _babyInfoArray[indexPath.row]
         
