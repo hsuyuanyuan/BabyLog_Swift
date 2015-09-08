@@ -244,6 +244,12 @@ extension NSDate {
         return formatter.stringFromDate(self)
     }
     
+    var formattedYYYYMMDD_Birthday: String {
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "YYYY/MM/dd" //formatter.dateFormat = "EEEE, dd MMM yyyy HH:mm:ss Z"
+        return formatter.stringFromDate(self)
+    }
+    
     var formattedYYYY: String {
         let formatter = NSDateFormatter()
         formatter.dateFormat = "YYYY" //formatter.dateFormat = "EEEE, dd MMM yyyy HH:mm:ss Z"

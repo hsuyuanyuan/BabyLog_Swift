@@ -17,11 +17,14 @@ class LogTabViewController: UIViewControllerForWebAPI, UITableViewDelegate, UITa
 {
 
     let cellReuseId = "logCell"
+    
+    var _babyName = "" // empty for all baby, but set for one baby
 
     var _logItemsForDisplay = [DailyLogItem]()
+    
     var curDate = "" {
         didSet {
-            curDateLabel.text = curDate
+            curDateLabel.text = _babyName + " " + curDate
         }
     }
     
@@ -349,6 +352,14 @@ class LogTabForOneBabyViewController: LogTabViewController, UploadLogForOneBabyD
     var _babyId = 0 // init to invalid one, set by the segue
  
     var _extraInfo = [DailyLogItem_ExtraInfoForBaby]()
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        _babyName = _babyInfoArray[_babyId].nickName
+        curDate = curDate // trigger the event caller to set label = name + date
+    }
     
 
     @IBAction func cancelButtonTapped(sender: AnyObject) {

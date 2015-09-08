@@ -39,6 +39,8 @@ class TeacherInfoViewController: UIViewControllerForWebAPI {
     @IBOutlet weak var teacherIntroTextView: UITextView!
     
     
+    var birthdayPicker = UIDatePicker()
+    
     
     
     @IBAction func confirmButtonPressed(sender: AnyObject) {
@@ -61,8 +63,25 @@ class TeacherInfoViewController: UIViewControllerForWebAPI {
         teacherIntroTextView.layer.cornerRadius = 5
         teacherIntroTextView.clipsToBounds = true
         
+        
+        birthdayPicker.datePickerMode = UIDatePickerMode.Date
+        birthdayPicker.locale = NSLocale(localeIdentifier: "zh_Hans_CN") //NL for Netherland, 24H; zh_Hans_CN for China
+        birthdayPicker.addTarget(self, action: "birthdayChangedAction", forControlEvents: UIControlEvents.ValueChanged)
+        
+        birthdayTextField.inputView = birthdayPicker
+        
     }
     
+    
+    
+    func birthdayChangedAction() {
+        birthdayTextField.text = birthdayPicker.date.formattedYYYYMMDD_Birthday
+    }
+    
+    
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        self.view.endEditing(true)
+    }
     
     
     func _showTeacherInfoUI() {

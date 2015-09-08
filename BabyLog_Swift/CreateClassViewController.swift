@@ -45,6 +45,8 @@ class CreateClassViewController: UIViewControllerForWebAPI, UITextFieldDelegate,
         // Do any additional setup after loading the view.
         
         classCodeTextField.delegate = self //Note: make it not editable
+        classCodeTextField.textColor = myGrayColor
+        
         
         //refer to: http://stackoverflow.com/questions/1824463/how-to-style-uitextview-to-like-rounded-rect-text-field
         classDescTextView.layer.borderColor = UIColor.grayColor().colorWithAlphaComponent(0.5).CGColor
