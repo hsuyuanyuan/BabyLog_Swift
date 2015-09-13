@@ -180,7 +180,7 @@ class UIViewControllerForWebAPI: UIViewController {
         
         let url = NSURL(string: headImg )
         
-        _teacherInfo = TeacherInfo(name: teacherName, nickName: teacherNickname, sex: teacherSex, id: teacherId, imageURL: url!, validImageExtension: bValidImageExtension, birthDay: teacherDoB, bloodType: teacherBloodType, city: teacherCity, province: teacherProvince, country: teacherCountry)
+        _teacherInfo = TeacherInfo(name: teacherName, nickName: teacherNickname, sex: teacherSex, id: teacherId, imageURL: url!, validImageExtension: bValidImageExtension, birthDay: teacherDoB, bloodType: teacherBloodType, city: teacherCity, province: teacherProvince, country: teacherCountry, intro: teacherIntro)
         
     }
     

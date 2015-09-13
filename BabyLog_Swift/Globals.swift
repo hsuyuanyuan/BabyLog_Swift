@@ -126,7 +126,7 @@ enum APIType: String, Printable {
     case UserLogIn = "user.login"
     case UserRegistration = "user.register"
     case UserGetInfo = "user.GetUserInfo"
-    case UserUpdateInfo = "user.UpdateUserInfo"
+    case UserUpdateInfo = "user.IOSUpdateUserInfo" //obsolete "user.UpdateUserInfo"
     case UserOutClassBaby = "User.TeacherOutClassBaby"
     
 

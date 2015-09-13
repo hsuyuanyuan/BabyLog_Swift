@@ -127,7 +127,8 @@ class TeacherInfoViewController: UIViewControllerForWebAPI {
             bloodType: bloodTextField.text,
             city: cityTextField.text,
             province: provinceTextField.text,
-            country: countryTextField.text)
+            country: countryTextField.text,
+            intro: teacherIntroTextView.text)
     }
     
     
@@ -176,16 +177,22 @@ class TeacherInfoViewController: UIViewControllerForWebAPI {
         let urlString:String = _teacherInfo!.imageURL.absoluteString!
         
         var requestParams : [String:AnyObject] = [
+            "Sex":_teacherInfo!.sex,
             "BabyName":_teacherInfo!.name,
             "Nickname":_teacherInfo!.nickName,
             "Birthday":_teacherInfo!.BirthDay,
+            
+            // not used, empty string
             "Province":_teacherInfo!.addrProv,
             "City":_teacherInfo!.addrCity,
             "Country":_teacherInfo!.addrCountry,
+            
+            //
             "BloodType":_teacherInfo!.BloodType,
             "Introduction":_teacherInfo!.intro,
-            "Sex":String(_teacherInfo!.sex),
-            "HeadImg": urlString
+            
+            // removed
+            //"HeadImg": urlString
         ]
         
         

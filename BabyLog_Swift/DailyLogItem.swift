@@ -227,7 +227,7 @@ class TeacherInfo: Printable  {
     
     
     init(name: String, nickName: String, sex: Int, id: Int, imageURL: NSURL, validImageExtension: Bool, birthDay: String, bloodType: String,
-        city: String, province: String, country: String) {
+        city: String, province: String, country: String, intro: String) {
         self.name = name
         self.nickName = nickName
         self.sex = sex
@@ -239,6 +239,7 @@ class TeacherInfo: Printable  {
         self.addrCity = city
         self.addrProv = province
         self.addrCountry = country
+        self.intro = intro
     }
 
     
