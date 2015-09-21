@@ -16,9 +16,10 @@ import UIKit
 class UIViewControllerForWebAPI: UIViewController {
     
     // MARK: user token
-    func _saveUserToken(userToken:String) {
+    func _saveUserTokenAndRongyunToken(userToken:String, rongyunToken:String) {
         let userDefault = NSUserDefaults.standardUserDefaults()
         userDefault.setObject(userToken, forKey: userTokenKeyInUserDefault)
+        userDefault.setObject(rongyunToken, forKey: rongyunTokenKeyInUserDefault)
     }
     
     func _getUserToken() -> String {
@@ -28,7 +29,12 @@ class UIViewControllerForWebAPI: UIViewController {
         return userToken
     }
     
-
+    func _getRongyunToken() -> String {
+        let userDefault = NSUserDefaults.standardUserDefaults()
+        let rongyunToken = userDefault.stringForKey(rongyunTokenKeyInUserDefault) ?? ""
+        println("\(rongyunToken)")
+        return rongyunToken
+    }
     
     
     // MARK: spinner and UI

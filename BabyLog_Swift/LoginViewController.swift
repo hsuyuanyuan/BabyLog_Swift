@@ -98,8 +98,19 @@ class LoginViewController: UIViewControllerForWebAPI {
         callWebAPI(requestParams, curAPIType: APIType.UserLogIn, postActionAfterSuccessulReturn: { (data) -> () in
             
             let userToken = (data as! NSDictionary)["Token"] as! String
-            self._saveUserToken(userToken)
+            let rongyunToken = (data as! NSDictionary)["RYToken"] as! String
+            self._saveUserTokenAndRongyunToken(userToken, rongyunToken: rongyunToken)
             
+            
+            // Rongyun registration
+            RCIM.sharedRCIM().initWithAppKey("pvxdm17jxr4rr")
+            RCIM.sharedRCIM().connectWithToken(rongyunToken, success: { (userid: String!) -> Void in
+                println("Rongyun connected ")
+                }, error: { (error: RCConnectErrorCode) -> Void in
+                    println("connection to Rongyun failed")
+                }) { () -> Void in
+                    println("Rongyun token wrong!")
+            }
 
             self.performSegueWithIdentifier("segueToShowMainTabBarVC", sender: self) //yxu: Note: segue is from the loginVC to mainVC in storyboard, not from button to mainVC, which would jump without calling performSegueWithIdentifier
             

@@ -13,7 +13,7 @@ class ChatViewController: RCConversationViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         //self.edgesForExtendedLayout = UIRectEdge.All
         //self.tableView.contentInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: tabBarHeight!, right: 0.0)
         
@@ -23,19 +23,30 @@ class ChatViewController: RCConversationViewController {
         footer.backgroundColor = [UIColor clearColor];
         myTableView.tableFooterView = footer;
         */
+        
         let footer = UIView(frame: CGRectMake(0,0,1,90))
         footer.backgroundColor = UIColor.clearColor()
         
-        
-        
-        
         // Do any additional setup after loading the view.
         conversationType = RCConversationType.ConversationType_PRIVATE
-        targetId = String(userIds[nextUser])
-        userName = userNames[nextUser]
-        title = userName
-
+        
+        
     }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        println("In viewDidLoad")
+    }
+    
+    
+    
+    func initRongyunIDandName(rongyunId: String, rongyunName: String) {
+        targetId = rongyunId
+        userName = rongyunName
+        title = rongyunName
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -55,15 +66,7 @@ class ChatViewController: RCConversationViewController {
         
     }
 
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
     /*
     override func onSelectedTableRow(conversationModelType: RCConversationModelType, conversationModel model: RCConversationModel!, atIndexPath indexPath: NSIndexPath!) {

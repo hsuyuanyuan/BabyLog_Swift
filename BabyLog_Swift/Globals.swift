@@ -161,6 +161,7 @@ let imageDefaultHead = UIImage(named: "Tab Bar-KId@3x.png")  // default photo fo
 let userTokenStringInHttpHeader = "Token" as NSObject
 
 let userTokenKeyInUserDefault = "keyForUserToken"
+let rongyunTokenKeyInUserDefault = "keyForRongYun"
 
 
 let activityIdMin = 1 // first activity id, not zero
@@ -320,6 +321,7 @@ Note: how to get the token for a test user?
 为了方便您进行测试开发，我们还提供了 API 调试工具，以便您不用部署服务器端程序，即可直接获得测试开发所需的 Token。请访问 融云开发者平台，打开您想测试的应用，在左侧菜单中选择“API 调试”即可。融云拥有业内最丰富功能的开发者后台服务，我们建议所有开发者先熟悉后台的功能。
 
 */
+/*
 let userTokens  = ["", "YosJ8u4R9BDqhiG3IZKQ+VIPIEx22OKrNk+hkytiK3ZE0cslnXRrmjK+u6BZOb3YUbhmXbiLhAET627UJzV7Og==", "jELDaCGEl2zDl2PxC+0pAg7Sb0qRD+ExST5W71Ob8Ref2OQLwZvwE0XkoygJS8+BJBQWVCcMMduw/WfGu1LNZg=="]
 let userIds  = [0, 1, 2 ]
 let userNames = ["", "Test111", "Test222" ]
@@ -329,6 +331,8 @@ let userNames = ["", "Test111", "Test222" ]
 // this is for simulator
 let curUser = 1
 let nextUser = 2
+*/
+
 
 /*
 // for phone

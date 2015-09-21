@@ -18,15 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       // Override point for customization after application launch.
     
     
-    RCIM.sharedRCIM().initWithAppKey("mgb7ka1nb5rjg")
-    
-    RCIM.sharedRCIM().connectWithToken(userTokens[curUser], success: { (userid: String!) -> Void in
-        println("userid = \(userid)")
-        }, error: { (error: RCConnectErrorCode) -> Void in
-            println("connection failed")
-        }) { () -> Void in
-            println("token wrong!")
-    }
+
     
     // For PuGongYing SDK:
     // dSYM文件是一个iOS应用编译的时候产生的文件，其中包含了符号信息。在Xcode中，选择项目目录下Products -> XXX.app，然后Show in Finder，即可看到项目对应的dSYM文件

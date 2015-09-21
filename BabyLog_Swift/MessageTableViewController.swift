@@ -13,6 +13,8 @@ class MessageTableViewController: UIViewControllerForWebAPI, UITableViewDataSour
     
     @IBOutlet weak var messageTableView: UITableView!
     
+    var _curRow:Int = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -49,13 +51,9 @@ class MessageTableViewController: UIViewControllerForWebAPI, UITableViewDataSour
                 
             }
             }, postActionAfterAllReturns: { () -> () in
-                
- 
-                
+      
                 self._stopSpinnerAndResumeUI()
-                
-                
-                
+   
         })
         
         
@@ -71,6 +69,8 @@ class MessageTableViewController: UIViewControllerForWebAPI, UITableViewDataSour
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("messageCell") as! MessageTableViewCell
+        
+        _curRow = indexPath.row
         
         let babyInfo = _babyInfoArray[indexPath.row]
         
@@ -103,6 +103,10 @@ class MessageTableViewController: UIViewControllerForWebAPI, UITableViewDataSour
         if segue.identifier == "showChatView" //yxu: defined in segue property in Storyboard
         {
             let chatVC = segue.destinationViewController as! ChatViewController
+            
+            let babyInfo = _babyInfoArray[_curRow]
+            chatVC.initRongyunIDandName( String(babyInfo.id) , rongyunName: babyInfo.nickName )
+            
             chatVC.hidesBottomBarWhenPushed = true
         }
         
