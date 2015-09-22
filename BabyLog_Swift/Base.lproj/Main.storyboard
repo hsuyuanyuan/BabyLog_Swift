@@ -1075,7 +1075,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sL6-pQ-vOI">
-                                <rect key="frame" x="205" y="555" width="53" height="30"/>
+                                <rect key="frame" x="209" y="555" width="125" height="30"/>
                                 <state key="normal" title="取   消" backgroundImage="Button-Big-Orange.png">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -1085,7 +1085,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hEg-8N-F59">
-                                <rect key="frame" x="87" y="555" width="53" height="30"/>
+                                <rect key="frame" x="39" y="555" width="125" height="30"/>
                                 <state key="normal" title="确   定" backgroundImage="Button-Big-Orange.png">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -1131,8 +1131,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uas-L0-4Lk">
-                                <rect key="frame" x="228" y="607" width="43" height="30"/>
-                                <state key="normal" title="取   消">
+                                <rect key="frame" x="209" y="607" width="125" height="30"/>
+                                <state key="normal" title="取   消" backgroundImage="Button-Big-Orange.png">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -1141,8 +1142,9 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IFC-pr-FvK">
-                                <rect key="frame" x="103" y="607" width="43" height="30"/>
-                                <state key="normal" title="确   定">
+                                <rect key="frame" x="41" y="607" width="125" height="30"/>
+                                <state key="normal" title="确   定" backgroundImage="Button-Big-Orange.png">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -1407,7 +1409,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RqW-xO-9r1">
-                                <rect key="frame" x="206" y="555" width="53" height="30"/>
+                                <rect key="frame" x="207" y="555" width="125" height="30"/>
                                 <state key="normal" title="取   消" backgroundImage="Button-Big-Orange.png">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -1440,7 +1442,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" enablesReturnKeyAutomatically="YES"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nmF-4A-oCm">
-                                <rect key="frame" x="87" y="555" width="53" height="30"/>
+                                <rect key="frame" x="39" y="555" width="125" height="30"/>
                                 <state key="normal" title="确   定" backgroundImage="Button-Big-Orange.png">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
