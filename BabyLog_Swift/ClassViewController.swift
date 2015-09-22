@@ -206,6 +206,7 @@ class ClassViewController: UIViewControllerForWebAPI, UICollectionViewDataSource
         
         //cell.babyImageView.image = babyInfo.image
         cell.babyImageButton.setBackgroundImage( babyInfo.image, forState: UIControlState.Normal) //yxu: tried setImage first. not working, show blue block
+        cell.babyImageButton.tag = indexPath.row
         cell._babyId = babyInfo.id
         cell._row = indexPath.row
         
