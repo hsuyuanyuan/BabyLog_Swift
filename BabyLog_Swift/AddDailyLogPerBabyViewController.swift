@@ -259,9 +259,8 @@ class AddDailyLogPerBabyViewController: AddDailyLogViewController, SaveStartsFor
             "EndTime":_curDailyLog.endTime, //"09:30",
             "Rand": "",
             "BabyId": idString, // baby ids separated by ,
-            "PicList": "",
-            "Content": _curDailyLog.content,
             "UploadPic": imageBase64StrList,
+            "Content": _curDailyLog.content,
             "Stars": starString // stars separated by ,
         ]
         

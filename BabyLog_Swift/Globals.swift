@@ -121,7 +121,7 @@ enum APIType: String, Printable {
     case DeleteScheduleForClass = "ClassSchedule.DeleteSchedule"
     case AddScheduleForClass = "ClassSchedule.InputScheduleJson"
     case GetScheduleForClass = "ClassSchedule.GetListSchedule"
-    case UploadCompleteStatusWithStars = "ClassSchedule.CompleteSchedule"
+    case UploadCompleteStatusWithStars = "ClassSchedule.IOSCompleteSchedule"
     
     case UserLogIn = "user.login"
     case UserRegistration = "user.register"
