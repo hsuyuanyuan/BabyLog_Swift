@@ -51,13 +51,14 @@ class AddDailyLogForOneBabyViewController: AddDailyLogViewController, FloatRatin
         
         delegatePerBaby?.uploadLogItemForOneBaby(activityItem, extraInfo: extraInfo)
         
-        dismissViewControllerAnimated(true, completion: nil)
+        navigationController?.popViewControllerAnimated(true)
+        //dismissViewControllerAnimated(true, completion: nil)
         
     }
     
     @IBAction func cancelButtonTapped(sender: AnyObject) {
-        
-        dismissViewControllerAnimated(true, completion: nil)
+        navigationController?.popViewControllerAnimated(true)
+        //dismissViewControllerAnimated(true, completion: nil)
     }
     
     

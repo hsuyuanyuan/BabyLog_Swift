@@ -717,7 +717,7 @@
                     <connections>
                         <segue destination="rc2-VK-VL2" kind="relationship" relationship="viewControllers" id="djL-87-rzD"/>
                         <segue destination="TwH-dV-FZM" kind="relationship" relationship="viewControllers" id="qyz-oq-4ho"/>
-                        <segue destination="PHP-mY-Vr5" kind="relationship" relationship="viewControllers" id="zcr-Ks-0WT"/>
+                        <segue destination="I7X-J2-f5D" kind="relationship" relationship="viewControllers" id="zcr-Ks-0WT"/>
                         <segue destination="ESp-CE-cbJ" kind="relationship" relationship="viewControllers" id="7Iw-m8-rzY"/>
                     </connections>
                 </tabBarController>
@@ -940,13 +940,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="556-Ph-Axr">
+                            <navigationBar contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="556-Ph-Axr">
                                 <rect key="frame" x="0.0" y="20" width="376" height="44"/>
                                 <items>
-                                    <navigationItem title="班级主页" id="ojd-tl-dfC"/>
+                                    <navigationItem id="ojd-tl-dfC"/>
                                 </items>
                             </navigationBar>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="lhW-81-nbg">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="lhW-81-nbg">
                                 <rect key="frame" x="16" y="64" width="343" height="554"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="CQR-fx-ud2">
@@ -1008,7 +1008,7 @@
                             <constraint firstItem="lhW-81-nbg" firstAttribute="top" secondItem="556-Ph-Axr" secondAttribute="bottom" id="ex5-zY-vzb"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" tag="1" title="班级主页" image="TabBar-Banji-Blue.png" id="uWY-v0-g5w"/>
+                    <navigationItem key="navigationItem" title="班级主页" id="UM2-fu-9re"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="classCollectionView" destination="lhW-81-nbg" id="jdY-v6-tve"/>
@@ -1016,7 +1016,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="weP-IO-7Qv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1954.5" y="201.5"/>
+            <point key="canvasLocation" x="2541.5" y="201.5"/>
         </scene>
         <!--Daily Log for each kid-->
         <scene sceneID="fD2-qp-Zvr">
@@ -1145,7 +1145,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0hp-hJ-YPe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2468.5" y="196.5"/>
+            <point key="canvasLocation" x="3055.5" y="196.5"/>
         </scene>
         <!--Baby Star View Controller-->
         <scene sceneID="k5c-QF-Ptv">
@@ -1246,7 +1246,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5XS-2K-jdQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2992.5" y="196.5"/>
+            <point key="canvasLocation" x="3579.5" y="196.5"/>
         </scene>
         <!--Log Tab For One Baby View Controller-->
         <scene sceneID="1v6-ZZ-Ntc">
@@ -1260,7 +1260,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="88" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="W0k-2d-eUw">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="88" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="W0k-2d-eUw">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -1312,7 +1312,7 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e2j-Qb-sqM">
+                            <navigationBar contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e2j-Qb-sqM">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <color key="backgroundColor" red="0.32477893251198503" green="0.34081541212230748" blue="0.88658249378204346" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" red="0.45098039220000002" green="0.63921568630000003" blue="0.90980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1337,17 +1337,6 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2RV-Qd-n7G">
-                                <rect key="frame" x="16" y="617" width="343" height="30"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <state key="normal" title="返     回" backgroundImage="Button-Big-Orange.png">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="cancelButtonTapped:" destination="qsc-Hd-ZPq" eventType="touchUpInside" id="tCv-3C-SNR"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -1547,6 +1536,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Poh-yA-XcS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="871.5" y="840.5"/>
+        </scene>
+        <!--班级主页-->
+        <scene sceneID="dW1-ty-4BK">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="I7X-J2-f5D" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" tag="1" title="班级主页" image="TabBar-Banji-Blue.png" id="uWY-v0-g5w"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="zfr-Jj-PeG">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="PHP-mY-Vr5" kind="relationship" relationship="rootViewController" id="VE9-sZ-SPh"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7T5-NI-SdA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1954.5" y="201.5"/>
         </scene>
     </scenes>
     <resources>
