@@ -15,6 +15,8 @@ class AddDailyLogPerBabyViewController: AddDailyLogViewController, SaveStartsFor
 
     // MARK: data arrays for baby info
     
+    @IBOutlet weak var dailyLogPerBabyContainerView: UIView!
+
     var _idsForKids:[Int]?
     var _starsForKids:[Float]?
     var _namesForKids:[String]?
@@ -85,6 +87,45 @@ class AddDailyLogPerBabyViewController: AddDailyLogViewController, SaveStartsFor
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        
+        var scaleX:CGFloat = view.frame.width / dailyLogPerBabyContainerView.frame.width
+        
+        var scaleY:CGFloat = (view.frame.height - 44 - 20 - 49) / dailyLogPerBabyContainerView.frame.height
+        
+        println("view width = \(dailyLogPerBabyContainerView.frame.width), view height = \( dailyLogPerBabyContainerView.frame.height)" )
+        println("super view width = \(view.frame.width), super view height = \( view.frame.height)" )
+        
+        
+        /*
+        http://stackoverflow.com/questions/30503254/get-frame-height-without-navigation-bar-height-and-tab-bar-height-in-deeper-view
+        
+        */
+        
+        var scale: CGFloat =   min(scaleX, scaleY)
+        
+        var t: CGAffineTransform = CGAffineTransformMakeScale(scale, scale)
+        
+        var translateX = ( dailyLogPerBabyContainerView.frame.width ) * (scale - 1) / 2 / scale;
+        if ( dailyLogPerBabyContainerView.frame.height > view.frame.height  ) // for 4s: 320* 480, while teacherContainerView is 340 * 540
+        {
+            translateX += 40
+        }
+        
+        var translateY = dailyLogPerBabyContainerView.frame.height * (scale - 1) / 2 / scale;
+        
+        
+        t = CGAffineTransformTranslate(t, translateX, translateY)
+        
+        dailyLogPerBabyContainerView.transform = t
+        
+        dailyLogPerBabyContainerView.frame = view.bounds
+        
+        dailyLogPerBabyContainerView.setNeedsLayout()
+        
+        
+        
         
         
         if _babyInfoArray.count == 0 {

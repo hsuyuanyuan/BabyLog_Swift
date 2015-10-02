@@ -19,6 +19,10 @@ protocol UploadLogForOneBabyDelegate {
 
 class AddDailyLogForOneBabyViewController: AddDailyLogViewController, FloatRatingViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, DKImagePickerControllerDelegate {
 
+    
+    
+    @IBOutlet weak var dailyLogOneBabyContainerView: UIView!
+    
     var _babyId = 0
     
     var delegatePerBaby: UploadLogForOneBabyDelegate!
@@ -61,6 +65,44 @@ class AddDailyLogForOneBabyViewController: AddDailyLogViewController, FloatRatin
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
+        var scaleX:CGFloat = view.frame.width / dailyLogOneBabyContainerView.frame.width
+        
+        var scaleY:CGFloat = (view.frame.height - 44 - 20 - 49) / dailyLogOneBabyContainerView.frame.height
+        
+        println("view width = \(dailyLogOneBabyContainerView.frame.width), view height = \( dailyLogOneBabyContainerView.frame.height)" )
+        println("super view width = \(view.frame.width), super view height = \( view.frame.height)" )
+        
+        
+        /*
+        http://stackoverflow.com/questions/30503254/get-frame-height-without-navigation-bar-height-and-tab-bar-height-in-deeper-view
+        
+        */
+        
+        var scale: CGFloat =   min(scaleX, scaleY)
+        
+        var t: CGAffineTransform = CGAffineTransformMakeScale(scale, scale)
+        
+        var translateX = ( dailyLogOneBabyContainerView.frame.width ) * (scale - 1) / 2 / scale;
+        if ( dailyLogOneBabyContainerView.frame.height > view.frame.height  ) // for 4s: 320* 480, while dailyLogOneBabyContainerView is 340 * 540
+        {
+            translateX += 40
+        }
+        
+        var translateY = dailyLogOneBabyContainerView.frame.height * (scale - 1) / 2 / scale;
+        
+        
+        t = CGAffineTransformTranslate(t, translateX, translateY)
+        
+        dailyLogOneBabyContainerView.transform = t
+        
+        dailyLogOneBabyContainerView.frame = view.bounds
+        
+        dailyLogOneBabyContainerView.setNeedsLayout()
+        
+        
+        
+        
         // Do any additional setup after loading the view.
         starRatingVIew.delegate = self
     }

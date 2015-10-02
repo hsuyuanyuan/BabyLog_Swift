@@ -18,6 +18,8 @@ protocol UploadLogDelegate {
 
 class AddDailyLogViewController: UIViewControllerForWebAPI, UIPickerViewDataSource, UIPickerViewDelegate {
 
+    @IBOutlet weak var dailyLogContainerView: UIView!
+    
     @IBOutlet weak var startTimeTextField: UITextField!
     
     @IBOutlet weak var endTimeTextField: UITextField!
@@ -77,6 +79,53 @@ class AddDailyLogViewController: UIViewControllerForWebAPI, UIPickerViewDataSour
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if( dailyLogContainerView != nil) {
+            
+            println("view width = \(dailyLogContainerView.frame.width), view height = \( dailyLogContainerView.frame.height)" )
+            println("super view width = \(view.frame.width), super view height = \( view.frame.height)" )
+            
+            
+            var scaleX:CGFloat = view.frame.width / dailyLogContainerView.frame.width
+            
+            var scaleY:CGFloat = (view.frame.height - 44 - 20 - 49) / dailyLogContainerView.frame.height
+            
+            println("view width = \(dailyLogContainerView.frame.width), view height = \( dailyLogContainerView.frame.height)" )
+            println("super view width = \(view.frame.width), super view height = \( view.frame.height)" )
+            
+            
+            /*
+            http://stackoverflow.com/questions/30503254/get-frame-height-without-navigation-bar-height-and-tab-bar-height-in-deeper-view
+            
+            */
+            
+            var scale: CGFloat =   min(scaleX, scaleY)
+            
+            var t: CGAffineTransform = CGAffineTransformMakeScale(scale, scale)
+            
+            var translateX = ( dailyLogContainerView.frame.width ) * (scale - 1) / 2 / scale;
+            if ( dailyLogContainerView.frame.height > view.frame.height  ) // for 4s: 320* 480, while teacherContainerView is 340 * 540
+            {
+                translateX += 40
+            }
+            
+            var translateY = dailyLogContainerView.frame.height * (scale - 1) / 2 / scale;
+            
+            
+            t = CGAffineTransformTranslate(t, translateX, translateY)
+            
+            dailyLogContainerView.transform = t
+            
+            dailyLogContainerView.frame = view.bounds
+            
+            dailyLogContainerView.setNeedsLayout()
+        
+        }
+        
+        
+        
+        
+        
         
         
         contentTextView.layer.borderWidth = 1.0

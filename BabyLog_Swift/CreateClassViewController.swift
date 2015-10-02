@@ -10,6 +10,7 @@ import UIKit
 
 class CreateClassViewController: UIViewControllerForWebAPI, UITextFieldDelegate,  UIPickerViewDataSource, UIPickerViewDelegate {
     
+    @IBOutlet weak var classContainerView: UIView!
     
     @IBOutlet weak var classAddressTextField: UITextField!
 
@@ -41,7 +42,43 @@ class CreateClassViewController: UIViewControllerForWebAPI, UITextFieldDelegate,
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+       
+        var scaleX:CGFloat = view.frame.width / classContainerView.frame.width
+        
+        var scaleY:CGFloat = (view.frame.height - 44 - 20 - 49) / classContainerView.frame.height
 
+        println("view width = \(classContainerView.frame.width), view height = \( classContainerView.frame.height)" )
+        println("super view width = \(view.frame.width), super view height = \( view.frame.height)" )
+        
+        
+        /*
+        http://stackoverflow.com/questions/30503254/get-frame-height-without-navigation-bar-height-and-tab-bar-height-in-deeper-view
+
+        */
+        
+        var scale: CGFloat =   min(scaleX, scaleY)
+
+        var t: CGAffineTransform = CGAffineTransformMakeScale(scale, scale)
+ 
+        var translateX = ( classContainerView.frame.width ) * (scale - 1) / 2 / scale;
+        if ( classContainerView.frame.height > view.frame.height  ) // for 4s: 320* 480, while classContainerView is 340 * 540
+        {
+            translateX += 40
+        }
+        
+        var translateY = classContainerView.frame.height * (scale - 1) / 2 / scale;
+ 
+        
+        t = CGAffineTransformTranslate(t, translateX, translateY)
+ 
+        classContainerView.transform = t
+        
+        classContainerView.frame = view.bounds
+        
+        classContainerView.setNeedsLayout()
+        
+        
         // Do any additional setup after loading the view.
         
         classCodeTextField.delegate = self //Note: make it not editable
@@ -69,6 +106,8 @@ class CreateClassViewController: UIViewControllerForWebAPI, UITextFieldDelegate,
         } else {
             _getBanjiInfo()
         }
+        
+
     }
 
     override func didReceiveMemoryWarning() {

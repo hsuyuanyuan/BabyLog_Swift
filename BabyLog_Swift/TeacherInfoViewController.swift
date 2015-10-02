@@ -11,6 +11,7 @@ import UIKit
 class TeacherInfoViewController: UIViewControllerForWebAPI {
     
     
+    @IBOutlet weak var teacherContainerView: UIView!
     
     @IBOutlet weak var teacherNameTextField: UITextField!
     
@@ -55,6 +56,48 @@ class TeacherInfoViewController: UIViewControllerForWebAPI {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+        
+        var scaleX:CGFloat = view.frame.width / teacherContainerView.frame.width
+        
+        var scaleY:CGFloat = (view.frame.height - 44 - 20 - 49) / teacherContainerView.frame.height
+        
+        println("view width = \(teacherContainerView.frame.width), view height = \( teacherContainerView.frame.height)" )
+        println("super view width = \(view.frame.width), super view height = \( view.frame.height)" )
+        
+        
+        /*
+        http://stackoverflow.com/questions/30503254/get-frame-height-without-navigation-bar-height-and-tab-bar-height-in-deeper-view
+        
+        */
+        
+        var scale: CGFloat =   min(scaleX, scaleY)
+        
+        var t: CGAffineTransform = CGAffineTransformMakeScale(scale, scale)
+        
+        var translateX = ( teacherContainerView.frame.width ) * (scale - 1) / 2 / scale;
+        if ( teacherContainerView.frame.height > view.frame.height  ) // for 4s: 320* 480, while teacherContainerView is 340 * 540
+        {
+            translateX += 40
+        }
+        
+        var translateY = teacherContainerView.frame.height * (scale - 1) / 2 / scale;
+        
+        
+        t = CGAffineTransformTranslate(t, translateX, translateY)
+        
+        teacherContainerView.transform = t
+        
+        teacherContainerView.frame = view.bounds
+        
+        teacherContainerView.setNeedsLayout()
+        
+        
+        
+        
+        
+        
+        
         
         _getTeacherInfo()
         
