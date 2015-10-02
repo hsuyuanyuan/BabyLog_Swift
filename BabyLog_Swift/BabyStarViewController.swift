@@ -16,6 +16,7 @@ protocol SaveStartsForKidsDelegate {
 
 class BabyStarViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FloatRatingViewDelegate {
 
+    @IBOutlet weak var babyStartContainerView: UIView!
 
     var _starsForKids: [Float]?
     var _namesForKids: [String]?
@@ -33,6 +34,42 @@ class BabyStarViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        var scaleX:CGFloat = view.frame.width / babyStartContainerView.frame.width
+        
+        var scaleY:CGFloat = (view.frame.height - 44 - 20 - 49) / babyStartContainerView.frame.height
+        
+        println("view width = \(babyStartContainerView.frame.width), view height = \( babyStartContainerView.frame.height)" )
+        println("super view width = \(view.frame.width), super view height = \( view.frame.height)" )
+        
+        
+        /*
+        http://stackoverflow.com/questions/30503254/get-frame-height-without-navigation-bar-height-and-tab-bar-height-in-deeper-view
+        
+        */
+        
+        var scale: CGFloat =   min(scaleX, scaleY)
+        
+        var t: CGAffineTransform = CGAffineTransformMakeScale(scale, scale)
+        
+        var translateX = ( babyStartContainerView.frame.width ) * (scale - 1) / 2 / scale;
+        if ( babyStartContainerView.frame.height > view.frame.height  ) // for 4s: 320* 480, while teacherContainerView is 340 * 540
+        {
+            translateX += 40
+        }
+        
+        var translateY = babyStartContainerView.frame.height * (scale - 1) / 2 / scale;
+        
+        
+        t = CGAffineTransformTranslate(t, translateX, translateY)
+        
+        babyStartContainerView.transform = t
+        
+        babyStartContainerView.frame = view.bounds
+        
+        babyStartContainerView.setNeedsLayout()
+        
+        
+        
         // Do any additional setup after loading the view.
         starTableView.delegate = self
         starTableView.dataSource = self
