@@ -25,14 +25,13 @@ class UIViewControllerForWebAPI: UIViewController {
     func _getUserToken() -> String {
         let userDefault = NSUserDefaults.standardUserDefaults()
         let userToken = userDefault.stringForKey(userTokenKeyInUserDefault) ?? ""
-        println("\(userToken)")
+        print("\(userToken)")
         return userToken
     }
     
     func _getRongyunToken() -> String {
         let userDefault = NSUserDefaults.standardUserDefaults()
         let rongyunToken = userDefault.stringForKey(rongyunTokenKeyInUserDefault) ?? ""
-        println("\(rongyunToken)")
         return rongyunToken
     }
     
@@ -106,7 +105,7 @@ class UIViewControllerForWebAPI: UIViewController {
                 "Token": _getUserToken()] //todo: retrive the token and put it in the header
         }
         
-        let data = NSJSONSerialization.dataWithJSONObject(requestParams, options: NSJSONWritingOptions.PrettyPrinted, error: nil)
+        let data = try? NSJSONSerialization.dataWithJSONObject(requestParams, options: NSJSONWritingOptions.PrettyPrinted)
         
  
         
@@ -117,23 +116,27 @@ class UIViewControllerForWebAPI: UIViewController {
             mutableRequest.HTTPBody = data
             return (mutableRequest, nil)
         })).responseJSON() {
-            (request, response, JSON, error) in
+            response in
             
             
-            println("we did get the response")
-            println(JSON) //yxu: output the unicode
-            println(request)
-            println(response)
-            println(error)
+            //http://stackoverflow.com/questions/33384342/contextual-type-for-closure-argument-list-expects-1-argument-but-4-were-specifi
+            // change for Swift 2.0 (error: Contextual type for closure argument list expects 1 argument, but 4 were specified )
             
-            
-            if error == nil {  //: error means http error. The api specific logic error is contained inside JSON
+            print("we did get the response")
 
-                println((JSON as! NSDictionary)["Error"]!) //yxu: output Chinese: http://stackoverflow.com/questions/26963029/how-can-i-get-the-swift-xcode-console-to-show-chinese-characters-instead-of-unic
+            //print(request)
+            //print(response)
+            //print(error)
+            
+            
+            if response.result.isSuccess {  //: error means http error. The api specific logic error is contained inside JSON
+                let JSON = response.result.value!
+                print(JSON) //yxu: output the unicode
+                print((JSON as! NSDictionary)["Error"]!) //yxu: output Chinese: http://stackoverflow.com/questions/26963029/how-can-i-get-the-swift-xcode-console-to-show-chinese-characters-instead-of-unic
                 
                 let statusCode = (JSON as! NSDictionary)["StatusCode"] as! Int
                 if statusCode  == 200 {
-                    println("Succeeded in making the api call: " + curAPIType.description )
+                    print("Succeeded in making the api call: " + curAPIType.description )
                     
                     postActionAfterSuccessulReturn?(data: JSON)
                     
@@ -145,7 +148,7 @@ class UIViewControllerForWebAPI: UIViewController {
                 
                 
             } else {
-                self.displayAlert( curAPIType.description + " failed", message: error!.description)
+                self.displayAlert( curAPIType.description + " failed", message: (response.result.error?.localizedDescription)!)
             }
             
             
@@ -165,20 +168,20 @@ class UIViewControllerForWebAPI: UIViewController {
         
         let userInfo = result["UserInfo"]
         
-        var teacherName: String = userInfo["BabyName"].string ?? ""
-        var teacherDoB: String = userInfo["Birthday"].string ?? ""
-        var teacherBloodType: String = userInfo["BloodType"].string ?? ""
-        var teacherCity: String = userInfo["City"].string ?? ""
-        var teacherProvince: String = userInfo["Province"].string ?? ""
-        var teacherCountry: String = userInfo["Country"].string ?? ""
-        var teacherId: Int = userInfo["Id"].int ?? 0
-        var teacherIntro: String = userInfo["Introduction"].string ?? ""
-        var teacherNickname: String = userInfo["Nickname"].string ?? ""
-        var teacherSex:Int = userInfo["Sex"].int ?? 0
-        var headImg: String = userInfo["HeadImg"].string ?? ""
+        let teacherName: String = userInfo["BabyName"].string ?? ""
+        let teacherDoB: String = userInfo["Birthday"].string ?? ""
+        let teacherBloodType: String = userInfo["BloodType"].string ?? ""
+        let teacherCity: String = userInfo["City"].string ?? ""
+        let teacherProvince: String = userInfo["Province"].string ?? ""
+        let teacherCountry: String = userInfo["Country"].string ?? ""
+        let teacherId: Int = userInfo["Id"].int ?? 0
+        let teacherIntro: String = userInfo["Introduction"].string ?? ""
+        let teacherNickname: String = userInfo["Nickname"].string ?? ""
+        let teacherSex:Int = userInfo["Sex"].int ?? 0
+        let headImg: String = userInfo["HeadImg"].string ?? ""
         
         
-        println("\(headImg.pathExtension)")
+        print("\(headImg.pathExtension)")
         var bValidImageExtension = true
         if headImg.pathExtension == "" {
             bValidImageExtension = false
@@ -202,21 +205,21 @@ class UIViewControllerForWebAPI: UIViewController {
             
             for babyInformation in babyInformationArray {
                 
-                var kidId: Int = babyInformation["Id"].int!
-                var kidName: String = babyInformation["BabyName"].string!
-                var kidNickName: String = babyInformation["Nickname"].string!
-                var kidSex: Int = babyInformation["Sex"].string?.toInt() ?? 0
-                var headImg = babyInformation["HeadImg"].string ?? ""
+                let kidId: Int = babyInformation["Id"].int!
+                let kidName: String = babyInformation["BabyName"].string!
+                let kidNickName: String = babyInformation["Nickname"].string!
+                let kidSex: Int = Int(babyInformation["Sex"].string!)!
+                let headImg = babyInformation["HeadImg"].string ?? ""
                 var headImgPath = babyInformation["HeadImgpath"].string ?? ""
                 
                 //let headImg = "302bf297-6646-4945-8867-d0ed17c7c111.jpg";
                 //var headImgPath = "~/Uploads/000014FilePath/";
                 // http://www.babysaga.cn/Uploads/000014FilePath/302bf297-6646-4945-8867-d0ed17c7c111.jpg
-                let range = headImgPath.startIndex ..< advance(headImgPath.startIndex, 2)
+                let range = headImgPath.startIndex ..< headImgPath.startIndex.advancedBy(2)
                 headImgPath.removeRange(range)
                 
                 
-                println("\(headImg.pathExtension)")
+                print("\(headImg.pathExtension)")
                 var bValidImageExtension = true
                 if headImg.pathExtension == "" {
                     bValidImageExtension = false
@@ -224,7 +227,7 @@ class UIViewControllerForWebAPI: UIViewController {
                 
                 let url = NSURL(string: headImgPath + headImg, relativeToURL: baseURL )
                 
-                var newKid = BabyInfo(babyName: kidName, nickName: kidNickName, sex: kidSex, id: kidId, imageURL: url!, validImageExtension: bValidImageExtension)
+                let newKid = BabyInfo(babyName: kidName, nickName: kidNickName, sex: kidSex, id: kidId, imageURL: url!, validImageExtension: bValidImageExtension)
                 kids.append(newKid)
             }
             
@@ -241,7 +244,7 @@ class UIViewControllerForWebAPI: UIViewController {
     
     func _startDownloadForImage(babyInfo: BabyInfo, indexPath: NSIndexPath, UpdataUI: ()->() ){
         
-        if let downloadOperation = pendingOperations.downloadsInProgress[indexPath] {
+        if let _ = pendingOperations.downloadsInProgress[indexPath] {
             return
         }
         

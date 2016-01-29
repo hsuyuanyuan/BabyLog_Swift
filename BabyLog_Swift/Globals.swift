@@ -103,9 +103,9 @@ enum InOutType: Int {
 }
 
 // constants for web api
-let APICommonPrefix = "http://www.babysaga.cn/app/service?method="
+let APICommonPrefix = "http://218.60.9.101:9999/app/service?method=" // "http://www.babysaga.cn/app/service?method="
 
-enum APIType: String, Printable {
+enum APIType: String, CustomStringConvertible {
     
     case AddDairyForOneBaby = "Diary.IOSInputDiary"
     case GetDairyForOneBaby = "diary.tdaydiary"
@@ -263,7 +263,8 @@ extension NSDate {
 extension String {
     
     subscript (i: Int) -> Character {
-        return self[advance(self.startIndex, i)]
+       // return self[advance(self.startIndex, i)]
+        return self[ self.startIndex.advancedBy(i)]
     }
     
     subscript (i: Int) -> String {
@@ -271,18 +272,34 @@ extension String {
     }
     
     subscript (r: Range<Int>) -> String {
-        return substringWithRange(Range(start: advance(startIndex, r.startIndex), end: advance(startIndex, r.endIndex)))
+        return substringWithRange(Range(start: startIndex.advancedBy(r.startIndex), end: startIndex.advancedBy(r.endIndex)))
+    }
+ 
+    
+}
+
+// http://stackoverflow.com/questions/32646168/pathextension-is-unavailable-use-pathextension-on-nsurl-instead-swift-2-0
+// fix the missing of pathExtension from Swift 2.0
+extension String {
+    var ns: NSString {
+        return self as NSString
+    }
+    var pathExtension: String? {
+        return ns.pathExtension
+    }
+    var lastPathComponent: String? {
+        return ns.lastPathComponent
     }
 }
 
 
 // refer to: http://stackoverflow.com/questions/29726643/how-to-compress-of-reduce-the-size-of-an-image-before-uploading-to-parse-as-pffi
 extension UIImage {
-    var highestQualityJPEGNSData:NSData { return UIImageJPEGRepresentation(self, 1.0) }
-    var highQualityJPEGNSData:NSData    { return UIImageJPEGRepresentation(self, 0.75)}
-    var mediumQualityJPEGNSData:NSData  { return UIImageJPEGRepresentation(self, 0.5) }
-    var lowQualityJPEGNSData:NSData     { return UIImageJPEGRepresentation(self, 0.25)}
-    var lowestQualityJPEGNSData:NSData  { return UIImageJPEGRepresentation(self, 0.0) }
+    var highestQualityJPEGNSData:NSData { return UIImageJPEGRepresentation(self, 1.0)! }
+    var highQualityJPEGNSData:NSData    { return UIImageJPEGRepresentation(self, 0.75)!}
+    var mediumQualityJPEGNSData:NSData  { return UIImageJPEGRepresentation(self, 0.5)! }
+    var lowQualityJPEGNSData:NSData     { return UIImageJPEGRepresentation(self, 0.25)!}
+    var lowestQualityJPEGNSData:NSData  { return UIImageJPEGRepresentation(self, 0.0)! }
 }
 
 
@@ -291,7 +308,7 @@ extension UIImage {
 extension UIImage {
     public func resize(size:CGSize, completionHandler:(resizedImage:UIImage, data:NSData)->()) {
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), { () -> Void in
-            var newSize:CGSize = size
+            let newSize:CGSize = size
             let rect = CGRectMake(0, 0, newSize.width, newSize.height)
             UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
             self.drawInRect(rect)
@@ -299,7 +316,7 @@ extension UIImage {
             UIGraphicsEndImageContext()
             let imageData = UIImageJPEGRepresentation(newImage, 0.5)
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                completionHandler(resizedImage: newImage, data:imageData)
+                completionHandler(resizedImage: newImage, data:imageData!)
             })
         })
     }

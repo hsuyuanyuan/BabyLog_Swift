@@ -101,7 +101,7 @@ class ClassBabyInfoCollectionViewCell: UICollectionViewCell, UITextFieldDelegate
     func textFieldDidBeginEditing(textField: UITextField) {
         if textField.tag != _bitMaskForLeaveTime {
             
-            var curTime = NSDate()
+            let curTime = NSDate()
 
             if arriveTime == defaultStringForInTime {
                 arriveTime = curTime.formattedHHMM
@@ -114,7 +114,7 @@ class ClassBabyInfoCollectionViewCell: UICollectionViewCell, UITextFieldDelegate
         
         if textField.tag == _bitMaskForLeaveTime  {
             
-            var curTime = NSDate()
+            let curTime = NSDate()
 
             
             if  leaveTime == defaultStringForOutTime {
@@ -135,12 +135,12 @@ class ClassBabyInfoCollectionViewCell: UICollectionViewCell, UITextFieldDelegate
         // call web api to upload the In/Out time, pass time and type(1 for arrival, 2 for leaving)
         var inOutType = InOutType.Arrival
         if textField.tag == _bitMaskForLeaveTime  {
-            println("This is a leave time text field ")
+            print("This is a leave time text field ")
             inOutType = InOutType.Leaving
 
         }
         
-        delegate?.SetInAndOutTime( _babyId, time: textField.text, inOutType: inOutType, row: _row )
+        delegate?.SetInAndOutTime( _babyId, time: textField.text ?? "", inOutType: inOutType, row: _row )
         
     }
     

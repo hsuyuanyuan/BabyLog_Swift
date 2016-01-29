@@ -11,7 +11,7 @@ import UIKit
 import AssetsLibrary
 
 
-class AddDailyLogPerBabyViewController: AddDailyLogViewController, SaveStartsForKidsDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, DKImagePickerControllerDelegate  {
+class AddDailyLogPerBabyViewController: AddDailyLogViewController, SaveStartsForKidsDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate  {
 
     // MARK: data arrays for baby info
     
@@ -53,16 +53,8 @@ class AddDailyLogPerBabyViewController: AddDailyLogViewController, SaveStartsFor
     }
     
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         dismissViewControllerAnimated(true, completion: nil)
-        
-        
-        
-        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            // imageView.contentMode = .ScaleAspectFit
-            // imageView.image = pickedImage
-        }
- 
         
     }
     
@@ -90,12 +82,12 @@ class AddDailyLogPerBabyViewController: AddDailyLogViewController, SaveStartsFor
         
         
         
-        var scaleX:CGFloat = view.frame.width / dailyLogPerBabyContainerView.frame.width
+        let scaleX:CGFloat = view.frame.width / dailyLogPerBabyContainerView.frame.width
         
-        var scaleY:CGFloat = (view.frame.height - 44 - 20 - 49) / dailyLogPerBabyContainerView.frame.height
+        let scaleY:CGFloat = (view.frame.height - 44 - 20 - 49) / dailyLogPerBabyContainerView.frame.height
         
-        println("view width = \(dailyLogPerBabyContainerView.frame.width), view height = \( dailyLogPerBabyContainerView.frame.height)" )
-        println("super view width = \(view.frame.width), super view height = \( view.frame.height)" )
+        print("view width = \(dailyLogPerBabyContainerView.frame.width), view height = \( dailyLogPerBabyContainerView.frame.height)" )
+        print("super view width = \(view.frame.width), super view height = \( view.frame.height)" )
         
         
         /*
@@ -103,7 +95,7 @@ class AddDailyLogPerBabyViewController: AddDailyLogViewController, SaveStartsFor
         
         */
         
-        var scale: CGFloat =   min(scaleX, scaleY)
+        let scale: CGFloat =   min(scaleX, scaleY)
         
         var t: CGAffineTransform = CGAffineTransformMakeScale(scale, scale)
         
@@ -113,7 +105,7 @@ class AddDailyLogPerBabyViewController: AddDailyLogViewController, SaveStartsFor
             translateX += 40
         }
         
-        var translateY = dailyLogPerBabyContainerView.frame.height * (scale - 1) / 2 / scale;
+        let translateY = dailyLogPerBabyContainerView.frame.height * (scale - 1) / 2 / scale;
         
         
         t = CGAffineTransformTranslate(t, translateX, translateY)
@@ -213,12 +205,17 @@ class AddDailyLogPerBabyViewController: AddDailyLogViewController, SaveStartsFor
         
         presentViewController(imagePickerView, animated: true, completion: nil)
         */
-
+        
+        /*
         // multiple image picker
         let imagePicker = DKImagePickerController()
 
-        imagePicker.pickerDelegate = self
+        imagePicker.didSelectAssets = { (assets: [DKAsset]) in
+            print("didSelectAssets")
+            print(assets)
+        }
         presentViewController(imagePicker, animated: true, completion: nil)
+        */
         
     }
 
@@ -226,8 +223,9 @@ class AddDailyLogPerBabyViewController: AddDailyLogViewController, SaveStartsFor
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    /*
     func imagePickerControllerDidSelectedAssets(assets: [DKAsset]!) {
-        for (index, asset) in enumerate(assets) {
+        for (index, asset) in assets.enumerate() {
             if let fullImage = asset.fullResolutionImage {
                 _imageList.append( fullImage )
             }
@@ -235,7 +233,7 @@ class AddDailyLogPerBabyViewController: AddDailyLogViewController, SaveStartsFor
         
         self.dismissViewControllerAnimated(true, completion: nil)
     }
-
+    */
     
     // MARK: delegate for saving star ratings
     func saveStartsForKids(starsForKids: [Float]?) {
@@ -282,9 +280,9 @@ class AddDailyLogPerBabyViewController: AddDailyLogViewController, SaveStartsFor
                 imageData = image.lowQualityJPEGNSData
             }
             
-            println("image size: \(imageData.length)") // ~100k
+            print("image size: \(imageData.length)") // ~100k
             
-            let base64Str = imageData.base64EncodedStringWithOptions( NSDataBase64EncodingOptions.allZeros )
+            let base64Str = imageData.base64EncodedStringWithOptions( NSDataBase64EncodingOptions() )
             //refer here for size on disk and size in mem:
             // http://stackoverflow.com/questions/15656403/inaccurate-nsdata-size-given-in-bytes
             
@@ -294,7 +292,7 @@ class AddDailyLogPerBabyViewController: AddDailyLogViewController, SaveStartsFor
         
         
         
-        var requestParams : [String:AnyObject] = [
+        let requestParams : [String:AnyObject] = [
             "Id": _curDailyLog.uniqueId,
             "StartTime":_curDailyLog.startTime, //"08:00",
             "EndTime":_curDailyLog.endTime, //"09:30",
@@ -305,7 +303,7 @@ class AddDailyLogPerBabyViewController: AddDailyLogViewController, SaveStartsFor
             "Stars": starString // stars separated by ,
         ]
         
-        println("\(requestParams.description)")
+        print("\(requestParams.description)")
         
         
         callWebAPI(requestParams, curAPIType: APIType.UploadCompleteStatusWithStars, postActionAfterSuccessulReturn: nil, postActionAfterAllReturns: nil)

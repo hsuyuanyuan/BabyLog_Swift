@@ -58,12 +58,12 @@ class TeacherInfoViewController: UIViewControllerForWebAPI {
         super.viewDidLoad()
         
         
-        var scaleX:CGFloat = view.frame.width / teacherContainerView.frame.width
+        let scaleX:CGFloat = view.frame.width / teacherContainerView.frame.width
         
-        var scaleY:CGFloat = (view.frame.height - 44 - 20 - 49) / teacherContainerView.frame.height
+        let scaleY:CGFloat = (view.frame.height - 44 - 20 - 49) / teacherContainerView.frame.height
         
-        println("view width = \(teacherContainerView.frame.width), view height = \( teacherContainerView.frame.height)" )
-        println("super view width = \(view.frame.width), super view height = \( view.frame.height)" )
+        print("view width = \(teacherContainerView.frame.width), view height = \( teacherContainerView.frame.height)" )
+        print("super view width = \(view.frame.width), super view height = \( view.frame.height)" )
         
         
         /*
@@ -71,7 +71,7 @@ class TeacherInfoViewController: UIViewControllerForWebAPI {
         
         */
         
-        var scale: CGFloat =   min(scaleX, scaleY)
+        let scale: CGFloat =   min(scaleX, scaleY)
         
         var t: CGAffineTransform = CGAffineTransformMakeScale(scale, scale)
         
@@ -81,7 +81,7 @@ class TeacherInfoViewController: UIViewControllerForWebAPI {
             translateX += 40
         }
         
-        var translateY = teacherContainerView.frame.height * (scale - 1) / 2 / scale;
+        let translateY = teacherContainerView.frame.height * (scale - 1) / 2 / scale;
         
         
         t = CGAffineTransformTranslate(t, translateX, translateY)
@@ -122,7 +122,7 @@ class TeacherInfoViewController: UIViewControllerForWebAPI {
     }
     
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.view.endEditing(true)
     }
     
@@ -160,18 +160,18 @@ class TeacherInfoViewController: UIViewControllerForWebAPI {
             prevSex = 1
         }
         
-        _teacherInfo = TeacherInfo(name: teacherNameTextField.text,
-            nickName: teacherNickNameTextField.text,
+        _teacherInfo = TeacherInfo(name: teacherNameTextField.text ?? "",
+            nickName: teacherNickNameTextField.text ?? "",
             sex: prevSex,
             id: prevId,
             imageURL: prevImageURL,
             validImageExtension: prevImageValidity,
-            birthDay: birthdayTextField.text,
-            bloodType: bloodTextField.text,
-            city: cityTextField.text,
-            province: provinceTextField.text,
-            country: countryTextField.text,
-            intro: teacherIntroTextView.text)
+            birthDay: birthdayTextField.text ?? "",
+            bloodType: bloodTextField.text ?? "",
+            city: cityTextField.text ?? "",
+            province: provinceTextField.text ?? "",
+            country: countryTextField.text ?? "",
+            intro: teacherIntroTextView.text ?? "")
     }
     
     
@@ -181,7 +181,7 @@ class TeacherInfoViewController: UIViewControllerForWebAPI {
         
         _startSpinnerAndBlockUI()
         
-        var requestParams : [String:AnyObject] = [:]
+        let requestParams : [String:AnyObject] = [:]
         
         callWebAPI(requestParams, curAPIType: APIType.UserGetInfo, postActionAfterSuccessulReturn: { (data) -> () in
             // refer to: https://grokswift.com/rest-with-alamofire-swiftyjson/
@@ -200,7 +200,7 @@ class TeacherInfoViewController: UIViewControllerForWebAPI {
                     self._showTeacherInfoUI() //yxu: reloadData must be called on main thread. otherwise it does not work!!!
                     
                     
-                    println("updating the table view")
+                    print("updating the table view")
                     // resume the UI at the end of async action
                     
                     self._stopSpinnerAndResumeUI()
@@ -217,9 +217,9 @@ class TeacherInfoViewController: UIViewControllerForWebAPI {
         
         _startSpinnerAndBlockUI()
         
-        let urlString:String = _teacherInfo!.imageURL.absoluteString!
+
         
-        var requestParams : [String:AnyObject] = [
+        let requestParams : [String:AnyObject] = [
             "Sex":_teacherInfo!.sex,
             "BabyName":_teacherInfo!.name,
             "Nickname":_teacherInfo!.nickName,

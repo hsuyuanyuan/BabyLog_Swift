@@ -131,7 +131,7 @@ class KeleCalData:NSObject
         data.startWeek =  comp1.weekday
         
         //当月总天数
-        let total:Int! = self._calendar?.rangeOfUnit(NSCalendarUnit.DayCalendarUnit, inUnit: NSCalendarUnit.MonthCalendarUnit, forDate: date).length
+        let total:Int! = self._calendar?.rangeOfUnit(NSCalendarUnit.Day, inUnit: NSCalendarUnit.Month, forDate: date).length
         data.totalDays = total
         
         //当月是否有今日
@@ -164,10 +164,10 @@ class KeleCalData:NSObject
     
     
     private func dateRange(date: NSDate) -> (NSDateComponents) {
-        
-        let units = NSCalendarUnit.YearCalendarUnit | NSCalendarUnit.MonthCalendarUnit | NSCalendarUnit.WeekCalendarUnit | NSCalendarUnit.DayCalendarUnit | NSCalendarUnit.CalendarUnitWeekday
+        // http://stackoverflow.com/questions/22744458/how-to-replace-deprecated-nsweekcalendarunit-in-context-of-uilocalnotification
+        // explain replace the deprecated week to weekofMonth or weekorYear
+        let units:NSCalendarUnit = [NSCalendarUnit.Year, NSCalendarUnit.Month, NSCalendarUnit.WeekOfMonth, NSCalendarUnit.Day, NSCalendarUnit.Weekday]
         let components = self._calendar?.components(units, fromDate: date)
-        
         
         return components!
     }

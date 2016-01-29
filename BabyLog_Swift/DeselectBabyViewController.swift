@@ -32,7 +32,7 @@ class DeselectBabyViewController: UIViewControllerForWebAPI, UIPickerViewDataSou
 
         _startSpinnerAndBlockUI()
         
-        var requestParams : [String:AnyObject] = [
+        let requestParams : [String:AnyObject] = [
             "BabyId": babyId
 
         ]
@@ -117,7 +117,7 @@ class DeselectBabyViewController: UIViewControllerForWebAPI, UIPickerViewDataSou
     }
     
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.view.endEditing(true)
     }
     
@@ -132,7 +132,7 @@ class DeselectBabyViewController: UIViewControllerForWebAPI, UIPickerViewDataSou
         return _babyInfoArray.count
     }
     
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         babyId = _babyInfoArray[row].id
         return _babyInfoArray[row].nickName
     }

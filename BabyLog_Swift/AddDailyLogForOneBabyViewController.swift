@@ -17,7 +17,7 @@ protocol UploadLogForOneBabyDelegate {
 
 
 
-class AddDailyLogForOneBabyViewController: AddDailyLogViewController, FloatRatingViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, DKImagePickerControllerDelegate {
+class AddDailyLogForOneBabyViewController: AddDailyLogViewController, FloatRatingViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     
     
@@ -37,9 +37,7 @@ class AddDailyLogForOneBabyViewController: AddDailyLogViewController, FloatRatin
     
     
     @IBAction func confirmButtonTapped(sender: AnyObject) {
-        println("uploading log ")
-        
-        println("activity = \(activityTypeTextField.text), id = \(activityId) \n\n")
+        print("uploading log ")
         
         
         // todo: add sanity check:  end time > start time etc
@@ -67,12 +65,12 @@ class AddDailyLogForOneBabyViewController: AddDailyLogViewController, FloatRatin
         super.viewDidLoad()
 
         
-        var scaleX:CGFloat = view.frame.width / dailyLogOneBabyContainerView.frame.width
+        let scaleX:CGFloat = view.frame.width / dailyLogOneBabyContainerView.frame.width
         
-        var scaleY:CGFloat = (view.frame.height - 44 - 20 - 49) / dailyLogOneBabyContainerView.frame.height
+        let scaleY:CGFloat = (view.frame.height - 44 - 20 - 49) / dailyLogOneBabyContainerView.frame.height
         
-        println("view width = \(dailyLogOneBabyContainerView.frame.width), view height = \( dailyLogOneBabyContainerView.frame.height)" )
-        println("super view width = \(view.frame.width), super view height = \( view.frame.height)" )
+        print("view width = \(dailyLogOneBabyContainerView.frame.width), view height = \( dailyLogOneBabyContainerView.frame.height)" )
+        print("super view width = \(view.frame.width), super view height = \( view.frame.height)" )
         
         
         /*
@@ -80,7 +78,7 @@ class AddDailyLogForOneBabyViewController: AddDailyLogViewController, FloatRatin
         
         */
         
-        var scale: CGFloat =   min(scaleX, scaleY)
+        let scale: CGFloat =   min(scaleX, scaleY)
         
         var t: CGAffineTransform = CGAffineTransformMakeScale(scale, scale)
         
@@ -90,7 +88,7 @@ class AddDailyLogForOneBabyViewController: AddDailyLogViewController, FloatRatin
             translateX += 40
         }
         
-        var translateY = dailyLogOneBabyContainerView.frame.height * (scale - 1) / 2 / scale;
+        let translateY = dailyLogOneBabyContainerView.frame.height * (scale - 1) / 2 / scale;
         
         
         t = CGAffineTransformTranslate(t, translateX, translateY)
@@ -122,7 +120,7 @@ class AddDailyLogForOneBabyViewController: AddDailyLogViewController, FloatRatin
     }
     
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         dismissViewControllerAnimated(true, completion: nil)
 
         
@@ -146,10 +144,17 @@ class AddDailyLogForOneBabyViewController: AddDailyLogViewController, FloatRatin
         */
         
         // multiple image picker
+        /*
         let imagePicker = DKImagePickerController()
         
-        imagePicker.pickerDelegate = self
+        imagePicker.didSelectAssets = { (assets: [DKAsset]) in
+            print("didSelectAssets")
+            print(assets)
+        }
+        
         presentViewController(imagePicker, animated: true, completion: nil)
+
+        */
         
     }
     
@@ -157,8 +162,9 @@ class AddDailyLogForOneBabyViewController: AddDailyLogViewController, FloatRatin
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    /*
     func imagePickerControllerDidSelectedAssets(assets: [DKAsset]!) {
-        for (index, asset) in enumerate(assets) {
+        for (index, asset) in assets.enumerate() {
 
             if let fullImage = asset.fullResolutionImage {
                 _imageList.append( fullImage )
@@ -169,7 +175,7 @@ class AddDailyLogForOneBabyViewController: AddDailyLogViewController, FloatRatin
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    
+    */
     
     func floatRatingView(ratingView: FloatRatingView, didUpdate rating: Float) {
         _numStars = Int(rating) // TODO: the ! may be dangerous

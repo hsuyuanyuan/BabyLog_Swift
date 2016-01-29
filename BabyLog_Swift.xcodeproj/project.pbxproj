@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		272540005D9C82BC53745C35 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AD880DCF430E191560FC27CB /* libPods.a */; };
 		45180A841B5B7AE3008B1FF9 /* Stars-3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45180A701B5B7AE3008B1FF9 /* Stars-3@2x.png */; };
 		45180A851B5B7AE3008B1FF9 /* Stars-3@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45180A711B5B7AE3008B1FF9 /* Stars-3@3x.png */; };
 		45180A861B5B7AE3008B1FF9 /* Stars-4.png in Resources */ = {isa = PBXBuildFile; fileRef = 45180A721B5B7AE3008B1FF9 /* Stars-4.png */; };
@@ -70,13 +69,28 @@
 		457E22711B79589300CDA4CC /* CreateClassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457E22701B79589300CDA4CC /* CreateClassViewController.swift */; };
 		457E22791B7D155D00CDA4CC /* TeacherInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457E22781B7D155D00CDA4CC /* TeacherInfoViewController.swift */; };
 		457E227B1B7DBCF400CDA4CC /* DeselectBabyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457E227A1B7DBCF400CDA4CC /* DeselectBabyViewController.swift */; };
-		45A7E8BE1B3E6E0B00748A6F /* KeleCalCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A7E8B81B3E6E0B00748A6F /* KeleCalCellView.swift */; };
-		45A7E8BF1B3E6E0B00748A6F /* KeleCalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A7E8B91B3E6E0B00748A6F /* KeleCalData.swift */; };
-		45A7E8C01B3E6E0B00748A6F /* KeleCalDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A7E8BA1B3E6E0B00748A6F /* KeleCalDelegate.swift */; };
-		45A7E8C11B3E6E0B00748A6F /* keleCalMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A7E8BB1B3E6E0B00748A6F /* keleCalMainView.swift */; };
-		45A7E8C21B3E6E0B00748A6F /* KeleCalMonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A7E8BC1B3E6E0B00748A6F /* KeleCalMonthView.swift */; };
-		45A7E8C31B3E6E0B00748A6F /* keleDraw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A7E8BD1B3E6E0B00748A6F /* keleDraw.swift */; };
-		45A7E8C51B3E6E5B00748A6F /* KeleCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A7E8C41B3E6E5B00748A6F /* KeleCalendarViewController.swift */; };
+		45864B5A1C54B8F400A7FE45 /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45864B4C1C54B8F400A7FE45 /* Alamofire.swift */; };
+		45864B5B1C54B8F400A7FE45 /* Download.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45864B4D1C54B8F400A7FE45 /* Download.swift */; };
+		45864B5C1C54B8F400A7FE45 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45864B4E1C54B8F400A7FE45 /* Error.swift */; };
+		45864B5D1C54B8F400A7FE45 /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45864B4F1C54B8F400A7FE45 /* Manager.swift */; };
+		45864B5E1C54B8F400A7FE45 /* MultipartFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45864B501C54B8F400A7FE45 /* MultipartFormData.swift */; };
+		45864B5F1C54B8F400A7FE45 /* ParameterEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45864B511C54B8F400A7FE45 /* ParameterEncoding.swift */; };
+		45864B601C54B8F400A7FE45 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45864B521C54B8F400A7FE45 /* Request.swift */; };
+		45864B611C54B8F400A7FE45 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45864B531C54B8F400A7FE45 /* Response.swift */; };
+		45864B621C54B8F400A7FE45 /* ResponseSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45864B541C54B8F400A7FE45 /* ResponseSerialization.swift */; };
+		45864B631C54B8F400A7FE45 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45864B551C54B8F400A7FE45 /* Result.swift */; };
+		45864B641C54B8F400A7FE45 /* ServerTrustPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45864B561C54B8F400A7FE45 /* ServerTrustPolicy.swift */; };
+		45864B651C54B8F400A7FE45 /* Stream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45864B571C54B8F400A7FE45 /* Stream.swift */; };
+		45864B661C54B8F400A7FE45 /* Upload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45864B581C54B8F400A7FE45 /* Upload.swift */; };
+		45864B671C54B8F400A7FE45 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45864B591C54B8F400A7FE45 /* Validation.swift */; };
+		45864B751C55647100A7FE45 /* FloatRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45864B741C55647100A7FE45 /* FloatRatingView.swift */; };
+		45864B7C1C55650800A7FE45 /* KeleCalCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45864B761C55650800A7FE45 /* KeleCalCellView.swift */; };
+		45864B7D1C55650800A7FE45 /* KeleCalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45864B771C55650800A7FE45 /* KeleCalData.swift */; };
+		45864B7E1C55650800A7FE45 /* KeleCalDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45864B781C55650800A7FE45 /* KeleCalDelegate.swift */; };
+		45864B7F1C55650800A7FE45 /* keleCalMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45864B791C55650800A7FE45 /* keleCalMainView.swift */; };
+		45864B801C55650800A7FE45 /* KeleCalMonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45864B7A1C55650800A7FE45 /* KeleCalMonthView.swift */; };
+		45864B811C55650800A7FE45 /* keleDraw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45864B7B1C55650800A7FE45 /* keleDraw.swift */; };
+		45864B831C558EEB00A7FE45 /* KeleCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45864B821C558EEB00A7FE45 /* KeleCalendarViewController.swift */; };
 		45A7E8C81B3E8FB400748A6F /* DailyLogItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A7E8C71B3E8FB400748A6F /* DailyLogItem.swift */; };
 		45A7E8CA1B3E933400748A6F /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A7E8C91B3E933400748A6F /* SwiftyJSON.swift */; };
 		45A7E8CC1B3F128500748A6F /* AddDailyLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A7E8CB1B3F128500748A6F /* AddDailyLogViewController.swift */; };
@@ -84,19 +98,9 @@
 		45A7E8DD1B43431800748A6F /* LogItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A7E8DC1B43431800748A6F /* LogItemTableViewCell.swift */; };
 		45A7E9751B4776A600748A6F /* ClassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A7E9741B4776A600748A6F /* ClassViewController.swift */; };
 		45A7E9771B479B6400748A6F /* ClassBabyInfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A7E9761B479B6400748A6F /* ClassBabyInfoCollectionViewCell.swift */; };
-		45A7E9811B49AF4F00748A6F /* FloatRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A7E9801B49AF4F00748A6F /* FloatRatingView.swift */; };
 		45A7E9831B49C03C00748A6F /* BabyStarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A7E9821B49C03C00748A6F /* BabyStarViewController.swift */; };
 		45A7E9851B49C16200748A6F /* BabyStarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A7E9841B49C16200748A6F /* BabyStarTableViewCell.swift */; };
 		45A7E9871B49D89200748A6F /* AddDailyLogPerBabyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A7E9861B49D89200748A6F /* AddDailyLogPerBabyViewController.swift */; };
-		45BEA6B01B5C88B90087EFB0 /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BEA6A71B5C88B90087EFB0 /* Alamofire.swift */; };
-		45BEA6B11B5C88B90087EFB0 /* Download.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BEA6A81B5C88B90087EFB0 /* Download.swift */; };
-		45BEA6B21B5C88B90087EFB0 /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BEA6A91B5C88B90087EFB0 /* Manager.swift */; };
-		45BEA6B31B5C88B90087EFB0 /* MultipartFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BEA6AA1B5C88B90087EFB0 /* MultipartFormData.swift */; };
-		45BEA6B41B5C88B90087EFB0 /* ParameterEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BEA6AB1B5C88B90087EFB0 /* ParameterEncoding.swift */; };
-		45BEA6B51B5C88B90087EFB0 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BEA6AC1B5C88B90087EFB0 /* Request.swift */; };
-		45BEA6B61B5C88B90087EFB0 /* ResponseSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BEA6AD1B5C88B90087EFB0 /* ResponseSerialization.swift */; };
-		45BEA6B71B5C88B90087EFB0 /* Upload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BEA6AE1B5C88B90087EFB0 /* Upload.swift */; };
-		45BEA6B81B5C88B90087EFB0 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BEA6AF1B5C88B90087EFB0 /* Validation.swift */; };
 		45BEA6BA1B5EA29F0087EFB0 /* PgySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45BEA6B91B5EA29F0087EFB0 /* PgySDK.framework */; };
 		45BEA6BC1B5EA2BD0087EFB0 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45BEA6BB1B5EA2BD0087EFB0 /* CoreTelephony.framework */; };
 		45BEA6BE1B5EA2C50087EFB0 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45BEA6BD1B5EA2C50087EFB0 /* OpenGLES.framework */; };
@@ -196,10 +200,10 @@
 		45BEA8181B658AD80087EFB0 /* Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 45BEA8171B658AD80087EFB0 /* Logo.png */; };
 		45DB02D21B5AADC400EA754D /* TestRongCloud.m in Sources */ = {isa = PBXBuildFile; fileRef = 45DB02D11B5AADC400EA754D /* TestRongCloud.m */; };
 		45DB02D71B5AAE3D00EA754D /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DB02D61B5AAE3D00EA754D /* ChatViewController.swift */; };
-		45E3552C1B578B350085770B /* DKImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E3552B1B578B350085770B /* DKImagePickerController.swift */; };
 		45E3552E1B578B460085770B /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45E3552D1B578B460085770B /* AssetsLibrary.framework */; };
 		45E355361B5892350085770B /* MessageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E355351B5892350085770B /* MessageTableViewController.swift */; };
 		45E3553B1B58944B0085770B /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E3553A1B58944B0085770B /* MessageTableViewCell.swift */; };
+		EAB00CC9AC233036913D5483 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EB0B33AA7C14A96A311B63A3 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -281,13 +285,30 @@
 		457E22701B79589300CDA4CC /* CreateClassViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateClassViewController.swift; sourceTree = "<group>"; };
 		457E22781B7D155D00CDA4CC /* TeacherInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherInfoViewController.swift; sourceTree = "<group>"; };
 		457E227A1B7DBCF400CDA4CC /* DeselectBabyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeselectBabyViewController.swift; sourceTree = "<group>"; };
-		45A7E8B81B3E6E0B00748A6F /* KeleCalCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeleCalCellView.swift; sourceTree = "<group>"; };
-		45A7E8B91B3E6E0B00748A6F /* KeleCalData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeleCalData.swift; sourceTree = "<group>"; };
-		45A7E8BA1B3E6E0B00748A6F /* KeleCalDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeleCalDelegate.swift; sourceTree = "<group>"; };
-		45A7E8BB1B3E6E0B00748A6F /* keleCalMainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = keleCalMainView.swift; sourceTree = "<group>"; };
-		45A7E8BC1B3E6E0B00748A6F /* KeleCalMonthView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeleCalMonthView.swift; sourceTree = "<group>"; };
-		45A7E8BD1B3E6E0B00748A6F /* keleDraw.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = keleDraw.swift; sourceTree = "<group>"; };
-		45A7E8C41B3E6E5B00748A6F /* KeleCalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeleCalendarViewController.swift; sourceTree = "<group>"; };
+		45864B4B1C54B8F400A7FE45 /* Alamofire.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Alamofire.h; sourceTree = "<group>"; };
+		45864B4C1C54B8F400A7FE45 /* Alamofire.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alamofire.swift; sourceTree = "<group>"; };
+		45864B4D1C54B8F400A7FE45 /* Download.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Download.swift; sourceTree = "<group>"; };
+		45864B4E1C54B8F400A7FE45 /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		45864B4F1C54B8F400A7FE45 /* Manager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
+		45864B501C54B8F400A7FE45 /* MultipartFormData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipartFormData.swift; sourceTree = "<group>"; };
+		45864B511C54B8F400A7FE45 /* ParameterEncoding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParameterEncoding.swift; sourceTree = "<group>"; };
+		45864B521C54B8F400A7FE45 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
+		45864B531C54B8F400A7FE45 /* Response.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
+		45864B541C54B8F400A7FE45 /* ResponseSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseSerialization.swift; sourceTree = "<group>"; };
+		45864B551C54B8F400A7FE45 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		45864B561C54B8F400A7FE45 /* ServerTrustPolicy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerTrustPolicy.swift; sourceTree = "<group>"; };
+		45864B571C54B8F400A7FE45 /* Stream.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stream.swift; sourceTree = "<group>"; };
+		45864B581C54B8F400A7FE45 /* Upload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Upload.swift; sourceTree = "<group>"; };
+		45864B591C54B8F400A7FE45 /* Validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
+		45864B741C55647100A7FE45 /* FloatRatingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatRatingView.swift; sourceTree = "<group>"; };
+		45864B761C55650800A7FE45 /* KeleCalCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeleCalCellView.swift; sourceTree = "<group>"; };
+		45864B771C55650800A7FE45 /* KeleCalData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeleCalData.swift; sourceTree = "<group>"; };
+		45864B781C55650800A7FE45 /* KeleCalDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeleCalDelegate.swift; sourceTree = "<group>"; };
+		45864B791C55650800A7FE45 /* keleCalMainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = keleCalMainView.swift; sourceTree = "<group>"; };
+		45864B7A1C55650800A7FE45 /* KeleCalMonthView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeleCalMonthView.swift; sourceTree = "<group>"; };
+		45864B7B1C55650800A7FE45 /* keleDraw.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = keleDraw.swift; sourceTree = "<group>"; };
+		45864B821C558EEB00A7FE45 /* KeleCalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeleCalendarViewController.swift; sourceTree = "<group>"; };
+		45864BAF1C560BD000A7FE45 /* DKImagePickerController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DKImagePickerController.framework; path = "Pods/../build/Debug-iphoneos/DKImagePickerController.framework"; sourceTree = "<group>"; };
 		45A7E8C71B3E8FB400748A6F /* DailyLogItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyLogItem.swift; sourceTree = "<group>"; };
 		45A7E8C91B3E933400748A6F /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		45A7E8CB1B3F128500748A6F /* AddDailyLogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddDailyLogViewController.swift; sourceTree = "<group>"; };
@@ -295,20 +316,9 @@
 		45A7E8DC1B43431800748A6F /* LogItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogItemTableViewCell.swift; sourceTree = "<group>"; };
 		45A7E9741B4776A600748A6F /* ClassViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassViewController.swift; sourceTree = "<group>"; };
 		45A7E9761B479B6400748A6F /* ClassBabyInfoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassBabyInfoCollectionViewCell.swift; sourceTree = "<group>"; };
-		45A7E9801B49AF4F00748A6F /* FloatRatingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatRatingView.swift; sourceTree = "<group>"; };
 		45A7E9821B49C03C00748A6F /* BabyStarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BabyStarViewController.swift; sourceTree = "<group>"; };
 		45A7E9841B49C16200748A6F /* BabyStarTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BabyStarTableViewCell.swift; sourceTree = "<group>"; };
 		45A7E9861B49D89200748A6F /* AddDailyLogPerBabyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddDailyLogPerBabyViewController.swift; sourceTree = "<group>"; };
-		45BEA6A61B5C88B90087EFB0 /* Alamofire.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Alamofire.h; sourceTree = "<group>"; };
-		45BEA6A71B5C88B90087EFB0 /* Alamofire.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alamofire.swift; sourceTree = "<group>"; };
-		45BEA6A81B5C88B90087EFB0 /* Download.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Download.swift; sourceTree = "<group>"; };
-		45BEA6A91B5C88B90087EFB0 /* Manager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
-		45BEA6AA1B5C88B90087EFB0 /* MultipartFormData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipartFormData.swift; sourceTree = "<group>"; };
-		45BEA6AB1B5C88B90087EFB0 /* ParameterEncoding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParameterEncoding.swift; sourceTree = "<group>"; };
-		45BEA6AC1B5C88B90087EFB0 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
-		45BEA6AD1B5C88B90087EFB0 /* ResponseSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseSerialization.swift; sourceTree = "<group>"; };
-		45BEA6AE1B5C88B90087EFB0 /* Upload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Upload.swift; sourceTree = "<group>"; };
-		45BEA6AF1B5C88B90087EFB0 /* Validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
 		45BEA6B91B5EA29F0087EFB0 /* PgySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PgySDK.framework; sourceTree = "<group>"; };
 		45BEA6BB1B5EA2BD0087EFB0 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		45BEA6BD1B5EA2C50087EFB0 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -406,15 +416,16 @@
 		45BEA8111B62CE140087EFB0 /* StarFull@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "StarFull@2x.png"; sourceTree = "<group>"; };
 		45BEA8121B62CE140087EFB0 /* StarEmpty@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "StarEmpty@2x.png"; sourceTree = "<group>"; };
 		45BEA8171B658AD80087EFB0 /* Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logo.png; sourceTree = "<group>"; };
+		45D6A2761C574573005FF6B9 /* DKImagePickerController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DKImagePickerController.framework; path = "Pods/../build/Debug-iphoneos/DKImagePickerController.framework"; sourceTree = "<group>"; };
+		45D6A2771C574573005FF6B9 /* Pods.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods.framework; path = "Pods/../build/Debug-iphoneos/Pods.framework"; sourceTree = "<group>"; };
 		45DB02D01B5AADC400EA754D /* BabyLog_Swift-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BabyLog_Swift-Bridging-Header.h"; sourceTree = "<group>"; };
 		45DB02D11B5AADC400EA754D /* TestRongCloud.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestRongCloud.m; sourceTree = "<group>"; };
 		45DB02D61B5AAE3D00EA754D /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
-		45E3552B1B578B350085770B /* DKImagePickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DKImagePickerController.swift; sourceTree = "<group>"; };
 		45E3552D1B578B460085770B /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		45E355351B5892350085770B /* MessageTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTableViewController.swift; sourceTree = "<group>"; };
 		45E3553A1B58944B0085770B /* MessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		7E94F1EE055CD555632AE808 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		AD880DCF430E191560FC27CB /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB0B33AA7C14A96A311B63A3 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -431,7 +442,7 @@
 				45BEA6C81B5EA2F30087EFB0 /* SystemConfiguration.framework in Frameworks */,
 				45E3552E1B578B460085770B /* AssetsLibrary.framework in Frameworks */,
 				45BEA6BA1B5EA29F0087EFB0 /* PgySDK.framework in Frameworks */,
-				272540005D9C82BC53745C35 /* libPods.a in Frameworks */,
+				EAB00CC9AC233036913D5483 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -512,9 +523,9 @@
 		453E2B1D1B35492800500E31 /* BabyLog_Swift */ = {
 			isa = PBXGroup;
 			children = (
+				45D6A2931C5747A0005FF6B9 /* DKImagePickerController */,
 				45A7E8B41B3E6DF100748A6F /* KeleCalendar */,
 				45BEA67E1B5C7A780087EFB0 /* Alamofire */,
-				45BEA67F1B5C7A8F0087EFB0 /* DKImagePIcker */,
 				45A7E97F1B49AF2C00748A6F /* FloatRatingView */,
 				45A7E97E1B49A99500748A6F /* SwiftyJson */,
 				453E2B4C1B354B6200500E31 /* Resources */,
@@ -604,13 +615,13 @@
 		45A7E8B41B3E6DF100748A6F /* KeleCalendar */ = {
 			isa = PBXGroup;
 			children = (
-				45A7E8C41B3E6E5B00748A6F /* KeleCalendarViewController.swift */,
-				45A7E8B81B3E6E0B00748A6F /* KeleCalCellView.swift */,
-				45A7E8B91B3E6E0B00748A6F /* KeleCalData.swift */,
-				45A7E8BA1B3E6E0B00748A6F /* KeleCalDelegate.swift */,
-				45A7E8BB1B3E6E0B00748A6F /* keleCalMainView.swift */,
-				45A7E8BC1B3E6E0B00748A6F /* KeleCalMonthView.swift */,
-				45A7E8BD1B3E6E0B00748A6F /* keleDraw.swift */,
+				45864B821C558EEB00A7FE45 /* KeleCalendarViewController.swift */,
+				45864B761C55650800A7FE45 /* KeleCalCellView.swift */,
+				45864B771C55650800A7FE45 /* KeleCalData.swift */,
+				45864B781C55650800A7FE45 /* KeleCalDelegate.swift */,
+				45864B791C55650800A7FE45 /* keleCalMainView.swift */,
+				45864B7A1C55650800A7FE45 /* KeleCalMonthView.swift */,
+				45864B7B1C55650800A7FE45 /* keleDraw.swift */,
 			);
 			name = KeleCalendar;
 			sourceTree = "<group>";
@@ -715,7 +726,7 @@
 		45A7E97F1B49AF2C00748A6F /* FloatRatingView */ = {
 			isa = PBXGroup;
 			children = (
-				45A7E9801B49AF4F00748A6F /* FloatRatingView.swift */,
+				45864B741C55647100A7FE45 /* FloatRatingView.swift */,
 			);
 			name = FloatRatingView;
 			sourceTree = "<group>";
@@ -723,31 +734,39 @@
 		45BEA67E1B5C7A780087EFB0 /* Alamofire */ = {
 			isa = PBXGroup;
 			children = (
-				45BEA6A61B5C88B90087EFB0 /* Alamofire.h */,
-				45BEA6A71B5C88B90087EFB0 /* Alamofire.swift */,
-				45BEA6A81B5C88B90087EFB0 /* Download.swift */,
-				45BEA6A91B5C88B90087EFB0 /* Manager.swift */,
-				45BEA6AA1B5C88B90087EFB0 /* MultipartFormData.swift */,
-				45BEA6AB1B5C88B90087EFB0 /* ParameterEncoding.swift */,
-				45BEA6AC1B5C88B90087EFB0 /* Request.swift */,
-				45BEA6AD1B5C88B90087EFB0 /* ResponseSerialization.swift */,
-				45BEA6AE1B5C88B90087EFB0 /* Upload.swift */,
-				45BEA6AF1B5C88B90087EFB0 /* Validation.swift */,
+				45864B4B1C54B8F400A7FE45 /* Alamofire.h */,
+				45864B4C1C54B8F400A7FE45 /* Alamofire.swift */,
+				45864B4D1C54B8F400A7FE45 /* Download.swift */,
+				45864B4E1C54B8F400A7FE45 /* Error.swift */,
+				45864B4F1C54B8F400A7FE45 /* Manager.swift */,
+				45864B501C54B8F400A7FE45 /* MultipartFormData.swift */,
+				45864B511C54B8F400A7FE45 /* ParameterEncoding.swift */,
+				45864B521C54B8F400A7FE45 /* Request.swift */,
+				45864B531C54B8F400A7FE45 /* Response.swift */,
+				45864B541C54B8F400A7FE45 /* ResponseSerialization.swift */,
+				45864B551C54B8F400A7FE45 /* Result.swift */,
+				45864B561C54B8F400A7FE45 /* ServerTrustPolicy.swift */,
+				45864B571C54B8F400A7FE45 /* Stream.swift */,
+				45864B581C54B8F400A7FE45 /* Upload.swift */,
+				45864B591C54B8F400A7FE45 /* Validation.swift */,
 			);
 			name = Alamofire;
 			sourceTree = "<group>";
 		};
-		45BEA67F1B5C7A8F0087EFB0 /* DKImagePIcker */ = {
+		45D6A2931C5747A0005FF6B9 /* DKImagePickerController */ = {
 			isa = PBXGroup;
 			children = (
-				45E3552B1B578B350085770B /* DKImagePickerController.swift */,
 			);
-			name = DKImagePIcker;
+			name = DKImagePickerController;
+			path = ../Pods/DKImagePickerController;
 			sourceTree = "<group>";
 		};
 		7F32535C4EFA45D819C29D2F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				45D6A2761C574573005FF6B9 /* DKImagePickerController.framework */,
+				45D6A2771C574573005FF6B9 /* Pods.framework */,
+				45864BAF1C560BD000A7FE45 /* DKImagePickerController.framework */,
 				45E3552D1B578B460085770B /* AssetsLibrary.framework */,
 				45BEA6C71B5EA2F30087EFB0 /* SystemConfiguration.framework */,
 				45BEA6C51B5EA2EC0087EFB0 /* AVFoundation.framework */,
@@ -757,7 +776,7 @@
 				45BEA6BD1B5EA2C50087EFB0 /* OpenGLES.framework */,
 				45BEA6BB1B5EA2BD0087EFB0 /* CoreTelephony.framework */,
 				45BEA6B91B5EA29F0087EFB0 /* PgySDK.framework */,
-				AD880DCF430E191560FC27CB /* libPods.a */,
+				EB0B33AA7C14A96A311B63A3 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -784,6 +803,7 @@
 				453E2B191B35492800500E31 /* Resources */,
 				45FBD6A51B3A8A3200A33663 /* Embed Frameworks */,
 				69D327FEBC3B3044394A88D3 /* Copy Pods Resources */,
+				1ACF183ECBB93AC75DA42ED6 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -980,6 +1000,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1ACF183ECBB93AC75DA42ED6 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		69D327FEBC3B3044394A88D3 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1018,47 +1053,51 @@
 			buildActionMask = 2147483647;
 			files = (
 				45A7E9871B49D89200748A6F /* AddDailyLogPerBabyViewController.swift in Sources */,
-				45A7E8BE1B3E6E0B00748A6F /* KeleCalCellView.swift in Sources */,
-				45A7E8C21B3E6E0B00748A6F /* KeleCalMonthView.swift in Sources */,
-				45BEA6B21B5C88B90087EFB0 /* Manager.swift in Sources */,
-				45E3552C1B578B350085770B /* DKImagePickerController.swift in Sources */,
 				453E2B211B35492800500E31 /* LoginViewController.swift in Sources */,
 				45A7E8CA1B3E933400748A6F /* SwiftyJSON.swift in Sources */,
-				45BEA6B01B5C88B90087EFB0 /* Alamofire.swift in Sources */,
-				45A7E8C11B3E6E0B00748A6F /* keleCalMainView.swift in Sources */,
+				45864B7D1C55650800A7FE45 /* KeleCalData.swift in Sources */,
 				45A7E8C81B3E8FB400748A6F /* DailyLogItem.swift in Sources */,
-				45A7E9811B49AF4F00748A6F /* FloatRatingView.swift in Sources */,
+				45864B5E1C54B8F400A7FE45 /* MultipartFormData.swift in Sources */,
 				45A7E8DD1B43431800748A6F /* LogItemTableViewCell.swift in Sources */,
 				453E2B1F1B35492800500E31 /* AppDelegate.swift in Sources */,
 				45180AD31B5B7B9D008B1FF9 /* AddDailyLogForOneBabyViewController.swift in Sources */,
 				45DB02D21B5AADC400EA754D /* TestRongCloud.m in Sources */,
+				45864B7C1C55650800A7FE45 /* KeleCalCellView.swift in Sources */,
+				45864B7E1C55650800A7FE45 /* KeleCalDelegate.swift in Sources */,
 				45E3553B1B58944B0085770B /* MessageTableViewCell.swift in Sources */,
+				45864B7F1C55650800A7FE45 /* keleCalMainView.swift in Sources */,
+				45864B5A1C54B8F400A7FE45 /* Alamofire.swift in Sources */,
 				45A7E9851B49C16200748A6F /* BabyStarTableViewCell.swift in Sources */,
+				45864B601C54B8F400A7FE45 /* Request.swift in Sources */,
+				45864B5C1C54B8F400A7FE45 /* Error.swift in Sources */,
+				45864B621C54B8F400A7FE45 /* ResponseSerialization.swift in Sources */,
 				45A7E9831B49C03C00748A6F /* BabyStarViewController.swift in Sources */,
-				45A7E8BF1B3E6E0B00748A6F /* KeleCalData.swift in Sources */,
 				45A7E9751B4776A600748A6F /* ClassViewController.swift in Sources */,
+				45864B5B1C54B8F400A7FE45 /* Download.swift in Sources */,
 				45BEA7C01B61E7730087EFB0 /* MainTabBarController.swift in Sources */,
 				45210B551B4F4C7B004A2EFB /* UIViewControllerForWebAPI.swift in Sources */,
-				45A7E8C01B3E6E0B00748A6F /* KeleCalDelegate.swift in Sources */,
+				45864B661C54B8F400A7FE45 /* Upload.swift in Sources */,
 				45E355361B5892350085770B /* MessageTableViewController.swift in Sources */,
-				45BEA6B41B5C88B90087EFB0 /* ParameterEncoding.swift in Sources */,
 				45A7E8CC1B3F128500748A6F /* AddDailyLogViewController.swift in Sources */,
 				45210B501B4F2B69004A2EFB /* Globals.swift in Sources */,
+				45864B671C54B8F400A7FE45 /* Validation.swift in Sources */,
+				45864B5D1C54B8F400A7FE45 /* Manager.swift in Sources */,
+				45864B811C55650800A7FE45 /* keleDraw.swift in Sources */,
 				457E22711B79589300CDA4CC /* CreateClassViewController.swift in Sources */,
 				45A7E8DB1B4103D700748A6F /* LogTabViewController.swift in Sources */,
-				45BEA6B71B5C88B90087EFB0 /* Upload.swift in Sources */,
-				45BEA6B31B5C88B90087EFB0 /* MultipartFormData.swift in Sources */,
-				45A7E8C31B3E6E0B00748A6F /* keleDraw.swift in Sources */,
+				45864B611C54B8F400A7FE45 /* Response.swift in Sources */,
+				45864B831C558EEB00A7FE45 /* KeleCalendarViewController.swift in Sources */,
+				45864B651C54B8F400A7FE45 /* Stream.swift in Sources */,
 				457E227B1B7DBCF400CDA4CC /* DeselectBabyViewController.swift in Sources */,
+				45864B5F1C54B8F400A7FE45 /* ParameterEncoding.swift in Sources */,
 				45A7E9771B479B6400748A6F /* ClassBabyInfoCollectionViewCell.swift in Sources */,
-				45BEA6B81B5C88B90087EFB0 /* Validation.swift in Sources */,
 				457E22791B7D155D00CDA4CC /* TeacherInfoViewController.swift in Sources */,
-				45BEA6B61B5C88B90087EFB0 /* ResponseSerialization.swift in Sources */,
+				45864B641C54B8F400A7FE45 /* ServerTrustPolicy.swift in Sources */,
+				45864B801C55650800A7FE45 /* KeleCalMonthView.swift in Sources */,
 				45DB02D71B5AAE3D00EA754D /* ChatViewController.swift in Sources */,
-				45BEA6B51B5C88B90087EFB0 /* Request.swift in Sources */,
-				45BEA6B11B5C88B90087EFB0 /* Download.swift in Sources */,
 				457E226F1B78368000CDA4CC /* MoreTableViewController.swift in Sources */,
-				45A7E8C51B3E6E5B00748A6F /* KeleCalendarViewController.swift in Sources */,
+				45864B631C54B8F400A7FE45 /* Result.swift in Sources */,
+				45864B751C55647100A7FE45 /* FloatRatingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1170,10 +1209,12 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/BabyLog_Swift",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
 				);
 				INFOPLIST_FILE = BabyLog_Swift/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1197,10 +1238,12 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/BabyLog_Swift",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
 				);
 				INFOPLIST_FILE = BabyLog_Swift/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

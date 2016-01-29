@@ -39,7 +39,7 @@ class LogTabViewController: UIViewControllerForWebAPI, UITableViewDelegate, UITa
     
     @IBAction func pickDateFromCalendar(sender: UIBarButtonItem) {
         
-        println("showing the calendar")
+        print("showing the calendar")
         
         let calendarPickerVC = KeleCalendarViewController()
         calendarPickerVC.delegate = self
@@ -106,7 +106,7 @@ class LogTabViewController: UIViewControllerForWebAPI, UITableViewDelegate, UITa
             let dailyLogPerBabyVC = segue.destinationViewController as! AddDailyLogPerBabyViewController
             
             let senderButton = sender as! UIButton
-            println("button tag: \(senderButton.tag)")
+            print("button tag: \(senderButton.tag)")
             
             let curDailyLog = _logItemsForDisplay[senderButton.tag]
             
@@ -137,7 +137,7 @@ class LogTabViewController: UIViewControllerForWebAPI, UITableViewDelegate, UITa
         
         _startSpinnerAndBlockUI()
         
-        var requestParams : [String:AnyObject] = [ //todo: add sanity check for the date string
+        let requestParams : [String:AnyObject] = [ //todo: add sanity check for the date string
             "Id":logId
         ]
         
@@ -160,7 +160,7 @@ class LogTabViewController: UIViewControllerForWebAPI, UITableViewDelegate, UITa
                 
                 self.logView.reloadData() //yxu: reloadData must be called on main thread. otherwise it does not work!!!
                 
-                println("updating the table view")
+                print("updating the table view")
                 // resume the UI at the end of async action
                 
                 self._stopSpinnerAndResumeUI()
@@ -174,7 +174,7 @@ class LogTabViewController: UIViewControllerForWebAPI, UITableViewDelegate, UITa
     
     
     func _uploadDailyLog(activityItem: DailyLogItem) {
-        var requestParams : [String:AnyObject] = [
+        let requestParams : [String:AnyObject] = [
             "TimeBegin":activityItem.startTime, //"08:00",
             "TimeEnd":activityItem.endTime, //"09:30",
             "InDay": curDate,
@@ -212,7 +212,7 @@ class LogTabViewController: UIViewControllerForWebAPI, UITableViewDelegate, UITa
         _startSpinnerAndBlockUI()
        
         
-        var requestParams : [String:AnyObject] = [ //todo: add sanity check for the date string
+        let requestParams : [String:AnyObject] = [ //todo: add sanity check for the date string
             //"Id":307, 306, 305
             "Day": date, //"2015-6-25"
         ]
@@ -236,7 +236,7 @@ class LogTabViewController: UIViewControllerForWebAPI, UITableViewDelegate, UITa
                 self.logView.reloadData() //yxu: reloadData must be called on main thread. otherwise it does not work!!!
                 
                 
-                println("updating the table view")
+                print("updating the table view")
                 // resume the UI at the end of async action
                 
                 self._stopSpinnerAndResumeUI()
@@ -256,13 +256,13 @@ class LogTabViewController: UIViewControllerForWebAPI, UITableViewDelegate, UITa
             var logItems = [DailyLogItem]()
             
             for logItem in logItemArray {
-                var logUniqueId: Int = logItem["Id"].int ?? 0
-                var logActivityType: Int = logItem["DiaryType"].int ?? 0
-                var logContent: String? = logItem["Content"].string
-                var logStartTime: String? = logItem["StartTime"].string
-                var logEndTime: String? = logItem["EndTime"].string
+                let logUniqueId: Int = logItem["Id"].int ?? 0
+                let logActivityType: Int = logItem["DiaryType"].int ?? 0
+                let logContent: String? = logItem["Content"].string
+                let logStartTime: String? = logItem["StartTime"].string
+                let logEndTime: String? = logItem["EndTime"].string
                 
-                var dailyLogItem = DailyLogItem(uniqueId: logUniqueId, activityType: logActivityType, content: logContent, startTime: logStartTime, endTime: logEndTime)
+                let dailyLogItem = DailyLogItem(uniqueId: logUniqueId, activityType: logActivityType, content: logContent, startTime: logStartTime, endTime: logEndTime)
                 logItems.append(dailyLogItem)
             }
             
@@ -313,7 +313,7 @@ class LogTabViewController: UIViewControllerForWebAPI, UITableViewDelegate, UITa
     
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        println("selected cell #\(indexPath.row)")
+        print("selected cell #\(indexPath.row)")
     }
     
     
@@ -327,7 +327,7 @@ class LogTabViewController: UIViewControllerForWebAPI, UITableViewDelegate, UITa
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if (editingStyle == UITableViewCellEditingStyle.Delete) {
-            println("deleting the cell ")
+            print("deleting the cell ")
             
             // get id
             let logId = _logItemsForDisplay[indexPath.row].uniqueId
@@ -394,14 +394,14 @@ class LogTabForOneBabyViewController: LogTabViewController, UploadLogForOneBabyD
     
     func uploadLogItemForOneBaby(activityItem: DailyLogItem, extraInfo: DailyLogItem_ExtraInfoForBaby)
     {
-        println("conform to the delegate: calling api to upload log for one baby ")
+        print("conform to the delegate: calling api to upload log for one baby ")
         
         _uploadDailyLogForOneBaby(activityItem, extraInfo: extraInfo)
         
     }
     
     override func _retrieveDataForDisplayInTableView() {
-        println("baby id = \(_babyId),  current date = \(curDate)")
+        print("baby id = \(_babyId),  current date = \(curDate)")
         
         _retrieveDailyLogForOneBaby(curDate)
     }
@@ -426,9 +426,9 @@ class LogTabForOneBabyViewController: LogTabViewController, UploadLogForOneBabyD
                     imageData = image.lowQualityJPEGNSData
                 }
                 
-                println("image size: \(imageData.length)") // ~100k
+                print("image size: \(imageData.length)") // ~100k
                 
-                let base64Str = imageData.base64EncodedStringWithOptions( NSDataBase64EncodingOptions.allZeros )
+                let base64Str = imageData.base64EncodedStringWithOptions( NSDataBase64EncodingOptions() )
                 //refer here for size on disk and size in mem: 
                 // http://stackoverflow.com/questions/15656403/inaccurate-nsdata-size-given-in-bytes
                 
@@ -437,7 +437,7 @@ class LogTabForOneBabyViewController: LogTabViewController, UploadLogForOneBabyD
         }
     
         
-        var requestParams : [String:AnyObject] = [
+        let requestParams : [String:AnyObject] = [
             "TimeBegin":activityItem.startTime, //"08:00",
             "TimeEnd":activityItem.endTime, //"09:30",
             "DiaryType": activityItem.activityType,
@@ -478,21 +478,21 @@ class LogTabForOneBabyViewController: LogTabViewController, UploadLogForOneBabyD
             var extraInfoItems = [DailyLogItem_ExtraInfoForBaby]()
             
             for logItem in logItemArray {
-                var logUniqueId: Int = logItem["Id"].int ?? 0
-                var logActivityType: Int = logItem["DiaryTypeId"].int ?? 0
-                var logContent: String? = logItem["Content"].string
-                var logStartTime: String? = logItem["StartTime"].string
-                var logEndTime: String? = logItem["EndTime"].string
+                let logUniqueId: Int = logItem["Id"].int ?? 0
+                let logActivityType: Int = logItem["DiaryTypeId"].int ?? 0
+                let logContent: String? = logItem["Content"].string
+                let logStartTime: String? = logItem["StartTime"].string
+                let logEndTime: String? = logItem["EndTime"].string
 
-                var dailyLogItem = DailyLogItem(uniqueId: logUniqueId, activityType: logActivityType, content: logContent, startTime: logStartTime, endTime: logEndTime)
+                let dailyLogItem = DailyLogItem(uniqueId: logUniqueId, activityType: logActivityType, content: logContent, startTime: logStartTime, endTime: logEndTime)
                 logItems.append(dailyLogItem)
                 
 
-                var logStars: Int = logItem["Rank"].int ?? 0
-                var logBabyId: Int = logItem["ToUseId"].int ?? 0
-                var logClassId: Int = logItem["ByClassId"].int ?? 0
-                var logCreatorId: Int = logItem["ByUserId"].int ?? 0
-                var logPicCount: Int = logItem["PicCount"].int ?? 0
+                let logStars: Int = logItem["Rank"].int ?? 0
+                let logBabyId: Int = logItem["ToUseId"].int ?? 0
+                let logClassId: Int = logItem["ByClassId"].int ?? 0
+                let logCreatorId: Int = logItem["ByUserId"].int ?? 0
+                let logPicCount: Int = logItem["PicCount"].int ?? 0
                 
                 var logPicPaths = [String]()
                 
@@ -500,12 +500,12 @@ class LogTabForOneBabyViewController: LogTabViewController, UploadLogForOneBabyD
                     
                     for pic in picListArray {
                         logPicPaths.append(pic.string ?? "")
-                        println("\(pic.string)")
+                        print("\(pic.string)")
                         
                     }
                 }
                 
-                var extraInfo = DailyLogItem_ExtraInfoForBaby(stars: logStars, babyId: logBabyId, classId: logClassId, creatorId: logCreatorId, picCount: logPicCount, picPaths: logPicPaths)
+                let extraInfo = DailyLogItem_ExtraInfoForBaby(stars: logStars, babyId: logBabyId, classId: logClassId, creatorId: logCreatorId, picCount: logPicCount, picPaths: logPicPaths)
                 
                 extraInfoItems.append( extraInfo)
                 
@@ -536,7 +536,7 @@ class LogTabForOneBabyViewController: LogTabViewController, UploadLogForOneBabyD
         _startSpinnerAndBlockUI()
         
 
-        var requestParams : [String:AnyObject] = [ //todo: add sanity check for the date string
+        let requestParams : [String:AnyObject] = [ //todo: add sanity check for the date string
             "ToUser": _babyId,
             "Day": date, //"2015-6-25"
         ]
@@ -557,7 +557,7 @@ class LogTabForOneBabyViewController: LogTabViewController, UploadLogForOneBabyD
                 self.logView.reloadData() //yxu: reloadData must be called on main thread. otherwise it does not work!!!
                 
                 
-                println("updating the table view")
+                print("updating the table view")
                 // resume the UI at the end of async action
                 
                 self._stopSpinnerAndResumeUI()
@@ -575,7 +575,7 @@ class LogTabForOneBabyViewController: LogTabViewController, UploadLogForOneBabyD
         
         _startSpinnerAndBlockUI()
         
-        var requestParams : [String:AnyObject] = [ //todo: add sanity check for the date string
+        let requestParams : [String:AnyObject] = [ //todo: add sanity check for the date string
             "Id":logId
         ]
         
@@ -592,7 +592,7 @@ class LogTabForOneBabyViewController: LogTabViewController, UploadLogForOneBabyD
                     
                     self.logView.reloadData() //yxu: reloadData must be called on main thread. otherwise it does not work!!!
                     
-                    println("updating the table view")
+                    print("updating the table view")
                     // resume the UI at the end of async action
                     
                     self._stopSpinnerAndResumeUI()
@@ -641,7 +641,7 @@ class LogTabForOneBabyViewController: LogTabViewController, UploadLogForOneBabyD
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if (editingStyle == UITableViewCellEditingStyle.Delete) {
-            println("deleting the cell ")
+            print("deleting the cell ")
             
             // get id
             let logId = _logItemsForDisplay[indexPath.row].uniqueId

@@ -48,9 +48,9 @@ class AddDailyLogViewController: UIViewControllerForWebAPI, UIPickerViewDataSour
     
     
     @IBAction func uploadLog(sender: UIButton) {
-        println("uploading log ")
+        print("uploading log ")
         
-        println("activity = \(activityTypeTextField.text), id = \(activityId) \n\n")
+        print("activity = \(activityTypeTextField.text), id = \(activityId) \n\n")
         
         // TODO: add sanity check:  end time > start time etc
         //   show an alert view if error detected
@@ -63,7 +63,7 @@ class AddDailyLogViewController: UIViewControllerForWebAPI, UIPickerViewDataSour
         
     }
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.view.endEditing(true)
     }
 
@@ -82,16 +82,16 @@ class AddDailyLogViewController: UIViewControllerForWebAPI, UIPickerViewDataSour
         
         if( dailyLogContainerView != nil) {
             
-            println("view width = \(dailyLogContainerView.frame.width), view height = \( dailyLogContainerView.frame.height)" )
-            println("super view width = \(view.frame.width), super view height = \( view.frame.height)" )
+            print("view width = \(dailyLogContainerView.frame.width), view height = \( dailyLogContainerView.frame.height)" )
+            print("super view width = \(view.frame.width), super view height = \( view.frame.height)" )
             
             
-            var scaleX:CGFloat = view.frame.width / dailyLogContainerView.frame.width
+            let scaleX:CGFloat = view.frame.width / dailyLogContainerView.frame.width
             
-            var scaleY:CGFloat = (view.frame.height - 44 - 20 - 49) / dailyLogContainerView.frame.height
+            let scaleY:CGFloat = (view.frame.height - 44 - 20 - 49) / dailyLogContainerView.frame.height
             
-            println("view width = \(dailyLogContainerView.frame.width), view height = \( dailyLogContainerView.frame.height)" )
-            println("super view width = \(view.frame.width), super view height = \( view.frame.height)" )
+            print("view width = \(dailyLogContainerView.frame.width), view height = \( dailyLogContainerView.frame.height)" )
+            print("super view width = \(view.frame.width), super view height = \( view.frame.height)" )
             
             
             /*
@@ -99,7 +99,7 @@ class AddDailyLogViewController: UIViewControllerForWebAPI, UIPickerViewDataSour
             
             */
             
-            var scale: CGFloat =   min(scaleX, scaleY)
+            let scale: CGFloat =   min(scaleX, scaleY)
             
             var t: CGAffineTransform = CGAffineTransformMakeScale(scale, scale)
             
@@ -109,7 +109,7 @@ class AddDailyLogViewController: UIViewControllerForWebAPI, UIPickerViewDataSour
                 translateX += 40
             }
             
-            var translateY = dailyLogContainerView.frame.height * (scale - 1) / 2 / scale;
+            let translateY = dailyLogContainerView.frame.height * (scale - 1) / 2 / scale;
             
             
             t = CGAffineTransformTranslate(t, translateX, translateY)
@@ -132,7 +132,7 @@ class AddDailyLogViewController: UIViewControllerForWebAPI, UIPickerViewDataSour
         contentTextView.layer.borderColor = myGrayColor.CGColor
         contentTextView.layer.cornerRadius = 5
         
-        var curTime = NSDate()
+        let curTime = NSDate()
         startTime = curTime.formattedHHMM
         endTime = startTime  // TODO add logic to add 30 minutes to starttime as endtime; And check agains midnight; make them aligned on 5 minutes resolution
         
@@ -181,7 +181,9 @@ class AddDailyLogViewController: UIViewControllerForWebAPI, UIPickerViewDataSour
         return activityTypeArray.count
     }
     
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
+
+    
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         activityId = activityTypeArray[row].id
         return activityTypeArray[row].name
     }
@@ -194,11 +196,11 @@ class AddDailyLogViewController: UIViewControllerForWebAPI, UIPickerViewDataSour
     }
     
  
-    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView!) -> UIView {
+    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
         
-        var myView = UIView(frame: CGRectMake(0, 0, pickerView.bounds.width - 30, 40))
+        let myView = UIView(frame: CGRectMake(0, 0, pickerView.bounds.width - 30, 40))
         
-        var myImageView = UIImageView(frame: CGRectMake(0, 4, 32, 32))
+        let myImageView = UIImageView(frame: CGRectMake(0, 4, 32, 32))
         
         myImageView.image = UIImage(named: activityTypeArray[row].imageName ?? defaultImg)
         

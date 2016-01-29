@@ -24,9 +24,9 @@ class KeleCalMainView: UIView, UIScrollViewDelegate {
     
     private var _keleData:KeleCalData = KeleCalData()
     
-    private var _scrollView: UIScrollView!
+    private let _scrollView: UIScrollView!
     
-    private var _frame:CGRect!
+    private let _frame:CGRect!
     
     
     private var _page:Int = 1
@@ -38,15 +38,15 @@ class KeleCalMainView: UIView, UIScrollViewDelegate {
 
     
     
-    init() {
+     init() {
         
-        var frame = CGRectMake(0, 70, 320, 8 * 320 / 7) //todo: change 70 to something related to Navigation Bar height
-        super.init(frame:frame)
+        let frame = CGRectMake(0, 30, 320, 8 * 320 / 7)
         
         
         _frame = frame
         _scrollView = UIScrollView(frame:frame)
-        
+        super.init(frame:frame)
+
         // Setup Scroll View.
         _scrollView.contentSize = CGSizeMake(frame.width * 3, frame.height)
         _scrollView.showsHorizontalScrollIndicator = false
@@ -54,7 +54,11 @@ class KeleCalMainView: UIView, UIScrollViewDelegate {
         _scrollView.pagingEnabled = true
         _scrollView.delegate = self
         
+
+        
         addSubview(_scrollView)
+        
+
         
         
 
@@ -107,12 +111,12 @@ class KeleCalMainView: UIView, UIScrollViewDelegate {
         addSubview(_topLabel!)
         
         //-------------------日历头----------------
-        var  xOffset:CGFloat = self.frame.size.width/7.0;
-        var  yOffset:CGFloat = 35.0
+        let  xOffset:CGFloat = self.frame.size.width/7.0;
+        let  yOffset:CGFloat = 35.0
         
         var weekLabelArray:[UILabel] = []
         for (var i:Int = 0 ; i<7; i++) {
-            var dayOfTheWeekLabel:UILabel = UILabel(frame: CGRectMake(xOffset * CGFloat(i), yOffset, xOffset, 20))
+            let dayOfTheWeekLabel:UILabel = UILabel(frame: CGRectMake(xOffset * CGFloat(i), yOffset, xOffset, 20))
             dayOfTheWeekLabel.textColor = UIColor.blackColor()
             dayOfTheWeekLabel.textAlignment = NSTextAlignment.Center
             dayOfTheWeekLabel.backgroundColor = UIColor.clearColor()
@@ -121,12 +125,13 @@ class KeleCalMainView: UIView, UIScrollViewDelegate {
             self.addSubview(dayOfTheWeekLabel)
             weekLabelArray.append(dayOfTheWeekLabel)
         }
-        var weekStr = ["日","一","二","三","四","五","六"]
+        let weekStr = ["日","一","二","三","四","五","六"]
         
-        
-        for(i, v) in enumerate(weekStr)
+        // http://stackoverflow.com/questions/31230761/enumerate-is-unavailable-call-the-enumerate-method-on-the-sequence
+        // enumerate changes in Swift 2.0
+        for(i, v) in weekStr.enumerate()
         {
-            var label:UILabel = weekLabelArray[i] as UILabel
+            let label:UILabel = weekLabelArray[i] as UILabel
             label.text = v as String
             
             if (i==0 || i == weekStr.count-1) {
@@ -177,6 +182,7 @@ class KeleCalMainView: UIView, UIScrollViewDelegate {
         let width = scrollView.frame.width
         
         let page  = Int(floor((_scrollView.contentOffset.x - width/2) / width) + 1)
+        
         if page !=  _page {
             
             _page = page
@@ -227,18 +233,10 @@ class KeleCalMainView: UIView, UIScrollViewDelegate {
             //----------------调整容器顺序-------------
             if _direction == .Left {
                 
-                temp = _viewCache[0]
-                _viewCache[0] = _viewCache[1]
-                _viewCache[1] = _viewCache[2]
-                _viewCache[2] = temp as! KeleCalMonthView
+
                 
                 _keleData.next()
             } else {
-                
-                temp = _viewCache[2]
-                _viewCache[2] = _viewCache[1]
-                _viewCache[1] = _viewCache[0]
-                _viewCache[0] = temp as! KeleCalMonthView
                 
                 _keleData.pre()
                 
@@ -263,10 +261,10 @@ class KeleCalMainView: UIView, UIScrollViewDelegate {
     {
         for i in 0...2 {
             
-            let frame = CGRectMake(_frame.width * CGFloat(i), 0, _frame.width, _frame.height)
+            //let frame = CGRectMake(_frame.width * CGFloat(i), 0, _frame.width, _frame.height)
             
             let view:KeleCalMonthView! = _viewCache[i]
-            view.frame = frame
+            //view.frame = frame
             
             
             if i == 0 {
@@ -282,7 +280,7 @@ class KeleCalMainView: UIView, UIScrollViewDelegate {
                 view.render(_keleData.nextDay)
             }
             
-            println("tag:\(_viewCache[i]?.tag)=\(_frame.width * CGFloat(i))--\(i)")
+            //println("tag:\(_viewCache[i]?.tag)=\(_frame.width * CGFloat(i))--\(i)")
         }
         
         _scrollView.scrollRectToVisible(CGRectMake(frame.width, 0, frame.width, frame.height), animated:false)

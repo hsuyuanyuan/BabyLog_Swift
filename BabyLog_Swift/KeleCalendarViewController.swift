@@ -40,7 +40,7 @@ class KeleCalendarViewController: UIViewController, KeleCalDelegate {
 
     func onCellPressed(cell: KeleCalCellView, kdate: CalDateTimeVO) {
         let date = "\(kdate.year!)-\(kdate.month!)-\(kdate.day!)"
-        println(date)
+        print(date)
         delegate?.pickDataFromCalendar(date)
         
         dismissViewControllerAnimated(true, completion: nil)        

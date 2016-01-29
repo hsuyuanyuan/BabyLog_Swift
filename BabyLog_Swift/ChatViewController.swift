@@ -36,7 +36,7 @@ class ChatViewController: RCConversationViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        println("In viewDidLoad")
+        print("In viewDidLoad")
     }
     
     

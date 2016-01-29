@@ -14,13 +14,14 @@ class KeleDraw: UIView {
     
     init(frame: CGRect, color: UIColor, _alpha: CGFloat) {
         
-        
         self.color = color
-        super.init(frame: frame) // order problem http://stackoverflow.com/questions/29890510/property-self-not-initialized-at-super-init-call
+        super.init(frame: frame)
         self.alpha = _alpha
+
+        
+        
         
         self.backgroundColor = .clearColor()
-        
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -43,7 +44,7 @@ class KeleDraw: UIView {
         CGContextSetFillColorWithColor(context, UIColor.clearColor().CGColor);//填充颜色
         CGContextSetStrokeColorWithColor(context, UIColor.yellowColor().CGColor);//线框颜色
         CGContextAddRect(context,CGRectMake(1, 0, frame.width, frame.height));//画方框
-        CGContextDrawPath(context, kCGPathFillStroke);//绘画路径
+        CGContextDrawPath(context, CGPathDrawingMode.FillStroke);//绘画路径
         
         return
 //        

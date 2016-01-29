@@ -52,13 +52,13 @@ class MoreTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         
-        var header = view as! UITableViewHeaderFooterView
+        let header = view as! UITableViewHeaderFooterView
         
-        header.textLabel.textColor = UIColor.redColor()
-        header.textLabel.font = UIFont.boldSystemFontOfSize(18)
-        var headerFrame = header.frame;
-        header.textLabel.frame = headerFrame;
-        header.textLabel.textAlignment = NSTextAlignment.Center
+        header.textLabel!.textColor = UIColor.redColor()
+        header.textLabel!.font = UIFont.boldSystemFontOfSize(18)
+        let headerFrame = header.frame;
+        header.textLabel!.frame = headerFrame;
+        header.textLabel!.textAlignment = NSTextAlignment.Center
     }
 
 

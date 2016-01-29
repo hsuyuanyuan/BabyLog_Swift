@@ -46,7 +46,7 @@ class LoginViewController: UIViewControllerForWebAPI {
             _startSpinnerAndBlockUI()
             
             // call login web api with async method
-             var requestParams : [String:AnyObject] = ["Username": userNameTextField.text, "Password": passwordTextField.text,
+             let requestParams : [String:AnyObject] = ["Username": userNameTextField.text!, "Password": passwordTextField.text!,
                 "ShenFen":"2",
                 "Email":"hsuyuanyuan@gmail.com"]
             
@@ -92,7 +92,7 @@ class LoginViewController: UIViewControllerForWebAPI {
         _startSpinnerAndBlockUI()
         
         // call login web api with async method
-        var requestParams : [String:AnyObject] = ["Username":userNameTextField.text, "Password":passwordTextField.text]
+        let requestParams : [String:AnyObject] = ["Username":userNameTextField.text!, "Password":passwordTextField.text!]
         
         
         callWebAPI(requestParams, curAPIType: APIType.UserLogIn, postActionAfterSuccessulReturn: { (data) -> () in
@@ -105,11 +105,11 @@ class LoginViewController: UIViewControllerForWebAPI {
             // Rongyun registration
             RCIM.sharedRCIM().initWithAppKey("pvxdm17jxr4rr")
             RCIM.sharedRCIM().connectWithToken(rongyunToken, success: { (userid: String!) -> Void in
-                println("Rongyun connected ")
+                print("Rongyun connected ")
                 }, error: { (error: RCConnectErrorCode) -> Void in
-                    println("connection to Rongyun failed")
+                    print("connection to Rongyun failed")
                 }) { () -> Void in
-                    println("Rongyun token wrong!")
+                    print("Rongyun token wrong!")
             }
 
             self.performSegueWithIdentifier("segueToShowMainTabBarVC", sender: self) //yxu: Note: segue is from the loginVC to mainVC in storyboard, not from button to mainVC, which would jump without calling performSegueWithIdentifier
@@ -125,8 +125,9 @@ class LoginViewController: UIViewControllerForWebAPI {
    }
 
     
-    
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    // http://stackoverflow.com/questions/30892254/override-func-error-in-swift-2
+    // original Obj-C prototype has been changed
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.view.endEditing(true)
     }
     

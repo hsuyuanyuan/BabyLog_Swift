@@ -1,6 +1,6 @@
-// Alamofire.swift
+// Request.swift
 //
-// Copyright (c) 2014–2015 Alamofire Software Foundation (http://alamofire.org/)
+// Copyright (c) 2014–2016 Alamofire Software Foundation (http://alamofire.org/)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,13 +23,15 @@
 import Foundation
 
 /**
-    Responsible for sending a request and receiving the response and associated data from the server, as well as managing its underlying `NSURLSessionTask`.
+    Responsible for sending a request and receiving the response and associated data from the server, as well as 
+    managing its underlying `NSURLSessionTask`.
 */
 public class Request {
 
     // MARK: - Properties
 
-    let delegate: TaskDelegate
+    /// The delegate for the underlying task.
+    public let delegate: TaskDelegate
 
     /// The underlying task.
     public var task: NSURLSessionTask { return delegate.task }
@@ -38,7 +40,7 @@ public class Request {
     public let session: NSURLSession
 
     /// The request sent or to be sent to the server.
-    public var request: NSURLRequest { return task.originalRequest }
+    public var request: NSURLRequest? { return task.originalRequest }
 
     /// The response received from the server, if any.
     public var response: NSHTTPURLResponse? { return task.response as? NSHTTPURLResponse }
@@ -68,13 +70,18 @@ public class Request {
     /**
         Associates an HTTP Basic credential with the request.
 
-        :param: user The user.
-        :param: password The password.
-        :param: persistence The URL credential persistence. `.ForSession` by default.
+        - parameter user:        The user.
+        - parameter password:    The password.
+        - parameter persistence: The URL credential persistence. `.ForSession` by default.
 
-        :returns: The request.
+        - returns: The request.
     */
-    public func authenticate(#user: String, password: String, persistence: NSURLCredentialPersistence = .ForSession) -> Self {
+    public func authenticate(
+        user user: String,
+        password: String,
+        persistence: NSURLCredentialPersistence = .ForSession)
+        -> Self
+    {
         let credential = NSURLCredential(user: user, password: password, persistence: persistence)
 
         return authenticate(usingCredential: credential)
@@ -83,12 +90,12 @@ public class Request {
     /**
         Associates a specified credential with the request.
 
-        :param: credential The credential.
+        - parameter credential: The credential.
 
-        :returns: The request.
+        - returns: The request.
     */
     public func authenticate(usingCredential credential: NSURLCredential) -> Self {
-        self.delegate.credential = credential
+        delegate.credential = credential
 
         return self
     }
@@ -96,21 +103,24 @@ public class Request {
     // MARK: - Progress
 
     /**
-        Sets a closure to be called periodically during the lifecycle of the request as data is written to or read from the server.
+        Sets a closure to be called periodically during the lifecycle of the request as data is written to or read 
+        from the server.
 
-        - For uploads, the progress closure returns the bytes written, total bytes written, and total bytes expected to write.
-        - For downloads and data tasks, the progress closure returns the bytes read, total bytes read, and total bytes expected to read.
+        - For uploads, the progress closure returns the bytes written, total bytes written, and total bytes expected 
+          to write.
+        - For downloads and data tasks, the progress closure returns the bytes read, total bytes read, and total bytes 
+          expected to read.
 
-        :param: closure The code to be executed periodically during the lifecycle of the request.
+        - parameter closure: The code to be executed periodically during the lifecycle of the request.
 
-        :returns: The request.
+        - returns: The request.
     */
     public func progress(closure: ((Int64, Int64, Int64) -> Void)? = nil) -> Self {
-        if let uploadDelegate = self.delegate as? UploadTaskDelegate {
+        if let uploadDelegate = delegate as? UploadTaskDelegate {
             uploadDelegate.uploadProgress = closure
-        } else if let dataDelegate = self.delegate as? DataTaskDelegate {
+        } else if let dataDelegate = delegate as? DataTaskDelegate {
             dataDelegate.dataProgress = closure
-        } else if let downloadDelegate = self.delegate as? DownloadTaskDelegate {
+        } else if let downloadDelegate = delegate as? DownloadTaskDelegate {
             downloadDelegate.downloadProgress = closure
         }
 
@@ -120,65 +130,17 @@ public class Request {
     /**
         Sets a closure to be called periodically during the lifecycle of the request as data is read from the server.
 
-        This closure returns the bytes most recently received from the server, not including data from previous calls. If this closure is set, data will only be available within this closure, and will not be saved elsewhere. It is also important to note that the `response` closure will be called with nil `responseData`.
+        This closure returns the bytes most recently received from the server, not including data from previous calls. 
+        If this closure is set, data will only be available within this closure, and will not be saved elsewhere. It is 
+        also important to note that the `response` closure will be called with nil `responseData`.
 
-        :param: closure The code to be executed periodically during the lifecycle of the request.
+        - parameter closure: The code to be executed periodically during the lifecycle of the request.
 
-        :returns: The request.
+        - returns: The request.
     */
     public func stream(closure: (NSData -> Void)? = nil) -> Self {
-        if let dataDelegate = self.delegate as? DataTaskDelegate {
+        if let dataDelegate = delegate as? DataTaskDelegate {
             dataDelegate.dataStream = closure
-        }
-
-        return self
-    }
-
-    // MARK: - Response
-
-    /**
-        A closure used by response handlers that takes a request, response, and data and returns a serialized object and any error that occured in the process.
-    */
-    public typealias Serializer = (NSURLRequest, NSHTTPURLResponse?, NSData?) -> (AnyObject?, NSError?)
-
-    /**
-        Creates a response serializer that returns the associated data as-is.
-
-        :returns: A data response serializer.
-    */
-    public class func responseDataSerializer() -> Serializer {
-        return { request, response, data in
-            return (data, nil)
-        }
-    }
-
-    /**
-        Adds a handler to be called once the request has finished.
-
-        :param: completionHandler The code to be executed once the request has finished.
-
-        :returns: The request.
-    */
-    public func response(completionHandler: (NSURLRequest, NSHTTPURLResponse?, AnyObject?, NSError?) -> Void) -> Self {
-        return response(serializer: Request.responseDataSerializer(), completionHandler: completionHandler)
-    }
-
-    /**
-        Adds a handler to be called once the request has finished.
-
-        :param: queue The queue on which the completion handler is dispatched.
-        :param: serializer The closure responsible for serializing the request, response, and data.
-        :param: completionHandler The code to be executed once the request has finished.
-
-        :returns: The request.
-    */
-    public func response(queue: dispatch_queue_t? = nil, serializer: Serializer, completionHandler: (NSURLRequest, NSHTTPURLResponse?, AnyObject?, NSError?) -> Void) -> Self {
-        self.delegate.queue.addOperationWithBlock {
-            let (responseObject: AnyObject?, serializationError: NSError?) = serializer(self.request, self.response, self.delegate.data)
-
-            dispatch_async(queue ?? dispatch_get_main_queue()) {
-                completionHandler(self.request, self.response, responseObject, self.delegate.error ?? serializationError)
-            }
         }
 
         return self
@@ -190,14 +152,14 @@ public class Request {
         Suspends the request.
     */
     public func suspend() {
-        self.task.suspend()
+        task.suspend()
     }
 
     /**
         Resumes the request.
     */
     public func resume() {
-        self.task.resume()
+        task.resume()
     }
 
     /**
@@ -212,15 +174,22 @@ public class Request {
                 downloadDelegate.resumeData = data
             }
         } else {
-            self.task.cancel()
+            task.cancel()
         }
     }
 
     // MARK: - TaskDelegate
 
-    class TaskDelegate: NSObject, NSURLSessionTaskDelegate {
+    /**
+        The task delegate is responsible for handling all delegate callbacks for the underlying task as well as 
+        executing all operations attached to the serial operation queue upon task completion.
+    */
+    public class TaskDelegate: NSObject {
+
+        /// The serial operation queue used to execute all operations after the task completes.
+        public let queue: NSOperationQueue
+
         let task: NSURLSessionTask
-        let queue: NSOperationQueue
         let progress: NSProgress
 
         var data: NSData? { return nil }
@@ -236,7 +205,7 @@ public class Request {
                 operationQueue.maxConcurrentOperationCount = 1
                 operationQueue.suspended = true
 
-                if operationQueue.respondsToSelector("qualityOfService") {
+                if #available(OSX 10.10, *) {
                     operationQueue.qualityOfService = NSQualityOfService.Utility
                 }
 
@@ -245,8 +214,8 @@ public class Request {
         }
 
         deinit {
-            self.queue.cancelAllOperations()
-            self.queue.suspended = true
+            queue.cancelAllOperations()
+            queue.suspended = false
         }
 
         // MARK: - NSURLSessionTaskDelegate
@@ -260,22 +229,47 @@ public class Request {
 
         // MARK: Delegate Methods
 
-        func URLSession(session: NSURLSession, task: NSURLSessionTask, willPerformHTTPRedirection response: NSHTTPURLResponse, newRequest request: NSURLRequest, completionHandler: ((NSURLRequest!) -> Void)) {
+        func URLSession(
+            session: NSURLSession,
+            task: NSURLSessionTask,
+            willPerformHTTPRedirection response: NSHTTPURLResponse,
+            newRequest request: NSURLRequest,
+            completionHandler: ((NSURLRequest?) -> Void))
+        {
             var redirectRequest: NSURLRequest? = request
 
-            if let taskWillPerformHTTPRedirection = self.taskWillPerformHTTPRedirection {
+            if let taskWillPerformHTTPRedirection = taskWillPerformHTTPRedirection {
                 redirectRequest = taskWillPerformHTTPRedirection(session, task, response, request)
             }
 
             completionHandler(redirectRequest)
         }
 
-        func URLSession(session: NSURLSession, task: NSURLSessionTask, didReceiveChallenge challenge: NSURLAuthenticationChallenge, completionHandler: ((NSURLSessionAuthChallengeDisposition, NSURLCredential!) -> Void)) {
+        func URLSession(
+            session: NSURLSession,
+            task: NSURLSessionTask,
+            didReceiveChallenge challenge: NSURLAuthenticationChallenge,
+            completionHandler: ((NSURLSessionAuthChallengeDisposition, NSURLCredential?) -> Void))
+        {
             var disposition: NSURLSessionAuthChallengeDisposition = .PerformDefaultHandling
             var credential: NSURLCredential?
 
-            if let taskDidReceiveChallenge = self.taskDidReceiveChallenge {
+            if let taskDidReceiveChallenge = taskDidReceiveChallenge {
                 (disposition, credential) = taskDidReceiveChallenge(session, task, challenge)
+            } else if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust {
+                let host = challenge.protectionSpace.host
+
+                if let
+                    serverTrustPolicy = session.serverTrustPolicyManager?.serverTrustPolicyForHost(host),
+                    serverTrust = challenge.protectionSpace.serverTrust
+                {
+                    if serverTrustPolicy.evaluateServerTrust(serverTrust, isValidForHost: host) {
+                        disposition = .UseCredential
+                        credential = NSURLCredential(forTrust: serverTrust)
+                    } else {
+                        disposition = .CancelAuthenticationChallenge
+                    }
+                }
             } else {
                 if challenge.previousFailureCount > 0 {
                     disposition = .CancelAuthenticationChallenge
@@ -291,10 +285,14 @@ public class Request {
             completionHandler(disposition, credential)
         }
 
-        func URLSession(session: NSURLSession, task: NSURLSessionTask, needNewBodyStream completionHandler: ((NSInputStream!) -> Void)) {
+        func URLSession(
+            session: NSURLSession,
+            task: NSURLSessionTask,
+            needNewBodyStream completionHandler: ((NSInputStream?) -> Void))
+        {
             var bodyStream: NSInputStream?
 
-            if let taskNeedNewBodyStream = self.taskNeedNewBodyStream {
+            if let taskNeedNewBodyStream = taskNeedNewBodyStream {
                 bodyStream = taskNeedNewBodyStream(session, task)
             }
 
@@ -302,14 +300,22 @@ public class Request {
         }
 
         func URLSession(session: NSURLSession, task: NSURLSessionTask, didCompleteWithError error: NSError?) {
-            if let taskDidCompleteWithError = self.taskDidCompleteWithError {
+            if let taskDidCompleteWithError = taskDidCompleteWithError {
                 taskDidCompleteWithError(session, task, error)
             } else {
-                if error != nil {
+                if let error = error {
                     self.error = error
+
+                    if let
+                        downloadDelegate = self as? DownloadTaskDelegate,
+                        userInfo = error.userInfo as? [String: AnyObject],
+                        resumeData = userInfo[NSURLSessionDownloadTaskResumeData] as? NSData
+                    {
+                        downloadDelegate.resumeData = resumeData
+                    }
                 }
 
-                self.queue.suspended = false
+                queue.suspended = false
             }
         }
     }
@@ -317,15 +323,15 @@ public class Request {
     // MARK: - DataTaskDelegate
 
     class DataTaskDelegate: TaskDelegate, NSURLSessionDataDelegate {
-        var dataTask: NSURLSessionDataTask? { return self.task as? NSURLSessionDataTask }
+        var dataTask: NSURLSessionDataTask? { return task as? NSURLSessionDataTask }
 
         private var totalBytesReceived: Int64 = 0
         private var mutableData: NSMutableData
         override var data: NSData? {
-            if self.dataStream != nil {
+            if dataStream != nil {
                 return nil
             } else {
-                return self.mutableData
+                return mutableData
             }
         }
 
@@ -334,7 +340,7 @@ public class Request {
         private var dataStream: ((data: NSData) -> Void)?
 
         override init(task: NSURLSessionTask) {
-            self.mutableData = NSMutableData()
+            mutableData = NSMutableData()
             super.init(task: task)
         }
 
@@ -349,46 +355,64 @@ public class Request {
 
         // MARK: Delegate Methods
 
-        func URLSession(session: NSURLSession, dataTask: NSURLSessionDataTask, didReceiveResponse response: NSURLResponse, completionHandler: ((NSURLSessionResponseDisposition) -> Void)) {
+        func URLSession(
+            session: NSURLSession,
+            dataTask: NSURLSessionDataTask,
+            didReceiveResponse response: NSURLResponse,
+            completionHandler: (NSURLSessionResponseDisposition -> Void))
+        {
             var disposition: NSURLSessionResponseDisposition = .Allow
 
-            self.expectedContentLength = response.expectedContentLength
+            expectedContentLength = response.expectedContentLength
 
-            if let dataTaskDidReceiveResponse = self.dataTaskDidReceiveResponse {
+            if let dataTaskDidReceiveResponse = dataTaskDidReceiveResponse {
                 disposition = dataTaskDidReceiveResponse(session, dataTask, response)
             }
 
             completionHandler(disposition)
         }
 
-        func URLSession(session: NSURLSession, dataTask: NSURLSessionDataTask, didBecomeDownloadTask downloadTask: NSURLSessionDownloadTask) {
-            self.dataTaskDidBecomeDownloadTask?(session, dataTask, downloadTask)
+        func URLSession(
+            session: NSURLSession,
+            dataTask: NSURLSessionDataTask,
+            didBecomeDownloadTask downloadTask: NSURLSessionDownloadTask)
+        {
+            dataTaskDidBecomeDownloadTask?(session, dataTask, downloadTask)
         }
 
         func URLSession(session: NSURLSession, dataTask: NSURLSessionDataTask, didReceiveData data: NSData) {
-            if let dataTaskDidReceiveData = self.dataTaskDidReceiveData {
+            if let dataTaskDidReceiveData = dataTaskDidReceiveData {
                 dataTaskDidReceiveData(session, dataTask, data)
             } else {
-                if let dataStream = self.dataStream {
+                if let dataStream = dataStream {
                     dataStream(data: data)
                 } else {
-                    self.mutableData.appendData(data)
+                    mutableData.appendData(data)
                 }
 
-                self.totalBytesReceived += data.length
-                let totalBytesExpectedToReceive = dataTask.response?.expectedContentLength ?? NSURLSessionTransferSizeUnknown
+                totalBytesReceived += data.length
+                let totalBytesExpected = dataTask.response?.expectedContentLength ?? NSURLSessionTransferSizeUnknown
 
-                self.progress.totalUnitCount = totalBytesExpectedToReceive
-                self.progress.completedUnitCount = totalBytesReceived
+                progress.totalUnitCount = totalBytesExpected
+                progress.completedUnitCount = totalBytesReceived
 
-                self.dataProgress?(bytesReceived: Int64(data.length), totalBytesReceived: self.totalBytesReceived, totalBytesExpectedToReceive: totalBytesExpectedToReceive)
+                dataProgress?(
+                    bytesReceived: Int64(data.length),
+                    totalBytesReceived: totalBytesReceived,
+                    totalBytesExpectedToReceive: totalBytesExpected
+                )
             }
         }
 
-        func URLSession(session: NSURLSession, dataTask: NSURLSessionDataTask, willCacheResponse proposedResponse: NSCachedURLResponse, completionHandler: ((NSCachedURLResponse!) -> Void)) {
+        func URLSession(
+            session: NSURLSession,
+            dataTask: NSURLSessionDataTask,
+            willCacheResponse proposedResponse: NSCachedURLResponse,
+            completionHandler: ((NSCachedURLResponse?) -> Void))
+        {
             var cachedResponse: NSCachedURLResponse? = proposedResponse
 
-            if let dataTaskWillCacheResponse = self.dataTaskWillCacheResponse {
+            if let dataTaskWillCacheResponse = dataTaskWillCacheResponse {
                 cachedResponse = dataTaskWillCacheResponse(session, dataTask, proposedResponse)
             }
 
@@ -397,74 +421,82 @@ public class Request {
     }
 }
 
-// MARK: - Printable
+// MARK: - CustomStringConvertible
 
-extension Request: Printable {
-    /// The textual representation used when written to an output stream, which includes the HTTP method and URL, as well as the response status code if a response has been received.
+extension Request: CustomStringConvertible {
+
+    /**
+        The textual representation used when written to an output stream, which includes the HTTP method and URL, as 
+        well as the response status code if a response has been received.
+    */
     public var description: String {
         var components: [String] = []
 
-        if let HTTPMethod = self.request.HTTPMethod {
+        if let HTTPMethod = request?.HTTPMethod {
             components.append(HTTPMethod)
         }
 
-        components.append(self.request.URL!.absoluteString!)
+        if let URLString = request?.URL?.absoluteString {
+            components.append(URLString)
+        }
 
-        if let response = self.response {
+        if let response = response {
             components.append("(\(response.statusCode))")
         }
 
-        return join(" ", components)
+        return components.joinWithSeparator(" ")
     }
 }
 
-// MARK: - DebugPrintable
+// MARK: - CustomDebugStringConvertible
 
-extension Request: DebugPrintable {
+extension Request: CustomDebugStringConvertible {
     func cURLRepresentation() -> String {
-        var components: [String] = ["$ curl -i"]
+        var components = ["$ curl -i"]
 
-        let URL = self.request.URL
+        guard let
+            request = self.request,
+            URL = request.URL,
+            host = URL.host
+        else {
+            return "$ curl command could not be created"
+        }
 
-        if let HTTPMethod = self.request.HTTPMethod where HTTPMethod != "GET" {
+        if let HTTPMethod = request.HTTPMethod where HTTPMethod != "GET" {
             components.append("-X \(HTTPMethod)")
         }
 
         if let credentialStorage = self.session.configuration.URLCredentialStorage {
             let protectionSpace = NSURLProtectionSpace(
-                host: URL!.host!,
-                port: URL!.port?.integerValue ?? 0,
-                `protocol`: URL!.scheme!,
-                realm: URL!.host!,
+                host: host,
+                port: URL.port?.integerValue ?? 0,
+                `protocol`: URL.scheme,
+                realm: host,
                 authenticationMethod: NSURLAuthenticationMethodHTTPBasic
             )
 
-            if let credentials = credentialStorage.credentialsForProtectionSpace(protectionSpace)?.values.array {
-                for credential: NSURLCredential in (credentials as! [NSURLCredential]) {
+            if let credentials = credentialStorage.credentialsForProtectionSpace(protectionSpace)?.values {
+                for credential in credentials {
                     components.append("-u \(credential.user!):\(credential.password!)")
                 }
             } else {
-                if let credential = self.delegate.credential {
+                if let credential = delegate.credential {
                     components.append("-u \(credential.user!):\(credential.password!)")
                 }
             }
         }
 
-        // Temporarily disabled on OS X due to build failure for CocoaPods
-        // See https://github.com/CocoaPods/swift/issues/24
-        #if !os(OSX)
-            if self.session.configuration.HTTPShouldSetCookies {
-                if let
-                    cookieStorage = self.session.configuration.HTTPCookieStorage,
-                    cookies = cookieStorage.cookiesForURL(URL!) as? [NSHTTPCookie] where !cookies.isEmpty
-                {
-                    let string = cookies.reduce(""){ $0 + "\($1.name)=\($1.value ?? String());" }
-                    components.append("-b \"\(string.substringToIndex(string.endIndex.predecessor()))\"")
-                }
+        if session.configuration.HTTPShouldSetCookies {
+            if let
+                cookieStorage = session.configuration.HTTPCookieStorage,
+                cookies = cookieStorage.cookiesForURL(URL) where !cookies.isEmpty
+            {
+                let string = cookies.reduce("") { $0 + "\($1.name)=\($1.value ?? String());" }
+                components.append("-b \"\(string.substringToIndex(string.endIndex.predecessor()))\"")
             }
-        #endif
+        }
 
-        if let headerFields = self.request.allHTTPHeaderFields {
+        if let headerFields = request.allHTTPHeaderFields {
             for (field, value) in headerFields {
                 switch field {
                 case "Cookie":
@@ -475,7 +507,7 @@ extension Request: DebugPrintable {
             }
         }
 
-        if let additionalHeaders = self.session.configuration.HTTPAdditionalHeaders {
+        if let additionalHeaders = session.configuration.HTTPAdditionalHeaders {
             for (field, value) in additionalHeaders {
                 switch field {
                 case "Cookie":
@@ -487,15 +519,16 @@ extension Request: DebugPrintable {
         }
 
         if let
-            HTTPBody = self.request.HTTPBody,
-            escapedBody = NSString(data: HTTPBody, encoding: NSUTF8StringEncoding)?.stringByReplacingOccurrencesOfString("\"", withString: "\\\"")
+            HTTPBodyData = request.HTTPBody,
+            HTTPBody = String(data: HTTPBodyData, encoding: NSUTF8StringEncoding)
         {
+            let escapedBody = HTTPBody.stringByReplacingOccurrencesOfString("\"", withString: "\\\"")
             components.append("-d \"\(escapedBody)\"")
         }
 
-        components.append("\"\(URL!.absoluteString!)\"")
+        components.append("\"\(URL.absoluteString)\"")
 
-        return join(" \\\n\t", components)
+        return components.joinWithSeparator(" \\\n\t")
     }
 
     /// The textual representation used when written to an output stream, in the form of a cURL command.

@@ -48,7 +48,7 @@ class ClassViewController: UIViewControllerForWebAPI, UICollectionViewDataSource
         
         // refer to: http://stackoverflow.com/questions/24126678/close-ios-keyboard-by-touching-anywhere-using-swift
         //Looks for single or multiple taps.
-        var tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "DismissKeyboard")
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "DismissKeyboard")
         view.addGestureRecognizer(tap)
         
     }
@@ -94,7 +94,7 @@ class ClassViewController: UIViewControllerForWebAPI, UICollectionViewDataSource
         let strCurDate = curDate.formattedYYYYMMDD
         
  
-        var requestParams : [String:AnyObject] = [ //todo: add sanity check for the date string
+        let requestParams : [String:AnyObject] = [ //todo: add sanity check for the date string
             "day": strCurDate
         ]
         
@@ -141,14 +141,14 @@ class ClassViewController: UIViewControllerForWebAPI, UICollectionViewDataSource
             
             for InAndOutTime in InAndOutTimeArray {
                 
-                var kidId: Int = InAndOutTime["Babyid"].int!
-                var kidName: String = InAndOutTime["Babyname"].string ?? ""
-                var kidImgPath: String = InAndOutTime["Img"].string ?? ""
-                var kidInTime: String =  InAndOutTime["Intime"].string ?? ""
-                var kidOutTime: String = InAndOutTime["Outtime"].string ?? ""
+                let kidId: Int = InAndOutTime["Babyid"].int!
+                let kidName: String = InAndOutTime["Babyname"].string ?? ""
+                let kidImgPath: String = InAndOutTime["Img"].string ?? ""
+                let kidInTime: String =  InAndOutTime["Intime"].string ?? ""
+                let kidOutTime: String = InAndOutTime["Outtime"].string ?? ""
 
                 
-                var newInAndOutTime = BabyInAndOutTime(id: kidId, babyName: kidName, imgPath: kidImgPath, inTime: kidInTime, outTime: kidOutTime)
+                let newInAndOutTime = BabyInAndOutTime(id: kidId, babyName: kidName, imgPath: kidImgPath, inTime: kidInTime, outTime: kidOutTime)
                 
                 BabyInAndOutTimeList.append(newInAndOutTime)
             }
@@ -292,14 +292,14 @@ class ClassViewController: UIViewControllerForWebAPI, UICollectionViewDataSource
     func SetInAndOutTime(babyId: Int, time: String, inOutType: InOutType, row: Int) {
    
         
-        var requestParams : [String:AnyObject] = [ //todo: add sanity check for the date string
+        let requestParams : [String:AnyObject] = [ //todo: add sanity check for the date string
             "BabyId": babyId,
             "Time": time,
             "InputType": inOutType.rawValue // convert enum to Int
         ]
         
         callWebAPI(requestParams, curAPIType: APIType.SetInAndOutTimeForOneBaby, postActionAfterSuccessulReturn: { (data) -> () in
-                var indexPath = NSIndexPath(forItem: row, inSection: 0)
+                let indexPath = NSIndexPath(forItem: row, inSection: 0)
             
                 // update local data
                 let prevInOutTime = self._BabyInAndOutTimeList[row]

@@ -31,12 +31,12 @@ class CreateClassViewController: UIViewControllerForWebAPI, UITextFieldDelegate,
     var classYearPIcker = UIPickerView()
     var classQuarterPicker = UIPickerView()
     
-    var curYearNum = NSDate().formattedYYYY.toInt() ?? 2015
+    var curYearNum = Int(NSDate().formattedYYYY) ?? 2015
     let numYearSelection = 10
     
     
     override func viewWillAppear(animated: Bool) {
-        println("view will appear: ")
+        print("view will appear: ")
     }
 
     
@@ -44,12 +44,12 @@ class CreateClassViewController: UIViewControllerForWebAPI, UITextFieldDelegate,
         super.viewDidLoad()
         
        
-        var scaleX:CGFloat = view.frame.width / classContainerView.frame.width
+        let scaleX:CGFloat = view.frame.width / classContainerView.frame.width
         
-        var scaleY:CGFloat = (view.frame.height - 44 - 20 - 49) / classContainerView.frame.height
+        let scaleY:CGFloat = (view.frame.height - 44 - 20 - 49) / classContainerView.frame.height
 
-        println("view width = \(classContainerView.frame.width), view height = \( classContainerView.frame.height)" )
-        println("super view width = \(view.frame.width), super view height = \( view.frame.height)" )
+        print("view width = \(classContainerView.frame.width), view height = \( classContainerView.frame.height)" )
+        print("super view width = \(view.frame.width), super view height = \( view.frame.height)" )
         
         
         /*
@@ -57,7 +57,7 @@ class CreateClassViewController: UIViewControllerForWebAPI, UITextFieldDelegate,
 
         */
         
-        var scale: CGFloat =   min(scaleX, scaleY)
+        let scale: CGFloat =   min(scaleX, scaleY)
 
         var t: CGAffineTransform = CGAffineTransformMakeScale(scale, scale)
  
@@ -67,7 +67,7 @@ class CreateClassViewController: UIViewControllerForWebAPI, UITextFieldDelegate,
             translateX += 40
         }
         
-        var translateY = classContainerView.frame.height * (scale - 1) / 2 / scale;
+        let translateY = classContainerView.frame.height * (scale - 1) / 2 / scale;
  
         
         t = CGAffineTransformTranslate(t, translateX, translateY)
@@ -131,7 +131,7 @@ class CreateClassViewController: UIViewControllerForWebAPI, UITextFieldDelegate,
         return 0
     }
     
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if (pickerView == classYearPIcker) {
             return String(curYearNum + numYearSelection/2 - row)
         }
@@ -153,7 +153,7 @@ class CreateClassViewController: UIViewControllerForWebAPI, UITextFieldDelegate,
     }
     
     // use to disable picker when clicking on window
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.view.endEditing(true)
     }
     
@@ -180,17 +180,17 @@ class CreateClassViewController: UIViewControllerForWebAPI, UITextFieldDelegate,
     
     func _storeBanjiInfo() {
         
-        _banjiInfo = BanjiInfo(name: className.text,
-            addr: classAddressTextField.text,
-            code: classCodeTextField.text,
+        _banjiInfo = BanjiInfo(name: className.text ?? "",
+            addr: classAddressTextField.text ?? "",
+            code: classCodeTextField.text ?? "",
             id: 0, // assigned by web api; not displayed anyway
             desc: classDescTextView.text,
-            password: classPasswordTextField.text,
-            quarter: classQuerterTextField.text.toInt() ?? 1,
-            school: classSchoolTextField.text,
+            password: classPasswordTextField.text ?? "",
+            quarter: Int(classQuerterTextField.text!) ?? 1,
+            school: classSchoolTextField.text ?? "",
             teacherId: _teacherInfo!.id,
             teacherName: _teacherInfo!.name,
-            year: classYearTextField.text)
+            year: classYearTextField.text ?? "")
     }
     
     
@@ -210,10 +210,8 @@ class CreateClassViewController: UIViewControllerForWebAPI, UITextFieldDelegate,
         
         _startSpinnerAndBlockUI()
         
-        let urlString:String = _teacherInfo!.imageURL.absoluteString!
-    
         
-        var requestParams : [String:AnyObject] = [
+        let requestParams : [String:AnyObject] = [
             "Name":_banjiInfo!.name,
             "Description":_banjiInfo!.desc,
             "Address":_banjiInfo!.addr,
@@ -259,7 +257,7 @@ class CreateClassViewController: UIViewControllerForWebAPI, UITextFieldDelegate,
         
         _startSpinnerAndBlockUI()
         
-        var requestParams : [String:AnyObject] = [:]
+        let requestParams : [String:AnyObject] = [:]
         
         callWebAPI(requestParams, curAPIType: APIType.GetBanjiInfo, postActionAfterSuccessulReturn: { (data) -> () in
             // refer to: https://grokswift.com/rest-with-alamofire-swiftyjson/
@@ -290,7 +288,7 @@ class CreateClassViewController: UIViewControllerForWebAPI, UITextFieldDelegate,
         
         _startSpinnerAndBlockUI()
         
-        var requestParams : [String:AnyObject] = [:]
+        let requestParams : [String:AnyObject] = [:]
         
         callWebAPI(requestParams, curAPIType: APIType.UserGetInfo, postActionAfterSuccessulReturn: { (data) -> () in
             // refer to: https://grokswift.com/rest-with-alamofire-swiftyjson/
@@ -308,7 +306,7 @@ class CreateClassViewController: UIViewControllerForWebAPI, UITextFieldDelegate,
                 dispatch_async(dispatch_get_main_queue()) { //sync or async
                     // update some UI
 
-                    println("updating the table view")
+                    print("updating the table view")
                     // resume the UI at the end of async action
                     
                     self._stopSpinnerAndResumeUI()
@@ -323,18 +321,18 @@ class CreateClassViewController: UIViewControllerForWebAPI, UITextFieldDelegate,
         
         let classInfo = result["Banji"]
         
-        var classaddress: String = classInfo["Address"].string ?? ""
-        var classCode: String = classInfo["Code"].string ?? ""
-        var classDesciption: String = classInfo["Description"].string ?? ""
-        var classId: Int = classInfo["Id"].int ?? 0
-        var className: String = classInfo["Name"].string ?? ""
+        let classaddress: String = classInfo["Address"].string ?? ""
+        let classCode: String = classInfo["Code"].string ?? ""
+        let classDesciption: String = classInfo["Description"].string ?? ""
+        let classId: Int = classInfo["Id"].int ?? 0
+        let className: String = classInfo["Name"].string ?? ""
         
-        var classPassword: String = classInfo["Password"].string ?? ""
-        var classQuarter: Int = classInfo["Quarter"].int ?? 1
-        var classSchool: String = classInfo["School"].string ?? ""
+        let classPassword: String = classInfo["Password"].string ?? ""
+        let classQuarter: Int = classInfo["Quarter"].int ?? 1
+        let classSchool: String = classInfo["School"].string ?? ""
         
-        var classTeacherId: Int = classInfo["TeacherId"].int ?? 0
-        var classTeacherName:String = classInfo["TeacherName"].string ?? ""
+        let classTeacherId: Int = classInfo["TeacherId"].int ?? 0
+        let classTeacherName:String = classInfo["TeacherName"].string ?? ""
         var classYear: String = classInfo["YearNum"].string ?? "2020"
         
         if classYear == "0000" {

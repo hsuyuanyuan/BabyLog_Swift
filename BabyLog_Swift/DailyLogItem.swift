@@ -26,7 +26,7 @@ class ActivityType {
 
 
 
-class DailyLogItem: Printable {
+class DailyLogItem: CustomStringConvertible {
     
     let activityType: Int
     let content: String
@@ -104,9 +104,7 @@ class BabyInAndOutTime {
 }
 
 
-class BabyInfo: Printable {
-    
-    // must have
+class BabyInfo: CustomStringConvertible {
     let babyName: String
     let nickName: String
     let id: Int  // baby id in class
@@ -159,7 +157,7 @@ class BabyInfo: Printable {
 
 
 
-class BanjiInfo: Printable { // avoid the name classInfo, may conflict with reserved words
+class BanjiInfo: CustomStringConvertible { // avoid the name classInfo, may conflict with reserved words
     
     var addr: String
     var code: String
@@ -203,7 +201,7 @@ class BanjiInfo: Printable { // avoid the name classInfo, may conflict with rese
 
 
 
-class TeacherInfo: Printable  {
+class TeacherInfo: CustomStringConvertible  {
     // must have
     let name: String
     let id: Int
